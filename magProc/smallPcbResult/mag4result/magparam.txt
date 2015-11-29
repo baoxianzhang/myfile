@@ -1,0 +1,33 @@
+Parameter calibrate result:
+V    : 48.075 -7.7455 71.488
+Winv : 1 0 0
+       0 1 0
+       0 0 1
+B    : 192.16
+ERROR: 2.6354
+
+
+Origin ellipsoid fit parameter:
+Ellipsoid center: 48.376 -7.5215 69.825
+Ellipsoid radii: 200.32 191.36 184.52
+Ellipsoid evecs:
+-0.9191 -0.27758 0.27965
+-0.23526 0.95593 0.17566
+0.31608 -0.095655 0.9439
+Algebraic form:
+3.2322e-05 3.4409e-05 3.671e-05 -8.5135e-07 1.5578e-06 -9.593e-10 -0.0016788 0.00030006 -0.0026387 -1 
+Average deviation of the fit: 0.17334
+
+
+Calibrated ellipsoid fit parameter:
+Ellipsoid center: 0.30084 0.224 -1.6629
+Ellipsoid radii: 200.32 191.36 184.52
+Ellipsoid evecs:
+-0.9191 -0.27758 0.27965
+-0.23526 0.95593 0.17566
+0.31608 -0.095655 0.9439
+Algebraic form:
+2.5499e-05 2.7145e-05 2.896e-05 -6.7162e-07 1.2289e-06 -7.5678e-10 -5.4771e-06 -5.8796e-06 4.7787e-05 -1 
+Average deviation of the fit: 0.17334
+
+
