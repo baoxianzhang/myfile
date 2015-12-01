@@ -1,6 +1,7 @@
 %while(1)
 for i=1:1:1000
-    file = importdata('message.log');
+    file = importdata('messages.log');
+    %file = importdata('messageb.log');
     magdata = file.data;
     figure(1);
     
