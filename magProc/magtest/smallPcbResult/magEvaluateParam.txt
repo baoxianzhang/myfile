@@ -1,0 +1,23 @@
+The result of x axis rotation:
+xCenter:      -7.4723
+yCenter:      18.454
+semimajor:    156.94
+semiminor:    150.17
+eccentricity: 0.29041
+percentage:   95.69
+
+The result of y axis rotation:
+xCenter:      35.989
+yCenter:      32.489
+semimajor:    158.1
+semiminor:    145.18
+eccentricity: 0.39586
+percentage:   91.831
+
+The result of z axis rotation:
+xCenter:      44.48
+yCenter:      -9.0096
+semimajor:    159
+semiminor:    154.77
+eccentricity: 0.22928
+percentage:   97.336

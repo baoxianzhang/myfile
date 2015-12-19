@@ -25,10 +25,10 @@ if (smallPCB == 1)
    end
    PCBdir = 'smallPcbResult';
 else
-   if (exist('smallPcbResult','dir') == 0)
-       mkdir('smallPcbResult');
+   if (exist('bigPcbResult','dir') == 0)
+       mkdir('bigPcbResult');
    end
-   PCBdir = 'smallPcbResult';
+   PCBdir = 'bigPcbResult';
 end    
 
 magdir = [PCBdir, '/mag4result'];
