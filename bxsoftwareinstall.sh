@@ -285,7 +285,9 @@ echo "<<<<<< Softlink zshrc >>>>>>"
 #mkidr ~/bxgithub
 #fi
 #cd ~/bxgithub
-#git clone https://github.com/baoxianzhang/myfile.git 
+#if [ ! -d "/home/zhangbaoxian/bxgithub/myfile" ]; then
+#git git clone https://github.com/baoxianzhang/myfile.git
+#fi
 #rm ~/.zshrc
 #ln -s ~/bxgithub/myfile/zshrc ~/.zshrc
 
@@ -294,11 +296,28 @@ echo "<<<<<< Softlink emacs >>>>>>"
 #mkidr ~/bxgithub
 #fi
 #cd ~/bxgithub
+#if [ ! -d "/home/zhangbaoxian/bxgithub/emacs-c-ide-demo" ]; then
 #git clone https://github.com/baoxianzhang/emacs-c-ide-demo.git
+#fi
 #link -s ~/bxgithub/emacs-c-ide-demo ~/.emacs.d
 
 
+echo "<<<<<< Softlink tmux >>>>>>"
+#if [ ! -d "/home/zhangbaoxian/bxgithub" ]; then
+#mkidr ~/bxgithub
+#fi
+#cd ~/bxgithub
+#if [ ! -d "/home/zhangbaoxian/bxgithub/myfile" ]; then
+#git git clone https://github.com/baoxianzhang/myfile.git
+#fi
+#rm ~/.zshrc
+#ln -s ~/bxgithub/myfile/zshrc ~/.zshrc
 
+echo "<<<<<< Install nginx >>>>>>"
+#sudo apt-get install nginx
+#echo " Configure the nginx "
+#sudo vim /etc/nginx/nginx.conf
+#
 
 
 
