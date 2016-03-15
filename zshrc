@@ -1,12 +1,11 @@
 # Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
+  export ZSH=/home/zhangbaoxian/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 ZSH_THEME="robbyrussell"
-# ZSH_THEME="strug"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -50,13 +49,12 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git python autojump)
+plugins=(git)
 
 # User configuration
 
-source /etc/profile
-export PATH=/home/zhangbaoxian/code/depot_tools:$PATH
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+  export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+export PATH=$PATH:/usr/src/gcc-arm-none-eabi-4_8-2014q3/bin
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -85,16 +83,35 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias ll='ls -l'
-alias la='ls -a'
-alias vi='vim'
-alias grep="grep --color=auto"
-alias cgz='tar -czvf'
-alias xgz='tar -xzvf'
-alias cbz='tar -cjvf'
-alias xbz='tar -xjvf'
-alias svnaddall='source ~/molmc_code/myfile/svnaddall.sh'
-setxkbmap -option ctrl:swapcaps
+alias rm='trash-put'
+alias bx45='sshpass -p zhangbaoxian ssh zhangbaoxian@192.168.0.45'
+alias lz45='sshpass -p luozheng ssh luozheng@192.168.0.45'
+alias zj45='sshpass -p zhongjin@192.168.0.45'
+alias 77login='sshpass -p vagrant ssh vagrant@192.168.0.77'
+alias dc='cd ~/Documents'
+alias dl='cd ~/Downloads'
+alias dt='cd ~/Desktop'
 
+extract () {
+    if [ -f $1 ] ; then
+      case $1 in
+        *.tar.bz2)   tar xjf $1     ;;
+        *.tar.gz)    tar xzf $1     ;;
+        *.bz2)       bunzip2 $1     ;;
+        *.rar)       unrar e $1     ;;
+        *.gz)        gunzip $1      ;;
+        *.tar)       tar xf $1      ;;
+        *.tbz2)      tar xjf $1     ;;
+        *.tgz)       tar xzf $1     ;;
+        *.zip)       unzip $1       ;;
+        *.Z)         uncompress $1  ;;
+        *.7z)        7z x $1        ;;
+        *)     echo "'$1' cannot be extracted via extract()" ;;
+         esac
+     else
+         echo "'$1' is not a valid file"
+     fi
+}
 
-#[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && . ~/.autojump/etc/profile.d/autojump.sh
+source ~/code/git-flow-completion/git-flow-completion.plugin.zsh
