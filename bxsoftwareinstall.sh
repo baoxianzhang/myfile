@@ -61,6 +61,8 @@ echo "<<<<<< Install zsh >>>>>>"
 #chsh -s /bin/zsh
 #echo "Logout to use zsh"
 
+
+
 echo "<<<<<< Install autojump >>>>>>" 
 #Ref: https://github.com/wting/autojump
 #cd ~/softwares
@@ -278,8 +280,22 @@ echo "<<<<<< Install terminator >>>>>>"
 echo "<<<<<< Install tmux >>>>>>"
 #sudo apt-get install tmux
 
+echo "<<<<<< Softlink zshrc >>>>>>"
+#if [ ! -d "/home/zhangbaoxian/bxgithub" ]; then
+#mkidr ~/bxgithub
+#fi
+#cd ~/bxgithub
+#git clone https://github.com/baoxianzhang/myfile.git 
+#rm ~/.zshrc
+#ln -s ~/bxgithub/myfile/zshrc ~/.zshrc
 
-
+echo "<<<<<< Softlink emacs >>>>>>"
+#if [ ! -d "/home/zhangbaoxian/bxgithub" ]; then
+#mkidr ~/bxgithub
+#fi
+#cd ~/bxgithub
+#git clone https://github.com/baoxianzhang/emacs-c-ide-demo.git
+#link -s ~/bxgithub/emacs-c-ide-demo ~/.emacs.d
 
 
 
