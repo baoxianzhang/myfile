@@ -13,8 +13,17 @@ echo "<<<<<< Update sources >>>>>>"
 #sudo apt-get update
 echo "<<<<<< Update the software, not upgrade system >>>>>>"
 #sleep 100
-echo "<<<<<< Install git >>>>>>"
-#sudo apt-get install git
+echo "<<<<<< Install git 2.7.3 >>>>>>"
+# Magit requires Git >= 1.9.4, you are using 1.9.1.
+#cd ~/softwares
+#sudo apt-get remove git
+#if [ ! -f "git-2.7.3" ]; then
+#wget https://www.kernel.org/pub/software/scm/git/git-2.7.3.tar.gz
+#tar -xzvf git-2.7.3
+#cd git-2.7.3
+#./configure
+#make
+#sudo make install
 #echo "<<<<<< Configure git email and name >>>>>> “
 #git config --global user.email "baoxianzhit@gmail.com" 
 #git config --global user.name "baoxianzhang"
@@ -204,6 +213,9 @@ echo "<<<<<< Install Emacs 24.5>>>>>>"
 #wget http://ftp.gnu.org/gnu/emacs/emacs-24.5.tar.gz
 #tar -xzvf emacs-24.5
 #cd emacs-24.5
+#sudo apt-get install libjpeg-dev
+#sudo apt-get install libgif-dev
+#sudo apt-get install libtiff5-dev 
 #./configure
 #make 
 #sudo make install
@@ -273,6 +285,10 @@ echo "<<<<<< Install Google Hosts >>>>>>"
 
 echo "<<<<<< Install virtualbox win 7 >>>>>>"
 #boot VT-x AMD-v to support 64 bit
+#VirtualBox guest additions
+#sudo apt-get install linux-headers-generic build-essential dkms -y
+##find the VirtualBox Guest Additions in the Device, and click and install it
+##Now you can use the sharefile and enlarge the screen
 
 echo "<<<<<< Install terminator >>>>>>"
 #sudo apt-get install terminator
@@ -299,7 +315,7 @@ echo "<<<<<< Softlink emacs >>>>>>"
 #if [ ! -d "/home/zhangbaoxian/bxgithub/emacs-c-ide-demo" ]; then
 #git clone https://github.com/baoxianzhang/emacs-c-ide-demo.git
 #fi
-#link -s ~/bxgithub/emacs-c-ide-demo ~/.emacs.d
+#ln -s ~/bxgithub/emacs-c-ide-demo ~/.emacs.d
 
 
 echo "<<<<<< Softlink tmux >>>>>>"
@@ -310,14 +326,55 @@ echo "<<<<<< Softlink tmux >>>>>>"
 #if [ ! -d "/home/zhangbaoxian/bxgithub/myfile" ]; then
 #git git clone https://github.com/baoxianzhang/myfile.git
 #fi
-#rm ~/.zshrc
-#ln -s ~/bxgithub/myfile/zshrc ~/.zshrc
+#rm ~/.tmux.conf
+#ln -s ~/bxgithub/myfile/tmux.conf ~/.tmux.conf
 
 echo "<<<<<< Install nginx >>>>>>"
 #sudo apt-get install nginx
 #echo " Configure the nginx "
 #sudo vim /etc/nginx/nginx.conf
 #
+
+
+echo "<<<<<< Install stlink >>>>>>"
+# cd ~/softwares
+# if [ ! -d "stlink" ]; then
+# git clone git://github.com/texane/stlink.git
+# fi
+# cd stlink
+# sudo apt-get install libsgutils2-dev libusb-1.0.0-dev
+# ./autogen.sh
+# ./configure
+# make
+# cd flash
+# make
+# cd ..
+# sudo install -s -m 775 st-util /usr/bin/st-util
+# sudo install -s -m 775 flash/st-flash /usr/bin/st-flash
+# sudo install -m 644 49-stlinkv1.rules /etc/udev/rules.d/49-stlinkv1.rules
+# sudo install -m 644 49-stlinkv2.rules /etc/udev/rules.d/49-stlinkv2.rules
+# sudo install -m 644 49-stlinkv2-1.rules /etc/udev/rules.d/49-stlinkv2-1.rules
+# sudo install -m 644 stlink_v1.modprobe.conf /etc/modprobe.d/stlink_v1.modprobe.conf
+# sudo udevadm control --reload-rules
+
+
+echo "<<<<<< Install GoldenDict >>>>>>"
+#sudo apt-get install goldendict
+##configure the dict source
+##http://abloz.com/huzheng/stardict-dic/zh_CN/
+##download the dict source stardict-langdao-ce-gb-2.4.2, stardict-langdao-ec-gb-2.4.2, stardict-oxford-gb-2.4.2
+#wget http://abloz.com/huzheng/stardict-dic/zh_CN/stardict-langdao-ec-gb-2.4.2.tar.bz2
+#wget http://abloz.com/huzheng/stardict-dic/zh_CN/stardict-langdao-ce-gb-2.4.2.tar.bz2
+#wget http://abloz.com/huzheng/stardict-dic/zh_CN/stardict-oxford-gb-2.4.2.tar.bz2
+#tar -xjvf stardict-langdao-ec-gb-2.4.2.tar.bz2
+#tar -xjvf stardict-langdao-ce-gb-2.4.2.tar.bz2
+#tar -xjvf stardict-oxford-gb-2.4.2.tar.bz2
+
+
+echo "<<<<<< Install go-for-it >>>>>>"
+#sudo add-apt-repository ppa:mank319/go-for-it
+#sudo apt-get update  
+#sudo apt-get install go-for-it
 
 
 
