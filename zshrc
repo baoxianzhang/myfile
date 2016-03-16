@@ -91,6 +91,7 @@ alias 77login='sshpass -p vagrant ssh vagrant@192.168.0.77'
 alias dc='cd ~/Documents'
 alias dl='cd ~/Downloads'
 alias dt='cd ~/Desktop'
+alias c='clear'
 
 extract () {
     if [ -f $1 ] ; then

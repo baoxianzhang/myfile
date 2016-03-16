@@ -90,6 +90,7 @@ echo "<<<<<< Install trash-cli >>>>>>"
 #source ~/.zshrc
 
 echo "<<<<<< Install SogouPinyin Input method >>>>>>"
+#Ref:  http://jingyan.baidu.com/article/08b6a591cb06f114a8092209.html
 #cd ~/softwares
 #sudo apt-get install fcitx libssh2-1
 #wget "http://pinyin.sogou.com/linux/download.php?f=linux&bit=64" -O "sogou_64.deb"
@@ -98,7 +99,7 @@ echo "<<<<<< Install SogouPinyin Input method >>>>>>"
 #echo "<<<<<< Finished to install SougouPin, Please configure it >>>>>>"
 #echo "System Settings > Language Support > Install/Remove Languages > install the Chinese language"
 #echo "Logout the system"
-#sleep 100
+#sleep 10
 
 echo "<<<<<< Install luajit >>>>>>"
 #sudo apt-get install luajit
@@ -134,6 +135,27 @@ echo "<<<<<< Install virtualbox >>>>>>"
 #sudo dpkg -i virtualbox-5.0_5.0.16-105871~Ubuntu~trusty_amd64.deb
 #if failed, click the deb, use the software center to install it.
 
+
+echo "<<<<<< Install virtualbox win 7 >>>>>>"
+#cd ~/softwares
+#boot VT-x AMD-v to support 64 bit
+#VirtualBox guest additions
+#sudo apt-get install linux-headers-generic build-essential dkms -y
+##find the VirtualBox Guest Additions in the Device, and click and install it
+##Now you can use the sharefile and enlarge the screen
+##Install the Oracle VM VirtualBox Extension Pack to use the usb
+##Ref: http://www.xiaojian.org/article/310.html
+#wget http://download.virtualbox.org/virtualbox/5.0.16/Oracle_VM_VirtualBox_Extension_Pack-5.0.16-105871.vbox-extpack
+#VBoxManage extpack install Oracle_VM_VirtualBox_Extension_Pack-5.0.16-105871.vbox-extpack
+#sudo addgroup zhangbaoxian vboxusers
+#cat /etc/group | grep vboxusers
+
+## Find the devigid and add to the devgid next line
+#sudo echo "none /proc/bus/usb usbfs devgid=125,devmode=664 0 0" >> /etc/fstab
+#if not work, please reinstall virtualbox!
+
+
+
 echo "<<<<<< Install vagrant >>>>>>"
 #Ref: http://rmingwang.com/vagrant-commands-and-config.html   https://www.vagrantup.com/docs/boxes.html
 #cd ~/softwares
@@ -145,8 +167,15 @@ echo "<<<<<< Install vagrant >>>>>>"
 #if [ ! -d "/home/zhangbaoxian/virtualbox/vagrant" ]; then
 #mkdir -p ~/virtualbox/vagrant
 #fi
-#cd ~/virtualbox/vagrant
-#vagrant box add 
+#Ref: https://atlas.hashicorp.com/boxes/search
+#wget https://github.com/kraksoft/vagrant-box-ubuntu/releases/download/14.04/ubuntu-14.04-amd64.box
+#cd ~/virtualbox/vagrant/box
+#vagrant box add ubuntu/trusty64
+#vagrant init ubuntu/trusty64
+#vagrant up
+#vagrant ssh
+#vagrant halt
+
 
 
 echo "<<<<<< Install ctags >>>>>>"
@@ -283,12 +312,6 @@ echo "<<<<<< Install sshpass >>>>>>"
 echo "<<<<<< Install Google Hosts >>>>>>"
 #Ref: http://laod.cn/hosts/2016-google-hosts.html
 
-echo "<<<<<< Install virtualbox win 7 >>>>>>"
-#boot VT-x AMD-v to support 64 bit
-#VirtualBox guest additions
-#sudo apt-get install linux-headers-generic build-essential dkms -y
-##find the VirtualBox Guest Additions in the Device, and click and install it
-##Now you can use the sharefile and enlarge the screen
 
 echo "<<<<<< Install terminator >>>>>>"
 #sudo apt-get install terminator
