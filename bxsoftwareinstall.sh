@@ -251,6 +251,10 @@ echo "<<<<<< Install Emacs 24.5>>>>>>"
 #fi
 
 
+echo "<<<<<< Install silversearcher-ag >>>>>>"
+sudo apt-get install silversearcher-ag
+
+
 #echo "<<<<<< Install roboust zhou vim >>>>>>"
 echo "<<<<<< Install spf13 vim >>>>>>"
 #Ref: http://www.vim.org/download.php
@@ -298,7 +302,7 @@ echo "<<<<<< Install arm-none-eabi-gcc 4.8.2 >>>>>>"
 #tar -xjvf gcc-arm-none-eabi-4_8-2014q3-20140805-linux.tar.bz2
 #fi
 #sudo cp gcc-arm-none-eabi-4_8-2014q3 /usr/src/ -r
-#echo "PATH=$PATH:/usr/src/gcc-arm-none-eabi-4_8-2014q3/bin" >> ~/.zshrc
+#echo "export PATH=$PATH:/usr/src/gcc-arm-none-eabi-4_8-2014q3/bin" >> ~/.zshrc
 #source ~/.zshrc
 #sleep 10
 
@@ -398,6 +402,67 @@ echo "<<<<<< Install go-for-it >>>>>>"
 #sudo add-apt-repository ppa:mank319/go-for-it
 #sudo apt-get update  
 #sudo apt-get install go-for-it
+
+
+echo "<<<<<< Download xtensa and install it >>>>>>"
+# https://drive.google.com/folderview?id=0B5bwBE9A5dBXaExvdDExVFNrUXM&usp=sharing
+#sudo cp xtensa-lx106-elf /usr/src/ -r
+#echo "export PATH=$PATH:/usr/src/xtensa-lx106-elf/bin" >> ~/.zshrc
+
+
+echo "<<<<<< Install awk for openwrt >>>>>>"
+#sudo apt-get install gawk 
+
+
+echo "<<<<<< Install perl >>>>>>"
+#sudo apt-get install perl
+
+echo "<<<<<< Install XML::Parser for openwrt >>>>>>"
+#sudo apt-get install expat
+#sudo apt-get install libexpat1-dev
+#sudo apt-get install libxml-parser-perl
+
+
+echo "<<<<<< Install Inkscape Vector Graphics Editor >>>>>>"
+#sudo apt-get install inkscape
+
+
+echo "<<<<<< Install Audacity >>>>>>"
+#sudo apt-get install audacity
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

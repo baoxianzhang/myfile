@@ -55,6 +55,7 @@ plugins=(git)
 
   export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
 export PATH=$PATH:/usr/src/gcc-arm-none-eabi-4_8-2014q3/bin
+export PATH=$PATH:/usr/src/xtensa-lx106-elf/bin
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -91,6 +92,7 @@ alias 77login='sshpass -p vagrant ssh vagrant@192.168.0.77'
 alias dc='cd ~/Documents'
 alias dl='cd ~/Downloads'
 alias dt='cd ~/Desktop'
+alias tl='cd ~/Templates'
 alias c='clear'
 
 extract () {

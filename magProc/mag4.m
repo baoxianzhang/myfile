@@ -11,6 +11,7 @@ else
     messageFile = [ 'message', 'b', '.log'];
 end
 file = importdata(messageFile);
+sdkfjdal;fjkljf
 
 magdata = file.data;
 
