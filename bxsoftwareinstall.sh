@@ -255,6 +255,9 @@ echo "<<<<<< Install silversearcher-ag >>>>>>"
 sudo apt-get install silversearcher-ag
 
 
+echo "<<<<<< Install sqlite3 >>>>>>"
+sudo apt-get install sqlite3
+
 #echo "<<<<<< Install roboust zhou vim >>>>>>"
 echo "<<<<<< Install spf13 vim >>>>>>"
 #Ref: http://www.vim.org/download.php
@@ -432,6 +435,8 @@ echo "<<<<<< Install Audacity >>>>>>"
 
 
 
+echo "<<<<<< Install SecureCRT 7.3 >>>>>>"
+# Ref:http://blog.csdn.net/chszs/article/details/40623169
 
 
 
