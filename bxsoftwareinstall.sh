@@ -46,6 +46,8 @@ if [ $ans == 1 ];then
     sudo apt-get install curl
     make
     sudo make install
+    echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
+    source ~/.bashrc
 fi
 
 echo "<<<<<< Configure git email and name. Continue?[Y/n] >>>>>> "
@@ -69,8 +71,8 @@ if [ $ans == 1 ];then
         mkdir -p code
     fi
     cd ~/code
-    echo "PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
-    source ~/.bashrc
+    # echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
+    # source ~/.bashrc
     if [ ! -d "git-flow-completion" ]; then
         git clone https://github.com/bobthecow/git-flow-completion.git
         #echo "source ~/code/git-flow-completion/git-flow-completion.zsh"
@@ -132,8 +134,10 @@ if [ $ans == 1 ];then
     #Restart and use the zsh
     cd ~/softwares
     sudo apt-get install zsh
+    # echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
+    # source ~/.bashrc
     wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
-    sudo chsh -s /bin/zsh
+    chsh -s /bin/zsh
     echo "Logout to use zsh"
 fi
 
@@ -143,6 +147,8 @@ if [ $ans == 1 ];then
     #Ref: https://github.com/wting/autojump
     cd ~/softwares
     if [ ! -f "autojump_v21.1.2.tar.gz" ]; then
+        # echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
+        # source ~/.bashrc
         wget https://github.com/downloads/joelthelion/autojump/autojump_v21.1.2.tar.gz
         tar -xzvf autojump_v21.1.2.tar.gz
         cd autojump_v21.1.2
@@ -186,6 +192,8 @@ if [ $ans == 1 ];then
     #Ref: http://forum.ubuntu.org.cn/viewtopic.php?t=421982
     cd ~/softwares
     if [ ! -d "rtl8188eu" ]; then
+        # echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
+        # source ~/.bashrc
         git clone https://github.com/lwfinger/rtl8188eu.git
     fi
     cd rtl8188eu
@@ -224,6 +232,7 @@ if [ $ans == 1 ];then
     cd global-6.5.2
     sudo apt-get install libsdl1.2-dev
     sudo apt-get install ncurses-bin
+    sudo apt-get install libncurses5-dev
     ./configure
     make
     sudo make install
@@ -266,6 +275,8 @@ if [ $ans == 1 ];then
     #Ref: http://www.vim.org/download.php
     cd ~/softwares
     if [ ! -d "vim" ]; then
+        # echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
+        # source ~/.bashrc
         git clone https://github.com/vim/vim.git
     fi
     sudo apt-get remove --purge vim vim-runtime vim-gnome vim-tiny vim-common vim-gui-common
@@ -346,6 +357,8 @@ if [ $ans == 1 ];then
     fi
     cd ~/bxgithub
     if [ ! -d "$homeDir/bxgithub/myfile" ]; then
+        # echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
+        # source ~/.bashrc
         git clone https://github.com/baoxianzhang/myfile.git
     fi
     rm ~/.zshrc
@@ -360,6 +373,8 @@ if [ $ans == 1 ];then
     fi
     cd ~/bxgithub
     if [ ! -d "$homeDir/bxgithub/emacs-c-ide-demo" ]; then
+        # echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
+        # source ~/.bashrc
         git clone https://github.com/baoxianzhang/emacs-c-ide-demo.git
     fi
     rm ~/.emacs.d -rf
@@ -509,8 +524,11 @@ if [ $ans == 1 ];then
     fi
     cd emacs-24.5
     sudo apt-get install libjpeg-dev
+    sleep 1
     sudo apt-get install libgif-dev
+    sleep 1
     sudo apt-get install libtiff5-dev
+    sleep 1
     ./configure
     make
     sudo make install
@@ -550,7 +568,7 @@ if [ $ans == 1 ];then
                 wget http://download.virtualbox.org/virtualbox/5.0.16/Oracle_VM_VirtualBox_Extension_Pack-5.0.16-105871.vbox-extpack
             fi
             VBoxManage extpack install Oracle_VM_VirtualBox_Extension_Pack-5.0.16-105871.vbox-extpack
-            echo "Run: sudo addgroup zhangbaoxian vboxusers"
+            echo "Run: sudo addgroup zhangbaoxian vboxusers. Continue?[Y/n]"
             ans=$(askForContinue)
             if [ $ans == 1 ];then
                 cat /etc/group | grep vboxusers
