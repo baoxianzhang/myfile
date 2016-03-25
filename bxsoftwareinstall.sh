@@ -50,11 +50,12 @@ if [ $ans == 1 ];then
     source ~/.bashrc
 fi
 
-echo "<<<<<< Configure git email and name. Continue?[Y/n] >>>>>> "
+echo "<<<<<< Configure git email name and editor. Continue?[Y/n] >>>>>> "
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     git config --global user.email "baoxianzhit@gmail.com"
     git config --global user.name "baoxianzhang"
+    git config --global core.editor vim
 fi
 
 echo "<<<<<< Install git flow. Continue?[Y/n] >>>>>>"
@@ -635,4 +636,11 @@ if [ $ans == 1 ];then
     echo "sudo cp xtensa-lx106-elf /usr/src/ -r"
     echo "Add to the PATH!"
     #echo "export PATH=$PATH:/usr/src/xtensa-lx106-elf/bin" >> ~/.zshrc
+fi
+
+
+echo "<<<<<< Install rar. Continue?[Y/n] >>>>>>"
+ans=$(askForContinue)
+if [ $ans == 1 ];then
+    sudo apt-get install rar
 fi

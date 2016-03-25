@@ -95,6 +95,7 @@ alias dt='cd ~/Desktop'
 alias tl='cd ~/Templates'
 alias c='clear'
 alias compile='make clean && make && cp firmware.hex ~/Templates/'
+alias vi='vim'
 
 extract () {
     if [ -f $1 ] ; then
@@ -120,3 +121,4 @@ extract () {
 [[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && . ~/.autojump/etc/profile.d/autojump.sh
 source ~/code/git-flow-completion/git-flow-completion.plugin.zsh
 #/usr/bin/setxkbmap -option "ctrl:swapcaps"
+export PATH=$PATH:/usr/lib/git-core/
