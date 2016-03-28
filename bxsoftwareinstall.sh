@@ -76,7 +76,7 @@ if [ $ans == 1 ];then
     # source ~/.bashrc
     if [ ! -d "git-flow-completion" ]; then
         git clone https://github.com/bobthecow/git-flow-completion.git
-        #echo "source ~/code/git-flow-completion/git-flow-completion.zsh"
+        #echo "source ~/code/git-flow-completion/git-flow-completion.zsh" >> ~/.zshrc
     fi
 fi
 
@@ -631,6 +631,7 @@ fi
 echo "<<<<<< Download xtensa and install it. Continue?[Y/n] >>>>>>"
 ans=$(askForContinue)
 if [ $ans == 1 ];then
+    #gcc-xtensa in github: https://github.com/jcmvbkbc/gcc-xtensa
     echo "Please install by your own hand. Follow the link and steps below!"
     echo "https://drive.google.com/folderview?id=0B5bwBE9A5dBXaExvdDExVFNrUXM&usp=sharing"
     echo "sudo cp xtensa-lx106-elf /usr/src/ -r"
