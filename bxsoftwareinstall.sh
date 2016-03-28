@@ -328,7 +328,7 @@ ans=$(askForContinue)
 if [ $ans == 1 ];then
     #Ref: http://sourceforge.net/projects/sshpass/
     sudo apt-get install sshpass
-    #echo "sshpass -p zhangbaoxian ssh  zhangbaoxian@192.168.0.45" > .zshrc
+    #echo "sshpass -p zhangbaoxian ssh  zhangbaoxian@192.168.0.45" >> .zshrc
 fi
 
 echo "<<<<<< Install Google Hosts. Continue?[Y/n] >>>>>>"
