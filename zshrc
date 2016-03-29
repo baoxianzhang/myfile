@@ -96,6 +96,7 @@ alias tl='cd ~/Templates'
 alias c='clear'
 alias compile='make clean && make && cp firmware.hex ~/Templates/'
 alias vi='vim'
+alias o='nautilus ./'
 
 extract () {
     if [ -f $1 ] ; then
