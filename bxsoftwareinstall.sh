@@ -210,6 +210,7 @@ fi
 echo "<<<<<< Install ctags. Continue?[Y/n] >>>>>>"
 ans=$(askForContinue)
 if [ $ans == 1 ];then
+    sudo apt-get install exuberant-ctags
     cd ~/softwares
     if [ ! -f "ctags-5.8.tar.gz" ]; then
         wget http://prdownloads.sourceforge.net/ctags/ctags-5.8.tar.gz
@@ -644,4 +645,11 @@ echo "<<<<<< Install rar. Continue?[Y/n] >>>>>>"
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     sudo apt-get install rar
+fi
+
+echo "<<<<<< Install fzf. Continue?[Y/n]"
+ans=$(askForContinue)
+if [ $ans == 1 ]; then
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    ~/.fzf/install
 fi
