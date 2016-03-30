@@ -653,3 +653,9 @@ if [ $ans == 1 ]; then
     git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
     ~/.fzf/install
 fi
+
+echo "<<<<<< Install enca. Continue?[Y/n]"
+ans=$(askForContinue)
+if [ $ans == 1 ]; then
+    sudo apt-get install enca
+fi

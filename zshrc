@@ -97,6 +97,8 @@ alias c='clear'
 alias compile='make clean && make && cp firmware.hex ~/Templates/'
 alias vi='vim'
 alias o='nautilus ./'
+alias encodeI='iconv -f GBK -t UTF-8 '
+alias encodeE='enca -L zh_CN -x utf-8 '
 
 extract () {
     if [ -f $1 ] ; then
@@ -123,3 +125,4 @@ extract () {
 source ~/code/git-flow-completion/git-flow-completion.plugin.zsh
 #/usr/bin/setxkbmap -option "ctrl:swapcaps"
 export PATH=$PATH:/usr/lib/git-core/
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
