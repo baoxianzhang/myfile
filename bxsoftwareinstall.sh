@@ -659,3 +659,13 @@ ans=$(askForContinue)
 if [ $ans == 1 ]; then
     sudo apt-get install enca
 fi
+
+echo "<<<<<< Install meld or bcompare. Continue?[Y/n]"
+ans=$(askForContinue)
+cd ~/softwares/
+if [ $ans == 1 ]; then
+    #sudo apt-get install meld
+    wget http://www.scootersoftware.com/bcompare-4.1.5.21031_amd64.deb
+    sudo dpkg -i bcompare-4.1.5.21031_amd64.deb
+    // trial licence
+fi
