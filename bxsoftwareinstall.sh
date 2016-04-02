@@ -165,6 +165,13 @@ if [ $ans == 1 ];then
     sudo apt-get install trash-cli
 fi
 
+echo "<<<<<< Install fcitx-googlepinyin Input method. Continue?[Y/n] >>>>>>"
+ans=$(askForContinue)
+if [ $ans == 1 ];then
+    sudo apt-get install fcitx-googlepinyin
+fi
+
+
 echo "<<<<<< Install SogouPinyin Input method. Continue?[Y/n] >>>>>>"
 ans=$(askForContinue)
 if [ $ans == 1 ];then
