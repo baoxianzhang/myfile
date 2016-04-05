@@ -105,6 +105,21 @@ alias sshAtom='ssh root@192.168.8.1'
 alias telAtom='telnet 192.168.8.1'
 alias s='source ~/.zshrc'
 alias scpintoyun='scp ~/molmc_code/intorobot_atom/out/intorobot_stm32_server.tar.gz root@112.124.117.64:/tmp/'
+alias shut='sudo shutdown -h now'
+
+# git config
+# gitignore: https://github.com/github/gitignore
+alias gaa='git add .'
+alias gcv='git commit --verbose'
+alias gco='git checkout'
+alias gs='git status'
+alias gl="git log --color --graph --pretty=format:git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit "
+alias gb='git branch'
+alias gd='git diff'
+alias grh='git reset --hard'
+
+
+
 
 extract () {
     if [ -f $1 ] ; then
