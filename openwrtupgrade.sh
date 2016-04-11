@@ -2,6 +2,7 @@
 #Author: baoxian zhang[baoxianzhang] <baoxianzhit@gmail.com>
 #Date: Tuesday, 10-04-2016
 #
+
 function askForContinue()
 {
     read ANS
@@ -61,6 +62,7 @@ ans=$(askForContinue)
 if [ $ans == 1 ];then
     cd ${openwrt_dir}
     make j=4
+    cecho "Compile finish!" $green
 fi
 
 cecho "<<<<<< Copy openwrt-ramips-atom bin to pub dir! Continue?[Y/n] >>>>>> " $yellow
@@ -78,7 +80,9 @@ if [ $ans == 1 ];then
     md5sum openwrt-ramips-${openwrt_ver}.bin > md5sums
     sed -i "s/  openwrt-ramips-${openwrt_ver}.bin/ \*openwrt-ramips-${openwrt_ver}.bin/g" `grep 'openwrt-ramips' -rl .`
     cd ..
-    tar -xvzf ${openwrt_ver}.${configbag_ver}.tar.gz ${openwrt_ver}.${configbag_ver}
+    tar -cvzf ${openwrt_ver}.${configbag_ver}.tar.gz ${openwrt_ver}.${configbag_ver}
+    cecho "upload to the bellow url:" $green
+    cecho "http://www.intorobot.com/downloads/atom/"
     nautilus ./
 fi
 
