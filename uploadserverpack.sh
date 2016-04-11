@@ -73,6 +73,6 @@ if [ $ans == 1 ];then
         git pull --rebase
         make release_server_pack
     fi
-    scp out/intorobot_stm32_server.tar.gz root@115.124.117.64:/tmp/
+    scp out/intorobot_stm32_server.tar.gz root@115.29.193.81:/tmp/
 fi
 

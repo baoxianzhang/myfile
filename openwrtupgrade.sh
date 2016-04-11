@@ -83,7 +83,8 @@ if [ $ans == 1 ];then
     tar -cvzf ${openwrt_ver}.${configbag_ver}.tar.gz ${openwrt_ver}.${configbag_ver}
     cecho "upload to the bellow url:" $green
     cecho "http://www.intorobot.com/downloads/atom/"
-    nautilus ./
+    #nautilus ./
+    scp ${openwrt_ver}.${configbag_ver}.tar.gz root@115.29.193.81:/tmp/ 
 fi
 
 cecho "<<<<<< Upload the openwrt-ramp bin to baiduyun pan and box! Continue?[Y/n] >>>>>>" $yellow
@@ -125,3 +126,7 @@ if [ $ans == 1 ];then
     cecho "2. md5sum config-10.tar.gz >> md5sums" $blue
     cecho "3. add * in md5sums" $blue
 fi
+
+cecho "<<<<<< Set the openwrt verison in the intorobot platform! >>>>>>" $yellow
+cecho "http://wiki.intorobot.com:8080/" $green
+
