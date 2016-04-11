@@ -116,7 +116,7 @@ alias gs='git status'
 alias gb='git branch'
 alias gd='git diff'
 alias grh='git reset --hard'
-
+alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 
 
 

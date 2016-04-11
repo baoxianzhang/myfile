@@ -14,22 +14,46 @@ function askForContinue()
     esac
 }
 
+# Set the colours you can use
+black='\033[0;30m'
+white='\033[0;37m'
+red='\033[0;31m'
+green='\033[0;32m'
+yellow='\033[0;33m'
+blue='\033[0;34m'
+magenta='\033[0;35m'
+cyan='\033[0;36m'
+
+#  Reset text attributes to normal + without clearing screen.
+#alias Reset="tput sgr0"
+
+# Color-echo.
+# arg $1 = message
+# arg $2 = Color
+cecho() {
+  echo -e "${2}${1}"
+  tput sgr0
+  # Reset # Reset to normal.
+  return
+}
+
+
 cd
 homeDir=$(pwd)
 if [ ! -d "$homeDir/softwares" ]; then
     mkdir ~/softwares
 fi
 
-echo "<<<<<< Softwares install begin on Ubuntu 14.04 >>>>>>"
-echo "Please connect the wifi and check the wifi! "
+cecho "<<<<<< Softwares install begin on Ubuntu 14.04 >>>>>>" $yellow
+cecho "Please connect the wifi and check the wifi! " $red
 
-echo "<<<<<< Update the software, not upgrade system. Continue?[Y/n] >>>>>>"
+cecho "<<<<<< Update the software, not upgrade system. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     sudo apt-get update
 fi
 
-echo "<<<<<< Install git 2.7.3. Continue?[Y/n] >>>>>>"
+cecho "<<<<<< Install git 2.7.3. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     # Magit requires Git >= 1.9.4, you are using 1.9.1.
@@ -50,7 +74,7 @@ if [ $ans == 1 ];then
     source ~/.bashrc
 fi
 
-echo "<<<<<< Configure git email name and editor. Continue?[Y/n] >>>>>> "
+cecho "<<<<<< Configure git email name and editor. Continue?[Y/n] >>>>>> " $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     git config --global user.email "baoxianzhit@gmail.com"
@@ -58,13 +82,13 @@ if [ $ans == 1 ];then
     git config --global core.editor vim
 fi
 
-echo "<<<<<< Install git flow. Continue?[Y/n] >>>>>>"
+cecho "<<<<<< Install git flow. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     sudo apt-get install git-flow
 fi
 
-echo "<<<<<< Install git flow completion. Continue?[Y/n] >>>>>>"
+cecho "<<<<<< Install git flow completion. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     cd
@@ -80,37 +104,37 @@ if [ $ans == 1 ];then
     fi
 fi
 
-echo "<<<<<< Install g++. Continue?[Y/n] >>>>>>"
+cecho "<<<<<< Install g++. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     sudo apt-get install g++
 fi
 
-echo "<<<<<< Install build-essential. Continue?[Y/n] >>>>>>"
+cecho "<<<<<< Install build-essential. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     sudo apt-get install build-essential
 fi
 
-echo "<<<<<< Install python. Continue?[Y/n] >>>>>>"
+cecho "<<<<<< Install python. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     sudo apt-get install python
 fi
 
-echo "<<<<<< Install python3. Continue?[Y/n] >>>>>>"
+cecho "<<<<<< Install python3. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     sudo apt-get install python3
 fi
 
-echo "<<<<<< Install openssh-server. Continue?[Y/n] >>>>>>"
+cecho "<<<<<< Install openssh-server. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     sudo apt-get install openssh-server
 fi
 
-echo "<<<<<< Install cmake. Continue?[Y/n] >>>>>>"
+cecho "<<<<<< Install cmake. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     #Ref: https://cmake.org/
@@ -128,7 +152,7 @@ if [ $ans == 1 ];then
     fi
 fi
 
-echo "<<<<<< Install zsh. Continue?[Y/n] >>>>>>"
+cecho "<<<<<< Install zsh. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     #Ref: http://zhuanlan.zhihu.com/mactalk/19556676ls
@@ -142,7 +166,7 @@ if [ $ans == 1 ];then
     echo "Logout to use zsh"
 fi
 
-echo "<<<<<< Install autojump. Continue?[Y/n] >>>>>>"
+cecho "<<<<<< Install autojump. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     #Ref: https://github.com/wting/autojump
@@ -159,20 +183,13 @@ if [ $ans == 1 ];then
     fi
 fi
 
-echo "<<<<<< Install trash-cli. Continue?[Y/n] >>>>>>"
+cecho "<<<<<< Install trash-cli. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     sudo apt-get install trash-cli
 fi
 
-echo "<<<<<< Install fcitx-googlepinyin Input method. Continue?[Y/n] >>>>>>"
-ans=$(askForContinue)
-if [ $ans == 1 ];then
-    sudo apt-get install fcitx-googlepinyin
-fi
-
-
-echo "<<<<<< Install SogouPinyin Input method. Continue?[Y/n] >>>>>>"
+cecho "<<<<<< Install SogouPinyin Input method. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     #Ref:  http://jingyan.baidu.com/article/08b6a591cb06f114a8092209.html
@@ -182,18 +199,18 @@ if [ $ans == 1 ];then
         wget "http://pinyin.sogou.com/linux/download.php?f=linux&bit=64" -O "sogou_64.deb"
     fi
     sudo dpkg -i sogou_64.deb
-    echo "<<<<<< Finished to install SougouPin, Please configure it >>>>>>"
-    echo "System Settings > Language Support > Install/Remove Languages > install the Chinese language"
-    echo "Logout the system to use sougou input method after finish all the installation!"
+    cecho "<<<<<< Finished to install SougouPin, Please configure it >>>>>>" $green
+    cecho "System Settings > Language Support > Install/Remove Languages > install the Chinese language" $green
+    cecho "Logout the system to use sougou input method after finish all the installation!" $green
 fi
 
-echo "<<<<<< Install luajit. Continue?[Y/n] >>>>>>"
+cecho "<<<<<< Install luajit. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     sudo apt-get install luajit
 fi
 
-echo "<<<<<< Install mercury Mw150us wireless driver. Continue?[Y/n] >>>>>>"
+cecho "<<<<<< Install mercury Mw150us wireless driver. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     #Ref: http://jarhead.blog.163.com/blog/static/175217041201317102236535/
@@ -211,10 +228,10 @@ if [ $ans == 1 ];then
     sudo make install
     # The next can be undo
     #sudo echo "8188eu" >> /etc/modules
-    echo "Logout to use Mw150us wireless"
+    cecho "Logout to use Mw150us wireless" $red
 fi
 
-echo "<<<<<< Install ctags. Continue?[Y/n] >>>>>>"
+cecho "<<<<<< Install ctags. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     sudo apt-get install exuberant-ctags
@@ -227,10 +244,10 @@ if [ $ans == 1 ];then
     ./configure
     make
     sudo make install
-    echo "Usage: ctags ./ -R *"
+    cecho "Usage: ctags ./ -R *" $green
 fi
 
-echo "<<<<<< Install gtags. Continue?[Y/n] >>>>>>"
+cecho "<<<<<< Install gtags. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     cd ~/softwares
@@ -245,10 +262,10 @@ if [ $ans == 1 ];then
     ./configure
     make
     sudo make install
-    echo "Usage: gtags"
+    cecho "Usage: gtags" $green
 fi
 
-echo "<<<<<< Install curl. Continue?[Y/n] >>>>>>"
+cecho "<<<<<< Install curl. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     sudo apt-get install curl
@@ -265,19 +282,19 @@ if [ $ans == 1 ];then
     #sudo apt-get install curl
 fi
 
-echo "<<<<<< Install silversearcher-ag. Continue?[Y/n] >>>>>>"
+cecho "<<<<<< Install silversearcher-ag. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     sudo apt-get install silversearcher-ag
 fi
 
-echo "<<<<<< Install sqlite3. Continue?[Y/n] >>>>>>"
+cecho "<<<<<< Install sqlite3. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     sudo apt-get install sqlite3
 fi
 
-echo "<<<<<< Install spf13 vim. Continue?[Y/n] >>>>>>"
+cecho "<<<<<< Install spf13 vim. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     #echo "<<<<<< Install roboust zhou vim >>>>>>"
@@ -314,10 +331,10 @@ if [ $ans == 1 ];then
     make
     sudo make install
     curl http://j.mp/spf13-vim3 -L -o - | sh
-    echo "Start vim and begin to install the plugin!"
+    cecho "Start vim and begin to install the plugin!" $green
 fi
 
-echo "<<<<<< Install arm-none-eabi-gcc 4.8.2. Continue?[Y/n] >>>>>>"
+cecho "<<<<<< Install arm-none-eabi-gcc 4.8.2. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     cd ~/softwares
@@ -331,7 +348,7 @@ if [ $ans == 1 ];then
     #source ~/.zshrc
 fi
 
-echo "<<<<<< Install sshpass. Continue?[Y/n] >>>>>>"
+cecho "<<<<<< Install sshpass. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     #Ref: http://sourceforge.net/projects/sshpass/
@@ -339,26 +356,26 @@ if [ $ans == 1 ];then
     #echo "sshpass -p zhangbaoxian ssh  zhangbaoxian@192.168.0.45" >> .zshrc
 fi
 
-echo "<<<<<< Install Google Hosts. Continue?[Y/n] >>>>>>"
+cecho "<<<<<< Install Google Hosts. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
-    echo "By your own hand! Follow the bellow link!"
-    echo "http://laod.cn/hosts/2016-google-hosts.html"
+    cecho "By your own hand! Follow the bellow link!" $green
+    cecho "http://laod.cn/hosts/2016-google-hosts.html" $green
 fi
 
-echo "<<<<<< Install terminator. Continue?[Y/n] >>>>>>"
+cecho "<<<<<< Install terminator. Continue?[Y/n] >>>>>>" $green
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     sudo apt-get install terminator
 fi
 
-echo "<<<<<< Install tmux. Continue?[Y/n] >>>>>>"
+cecho "<<<<<< Install tmux. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     sudo apt-get install tmux
 fi
 
-echo "<<<<<< Softlink zshrc. Continue?[Y/n] >>>>>>"
+cecho "<<<<<< Softlink zshrc. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     if [ ! -d "$homeDir/bxgithub" ]; then
@@ -374,7 +391,7 @@ if [ $ans == 1 ];then
     ln -s ~/bxgithub/myfile/zshrc ~/.zshrc
 fi
 
-echo "<<<<<< Softlink emacs. Continue?[Y/n] >>>>>>"
+cecho "<<<<<< Softlink emacs. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     if [ ! -d "$homeDir/bxgithub" ]; then
@@ -390,7 +407,7 @@ if [ $ans == 1 ];then
     ln -s ~/bxgithub/emacs-c-ide-demo ~/.emacs.d
 fi
 
-echo "<<<<<< Softlink tmux. Continue?[Y/n] >>>>>>"
+cecho "<<<<<< Softlink tmux. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     if [ ! -d "$homeDir/bxgithub" ]; then
@@ -404,15 +421,15 @@ if [ $ans == 1 ];then
     ln -s ~/bxgithub/myfile/tmux.conf ~/.tmux.conf
 fi
 
-echo "<<<<<< Install nginx. Continue?[Y/n] >>>>>>"
+cecho "<<<<<< Install nginx. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     sudo apt-get install nginx
-    echo "Configure the nginx "
-    echo "Run: sudo vim /etc/nginx/nginx.conf"
+    cecho "Configure the nginx " $green
+    cecho "Run: sudo vim /etc/nginx/nginx.conf" $green
 fi
 
-echo "<<<<<< Install stlink. Continue?[Y/n] >>>>>>"
+cecho "<<<<<< Install stlink. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     cd ~/softwares
@@ -437,7 +454,7 @@ if [ $ans == 1 ];then
     sudo udevadm control --reload-rules
 fi
 
-echo "<<<<<< Install GoldenDict. Continue?[Y/n] >>>>>>"
+cecho "<<<<<< Install GoldenDict. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     sudo apt-get install goldendict
@@ -457,22 +474,22 @@ if [ $ans == 1 ];then
         tar -xjvf stardict-langdao-ce-gb-2.4.2.tar.bz2
         tar -xjvf stardict-oxford-gb-2.4.2.tar.bz2
     fi
-    echo "start: goldendict, and configure it"
+    cecho "start: goldendict, and configure it" $green
 fi
 
-echo "<<<<<< Install awk for openwrt. Continue?[Y/n] >>>>>>"
+cecho "<<<<<< Install awk for openwrt. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     sudo apt-get install gawk
 fi
 
-echo "<<<<<< Install perl. Continue?[Y/n] >>>>>>"
+cecho "<<<<<< Install perl. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     sudo apt-get install perl
 fi
 
-echo "<<<<<< Install XML::Parser for openwrt. Continue?[Y/n] >>>>>>"
+cecho "<<<<<< Install XML::Parser for openwrt. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     sudo apt-get install expat
@@ -480,19 +497,19 @@ if [ $ans == 1 ];then
     sudo apt-get install libxml-parser-perl
 fi
 
-echo "<<<<<< Install Inkscape Vector Graphics Editor. Continue?[Y/n] >>>>>>"
+cecho "<<<<<< Install Inkscape Vector Graphics Editor. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     sudo apt-get install inkscape
 fi
 
-echo "<<<<<< Install Audacity. Continue?[Y/n] >>>>>>"
+cecho "<<<<<< Install Audacity. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     sudo apt-get install audacity
 fi
 
-echo "<<<<<< Google Chrome. Continue?[Y/n] >>>>>>"
+cecho "<<<<<< Google Chrome. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     #Ref: http://www.linuxidc.com/Linux/2014-04/100645.htm
@@ -500,23 +517,23 @@ if [ $ans == 1 ];then
     if [ ! -f "google-chrome-stable_current_amd64.deb" ]; then
         wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
     fi
-    echo "Use the Software center to install the deb since dpkg is not work!"
+    cecho "Use the Software center to install the deb since dpkg is not work!" $red
     # sudo dpkg -i google-chrome-stable_current_amd64.deb
-    echo "Usage: google-chrome-stable"
+    cecho "Usage: google-chrome-stable" $green
 fi
 
-echo "<<<<<< Install Skype. Continue?[Y/n] >>>>>>"
+cecho "<<<<<< Install Skype. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     cd ~/softwares
     if [ ! -f "skype-ubuntu-precise_4.3.0.37-1_i386.deb" ]; then
         wget download.skype.com/linux/skype-ubuntu-precise_4.3.0.37-1_i386.deb
     fi
-    echo "Use the Software center to install the deb since dpkg is not work!"
+    cecho "Use the Software center to install the deb since dpkg is not work!" $red
     # sudo dpkg -i skype-ubuntu-precise_4.3.0.37-1_i386.deb
 fi
 
-echo "<<<<<< Install Emacs 24.5. Continue?[Y/n] >>>>>>"
+cecho "<<<<<< Install Emacs 24.5. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     #if [ ! -f "emacs" ]; then
@@ -543,7 +560,7 @@ if [ $ans == 1 ];then
     sudo make install
 fi
 
-echo "<<<<<< Install virtualbox. Continue?[Y/n] >>>>>>"
+cecho "<<<<<< Install virtualbox. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     #Ref: https://www.virtualbox.org/
@@ -551,15 +568,15 @@ if [ $ans == 1 ];then
     if [ ! -f "virtualbox-5.0_5.0.16-105871~Ubuntu~trusty_amd64.deb" ]; then
         wget http://download.virtualbox.org/virtualbox/5.0.16/virtualbox-5.0_5.0.16-105871~Ubuntu~trusty_amd64.deb
     fi
-    echo "Use the Software center to install the deb since dpkg is not work!"
+    #echo "Use the Software center to install the deb since dpkg is not work!"
     sudo dpkg -i virtualbox-5.0_5.0.16-105871~Ubuntu~trusty_amd64.deb
-    echo "if failed, click the deb, use the software center to install it."
+    cecho "if failed, click the deb, use the software center to install it." $red
 fi
 
-echo "<<<<<< Install virtualbox win 7 addition. Continue?[Y/n] >>>>>>"
+cecho "<<<<<< Install virtualbox win 7 addition. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
-    echo "Please install the iso first! Continue?[Y/n]"
+    cecho "Please install the iso first! Continue?[Y/n]" $yellow
     virtualbox
     ans=$(askForContinue)
     if [ $ans == 1 ];then
@@ -567,17 +584,17 @@ if [ $ans == 1 ];then
         #boot VT-x AMD-v to support 64 bit
         #VirtualBox guest additions
         sudo apt-get install linux-headers-generic build-essential dkms -y
-        echo "find the VirtualBox Guest Additions in the Device, and click and install it. Continue?[Y/n]"
+        cecho "find the VirtualBox Guest Additions in the Device, and click and install it. Continue?[Y/n]" $green
         ans=$(askForContinue)
         if [ $ans == 1 ];then
             ##Now you can use the sharefile and enlarge the screen
-            echo "Install the Oracle VM VirtualBox Extension Pack to use the usb"
+            cecho "Install the Oracle VM VirtualBox Extension Pack to use the usb" $green
             ##Ref: http://www.xiaojian.org/article/310.html
             if [ ! -f "Oracle_VM_VirtualBox_Extension_Pack-5.0.16-105871.vbox-extpack" ];then
                 wget http://download.virtualbox.org/virtualbox/5.0.16/Oracle_VM_VirtualBox_Extension_Pack-5.0.16-105871.vbox-extpack
             fi
             VBoxManage extpack install Oracle_VM_VirtualBox_Extension_Pack-5.0.16-105871.vbox-extpack
-            echo "Run: sudo addgroup zhangbaoxian vboxusers. Continue?[Y/n]"
+            cecho "Run: sudo addgroup zhangbaoxian vboxusers. Continue?[Y/n]" $yellow
             ans=$(askForContinue)
             if [ $ans == 1 ];then
                 cat /etc/group | grep vboxusers
@@ -590,7 +607,7 @@ if [ $ans == 1 ];then
    fi
 fi
 
-echo "<<<<<< Install vagrant. Continue?[Y/n] >>>>>>"
+cecho "<<<<<< Install vagrant. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     #Ref: http://rmingwang.com/vagrant-commands-and-config.html   https://www.vagrantup.com/docs/boxes.html
@@ -621,7 +638,7 @@ if [ $ans == 1 ];then
     #vagrant halt
 fi
 
-echo "<<<<<< Install go-for-it. Continue?[Y/n] >>>>>>"
+cecho "<<<<<< Install go-for-it. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     sudo add-apt-repository ppa:mank319/go-for-it
@@ -629,50 +646,50 @@ if [ $ans == 1 ];then
     sudo apt-get install go-for-it
 fi
 
-echo "<<<<<< Install SecureCRT 7.3. Continue?[Y/n] >>>>>>"
+cecho "<<<<<< Install SecureCRT 7.3. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
-    echo "Please install by your own hand. Follow the link below!"
-    echo "http://blog.csdn.net/chszs/article/details/40623169"
+    cecho "Please install by your own hand. Follow the link below!" $green
+    cecho "http://blog.csdn.net/chszs/article/details/40623169" $green
 fi
 
-echo "<<<<<< Download xtensa and install it. Continue?[Y/n] >>>>>>"
+cecho "<<<<<< Download xtensa and install it. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     #gcc-xtensa in github: https://github.com/jcmvbkbc/gcc-xtensa
-    echo "Please install by your own hand. Follow the link and steps below!"
-    echo "https://drive.google.com/folderview?id=0B5bwBE9A5dBXaExvdDExVFNrUXM&usp=sharing"
-    echo "sudo cp xtensa-lx106-elf /usr/src/ -r"
-    echo "Add to the PATH!"
+    cecho "Please install by your own hand. Follow the link and steps below!" $green
+    cecho "https://drive.google.com/folderview?id=0B5bwBE9A5dBXaExvdDExVFNrUXM&usp=sharing" $green
+    cecho "sudo cp xtensa-lx106-elf /usr/src/ -r" $green
+    cecho "Add to the PATH!" $green
     #echo "export PATH=$PATH:/usr/src/xtensa-lx106-elf/bin" >> ~/.zshrc
 fi
 
 
-echo "<<<<<< Install rar. Continue?[Y/n] >>>>>>"
+cecho "<<<<<< Install rar. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     sudo apt-get install rar
 fi
 
-echo "<<<<<< Install fzf. Continue?[Y/n]"
+cecho "<<<<<< Install fzf. Continue?[Y/n]" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ]; then
     git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
     ~/.fzf/install
 fi
 
-echo "<<<<<< Install enca. Continue?[Y/n]"
+cecho "<<<<<< Install enca. Continue?[Y/n]" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ]; then
     sudo apt-get install enca
 fi
 
-echo "<<<<<< Install meld or bcompare. Continue?[Y/n]"
+cecho "<<<<<< Install meld or bcompare. Continue?[Y/n]" $yellow
 ans=$(askForContinue)
 cd ~/softwares/
 if [ $ans == 1 ]; then
     #sudo apt-get install meld
     wget http://www.scootersoftware.com/bcompare-4.1.5.21031_amd64.deb
     sudo dpkg -i bcompare-4.1.5.21031_amd64.deb
-    // trial licence
+    cecho "trial licence" $red
 fi
