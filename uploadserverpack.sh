@@ -41,7 +41,7 @@ cecho() {
 file_dir=$(cd "$(dirname "$0")"; pwd)
 #file_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd )
 
-echo "file_dir=${file_dir}"
+cecho "file_dir=${file_dir}" $green
 atom_dir=${file_dir}/intorobot_atom
 
 cecho "<<<<<< Make realease pack of  intorobot_atom and upload to intoyun for test! Continue?[Y/n] >>>>>>" $yellow
@@ -52,13 +52,13 @@ if [ $ans == 1 ];then
     make clean_server_pack
     git pull --rebase
     make release_server_pack
-    echo "cp intorobot_stm32_server.tar.gz to intoyun"
+    cecho "cp intorobot_stm32_server.tar.gz to intoyun" $green
     scp out/intorobot_stm32_server.tar.gz root@112.124.117.64:/tmp/
-    echo "Follow the following steps to install the pack"
-    echo "1. Login intoyun"
-    echo "2. cd /var/"
-    echo "3. run firmware_install.sh"
-    echo "Enter to continue!"
+    cecho "Follow the following steps to install the pack" $green
+    cecho "1. Login intoyun" $blue
+    cecho "2. cd /var/" $blue
+    cecho "3. run firmware_install.sh" $blue
+    cecho "Enter to continue!" $green
     read nothing
     ssh root@112.124.117.64
 fi

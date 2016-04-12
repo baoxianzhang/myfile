@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/zhangbaoxian/.oh-my-zsh
+export ZSH=/home/${USERNAME}/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -53,7 +53,7 @@ plugins=(git)
 
 # User configuration
 
-  export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
 export PATH=$PATH:/usr/src/gcc-arm-none-eabi-4_8-2014q3/bin
 export PATH=$PATH:/usr/src/xtensa-lx106-elf/bin
 # export MANPATH="/usr/local/man:$MANPATH"

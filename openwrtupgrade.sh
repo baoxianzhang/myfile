@@ -1,5 +1,5 @@
 #! /bin/bash
-#Author: baoxian zhang[baoxianzhang] <baoxianzhit@gmail.com>
+#Author: lin jiahui; baoxian zhang[baoxianzhang] <baoxianzhit@gmail.com>
 #Date: Tuesday, 10-04-2016
 #
 
@@ -44,7 +44,9 @@ file_dir=$(cd "$(dirname "$0")"; pwd)
 cecho "file_dir=${file_dir}" $green
 openwrt_dir=${file_dir}/openwrt
 pub_dir=${file_dir}/pub
+doc_dir=${file_dir}/molmc_doc/src/content/zh/
 openwrt_binname=openwrt-ramips-mt7620-atom-squashfs-sysupgrade
+
 
 cecho "<<<<<< Enter the Information about the upgrade! Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
@@ -94,14 +96,49 @@ if [ $ans == 1 ];then
     cecho "http://yun.baidu.com/?ref=PPZQ" $blue
     cecho "The box url:" $green
     cecho "https://app.box.com/login" $blue
-    cecho  "The account:" $green
+    cecho "The account:" $green
     cecho "developer@molmc.com" $blue
+    cecho "add the share link to the file baidupanboxsharelink "
+    cd ${pub_dir}/${date_dir}
+    echo "baiduyunpan:" > baidupanboxsharelink
+    echo "" >> baidupanboxsharelink
+    echo "box:" >> baidupanboxsharelink
+    echo "" >> baidupanboxsharelink
+    gedit baidupanboxsharelink
 fi
 
 cecho "<<<<<< Fix the link in the molmc_doc! Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
-    echo "Wait and good!"
+    cd ${doc_dir}
+    git pull --rebase
+    link_file=${pub_dir}/${date_dir}/baidupanboxsharelink
+    connect_file=${doc_dir}/src/content/zh/connect.md
+    keystring="下载Atom官方固件"
+    #取出国内网址，并将'/'修改为'\/'
+    guonei=$(sed -n -e '/baiduyunpan:/N;s/.*\n\(.*\)/\1/p' $link_file)
+    guonei=$(echo ${guonei} | sed "s:\/:\\\/:g")
+
+    #取出国外网址，并将'/'修改为'\/'
+    guowai=$(sed -n -e '/box:/N;s/.*\n\(.*\)/\1/p' $link_file)
+    guowai=$(echo ${guowai} | sed "s:\/:\\\/:g")
+
+    sed -i "/${keystring}/s/([^)]*)/(${guonei})/1" ${connect_file}
+    sed -i "/${keystring}/s/([^)]*)/(${guowai})/2" ${connect_file}
+    git add .
+    git commit -m "update the link of openwrt firmware"
+    git push
+fi
+
+cecho "<<<<<< Test the link in the 45 platform! Continue?[Y/n] >>>>>>" $yellow
+ans=$(askForContinue)
+if [ $ans == 1 ];then
+    cecho "Follow the steps bellow:" $green
+    cecho "1. Login luozheng 45 &&  cd ~/workspace/molmc_docs/ && git pull --rebase && grunt server" $blue
+    cecho "2. Test in the web url: 192.168.0.45.9999" $blue
+    cecho "Enter to continue!" $green
+    read nothing
+    sshpass -p luozheng ssh luozheng@192.168.0.45
 fi
 
 cecho "<<<<<< make the openwrt configbag! Continue?[Y/n] >>>>>>" $yellow
