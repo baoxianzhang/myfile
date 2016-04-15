@@ -104,8 +104,11 @@ alias rmkeygen='ssh-keygen -f "/home/zhangbaoxian/.ssh/known_hosts" -R 192.168.8
 alias sshAtom='ssh root@192.168.8.1'
 alias telAtom='telnet 192.168.8.1'
 alias s='source ~/.zshrc'
+alias vz='vim ~/.zshrc'
 alias scpintoyun='scp ~/molmc_code/intorobot_atom/out/intorobot_stm32_server.tar.gz root@112.124.117.64:/tmp/'
-alias shut='sudo shutdown -h now'
+alias shutdown='sudo shutdown -h now'
+alias reboot='sudo reboot'
+alias espcopy='cd ~/molmc_code/esp_iot_sdk_v1.5.1/ && make clean && make ; rm ~/Templates/esp_iot_sdk_v1.5.1 ; cp ~/molmc_code/esp_iot_sdk_v1.5.1 ~/Templates/ -r'
 
 # git config
 # gitignore: https://github.com/github/gitignore

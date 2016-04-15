@@ -37,6 +37,7 @@ cecho() {
   return
 }
 
+# sed -i "s/IP_REDIS_CONFIG/192.168.33.13/g" `grep 'IP_REDIS_CONFIG' -rl .`
 
 cd
 homeDir=$(pwd)
@@ -692,4 +693,19 @@ if [ $ans == 1 ]; then
     wget http://www.scootersoftware.com/bcompare-4.1.5.21031_amd64.deb
     sudo dpkg -i bcompare-4.1.5.21031_amd64.deb
     cecho "trial licence" $red
+fi
+
+cecho "<<<<<< Install galculator. Continue?[Y/n]" $yellow
+ans=$(askForContinue)
+cd ~/softwares/
+if [ $ans == 1 ]; then
+ #   if [ ! -f "galculator-2.1.4.tar.gz" ]; then
+ #       wget http://galculator.mnim.org/downloads/galculator-2.1.4.tar.gz
+ #       tar -xzvf galculator-2.1.4.tar.gz
+ #   fi
+ #   sudo apt-get install intltool
+ #   cd galculator-2.1.4
+ #   make 
+ #   sudo make install
+    sudo apt-get install galculator
 fi
