@@ -709,3 +709,18 @@ if [ $ans == 1 ]; then
  #   sudo make install
     sudo apt-get install galculator
 fi
+
+cecho "<<<<<< Install audacious. Continue?[Y/n]" $yellow
+ans=$(askForContinue)
+if [ $ans == 1 ]; then
+    sudo apt-get install audacity # for the ape music
+fi
+
+cecho "<<<<<< Install thefuck. Continue?[Y/n]" $yellow
+ans=$(askForContinue)
+if [ $ans == 1 ]; then
+    sudo -H pip install thefuck
+    #echo "eval $(thefuck --alias)" >> ~/.zshrc
+fi
+
+
