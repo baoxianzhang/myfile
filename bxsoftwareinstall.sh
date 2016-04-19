@@ -37,7 +37,35 @@ cecho() {
   return
 }
 
+
+# Keep-alive: update existing `sudo` time stamp until the script has finished.
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
 # sed -i "s/IP_REDIS_CONFIG/192.168.33.13/g" `grep 'IP_REDIS_CONFIG' -rl .`
+apps=(
+    # Utilities
+    # add your install apt softwares in lines
+    # for example, audacious
+    # git 
+    # 
+
+)
+
+for item in ${apps[@]}; do
+  cecho "> ${item}" $magenta
+done
+
+echo ""
+
+select yn in "Yes" "No"; do
+  case $yn in
+    Yes )
+        cecho "Ok! installing apps, please wait ... " $yellow
+        sudo apt-get install -y ${apps[@]}
+        break;;
+    No ) break;;
+  esac
+done
 
 cd
 homeDir=$(pwd)

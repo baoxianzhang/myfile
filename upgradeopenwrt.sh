@@ -81,12 +81,6 @@ if [ $ans == 1 ];then
     cd ${pub_dir}/${date_dir}/${openwrt_ver}.${configbag_ver}
     md5sum openwrt-ramips-${openwrt_ver}.bin > md5sums
     sed -i "s/  openwrt-ramips-${openwrt_ver}.bin/ \*openwrt-ramips-${openwrt_ver}.bin/g" `grep 'openwrt-ramips' -rl .`
-    cd ..
-    tar -cvzf ${openwrt_ver}.${configbag_ver}.tar.gz ${openwrt_ver}.${configbag_ver}
-    cecho "upload to the bellow url:" $green
-    cecho "http://www.intorobot.com/downloads/atom/"
-    #nautilus ./
-    scp ${openwrt_ver}.${configbag_ver}.tar.gz root@115.29.193.81:/tmp/ 
 fi
 
 cecho "<<<<<< Upload the openwrt-ramp bin to baiduyun pan and box! Continue?[Y/n] >>>>>>" $yellow
@@ -163,6 +157,22 @@ if [ $ans == 1 ];then
     cecho "2. md5sum config-10.tar.gz >> md5sums" $blue
     cecho "3. add * in md5sums" $blue
 fi
+
+cecho "<<<<<< tar the file and scp to intorobot! Continue?[Y/n] >>>>>>" $yellow
+ans=$(askForContinue)
+if [ $ans == 1 ];then
+    cecho "Follow the steps:" $green
+    cecho "1. tar -czvf ${openwrt_ver}.${configbag_ver}.tar.gz ${openwrt_ver}.${configbag_ver}" $blue
+    cecho "2. scp ${openwrt_ver}.${configbag_ver}.tar.gz root@115.29.193.81:/tmp/" $blue
+    cd ..
+    tar -cvzf ${openwrt_ver}.${configbag_ver}.tar.gz ${openwrt_ver}.${configbag_ver}
+    cecho "upload to the bellow url:" $green
+    cecho "http://www.intorobot.com/downloads/atom/"
+    #nautilus ./
+    scp ${openwrt_ver}.${configbag_ver}.tar.gz root@115.29.193.81:/tmp/ 
+f
+fi
+
 
 cecho "<<<<<< Set the openwrt verison in the intorobot platform! >>>>>>" $yellow
 cecho "http://wiki.intorobot.com:8080/" $green
