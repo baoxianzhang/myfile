@@ -167,13 +167,15 @@ if [ $ans == 1 ];then
     cd ..
     tar -cvzf ${openwrt_ver}.${configbag_ver}.tar.gz ${openwrt_ver}.${configbag_ver}
     cecho "upload to the bellow url:" $green
-    cecho "http://www.intorobot.com/downloads/atom/"
+    cecho "http://www.intorobot.com/downloads/atom/" $blue
+    cecho "112.124.117.64/downloads/atom/" $blue
     #nautilus ./
     scp ${openwrt_ver}.${configbag_ver}.tar.gz root@115.29.193.81:/tmp/ 
-f
+    scp ${openwrt_ver}.${configbag_ver}.tar.gz root@112.124.117.64:/tmp/ 
 fi
 
 
 cecho "<<<<<< Set the openwrt verison in the intorobot platform! >>>>>>" $yellow
 cecho "http://wiki.intorobot.com:8080/" $green
+cecho "112.124.117.64:8080" $green
 
