@@ -44,20 +44,20 @@ file_dir=$(cd "$(dirname "$0")"; pwd)
 cecho "file_dir=${file_dir}" $green
 openwrt_dir=${file_dir}/openwrt
 pub_dir=${file_dir}/pub
-doc_dir=${file_dir}/molmc_doc/src/content/zh/
+doc_dir=${file_dir}/molmc_docs
 openwrt_binname=openwrt-ramips-mt7620-atom-squashfs-sysupgrade
 
 
 cecho "<<<<<< Enter the Information about the upgrade! Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
-if [ $ans == 1 ]; then
-    cecho "Enter the pub date:" $green
-    read date_dir
-    cecho "Enter the openwrt ver:" $green
-    read openwrt_ver
-    cecho "Enter the configbag ver:" $green
-    read configbag_ver
-fi
+#ans=$(askForContinue)
+#if [ $ans == 1 ]; then
+cecho "Enter the pub date:" $green
+read date_dir
+cecho "Enter the openwrt ver:" $green
+read openwrt_ver
+cecho "Enter the configbag ver:" $green
+read configbag_ver
+#fi
 
 cecho "<<<<<<< Compile openwrt! Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
@@ -104,6 +104,8 @@ fi
 cecho "<<<<<< Fix the link in the molmc_doc! Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
+    cecho "luozheng" $red
+    cecho "luozheng123" $red
     cd ${doc_dir}
     git pull --rebase
     link_file=${pub_dir}/${date_dir}/baidupanboxsharelink
@@ -129,7 +131,11 @@ ans=$(askForContinue)
 if [ $ans == 1 ];then
     cecho "Follow the steps bellow:" $green
     cecho "1. Login luozheng 45 &&  cd ~/workspace/molmc_docs/ && git pull --rebase && grunt server" $blue
-    cecho "2. Test in the web url: 192.168.0.45.9999" $blue
+    cecho "2. Test in the web url: http://192.168.0.45:9999/zh/connect/" $blue
+    cecho "3. find 国内 and download the link check right or not"
+    cecho "4. if right, tell guozhen update to intorobot platform" $red
+    cecho "luozheng" $red
+    cecho "luozheng123" $red
     cecho "Enter to continue!" $green
     read nothing
     sshpass -p luozheng ssh luozheng@192.168.0.45
@@ -158,24 +164,32 @@ if [ $ans == 1 ];then
     cecho "3. add * in md5sums" $blue
 fi
 
-cecho "<<<<<< tar the file and scp to intorobot! Continue?[Y/n] >>>>>>" $yellow
+cecho "<<<<<< tar the file and scp to intoyun and intorobot! Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     cecho "Follow the steps:" $green
     cecho "1. tar -czvf ${openwrt_ver}.${configbag_ver}.tar.gz ${openwrt_ver}.${configbag_ver}" $blue
     cecho "2. scp ${openwrt_ver}.${configbag_ver}.tar.gz root@115.29.193.81:/tmp/" $blue
-    cd ..
+    cd ${pub_dir}/${date_dir}
     tar -cvzf ${openwrt_ver}.${configbag_ver}.tar.gz ${openwrt_ver}.${configbag_ver}
     cecho "upload to the bellow url:" $green
     cecho "http://www.intorobot.com/downloads/atom/" $blue
     cecho "112.124.117.64/downloads/atom/" $blue
     #nautilus ./
+    cecho "The intorobot platfom:" $green
     scp ${openwrt_ver}.${configbag_ver}.tar.gz root@115.29.193.81:/tmp/ 
+    cecho "The intoyun platfom:" $green
     scp ${openwrt_ver}.${configbag_ver}.tar.gz root@112.124.117.64:/tmp/ 
+    cecho "Now ssh intoyun && cd /var/www/downloads/atom/" $green
+    cecho "tar -xzvf /tmp/${openwrt_ver}.${configbag_ver}.tar.gz" $green
+    ssh root@112.124.117.64
+    cecho "Tell zhongjin to upload the openwrt bag" $red
 fi
 
-
 cecho "<<<<<< Set the openwrt verison in the intorobot platform! >>>>>>" $yellow
+cecho "The intorobot platfom:" $green
 cecho "http://wiki.intorobot.com:8080/" $green
+cecho "The intoyun platfom:" $green
 cecho "112.124.117.64:8080" $green
+cecho "The admin: admin@intorobot.com "
 

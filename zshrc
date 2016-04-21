@@ -100,7 +100,7 @@ alias vi='vim'
 alias o='nautilus ./'
 alias encodeI='iconv -f GBK -t UTF-8 '
 alias encodeE='enca -L zh_CN -x utf-8 '
-alias rmkeygen='ssh-keygen -f "/home/zhangbaoxian/.ssh/known_hosts" -R 192.168.8.1'
+alias rmkeygen='ssh-keygen -f "/home/${USERNAME}/.ssh/known_hosts" -R 192.168.8.1'
 alias sshAtom='ssh root@192.168.8.1'
 alias telAtom='telnet 192.168.8.1'
 alias s='source ~/.zshrc'
@@ -109,6 +109,11 @@ alias scpintoyun='scp ~/molmc_code/intorobot_atom/out/intorobot_stm32_server.tar
 alias shutdown='sudo shutdown -h now'
 alias reboot='sudo reboot'
 alias espcopy='cd ~/molmc_code/esp_iot_sdk_v1.5.1/ && make clean && make ; rm ~/Templates/esp_iot_sdk_v1.5.1 ; cp ~/molmc_code/esp_iot_sdk_v1.5.1 ~/Templates/ -r'
+alias makecopy='cd ~/molmc_code/intorobot_neutron/ && make clean && make ; rm ~/Templates/firmare.hex; cp ~/molmc_code/intorobot_neutron/firmware-neutron/build/firmware.hex ~/Templates/'
+alias atom='cd ~/molmc_code/intorobot_atom/'
+alias neutron='cd ~/molmc_code/intorobot_neutron/'
+alias openwrt='cd ~/molmc_code/openwrt/'
+alias es='cd ~/molmc_code/esp_iot_sdk_v1.5.1/'
 
 # git config
 # gitignore: https://github.com/github/gitignore
