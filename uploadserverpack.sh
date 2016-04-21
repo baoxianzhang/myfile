@@ -53,6 +53,10 @@ file_dir=$(cd "$(dirname "$0")"; pwd)
 cecho "file_dir=${file_dir}" $green
 atom_dir=${file_dir}/intorobot_atom
 
+echo ""
+cecho "!!!!!!!!Attention: rememeber to modify the INTOROBOT_FIRMWARE_LIB_VER. !!!!!!!!!!" $red 
+echo ""
+
 cecho "<<<<<< Make realease pack of  intorobot_atom and upload to intoyun for test! Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then

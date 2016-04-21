@@ -56,6 +56,10 @@ pub_dir=${file_dir}/pub
 doc_dir=${file_dir}/molmc_docs
 openwrt_binname=openwrt-ramips-mt7620-atom-squashfs-sysupgrade
 
+echo ""
+cecho "!!!!!!!!Attention: rememeber to modify the INTOROBOT_FIRMWARE_LIB_VER. !!!!!!!!!!" $red 
+echo ""
+
 
 cecho "<<<<<< Enter the Information about the upgrade! Continue?[Y/n] >>>>>>" $yellow
 #ans=$(askForContinue)
@@ -204,11 +208,13 @@ cecho "The admin: admin@intorobot.com" $green
 
 cecho "<<<<<< You are at final! Check the last four things! >>>>>>" $yellow
 cecho "Check the following things:" $green
-cecho "1. release server pack to the intorobot platform;" $blue
-cecho "2. release openwrt bag to the intorobot platform;" $blue
-cecho "3. release molmc_docs to the intorobot platform;" $blue
-cecho "4. git push the openwrt and atom code;" $blue
-cecho "5. Record the log of atom and openwrt in the ${pub_dir}/${date_dir}." $blue
+cecho "1. update INTOROBOT_FIRMWARE_LIB_VER in the intorobot_api.cpp;" $red
+cecho "2. release server pack to the intorobot platform;" $blue
+cecho "3. release openwrt bag to the intorobot platform;" $blue
+cecho "4. release molmc_docs to the intorobot platform;" $blue
+cecho "5. release onlinepro to the intorobot platform and intoyun;"
+cecho "5. git push the openwrt and atom code;" $blue
+cecho "6. Record the log of atom and openwrt in the ${pub_dir}/${date_dir}." $blue
 echo "openwrt log and version:" > openwrtatomlog
 echo "1." >> openwrtatomlog
 echo "2." >> openwrtatomlog
