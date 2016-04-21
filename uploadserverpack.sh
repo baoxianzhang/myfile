@@ -6,13 +6,22 @@ function askForContinue()
 {
     read ANS
     case $ANS in
-        y|Y|yes|YES)
-            echo 1
-            ;;
         n|N|no|NO)
             echo 0
             ;;
+        *)
+            echo 1
+            ;;
     esac
+#    read ANS
+#    case $ANS in
+#        y|Y|yes|YES)
+#            echo 1
+#            ;;
+#        n|N|no|NO)
+#            echo 0
+#            ;;
+#    esac
 }
 
 # Set the colours you can use

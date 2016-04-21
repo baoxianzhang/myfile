@@ -7,13 +7,22 @@ function askForContinue()
 {
     read ANS
     case $ANS in
-        y|Y|yes|YES)
-            echo 1
-            ;;
         n|N|no|NO)
             echo 0
             ;;
+        *)
+            echo 1
+            ;;
     esac
+#    read ANS
+#    case $ANS in
+#        y|Y|yes|YES)
+#            echo 1
+#            ;;
+#        n|N|no|NO)
+#            echo 0
+#            ;;
+#    esac
 }
 # Set the colours you can use
 black='\033[0;30m'
@@ -51,11 +60,11 @@ openwrt_binname=openwrt-ramips-mt7620-atom-squashfs-sysupgrade
 cecho "<<<<<< Enter the Information about the upgrade! Continue?[Y/n] >>>>>>" $yellow
 #ans=$(askForContinue)
 #if [ $ans == 1 ]; then
-cecho "Enter the pub date:" $green
+cecho "Enter the pub date {20160421}:" $green
 read date_dir
-cecho "Enter the openwrt ver:" $green
+cecho "Enter the openwrt ver {3.6.3}:" $green
 read openwrt_ver
-cecho "Enter the configbag ver:" $green
+cecho "Enter the configbag ver {0}:" $green
 read configbag_ver
 #fi
 
@@ -191,5 +200,23 @@ cecho "The intorobot platfom:" $green
 cecho "http://wiki.intorobot.com:8080/" $green
 cecho "The intoyun platfom:" $green
 cecho "112.124.117.64:8080" $green
-cecho "The admin: admin@intorobot.com "
+cecho "The admin: admin@intorobot.com" $green
 
+cecho "<<<<<< You are at final! Check the last four things! >>>>>>" $yellow
+cecho "Check the following things:" $green
+cecho "1. release server pack to the intorobot platform;" $blue
+cecho "2. release openwrt bag to the intorobot platform;" $blue
+cecho "3. release molmc_docs to the intorobot platform;" $blue
+cecho "4. git push the openwrt and atom code;" $blue
+cecho "5. Record the log of atom and openwrt in the ${pub_dir}/${date_dir}." $blue
+echo "openwrt log and version:" > openwrtatomlog
+echo "1." >> openwrtatomlog
+echo "2." >> openwrtatomlog
+echo "3." >> openwrtatomlog
+echo "" >> openwrtatomlog
+echo "atom log and version:" >> openwrtatomlog
+echo "1." >> openwrtatomlog
+echo "2." >> openwrtatomlog
+echo "3." >> openwrtatomlog
+echo "" >> openwrtatomlog
+gedit openwrtatomlog
