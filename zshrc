@@ -114,6 +114,7 @@ alias atom='cd ~/molmc_code/intorobot_atom/'
 alias neutron='cd ~/molmc_code/intorobot_neutron/'
 alias openwrt='cd ~/molmc_code/openwrt/'
 alias es='cd ~/molmc_code/esp_iot_sdk_v1.5.1/'
+alias pub='cd ~/molmc_code/pub/'
 
 # git config
 # gitignore: https://github.com/github/gitignore
