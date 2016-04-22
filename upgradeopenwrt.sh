@@ -214,7 +214,8 @@ cecho "3. release openwrt bag to the intorobot platform;" $blue
 cecho "4. release molmc_docs to the intorobot platform;" $blue
 cecho "5. release onlinepro to the intorobot platform and intoyun;"
 cecho "5. git push the openwrt and atom code;" $blue
-cecho "6. Record the log of atom and openwrt in the ${pub_dir}/${date_dir}." $blue
+cecho "6. release and tag the code;"
+cecho "7. Record the log of atom and openwrt in the ${pub_dir}/${date_dir}." $blue
 echo "openwrt log and version:" > openwrtatomlog
 echo "1." >> openwrtatomlog
 echo "2." >> openwrtatomlog
@@ -225,4 +226,4 @@ echo "1." >> openwrtatomlog
 echo "2." >> openwrtatomlog
 echo "3." >> openwrtatomlog
 echo "" >> openwrtatomlog
-gedit openwrtatomlog
+gedit ${pub_dir}/${date_dir}/openwrtatomlog
