@@ -104,6 +104,7 @@ alias rmkeygen='ssh-keygen -f "/home/${USERNAME}/.ssh/known_hosts" -R 192.168.8.
 alias sshAtom='ssh root@192.168.8.1'
 alias telAtom='telnet 192.168.8.1'
 alias s='source ~/.zshrc'
+alias S='source ~/.zshrc'
 alias vz='vim ~/.zshrc'
 alias scpintoyun='scp ~/molmc_code/intorobot_atom/out/intorobot_stm32_server.tar.gz root@112.124.117.64:/tmp/'
 alias shutdown='sudo shutdown -h now'
@@ -115,6 +116,8 @@ alias neutron='cd ~/molmc_code/intorobot_neutron/'
 alias openwrt='cd ~/molmc_code/openwrt/'
 alias es='cd ~/molmc_code/esp_iot_sdk_v1.5.1/'
 alias pub='cd ~/molmc_code/pub/'
+alias ss='sslocal -s jp06-60.ssv7.net -p 30122 -b 127.0.0.1 -l 1080 -k LGJckcFy64ZQ -m aes-256-cfb -q 2>&1 > /dev/null'
+alias tmnl='gnome-terminal'
 
 # git config
 # gitignore: https://github.com/github/gitignore
@@ -156,3 +159,4 @@ source ~/code/git-flow-completion/git-flow-completion.plugin.zsh
 export PATH=$PATH:/usr/lib/git-core/
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 eval $(thefuck --alias)
+export PATH=$PATH:/usr/src/xtensa-lx106-elf/bin

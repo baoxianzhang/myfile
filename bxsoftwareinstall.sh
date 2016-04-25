@@ -5,11 +5,11 @@ function askForContinue()
 {
     read ANS
     case $ANS in
-        y|Y|yes|YES)
-            echo 1
-            ;;
         n|N|no|NO)
             echo 0
+            ;;
+        *)
+            echo 1
             ;;
     esac
 }
@@ -37,6 +37,14 @@ cecho() {
   return
 }
 
+cecho "<<<<<< Softwares install begin on Ubuntu 14.04 >>>>>>" $yellow
+cecho "Please connect the wifi and check the wifi! " $red
+
+cecho "<<<<<< Update the software, not upgrade system. Continue?[Y/n] >>>>>>" $yellow
+ans=$(askForContinue)
+if [ $ans == 1 ];then
+    sudo apt-get update
+fi
 
 # Keep-alive: update existing `sudo` time stamp until the script has finished.
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
@@ -47,13 +55,56 @@ apps=(
     # add your install apt softwares in lines
     # for example, audacious
     # git 
-    # 
-
+    git 
+    git-flow
+    g++
+    build-essential
+    python
+    python3
+    openssh-server
+    trash-cli
+    ibus-googlepinyin
+    luajit
+    exuberant-ctags
+    curl
+    siversearcher-ag
+    sqlite3
+    sshpass
+    terminator
+    nginx
+    gawk
+    perl
+    expat
+    libexpat1-dev
+    libxml-parser-perl
+    inkscape
+    audacity
+    rar
+    enca
+    galculator
+    audacity
+    python-pip
+    vim
+    google-chrome-stable
 )
 
+cecho "Please edit the apps you need to install and save it!" $red
+read nothing
+
+cat /dev/null > apps.tmp
+for item in ${apps[@]}; do
+    echo "${item}" >> apps.tmp
+done
+
+vim apps.tmp
+apps=$(cat apps.tmp)
+rm apps.tmp
+
+cecho "Now, the following apps will be installed!" $red
 for item in ${apps[@]}; do
   cecho "> ${item}" $magenta
 done
+read nothing
 
 echo ""
 
@@ -73,14 +124,6 @@ if [ ! -d "$homeDir/softwares" ]; then
     mkdir ~/softwares
 fi
 
-cecho "<<<<<< Softwares install begin on Ubuntu 14.04 >>>>>>" $yellow
-cecho "Please connect the wifi and check the wifi! " $red
-
-cecho "<<<<<< Update the software, not upgrade system. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
-if [ $ans == 1 ];then
-    sudo apt-get update
-fi
 
 cecho "<<<<<< Install git 2.7.3. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
@@ -106,15 +149,24 @@ fi
 cecho "<<<<<< Configure git email name and editor. Continue?[Y/n] >>>>>> " $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
-    git config --global user.email "baoxianzhit@gmail.com"
-    git config --global user.name "baoxianzhang"
-    git config --global core.editor vim
-fi
+echo"[user]
+	email = baoxianzhit@gmail.com
+	name = baoxianzhang
+[core]
+	editor = vim
+[alias]
+	unstage = reset HEAD --
+	last = log -1 HEAD
+[merge]
+	tool = vimdiff
+[push]
+	default = simple
+" > ~/.gitconfig
+    vim ~/.gitconfig
 
-cecho "<<<<<< Install git flow. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
-if [ $ans == 1 ];then
-    sudo apt-get install git-flow
+#    git config --global user.email "baoxianzhit@gmail.com"
+#    git config --global user.name "baoxianzhang"
+#    git config --global core.editor vim
 fi
 
 cecho "<<<<<< Install git flow completion. Continue?[Y/n] >>>>>>" $yellow
@@ -131,36 +183,6 @@ if [ $ans == 1 ];then
         git clone https://github.com/bobthecow/git-flow-completion.git
         #echo "source ~/code/git-flow-completion/git-flow-completion.zsh" >> ~/.zshrc
     fi
-fi
-
-cecho "<<<<<< Install g++. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
-if [ $ans == 1 ];then
-    sudo apt-get install g++
-fi
-
-cecho "<<<<<< Install build-essential. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
-if [ $ans == 1 ];then
-    sudo apt-get install build-essential
-fi
-
-cecho "<<<<<< Install python. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
-if [ $ans == 1 ];then
-    sudo apt-get install python
-fi
-
-cecho "<<<<<< Install python3. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
-if [ $ans == 1 ];then
-    sudo apt-get install python3
-fi
-
-cecho "<<<<<< Install openssh-server. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
-if [ $ans == 1 ];then
-    sudo apt-get install openssh-server
 fi
 
 cecho "<<<<<< Install cmake. Continue?[Y/n] >>>>>>" $yellow
@@ -212,12 +234,6 @@ if [ $ans == 1 ];then
     fi
 fi
 
-cecho "<<<<<< Install trash-cli. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
-if [ $ans == 1 ];then
-    sudo apt-get install trash-cli
-fi
-
 cecho "<<<<<< Install SogouPinyin Input method. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
@@ -231,12 +247,6 @@ if [ $ans == 1 ];then
     cecho "<<<<<< Finished to install SougouPin, Please configure it >>>>>>" $green
     cecho "System Settings > Language Support > Install/Remove Languages > install the Chinese language" $green
     cecho "Logout the system to use sougou input method after finish all the installation!" $green
-fi
-
-cecho "<<<<<< Install luajit. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
-if [ $ans == 1 ];then
-    sudo apt-get install luajit
 fi
 
 cecho "<<<<<< Install mercury Mw150us wireless driver. Continue?[Y/n] >>>>>>" $yellow
@@ -273,7 +283,7 @@ if [ $ans == 1 ];then
     ./configure
     make
     sudo make install
-    cecho "Usage: ctags ./ -R *" $green
+    cecho "Usage: exuberant-ctags -R *" $green
 fi
 
 cecho "<<<<<< Install gtags. Continue?[Y/n] >>>>>>" $yellow
@@ -292,35 +302,6 @@ if [ $ans == 1 ];then
     make
     sudo make install
     cecho "Usage: gtags" $green
-fi
-
-cecho "<<<<<< Install curl. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
-if [ $ans == 1 ];then
-    sudo apt-get install curl
-    #or
-    #sudo apt-get install curl libcurl3 libcurl3-dev php5-curl
-    ##or
-    #cd ~/softwares
-    #git clone https://github.com/curl/curl.git
-    #sudo apt-get install autoconf
-    #cd curl
-    #
-    #sudo add-apt-repository ppa:costamagnagianfranco/ettercap-stable-backports
-    #sudo apt-get update
-    #sudo apt-get install curl
-fi
-
-cecho "<<<<<< Install silversearcher-ag. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
-if [ $ans == 1 ];then
-    sudo apt-get install silversearcher-ag
-fi
-
-cecho "<<<<<< Install sqlite3. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
-if [ $ans == 1 ];then
-    sudo apt-get install sqlite3
 fi
 
 cecho "<<<<<< Install spf13 vim. Continue?[Y/n] >>>>>>" $yellow
@@ -363,6 +344,12 @@ if [ $ans == 1 ];then
     cecho "Start vim and begin to install the plugin!" $green
 fi
 
+cecho "<<<<<< Install vim plugin in the other terninal. Continue?[Y/n] >>>>>>" $yellow
+ans=$(askForContinue)
+if [ $ans == 1 ];then
+    gnome-terminal -x bash -c "vim"
+fi
+
 cecho "<<<<<< Install arm-none-eabi-gcc 4.8.2. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
@@ -377,31 +364,11 @@ if [ $ans == 1 ];then
     #source ~/.zshrc
 fi
 
-cecho "<<<<<< Install sshpass. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
-if [ $ans == 1 ];then
-    #Ref: http://sourceforge.net/projects/sshpass/
-    sudo apt-get install sshpass
-    #echo "sshpass -p zhangbaoxian ssh  zhangbaoxian@192.168.0.45" >> .zshrc
-fi
-
 cecho "<<<<<< Install Google Hosts. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     cecho "By your own hand! Follow the bellow link!" $green
     cecho "http://laod.cn/hosts/2016-google-hosts.html" $green
-fi
-
-cecho "<<<<<< Install terminator. Continue?[Y/n] >>>>>>" $green
-ans=$(askForContinue)
-if [ $ans == 1 ];then
-    sudo apt-get install terminator
-fi
-
-cecho "<<<<<< Install tmux. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
-if [ $ans == 1 ];then
-    sudo apt-get install tmux
 fi
 
 cecho "<<<<<< Softlink zshrc. Continue?[Y/n] >>>>>>" $yellow
@@ -448,14 +415,6 @@ if [ $ans == 1 ];then
     fi
     rm ~/.tmux.conf
     ln -s ~/bxgithub/myfile/tmux.conf ~/.tmux.conf
-fi
-
-cecho "<<<<<< Install nginx. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
-if [ $ans == 1 ];then
-    sudo apt-get install nginx
-    cecho "Configure the nginx " $green
-    cecho "Run: sudo vim /etc/nginx/nginx.conf" $green
 fi
 
 cecho "<<<<<< Install stlink. Continue?[Y/n] >>>>>>" $yellow
@@ -506,50 +465,18 @@ if [ $ans == 1 ];then
     cecho "start: goldendict, and configure it" $green
 fi
 
-cecho "<<<<<< Install awk for openwrt. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
-if [ $ans == 1 ];then
-    sudo apt-get install gawk
-fi
-
-cecho "<<<<<< Install perl. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
-if [ $ans == 1 ];then
-    sudo apt-get install perl
-fi
-
-cecho "<<<<<< Install XML::Parser for openwrt. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
-if [ $ans == 1 ];then
-    sudo apt-get install expat
-    sudo apt-get install libexpat1-dev
-    sudo apt-get install libxml-parser-perl
-fi
-
-cecho "<<<<<< Install Inkscape Vector Graphics Editor. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
-if [ $ans == 1 ];then
-    sudo apt-get install inkscape
-fi
-
-cecho "<<<<<< Install Audacity. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
-if [ $ans == 1 ];then
-    sudo apt-get install audacity
-fi
-
-cecho "<<<<<< Google Chrome. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
-if [ $ans == 1 ];then
-    #Ref: http://www.linuxidc.com/Linux/2014-04/100645.htm
-    cd ~/softwares
-    if [ ! -f "google-chrome-stable_current_amd64.deb" ]; then
-        wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-    fi
-    cecho "Use the Software center to install the deb since dpkg is not work!" $red
-    # sudo dpkg -i google-chrome-stable_current_amd64.deb
-    cecho "Usage: google-chrome-stable" $green
-fi
+#cecho "<<<<<< Google Chrome. Continue?[Y/n] >>>>>>" $yellow
+#ans=$(askForContinue)
+#if [ $ans == 1 ];then
+#    #Ref: http://www.linuxidc.com/Linux/2014-04/100645.htm
+#    cd ~/softwares
+#    if [ ! -f "google-chrome-stable_current_amd64.deb" ]; then
+#        wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+#    fi
+#    cecho "Use the Software center to install the deb since dpkg is not work!" $red
+#    # sudo dpkg -i google-chrome-stable_current_amd64.deb
+#    cecho "Usage: google-chrome-stable" $green
+#fi
 
 cecho "<<<<<< Install Skype. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
@@ -602,7 +529,7 @@ if [ $ans == 1 ];then
     cecho "if failed, click the deb, use the software center to install it." $red
 fi
 
-cecho "<<<<<< Install virtualbox win 7 addition. Continue?[Y/n] >>>>>>" $yellow
+cecho "<<<<<< Install virtualbox win 7 and win 7 addition. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     cecho "Please install the iso first! Continue?[Y/n]" $yellow
@@ -645,26 +572,29 @@ if [ $ans == 1 ];then
         wget https://releases.hashicorp.com/vagrant/1.8.1/vagrant_1.8.1_x86_64.deb
     fi
     sudo dpkg -i vagrant_1.8.1_x86_64.deb
-    if [ ! -d "$homeDir/virtualbox/vagrant" ]; then
-        mkdir -p ~/virtualbox/vagrant
+    cecho "<<<<<< Install ubuntu/trusty64. Continue?[Y/n] >>>>>>" $yellow
+    if [ $ans == 1 ];then
+        if [ ! -d "$homeDir/virtualbox/vagrant" ]; then
+            mkdir -p ~/virtualbox/vagrant
+        fi
+        #Ref: https://atlas.hashicorp.com/boxes/search
+        #wget https://github.com/kraksoft/vagrant-box-ubuntu/releases/download/14.04/ubuntu-14.04-amd64.box
+        cd ~/virtualbox/vagrant
+        if [ ! -d "box" ]; then
+            mkdir box
+        fi
+        cd box
+        vagrant box add ubuntu/trusty64
+        cd ..
+        if [ ! -d "trust64" ]; then
+            mkdir trust64
+        fi
+        cd trust64
+        vagrant init ubuntu/trusty64
+        #vagrant up
+        #vagrant ssh
+        #vagrant halt
     fi
-    #Ref: https://atlas.hashicorp.com/boxes/search
-    #wget https://github.com/kraksoft/vagrant-box-ubuntu/releases/download/14.04/ubuntu-14.04-amd64.box
-    cd ~/virtualbox/vagrant
-    if [ ! -d "box" ]; then
-        mkdir box
-    fi
-    cd box
-    vagrant box add ubuntu/trusty64
-    cd ..
-    if [ ! -d "trust64" ]; then
-        mkdir trust64
-    fi
-    cd trust64
-    vagrant init ubuntu/trusty64
-    #vagrant up
-    #vagrant ssh
-    #vagrant halt
 fi
 
 cecho "<<<<<< Install go-for-it. Continue?[Y/n] >>>>>>" $yellow
@@ -691,26 +621,17 @@ if [ $ans == 1 ];then
     cecho "sudo cp xtensa-lx106-elf /usr/src/ -r" $green
     cecho "Add to the PATH!" $green
     #echo "export PATH=$PATH:/usr/src/xtensa-lx106-elf/bin" >> ~/.zshrc
+    wget https://doc-0o-3o-docs.googleusercontent.com/docs/securesc/ha0ro937gcuc7l7deffksulhg5h7mbp1/c66ev5j18rjbov5hsvkefgttllsrrrk2/1461578400000/00407590198758729148/*/0B5bwBE9A5dBXT0plVndobnU1dTg?e=download
+    tar -xjvf xtensa-lx06.tar.bz
+    iscp xtensa-lx106-elf /usr/src/ -r
 fi
 
-
-cecho "<<<<<< Install rar. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
-if [ $ans == 1 ];then
-    sudo apt-get install rar
-fi
 
 cecho "<<<<<< Install fzf. Continue?[Y/n]" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ]; then
     git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
     ~/.fzf/install
-fi
-
-cecho "<<<<<< Install enca. Continue?[Y/n]" $yellow
-ans=$(askForContinue)
-if [ $ans == 1 ]; then
-    sudo apt-get install enca
 fi
 
 cecho "<<<<<< Install meld or bcompare. Continue?[Y/n]" $yellow
@@ -723,32 +644,81 @@ if [ $ans == 1 ]; then
     cecho "trial licence" $red
 fi
 
-cecho "<<<<<< Install galculator. Continue?[Y/n]" $yellow
-ans=$(askForContinue)
-cd ~/softwares/
-if [ $ans == 1 ]; then
- #   if [ ! -f "galculator-2.1.4.tar.gz" ]; then
- #       wget http://galculator.mnim.org/downloads/galculator-2.1.4.tar.gz
- #       tar -xzvf galculator-2.1.4.tar.gz
- #   fi
- #   sudo apt-get install intltool
- #   cd galculator-2.1.4
- #   make 
- #   sudo make install
-    sudo apt-get install galculator
-fi
-
-cecho "<<<<<< Install audacious. Continue?[Y/n]" $yellow
-ans=$(askForContinue)
-if [ $ans == 1 ]; then
-    sudo apt-get install audacity # for the ape music
-fi
-
 cecho "<<<<<< Install thefuck. Continue?[Y/n]" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ]; then
+    sudo apt-get install python-pip
     sudo -H pip install thefuck
     #echo "eval $(thefuck --alias)" >> ~/.zshrc
 fi
 
+cecho "<<<<<< Install ubuntu flat themes and icons. Continue?[Y/n]" $yellow
+ans=$(askForContinue)
+if [ $ans == 1 ]; then
+    echo "install the flat themes and icons for ubuntu ...";
+    echo -e "\033[40;32m You can refer: https://blog.anmoljagetia.me/flatabulous-ubuntu-theme/  website to deploy you theme 033[0m"
+    echo ""
+    echo "install the Ubuntu tweak tool"
+    sudo add-apt-repository ppa:tualatrix/ppa
+    sudo apt-get update
+    sudo apt-get install ubuntu-tweak
+    echo ""
+    echo "install themes"
+    wget -O flatTheme.zip https://github.com/anmoljagetia/Flatabulous/archive/master.zip
+    sudo unzip flatTheme.zip -d /usr/share/themes/
+    echo ""
 
+    echo "install the icons"
+    sudo add-apt-repository ppa:noobslab/icons
+    sudo apt-get update
+    sudo apt-get install ultra-flat-icons
+    #sudo apt-get install ultra-flat-icons-orange
+    #sudo apt-get install ultra-flat-icons-gree
+    echo ""
+
+    cat <<EOF
+    Now press your super key,
+    search for Ubuntu Tweak and fire it.
+    Under the tweaks tab, there is an option for theme.
+    Under that select the Flatabulous theme.
+    Under the icon settings, select ultra-flat-icons.
+    Restart your computer, and you should be good to go!
+    EOF
+
+fi
+
+cecho "<<<<<< Install shadowsocks. Continue?[Y/n]" $yellow
+ans=$(askForContinue)
+if [ $ans == 1 ]; then
+   echo "sudo pip install shadowsocks";
+   sudo -H pip install shadowsocks
+   echo -e "\033[40;32m deploy the proxy server on your remote vps: server[1,2,3] \033[0m"
+  
+   SS_CFG="/etc/shadowsocks.json"
+   if [ ! -f "$SS_CFG" ]; then
+     echo "no found shadowsocks config file: /etc/shadowsocks.json";
+     sudo touch "$SS_CFG"
+   fi
+   sudo chmod a+w "$SS_CFG"
+   cat > "$SS_CFG" <<EOF
+   {
+    "server":["server1","server2"],
+    "server_port":8080,
+    "local_address":"127.0.0.1",
+    "local_port":1080,
+    "password":"password",
+    "timeout":300,
+    "method":"aes-256-cfb",
+    "fast_open": false
+   }
+   EOF
+
+  echo -e "\033[40;32m you can start the shadowsocks server on remote vps: sudo ssserver -c /etc/shadowsocks.json -d start \033[0m"
+  #sudo ssserver -c $SS_CFG -d stop
+  #sudo ssserver -c $SS_CFG -d start
+  echo -e "\033[40;32m you can start the shadowsocks client on your local laptop: sslocal -c /etc/shadowsocks.json \033[0m"
+fi;
+
+echo ""
+cecho "Done， Happy Hacking!" $red
+echo ""
