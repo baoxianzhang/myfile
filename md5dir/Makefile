@@ -1,4 +1,4 @@
-
-md5: main.c md5.c md5.h
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
-	chmod a+x $@
+CC=gcc
+CFLAGS= -I ./
+md5: *.c
+	$(CC) $(CFLAGS) $^ -o $@

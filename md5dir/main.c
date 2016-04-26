@@ -17,14 +17,13 @@ int Compute_file_md5(const char *file_path, char *value);
 int main(int argc, char *argv[])
 {
   int ret;
-  const char *file_path = "temp";
+  const char *file_path = argv[1];//"md5test";
   char md5_str[MD5_STR_LEN + 1];
 
   ret = Compute_file_md5(file_path, md5_str);
   if (0 == ret)
   {
-    printf("[file - %s] md5 value:\n", file_path);
-    printf("%s\n", md5_str);
+    printf("%s  %s\n", md5_str, file_path);
   }
 
   return 0;
