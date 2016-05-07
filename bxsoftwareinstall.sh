@@ -46,77 +46,82 @@ if [ $ans == 1 ];then
     sudo apt-get update
 fi
 
-# Keep-alive: update existing `sudo` time stamp until the script has finished.
-while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
-
-# sed -i "s/IP_REDIS_CONFIG/192.168.33.13/g" `grep 'IP_REDIS_CONFIG' -rl .`
-apps=(
-    # Utilities
-    # add your install apt softwares in lines
-    # for example, audacious
-    # git 
-    git 
-    git-flow
-    g++
-    build-essential
-    python
-    python3
-    openssh-server
-    trash-cli
-    ibus-googlepinyin
-    luajit
-    exuberant-ctags
-    curl
-    siversearcher-ag
-    sqlite3
-    sshpass
-    terminator
-    nginx
-    gawk
-    perl
-    expat
-    libexpat1-dev
-    libxml-parser-perl
-    inkscape
-    audacity
-    rar
-    enca
-    galculator
-    audacity
-    python-pip
-    vim
-    google-chrome-stable
-)
-
-cecho "Please edit the apps you need to install and save it!" $red
-read nothing
-
-cat /dev/null > apps.tmp
-for item in ${apps[@]}; do
-    echo "${item}" >> apps.tmp
-done
-
-vim apps.tmp
-apps=$(cat apps.tmp)
-rm apps.tmp
-
-cecho "Now, the following apps will be installed!" $red
-for item in ${apps[@]}; do
-  cecho "> ${item}" $magenta
-done
-read nothing
-
-echo ""
-
-select yn in "Yes" "No"; do
-  case $yn in
-    Yes )
-        cecho "Ok! installing apps, please wait ... " $yellow
-        sudo apt-get install -y ${apps[@]}
-        break;;
-    No ) break;;
-  esac
-done
+cecho "<<<<<< Update the software, not upgrade system. Continue?[Y/n] >>>>>>" $yellow
+ans=$(askForContinue)
+if [ $ans == 1 ];then
+    # Keep-alive: update existing `sudo` time stamp until the script has finished.
+    while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+    
+    # sed -i "s/IP_REDIS_CONFIG/192.168.33.13/g" `grep 'IP_REDIS_CONFIG' -rl .`
+    apps=(
+        # Utilities
+        # add your install apt softwares in lines
+        # for example, audacious
+        # git 
+        git 
+        git-flow
+        g++
+        build-essential
+        python
+        python3
+        openssh-server
+        trash-cli
+        ibus-googlepinyin
+        luajit
+        exuberant-ctags
+        curl
+        #siversearcher-ag
+        sqlite3
+        sshpass
+        terminator
+        nginx
+        gawk
+        perl
+        expat
+        libexpat1-dev
+        libxml-parser-perl
+        inkscape
+        audacity
+        rar
+        enca
+        galculator
+        audacity
+        python-pip
+        vim
+        #google-chrome-stable
+        chromium-browser
+    )
+    
+    cecho "Please edit the apps you need to install and save it!" $red
+    read nothing
+    
+    cat /dev/null > apps.tmp
+    for item in ${apps[@]}; do
+        echo "${item}" >> apps.tmp
+    done
+    
+    vi apps.tmp
+    apps=$(cat apps.tmp)
+    rm apps.tmp
+    
+    cecho "Now, the following apps will be installed!" $red
+    for item in ${apps}; do
+      cecho "> ${item}" $magenta
+    done
+    read nothing
+    
+    echo ""
+    
+    select yn in "Yes" "No"; do
+      case $yn in
+        Yes )
+            cecho "Ok! installing apps, please wait ... " $yellow
+            sudo apt-get install -y ${apps}
+            break;;
+        No ) break;;
+      esac
+    done
+fi
 
 cd
 homeDir=$(pwd)
@@ -143,25 +148,27 @@ if [ $ans == 1 ];then
     make
     sudo make install
     echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
+    sleep 3
     source ~/.bashrc
 fi
 
 cecho "<<<<<< Configure git email name and editor. Continue?[Y/n] >>>>>> " $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
-echo"[user]
-	email = baoxianzhit@gmail.com
-	name = baoxianzhang
-[core]
-	editor = vim
-[alias]
-	unstage = reset HEAD --
-	last = log -1 HEAD
-[merge]
-	tool = vimdiff
-[push]
-	default = simple
-" > ~/.gitconfig
+    cecho "<<<<<< Fix ~/.gitconfig file to your own cofiguration. >>>>>> "$green
+echo "#[user]
+#	email = baoxianzhit@gmail.com
+#	name = baoxianzhang
+#[core]
+#	editor = vim
+#[alias]
+#	unstage = reset HEAD --
+#	last = log -1 HEAD
+#[merge]
+#	tool = vimdiff
+#[push]
+#	default = simple
+" >> ~/.gitconfig
     vim ~/.gitconfig
 
 #    git config --global user.email "baoxianzhit@gmail.com"
@@ -180,7 +187,8 @@ if [ $ans == 1 ];then
     # echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
     # source ~/.bashrc
     if [ ! -d "git-flow-completion" ]; then
-        git clone https://github.com/bobthecow/git-flow-completion.git
+        #git clone https://github.com/bobthecow/git-flow-completion.git
+        gnome-terminal -x bash -c "cd ~/code && git clone https://github.com/bobthecow/git-flow-completion.git"
         #echo "source ~/code/git-flow-completion/git-flow-completion.zsh" >> ~/.zshrc
     fi
 fi
@@ -212,7 +220,8 @@ if [ $ans == 1 ];then
     sudo apt-get install zsh
     # echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
     # source ~/.bashrc
-    wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
+    #wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
+    gnome-terminal -x bash -c "cd ~/softwares/ && wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh"
     chsh -s /bin/zsh
     echo "Logout to use zsh"
 fi
@@ -283,7 +292,7 @@ if [ $ans == 1 ];then
     ./configure
     make
     sudo make install
-    cecho "Usage: exuberant-ctags -R *" $green
+    cecho "Usage: ctags-exuberant -R *" $green
 fi
 
 cecho "<<<<<< Install gtags. Continue?[Y/n] >>>>>>" $yellow
@@ -313,7 +322,8 @@ if [ $ans == 1 ];then
     if [ ! -d "vim" ]; then
         # echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
         # source ~/.bashrc
-        git clone https://github.com/vim/vim.git
+        #git clone https://github.com/vim/vim.git
+        gnome-terminal -x bash -c "cd ~/softwares/ && git clone https://github.com/vim/vim.git"
     fi
     sudo apt-get remove --purge vim vim-runtime vim-gnome vim-tiny vim-common vim-gui-common
     sudo apt-get build-dep vim-gnome
@@ -381,10 +391,11 @@ if [ $ans == 1 ];then
     if [ ! -d "$homeDir/bxgithub/myfile" ]; then
         # echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
         # source ~/.bashrc
-        git clone https://github.com/baoxianzhang/myfile.git
+        #git clone https://github.com/baoxianzhang/myfile.git
+        gnome-terminal -x bash -c "cd ~/bxgithub/ && git clone https://github.com/baoxianzhang/myfile.git && rm ~/.zshrc && ln -s ~/bxgithub/myfile/zshrc ~/.zshrc"
     fi
-    rm ~/.zshrc
-    ln -s ~/bxgithub/myfile/zshrc ~/.zshrc
+    #rm ~/.zshrc
+    #ln -s ~/bxgithub/myfile/zshrc ~/.zshrc
 fi
 
 cecho "<<<<<< Softlink emacs. Continue?[Y/n] >>>>>>" $yellow
@@ -397,10 +408,11 @@ if [ $ans == 1 ];then
     if [ ! -d "$homeDir/bxgithub/emacs-c-ide-demo" ]; then
         # echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
         # source ~/.bashrc
-        git clone https://github.com/baoxianzhang/emacs-c-ide-demo.git
+        #git clone https://github.com/baoxianzhang/emacs-c-ide-demo.git
+        gnome-terminal -x bash -c "cd ~/bxgithub/ && git clone https://github.com/baoxianzhang/emacs-c-ide-demo.git && rm ~/.emacs.d -rf && ln -s ~/bxgithub/emacs-c-ide-demo ~/.emacs.d"
     fi
-    rm ~/.emacs.d -rf
-    ln -s ~/bxgithub/emacs-c-ide-demo ~/.emacs.d
+    #rm ~/.emacs.d -rf
+    #ln -s ~/bxgithub/emacs-c-ide-demo ~/.emacs.d
 fi
 
 cecho "<<<<<< Softlink tmux. Continue?[Y/n] >>>>>>" $yellow
@@ -610,6 +622,10 @@ ans=$(askForContinue)
 if [ $ans == 1 ];then
     cecho "Please install by your own hand. Follow the link below!" $green
     cecho "http://blog.csdn.net/chszs/article/details/40623169" $green
+    cecho "Download deb and crack in baiduyun pan" $green
+    cecho "$sudo dpkg -i scrt-7.3.0-657.ubuntu13-64.x86_64.deb" $green
+    cecho "$sudo perl securecrt_linux_crack.pl /usr/bin/SecureCRT" $green
+
 fi
 
 cecho "<<<<<< Download xtensa and install it. Continue?[Y/n] >>>>>>" $yellow
@@ -655,7 +671,7 @@ fi
 cecho "<<<<<< Install ubuntu flat themes and icons. Continue?[Y/n]" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ]; then
-    echo "install the flat themes and icons for ubuntu ...";
+    echo "install the flat themes and icons for ubuntu ..."
     echo -e "\033[40;32m You can refer: https://blog.anmoljagetia.me/flatabulous-ubuntu-theme/  website to deploy you theme 033[0m"
     echo ""
     echo "install the Ubuntu tweak tool"
@@ -664,6 +680,7 @@ if [ $ans == 1 ]; then
     sudo apt-get install ubuntu-tweak
     echo ""
     echo "install themes"
+    cd ~/softwares/
     wget -O flatTheme.zip https://github.com/anmoljagetia/Flatabulous/archive/master.zip
     sudo unzip flatTheme.zip -d /usr/share/themes/
     echo ""

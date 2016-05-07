@@ -196,7 +196,7 @@ if [ $ans == 1 ];then
     cecho "Now ssh intoyun && cd /var/www/downloads/atom/" $green
     cecho "tar -xzvf /tmp/${openwrt_ver}.${configbag_ver}.tar.gz" $green
     ssh root@112.124.117.64
-    cecho "Tell zhongjin to upload the openwrt bag" $red
+    cecho "If test ok, you can upload the openwrt bag, Tell zhongjin to upload the openwrt bag to intorobot" $red
 fi
 
 cecho "<<<<<< Set the openwrt verison in the intorobot platform! >>>>>>" $yellow

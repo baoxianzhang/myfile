@@ -106,10 +106,10 @@ alias telAtom='telnet 192.168.8.1'
 alias s='source ~/.zshrc'
 alias S='source ~/.zshrc'
 alias vz='vim ~/.zshrc'
-alias scpintoyun='scp ~/molmc_code/intorobot_atom/out/intorobot_stm32_server.tar.gz root@112.124.117.64:/tmp/'
+alias scpIntoyun='scp ~/molmc_code/intorobot_atom/out/intorobot_stm32_server.tar.gz root@112.124.117.64:/tmp/'
 alias shutdown='sudo shutdown -h now'
 alias reboot='sudo reboot'
-alias espcopy='cd ~/molmc_code/esp_iot_sdk_v1.5.1/ && make clean && make ; rm ~/Templates/esp_iot_sdk_v1.5.1 ; cp ~/molmc_code/esp_iot_sdk_v1.5.1 ~/Templates/ -r'
+alias espcopy='cd ~/molmc_code/esp_iot_sdk_v1.5.1/ && make clean && make ; rm ~/Templates/esp_iot_sdk_v1.5.1/bin ; cp ~/molmc_code/esp_iot_sdk_v1.5.1/bin ~/Templates/esp_iot_sdk_v1.5.1/bin -r'
 alias makecopy='cd ~/molmc_code/intorobot_neutron/ && make clean && make ; rm ~/Templates/firmare.hex; cp ~/molmc_code/intorobot_neutron/firmware-neutron/build/firmware.hex ~/Templates/'
 alias atom='cd ~/molmc_code/intorobot_atom/'
 alias neutron='cd ~/molmc_code/intorobot_neutron/'
@@ -118,6 +118,7 @@ alias es='cd ~/molmc_code/esp_iot_sdk_v1.5.1/'
 alias pub='cd ~/molmc_code/pub/'
 alias ss='sslocal -s jp06-60.ssv7.net -p 30122 -b 127.0.0.1 -l 1080 -k LGJckcFy64ZQ -m aes-256-cfb -q 2>&1 > /dev/null'
 alias tmnl='gnome-terminal'
+alias scpdefaultparam="scp ~/molmc_code/pub/default-param/* root@192.168.8.1:~/"
 
 # git config
 # gitignore: https://github.com/github/gitignore
