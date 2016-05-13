@@ -46,7 +46,7 @@ if [ $ans == 1 ];then
     sudo apt-get update
 fi
 
-cecho "<<<<<< Update the software, not upgrade system. Continue?[Y/n] >>>>>>" $yellow
+cecho "<<<<<< Install apps using apt-get. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     # Keep-alive: update existing `sudo` time stamp until the script has finished.
@@ -70,7 +70,7 @@ if [ $ans == 1 ];then
         luajit
         exuberant-ctags
         curl
-        #siversearcher-ag
+        siversearcher-ag
         sqlite3
         sshpass
         terminator
@@ -88,8 +88,8 @@ if [ $ans == 1 ];then
         audacity
         python-pip
         vim
-        #google-chrome-stable
-        chromium-browser
+        google-chrome-stable
+        npm
     )
     
     cecho "Please edit the apps you need to install and save it!" $red
@@ -169,7 +169,7 @@ echo "#[user]
 #[push]
 #	default = simple
 " >> ~/.gitconfig
-    vim ~/.gitconfig
+    vi ~/.gitconfig
 
 #    git config --global user.email "baoxianzhit@gmail.com"
 #    git config --global user.name "baoxianzhang"
@@ -187,8 +187,7 @@ if [ $ans == 1 ];then
     # echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
     # source ~/.bashrc
     if [ ! -d "git-flow-completion" ]; then
-        #git clone https://github.com/bobthecow/git-flow-completion.git
-        gnome-terminal -x bash -c "cd ~/code && git clone https://github.com/bobthecow/git-flow-completion.git"
+        git clone https://github.com/bobthecow/git-flow-completion.git
         #echo "source ~/code/git-flow-completion/git-flow-completion.zsh" >> ~/.zshrc
     fi
 fi
@@ -220,8 +219,7 @@ if [ $ans == 1 ];then
     sudo apt-get install zsh
     # echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
     # source ~/.bashrc
-    #wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
-    gnome-terminal -x bash -c "cd ~/softwares/ && wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh"
+    wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
     chsh -s /bin/zsh
     echo "Logout to use zsh"
 fi
@@ -322,8 +320,7 @@ if [ $ans == 1 ];then
     if [ ! -d "vim" ]; then
         # echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
         # source ~/.bashrc
-        #git clone https://github.com/vim/vim.git
-        gnome-terminal -x bash -c "cd ~/softwares/ && git clone https://github.com/vim/vim.git"
+        git clone https://github.com/vim/vim.git
     fi
     sudo apt-get remove --purge vim vim-runtime vim-gnome vim-tiny vim-common vim-gui-common
     sudo apt-get build-dep vim-gnome
@@ -391,11 +388,10 @@ if [ $ans == 1 ];then
     if [ ! -d "$homeDir/bxgithub/myfile" ]; then
         # echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
         # source ~/.bashrc
-        #git clone https://github.com/baoxianzhang/myfile.git
-        gnome-terminal -x bash -c "cd ~/bxgithub/ && git clone https://github.com/baoxianzhang/myfile.git && rm ~/.zshrc && ln -s ~/bxgithub/myfile/zshrc ~/.zshrc"
+        git clone https://github.com/baoxianzhang/myfile.git
     fi
-    #rm ~/.zshrc
-    #ln -s ~/bxgithub/myfile/zshrc ~/.zshrc
+    rm ~/.zshrc
+    ln -s ~/bxgithub/myfile/zshrc ~/.zshrc
 fi
 
 cecho "<<<<<< Softlink emacs. Continue?[Y/n] >>>>>>" $yellow
@@ -408,11 +404,10 @@ if [ $ans == 1 ];then
     if [ ! -d "$homeDir/bxgithub/emacs-c-ide-demo" ]; then
         # echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
         # source ~/.bashrc
-        #git clone https://github.com/baoxianzhang/emacs-c-ide-demo.git
-        gnome-terminal -x bash -c "cd ~/bxgithub/ && git clone https://github.com/baoxianzhang/emacs-c-ide-demo.git && rm ~/.emacs.d -rf && ln -s ~/bxgithub/emacs-c-ide-demo ~/.emacs.d"
+        git clone https://github.com/baoxianzhang/emacs-c-ide-demo.git
     fi
-    #rm ~/.emacs.d -rf
-    #ln -s ~/bxgithub/emacs-c-ide-demo ~/.emacs.d
+    rm ~/.emacs.d -rf
+    ln -s ~/bxgithub/emacs-c-ide-demo ~/.emacs.d
 fi
 
 cecho "<<<<<< Softlink tmux. Continue?[Y/n] >>>>>>" $yellow
@@ -671,7 +666,7 @@ fi
 cecho "<<<<<< Install ubuntu flat themes and icons. Continue?[Y/n]" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ]; then
-    echo "install the flat themes and icons for ubuntu ..."
+    echo "install the flat themes and icons for ubuntu ...";
     echo -e "\033[40;32m You can refer: https://blog.anmoljagetia.me/flatabulous-ubuntu-theme/  website to deploy you theme 033[0m"
     echo ""
     echo "install the Ubuntu tweak tool"
@@ -680,7 +675,6 @@ if [ $ans == 1 ]; then
     sudo apt-get install ubuntu-tweak
     echo ""
     echo "install themes"
-    cd ~/softwares/
     wget -O flatTheme.zip https://github.com/anmoljagetia/Flatabulous/archive/master.zip
     sudo unzip flatTheme.zip -d /usr/share/themes/
     echo ""
