@@ -90,6 +90,8 @@ if [ $ans == 1 ];then
         vim
         google-chrome-stable
         npm
+        expect
+        unzip
     )
     
     cecho "Please edit the apps you need to install and save it!" $red
@@ -187,7 +189,9 @@ if [ $ans == 1 ];then
     # echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
     # source ~/.bashrc
     if [ ! -d "git-flow-completion" ]; then
-        git clone https://github.com/bobthecow/git-flow-completion.git
+        #git clone https://github.com/bobthecow/git-flow-completion.git
+        wget -O git-flow-completion.zip https://github.com/bobthecow/git-flow-completion/archive/master.zip
+        unzip git-flow-completion.zip
         #echo "source ~/code/git-flow-completion/git-flow-completion.zsh" >> ~/.zshrc
     fi
 fi
@@ -265,7 +269,9 @@ if [ $ans == 1 ];then
     if [ ! -d "rtl8188eu" ]; then
         # echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
         # source ~/.bashrc
-        git clone https://github.com/lwfinger/rtl8188eu.git
+        # git clone https://github.com/lwfinger/rtl8188eu.git
+        wget -O rtl8188eu.zip https://github.com/lwfinger/rtl8188eu/archive/master.zip
+        unzip rtl8188eu.zip
     fi
     cd rtl8188eu
     sudo apt-get install build-essential
@@ -320,7 +326,9 @@ if [ $ans == 1 ];then
     if [ ! -d "vim" ]; then
         # echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
         # source ~/.bashrc
-        git clone https://github.com/vim/vim.git
+        # git clone https://github.com/vim/vim.git
+        wget -O vim.zip https://github.com/vim/vim/archive/master.zip
+        unzip vim.zip
     fi
     sudo apt-get remove --purge vim vim-runtime vim-gnome vim-tiny vim-common vim-gui-common
     sudo apt-get build-dep vim-gnome
@@ -388,7 +396,9 @@ if [ $ans == 1 ];then
     if [ ! -d "$homeDir/bxgithub/myfile" ]; then
         # echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
         # source ~/.bashrc
-        git clone https://github.com/baoxianzhang/myfile.git
+        # git clone https://github.com/baoxianzhang/myfile.git
+        wget -O myfile.zip https://github.com/baoxianzhang/myfile/archive/master.zip
+        unzip myfile.zip
     fi
     rm ~/.zshrc
     ln -s ~/bxgithub/myfile/zshrc ~/.zshrc
@@ -404,7 +414,9 @@ if [ $ans == 1 ];then
     if [ ! -d "$homeDir/bxgithub/emacs-c-ide-demo" ]; then
         # echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
         # source ~/.bashrc
-        git clone https://github.com/baoxianzhang/emacs-c-ide-demo.git
+        # git clone https://github.com/baoxianzhang/emacs-c-ide-demo.git
+        wget -O emacs-c-ide-demo.zip https://github.com/baoxianzhang/emacs-c-ide-demo/archive/master.zip
+        unzip emacs-c-ide-demo.zip
     fi
     rm ~/.emacs.d -rf
     ln -s ~/bxgithub/emacs-c-ide-demo ~/.emacs.d
@@ -418,7 +430,9 @@ if [ $ans == 1 ];then
     fi
     cd ~/bxgithub
     if [ ! -d "$homeDir/bxgithub/myfile" ]; then
-        git clone https://github.com/baoxianzhang/myfile.git
+        # git clone https://github.com/baoxianzhang/myfile.git
+        wget -O myfile.zip https://github.com/baoxianzhang/myfile/archive/master.zip
+        unzip myfile.zip
     fi
     rm ~/.tmux.conf
     ln -s ~/bxgithub/myfile/tmux.conf ~/.tmux.conf
@@ -666,7 +680,7 @@ fi
 cecho "<<<<<< Install ubuntu flat themes and icons. Continue?[Y/n]" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ]; then
-    echo "install the flat themes and icons for ubuntu ...";
+    echo "install the flat themes and icons for ubuntu ..."
     echo -e "\033[40;32m You can refer: https://blog.anmoljagetia.me/flatabulous-ubuntu-theme/  website to deploy you theme 033[0m"
     echo ""
     echo "install the Ubuntu tweak tool"
@@ -687,16 +701,15 @@ if [ $ans == 1 ]; then
     #sudo apt-get install ultra-flat-icons-gree
     echo ""
 
-    cat <<EOF
-    Now press your super key,
-    search for Ubuntu Tweak and fire it.
-    Under the tweaks tab, there is an option for theme.
-    Under that select the Flatabulous theme.
-    Under the icon settings, select ultra-flat-icons.
-    Restart your computer, and you should be good to go!
-    EOF
-
-fi
+cat <<EOF
+Now press your super key,
+search for Ubuntu Tweak and fire it.
+Under the tweaks tab, there is an option for theme.
+Under that select the Flatabulous theme.
+Under the icon settings, select ultra-flat-icons.
+Restart your computer, and you should be good to go!
+EOF
+fi;
 
 cecho "<<<<<< Install shadowsocks. Continue?[Y/n]" $yellow
 ans=$(askForContinue)
