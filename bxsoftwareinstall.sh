@@ -743,6 +743,7 @@ if [ $ans == 1 ]; then
   echo -e "\033[40;32m you can start the shadowsocks client on your local laptop: sslocal -c /etc/shadowsocks.json \033[0m"
 fi;
 
+# other softwares packagesender, 
 echo ""
 cecho "Done， Happy Hacking!" $red
 echo ""
