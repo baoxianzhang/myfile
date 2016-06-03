@@ -451,11 +451,8 @@ if [ $ans == 1 ];then
     ./autogen.sh
     ./configure
     make
-    cd flash
-    make
-    cd ..
     sudo install -s -m 775 st-util /usr/bin/st-util
-    sudo install -s -m 775 flash/st-flash /usr/bin/st-flash
+    sudo install -s -m 775 st-flash /usr/bin/st-flash
     sudo install -m 644 49-stlinkv1.rules /etc/udev/rules.d/49-stlinkv1.rules
     sudo install -m 644 49-stlinkv2.rules /etc/udev/rules.d/49-stlinkv2.rules
     sudo install -m 644 49-stlinkv2-1.rules /etc/udev/rules.d/49-stlinkv2-1.rules

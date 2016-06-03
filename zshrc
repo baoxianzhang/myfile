@@ -122,7 +122,8 @@ alias scpdefaultparam="scp ~/molmc_code/pub/default-param/* root@192.168.8.1:~/"
 alias lstty="ls /dev/tty*"
 alias pullgit="/home/zhangbaoxian/bxgithub/myfile/gitpull"
 alias pushgit="/home/zhangbaoxian/bxgithub/myfile/gitpush"
-
+alias pullgit="/home/zhangbaoxian/bxgithub/myfile/githubpull"
+alias pushgit="/home/zhangbaoxian/bxgithub/myfile/githubpush"
 
 # git config
 # gitignore: https://github.com/github/gitignore
