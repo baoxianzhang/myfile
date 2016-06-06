@@ -452,6 +452,8 @@ if [ $ans == 1 ];then
         git clone git://github.com/texane/stlink.git
     fi
     cd stlink
+    sudo apt-get install pk-config
+    sudo apt-get install intltool
     sudo apt-get install libsgutils2-dev libusb-1.0.0-dev
     sudo apt-get install autoconf automake libtool
     ./autogen.sh
@@ -459,11 +461,12 @@ if [ $ans == 1 ];then
     make
     sudo install -s -m 775 st-util /usr/bin/st-util
     sudo install -s -m 775 st-flash /usr/bin/st-flash
-    sudo install -m 644 49-stlinkv1.rules /etc/udev/rules.d/49-stlinkv1.rules
-    sudo install -m 644 49-stlinkv2.rules /etc/udev/rules.d/49-stlinkv2.rules
-    sudo install -m 644 49-stlinkv2-1.rules /etc/udev/rules.d/49-stlinkv2-1.rules
-    sudo install -m 644 stlink_v1.modprobe.conf /etc/modprobe.d/stlink_v1.modprobe.conf
+    sudo install -m 644 ./etc/udev/rules.d/49-stlinkv1.rules /etc/udev/rules.d/49-stlinkv1.rules
+    sudo install -m 644 ./etc/udev/rules.d/49-stlinkv2.rules /etc/udev/rules.d/49-stlinkv2.rules
+    sudo install -m 644 ./etc/udev/rules.d/49-stlinkv2-1.rules /etc/udev/rules.d/49-stlinkv2-1.rules
+    sudo install -m 644 ./etc/modprobe.d/stlink_v1.conf /etc/modprobe.d/stlink_v1.conf
     sudo udevadm control --reload-rules
+    sudo udevadm trigger
 fi
 
 cecho "<<<<<< Install GoldenDict. Continue?[Y/n] >>>>>>" $yellow
