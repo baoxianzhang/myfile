@@ -73,7 +73,7 @@ if [ $ans == 1 ];then
         siversearcher-ag
         sqlite3
         sshpass
-        terminator
+        #terminator
         nginx
         gawk
         perl
@@ -93,7 +93,6 @@ if [ $ans == 1 ];then
         expect
         unzip
     )
-    
     cecho "Please edit the apps you need to install and save it!" $red
     read nothing
     
@@ -363,6 +362,13 @@ cecho "<<<<<< Install vim plugin in the other terninal. Continue?[Y/n] >>>>>>" $
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     gnome-terminal -x bash -c "vim"
+fi
+
+cecho "<<<<<< Set my local settings in vim. Continue?[Y/n] >>>>>>" $yellow
+ans=$(askForContinue)
+if [ $ans == 1 ];then
+    rm ~/.vimrc.local
+    ln -s ~/bxgithub/myfile/vimrc.local ~/.vimrc.local 
 fi
 
 cecho "<<<<<< Install arm-none-eabi-gcc 4.8.2. Continue?[Y/n] >>>>>>" $yellow
