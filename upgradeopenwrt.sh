@@ -227,3 +227,4 @@ echo "2." >> openwrtatomlog
 echo "3." >> openwrtatomlog
 echo "" >> openwrtatomlog
 gedit ${pub_dir}/${date_dir}/openwrtatomlog
+
