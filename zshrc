@@ -138,7 +138,20 @@ alias gd='git diff'
 alias grh='git reset --hard'
 alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 
+scpIntoyunTmp() {
+    scp $1 root@112.124.117.64:/tmp/
+    #command scp $1 root@112.124.117.64:/tmp/
+}
 
+scpIntoRobotTmp() {
+    scp $1 root@112.124.117.64:/tmp/
+    #command scp $1 root@112.124.117.64:/tmp/
+}
+
+#mcd() {
+#    mkdir -p "$1";
+#    cd "$1";
+#}
 
 extract () {
     if [ -f $1 ] ; then
