@@ -144,8 +144,8 @@ scpIntoyunTmp() {
 }
 
 scpIntoRobotTmp() {
-    scp $1 root@112.124.117.64:/tmp/
-    #command scp $1 root@112.124.117.64:/tmp/
+    scp $1 root@115.29.193.81:/tmp/
+    #command scp $1 root@115.29.193.81:/tmp/
 }
 
 #mcd() {
