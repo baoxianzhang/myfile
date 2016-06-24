@@ -114,6 +114,8 @@ alias makecopy='cd ~/molmc_code/intorobot_neutron/ && make clean && make ; rm ~/
 alias atom='cd ~/molmc_code/intorobot_atom/'
 alias neutron='cd ~/molmc_code/intorobot_neutron/'
 alias openwrt='cd ~/molmc_code/openwrtgithub/'
+alias firmware='cd ~/molmc_code/firmware/'
+alias spark='cd ~/code/sparkcorefirmware/'
 alias es='cd ~/molmc_code/esp_iot_sdk_v1.5.1/'
 alias pub='cd ~/molmc_code/pub/'
 alias myfile='cd ~/bxgithub/myfile/'
@@ -148,6 +150,15 @@ scpIntoRobotTmp() {
     #command scp $1 root@115.29.193.81:/tmp/
 }
 
+flash20000() {
+    st-flash --reset write $1 0x8020000
+}
+
+flash00000() {
+    st-flash --reset write $1 0x8000000
+}
+
+
 #mcd() {
 #    mkdir -p "$1";
 #    cd "$1";
@@ -181,3 +192,4 @@ export PATH=$PATH:/usr/lib/git-core/
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 eval $(thefuck --alias)
 export PATH=$PATH:/usr/src/xtensa-lx106-elf/bin
+export PARTICLE_DEVELOP=1
