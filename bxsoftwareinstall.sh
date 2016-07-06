@@ -608,7 +608,7 @@ if [ $ans == 1 ];then
         cd ~/softwares
         #boot VT-x AMD-v to support 64 bit
         #VirtualBox guest additions
-        sudo apt-get install -y linux-headers-generic build-essential dkms -y
+        sudo apt-get install -y linux-headers-generic build-essential dkms
         cecho "find the VirtualBox Guest Additions in the Device, and click and install it. Continue?[Y/n]" $green
         ans=$(askForContinue)
         if [ $ans == 1 ];then
@@ -619,11 +619,11 @@ if [ $ans == 1 ];then
                 wget -nc http://download.virtualbox.org/virtualbox/5.0.16/Oracle_VM_VirtualBox_Extension_Pack-5.0.16-105871.vbox-extpack
             fi
             VBoxManage extpack install Oracle_VM_VirtualBox_Extension_Pack-5.0.16-105871.vbox-extpack
-            cecho "Run: sudo addgroup zhangbaoxian vboxusers. Continue?[Y/n]" $yellow
-            ans=$(askForContinue)
-            if [ $ans == 1 ];then
-                cat /etc/group | grep vboxusers
-            fi
+            #cecho "Run: sudo addgroup zhangbaoxian vboxusers. Continue?[Y/n]" $yellow
+            #ans=$(askForContinue)
+            #if [ $ans == 1 ];then
+            #    cat /etc/group | grep vboxusers
+            #fi
             ## Find the devigid and add to the devgid next line
             #sudo echo "none /proc/bus/usb usbfs devgid=125,devmode=664 0 0" >> /etc/fstab
             #if not work, please reinstall virtualbox!
