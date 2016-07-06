@@ -51,7 +51,7 @@ ans=$(askForContinue)
 if [ $ans == 1 ];then
     # Keep-alive: update existing `sudo` time stamp until the script has finished.
     while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
-    
+
     # sed -i "s/IP_REDIS_CONFIG/192.168.33.13/g" `grep 'IP_REDIS_CONFIG' -rl .`
     apps=(
         # Utilities
@@ -95,24 +95,24 @@ if [ $ans == 1 ];then
     )
     cecho "Please edit the apps you need to install and save it!" $red
     read nothing
-    
+
     cat /dev/null > apps.tmp
     for item in ${apps[@]}; do
         echo "${item}" >> apps.tmp
     done
-    
+
     vi apps.tmp
     apps=$(cat apps.tmp)
     rm apps.tmp
-    
+
     cecho "Now, the following apps will be installed!" $red
     for item in ${apps}; do
       cecho "> ${item}" $magenta
     done
     read nothing
-    
+
     echo ""
-    
+
     select yn in "Yes" "No"; do
       case $yn in
         Yes )
@@ -132,20 +132,21 @@ fi
 
 
 cecho "<<<<<< Install git 2.7.3. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
+#ans=$(askForContinue)
+ans=1
 if [ $ans == 1 ];then
     # Magit requires Git >= 1.9.4, you are using 1.9.1.
     cd ~/softwares
     #sudo apt-get remove git
     if [ ! -d "git-2.7.3" ]; then
-        wget https://www.kernel.org/pub/software/scm/git/git-2.7.3.tar.gz
+        wget -nc https://www.kernel.org/pub/software/scm/git/git-2.7.3.tar.gz
         tar -xzvf git-2.7.3.tar.gz
     fi
     cd git-2.7.3
     chmod +x configure
     ./configure
-    sudo apt-get install zlib1g-dev
-    sudo apt-get install curl
+    sudo apt-get install -y zlib1g-dev
+    sudo apt-get install -y curl
     make
     sudo make install
     echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
@@ -154,7 +155,8 @@ if [ $ans == 1 ];then
 fi
 
 cecho "<<<<<< Configure git email name and editor. Continue?[Y/n] >>>>>> " $yellow
-ans=$(askForContinue)
+#ans=$(askForContinue)
+ans=1
 if [ $ans == 1 ];then
     cecho "<<<<<< Fix ~/.gitconfig file to your own cofiguration. >>>>>> "$green
 echo "#[user]
@@ -178,7 +180,8 @@ echo "#[user]
 fi
 
 cecho "<<<<<< Install git flow completion. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
+#ans=$(askForContinue)
+ans=1
 if [ $ans == 1 ];then
     cd
     if [ ! -d "$homeDir/code" ]; then
@@ -189,19 +192,20 @@ if [ $ans == 1 ];then
     # source ~/.bashrc
     if [ ! -d "git-flow-completion" ]; then
         #git clone https://github.com/bobthecow/git-flow-completion.git
-        wget -O git-flow-completion.zip https://github.com/bobthecow/git-flow-completion/archive/master.zip
+        wget -nc -O git-flow-completion.zip https://github.com/bobthecow/git-flow-completion/archive/master.zip
         unzip git-flow-completion.zip
         #echo "source ~/code/git-flow-completion/git-flow-completion.zsh" >> ~/.zshrc
     fi
 fi
 
 cecho "<<<<<< Install cmake. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
+#ans=$(askForContinue)
+ans=1
 if [ $ans == 1 ];then
     #Ref: https://cmake.org/
     cd ~/softwares
     if [ ! -f "cmake-3.5.0.tar.gz" ]; then
-        wget https://cmake.org/files/v3.5/cmake-3.5.0.tar.gz
+        wget -nc https://cmake.org/files/v3.5/cmake-3.5.0.tar.gz
         tar -xvzf cmake-3.5.0.tar.gz
     fi
     if [ -d "cmake-3.5.0" ]; then
@@ -214,28 +218,30 @@ if [ $ans == 1 ];then
 fi
 
 cecho "<<<<<< Install zsh. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
+#ans=$(askForContinue)
+ans=1
 if [ $ans == 1 ];then
     #Ref: http://zhuanlan.zhihu.com/mactalk/19556676ls
     #Restart and use the zsh
     cd ~/softwares
-    sudo apt-get install zsh
+    sudo apt-get install -y zsh
     # echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
     # source ~/.bashrc
-    wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
+    wget -nc https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
     chsh -s /bin/zsh
     echo "Logout to use zsh"
 fi
 
 cecho "<<<<<< Install autojump. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
+#ans=$(askForContinue)
+ans=1
 if [ $ans == 1 ];then
     #Ref: https://github.com/wting/autojump
     cd ~/softwares
     if [ ! -f "autojump_v21.1.2.tar.gz" ]; then
         # echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
         # source ~/.bashrc
-        wget https://github.com/downloads/joelthelion/autojump/autojump_v21.1.2.tar.gz
+        wget -nc https://github.com/downloads/joelthelion/autojump/autojump_v21.1.2.tar.gz
         tar -xzvf autojump_v21.1.2.tar.gz
         cd autojump_v21.1.2
         ./install.sh
@@ -244,51 +250,14 @@ if [ $ans == 1 ];then
     fi
 fi
 
-cecho "<<<<<< Install SogouPinyin Input method. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
-if [ $ans == 1 ];then
-    #Ref:  http://jingyan.baidu.com/article/08b6a591cb06f114a8092209.html
-    cd ~/softwares
-    if [ ! -r sogou_64.deb ]; then
-        sudo apt-get install fcitx libssh2-1
-        wget "http://pinyin.sogou.com/linux/download.php?f=linux&bit=64" -O "sogou_64.deb"
-    fi
-    sudo dpkg -i sogou_64.deb
-    cecho "<<<<<< Finished to install SougouPin, Please configure it >>>>>>" $green
-    cecho "System Settings > Language Support > Install/Remove Languages > install the Chinese language" $green
-    cecho "Logout the system to use sougou input method after finish all the installation!" $green
-fi
-
-cecho "<<<<<< Install mercury Mw150us wireless driver. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
-if [ $ans == 1 ];then
-    #Ref: http://jarhead.blog.163.com/blog/static/175217041201317102236535/
-    #Ref: http://forum.ubuntu.org.cn/viewtopic.php?t=421982
-    cd ~/softwares
-    if [ ! -d "rtl8188eu" ]; then
-        # echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
-        # source ~/.bashrc
-        # git clone https://github.com/lwfinger/rtl8188eu.git
-        wget -O rtl8188eu.zip https://github.com/lwfinger/rtl8188eu/archive/master.zip
-        unzip rtl8188eu.zip
-    fi
-    cd rtl8188eu
-    sudo apt-get install build-essential
-    sudo apt-get install linux-headers-$(uname -r)
-    make
-    sudo make install
-    # The next can be undo
-    #sudo echo "8188eu" >> /etc/modules
-    cecho "Logout to use Mw150us wireless" $red
-fi
-
 cecho "<<<<<< Install ctags. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
+#ans=$(askForContinue)
+ans=1
 if [ $ans == 1 ];then
-    sudo apt-get install exuberant-ctags
+    sudo apt-get install -y exuberant-ctags
     cd ~/softwares
     if [ ! -f "ctags-5.8.tar.gz" ]; then
-        wget http://prdownloads.sourceforge.net/ctags/ctags-5.8.tar.gz
+        wget -nc http://prdownloads.sourceforge.net/ctags/ctags-5.8.tar.gz
         tar -xzvf ctags-5.8.tar.gz
     fi
     cd ctags-5.8
@@ -299,17 +268,18 @@ if [ $ans == 1 ];then
 fi
 
 cecho "<<<<<< Install gtags. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
+#ans=$(askForContinue)
+ans=1
 if [ $ans == 1 ];then
     cd ~/softwares
     if [ ! -f "global-6.5.2.tar.gz" ]; then
-        wget http://tamacom.com/global/global-6.5.2.tar.gz
+        wget -nc http://tamacom.com/global/global-6.5.2.tar.gz
         tar -xzvf global-6.5.2.tar.gz
     fi
     cd global-6.5.2
-    sudo apt-get install libsdl1.2-dev
-    sudo apt-get install ncurses-bin
-    sudo apt-get install libncurses5-dev
+    sudo apt-get install -y libsdl1.2-dev
+    sudo apt-get install -y ncurses-bin
+    sudo apt-get install -y libncurses5-dev
     ./configure
     make
     sudo make install
@@ -317,7 +287,8 @@ if [ $ans == 1 ];then
 fi
 
 cecho "<<<<<< Install spf13 vim. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
+#ans=$(askForContinue)
+ans=1
 if [ $ans == 1 ];then
     #echo "<<<<<< Install roboust zhou vim >>>>>>"
     #Ref: http://www.vim.org/download.php
@@ -326,12 +297,12 @@ if [ $ans == 1 ];then
         # echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
         # source ~/.bashrc
         # git clone https://github.com/vim/vim.git
-        wget -O vim.zip https://github.com/vim/vim/archive/master.zip
+        wget -nc -O vim.zip https://github.com/vim/vim/archive/master.zip
         unzip vim.zip
     fi
     sudo apt-get remove --purge vim vim-runtime vim-gnome vim-tiny vim-common vim-gui-common
     sudo apt-get build-dep vim-gnome
-    sudo apt-get install liblua5.1-dev luajit libluajit-5.1 python-dev ruby-dev libperl-dev libncurses5-dev libgnome2-dev libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev
+    sudo apt-get install -y liblua5.1-dev luajit libluajit-5.1 python-dev ruby-dev libperl-dev libncurses5-dev libgnome2-dev libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev
     sudo rm -rf /usr/local/share/vim
     sudo rm /usr/bin/vim
     sudo mkdir /usr/include/lua5.1/include
@@ -359,41 +330,36 @@ if [ $ans == 1 ];then
 fi
 
 cecho "<<<<<< Install vim plugin in the other terninal. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
+#ans=$(askForContinue)
+ans=1
 if [ $ans == 1 ];then
     gnome-terminal -x bash -c "vim"
 fi
 
 cecho "<<<<<< Set my local settings in vim. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
+#ans=$(askForContinue)
+ans=1
 if [ $ans == 1 ];then
     rm ~/.vimrc.local
     ln -s ~/bxgithub/myfile/vimrc.local ~/.vimrc.local 
 fi
 
-cecho "<<<<<< Install arm-none-eabi-gcc 4.8.2. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
+cecho "<<<<<< Install arm-none-eabi-gcc 4.9.3. Continue?[Y/n] >>>>>>" $yellow
+#ans=$(askForContinue)
+ans=1
 if [ $ans == 1 ];then
     cd ~/softwares
-    sudo apt-get install lib32ncurses5 lib32z1 lib32bz2-1.0
-    if [ ! -f "gcc-arm-none-eabi-4_8-2014q3-20140805-linux.tar.bz2" ]; then
-        wget https://launchpad.net/gcc-arm-embedded/4.8/4.8-2014-q3-update/+download/gcc-arm-none-eabi-4_8-2014q3-20140805-linux.tar.bz2
-        tar -xvf gcc-arm-none-eabi-4_8-2014q3-20140805-linux.tar.bz2
-    fi
-    sudo cp gcc-arm-none-eabi-4_8-2014q3 /usr/src/ -r
-    #echo "export PATH=$PATH:/usr/src/gcc-arm-none-eabi-4_8-2014q3/bin" >> ~/.zshrc
+    sudo apt-get install -y lib32ncurses5 lib32z1 lib32bz2-1.0
+    wget -nc https://launchpad.net/gcc-arm-embedded/4.9/4.9-2015-q3-update/+download/gcc-arm-none-eabi-4_9-2015q3-20150921-linux.tar.bz2
+    tar -jxf gcc-arm-none-eabi-4_9-2015q3-20150921-linux.tar.bz2
+    sudo cp gcc-arm-none-eabi-4_9-2014q3 /usr/src/ -r
+    #echo "export PATH=$PATH:/usr/src/gcc-arm-none-eabi-4_9-2015q3/bin" >> ~/.zshrc
     #source ~/.zshrc
 fi
 
-cecho "<<<<<< Install Google Hosts. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
-if [ $ans == 1 ];then
-    cecho "By your own hand! Follow the bellow link!" $green
-    cecho "http://laod.cn/hosts/2016-google-hosts.html" $green
-fi
-
 cecho "<<<<<< Softlink zshrc. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
+#ans=$(askForContinue)
+ans=1
 if [ $ans == 1 ];then
     if [ ! -d "$homeDir/bxgithub" ]; then
         mkdir ~/bxgithub
@@ -403,33 +369,16 @@ if [ $ans == 1 ];then
         # echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
         # source ~/.bashrc
         # git clone https://github.com/baoxianzhang/myfile.git
-        wget -O myfile.zip https://github.com/baoxianzhang/myfile/archive/master.zip
+        wget -nc -O myfile.zip https://github.com/baoxianzhang/myfile/archive/master.zip
         unzip myfile.zip
     fi
     rm ~/.zshrc
     ln -s ~/bxgithub/myfile/zshrc ~/.zshrc
 fi
 
-cecho "<<<<<< Softlink emacs. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
-if [ $ans == 1 ];then
-    if [ ! -d "$homeDir/bxgithub" ]; then
-        mkdir ~/bxgithub
-    fi
-    cd ~/bxgithub
-    if [ ! -d "$homeDir/bxgithub/emacs-c-ide-demo" ]; then
-        # echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
-        # source ~/.bashrc
-        # git clone https://github.com/baoxianzhang/emacs-c-ide-demo.git
-        wget -O emacs-c-ide-demo.zip https://github.com/baoxianzhang/emacs-c-ide-demo/archive/master.zip
-        unzip emacs-c-ide-demo.zip
-    fi
-    rm ~/.emacs.d -rf
-    ln -s ~/bxgithub/emacs-c-ide-demo ~/.emacs.d
-fi
-
 cecho "<<<<<< Softlink tmux. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
+#ans=$(askForContinue)
+ans=1
 if [ $ans == 1 ];then
     if [ ! -d "$homeDir/bxgithub" ]; then
         mkdIr ~/bxgithub
@@ -437,7 +386,7 @@ if [ $ans == 1 ];then
     cd ~/bxgithub
     if [ ! -d "$homeDir/bxgithub/myfile" ]; then
         # git clone https://github.com/baoxianzhang/myfile.git
-        wget -O myfile.zip https://github.com/baoxianzhang/myfile/archive/master.zip
+        wget -nc -O myfile.zip https://github.com/baoxianzhang/myfile/archive/master.zip
         unzip myfile.zip
     fi
     rm ~/.tmux.conf
@@ -445,17 +394,18 @@ if [ $ans == 1 ];then
 fi
 
 cecho "<<<<<< Install stlink. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
+#ans=$(askForContinue)
+ans=1
 if [ $ans == 1 ];then
     cd ~/softwares
     if [ ! -d "stlink" ]; then
         git clone git://github.com/texane/stlink.git
     fi
     cd stlink
-    sudo apt-get install pk-config
-    sudo apt-get install intltool
-    sudo apt-get install libsgutils2-dev libusb-1.0.0-dev
-    sudo apt-get install autoconf automake libtool
+    sudo apt-get install -y pk-config
+    sudo apt-get install -y intltool
+    sudo apt-get install -y libsgutils2-dev libusb-1.0.0-dev
+    sudo apt-get install -y autoconf automake libtool
     ./autogen.sh
     ./configure
     make
@@ -470,9 +420,10 @@ if [ $ans == 1 ];then
 fi
 
 cecho "<<<<<< Install GoldenDict. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
+#ans=$(askForContinue)
+ans=1
 if [ $ans == 1 ];then
-    sudo apt-get install goldendict
+    sudo apt-get install -y goldendict
     ##configure the dict source
     ##http://abloz.com/huzheng/stardict-dic/zh_CN/
     ##download the dict source stardict-langdao-ce-gb-2.4.2, stardict-langdao-ec-gb-2.4.2, stardict-oxford-gb-2.4.2
@@ -482,14 +433,52 @@ if [ $ans == 1 ];then
     fi
     cd ~/GodlenDict
     if [ ! -f "stardict-langdao-ec-gb-2.4.2.tar.bz2"];then
-        wget http://abloz.com/huzheng/stardict-dic/zh_CN/stardict-langdao-ec-gb-2.4.2.tar.bz2
-        wget http://abloz.com/huzheng/stardict-dic/zh_CN/stardict-langdao-ce-gb-2.4.2.tar.bz2
-        wget http://abloz.com/huzheng/stardict-dic/zh_CN/stardict-oxford-gb-2.4.2.tar.bz2
+        wget -nc http://abloz.com/huzheng/stardict-dic/zh_CN/stardict-langdao-ec-gb-2.4.2.tar.bz2
+        wget -nc http://abloz.com/huzheng/stardict-dic/zh_CN/stardict-langdao-ce-gb-2.4.2.tar.bz2
+        wget -nc http://abloz.com/huzheng/stardict-dic/zh_CN/stardict-oxford-gb-2.4.2.tar.bz2
         tar -xjvf stardict-langdao-ec-gb-2.4.2.tar.bz2
         tar -xjvf stardict-langdao-ce-gb-2.4.2.tar.bz2
         tar -xjvf stardict-oxford-gb-2.4.2.tar.bz2
     fi
     cecho "start: goldendict, and configure it" $green
+fi
+
+cecho "<<<<<< Install fzf. Continue?[Y/n]" $yellow
+#ans=$(askForContinue)
+ans=1
+if [ $ans == 1 ]; then
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    ~/.fzf/install
+fi
+
+cecho "<<<<<< Install go-for-it. Continue?[Y/n] >>>>>>" $yellow
+#ans=$(askForContinue)
+ans=1
+if [ $ans == 1 ];then
+    sudo add-apt-repository ppa:mank319/go-for-it
+    sudo apt-get update
+    sudo apt-get install -y go-for-it
+fi
+
+
+cecho "<<<<<< Install meld for compare. Continue?[Y/n]" $yellow
+#ans=$(askForContinue)
+ans=1
+cd ~/softwares/
+if [ $ans == 1 ]; then
+    sudo apt-get install -y meld
+    #wget -nc http://www.scootersoftware.com/bcompare-4.1.5.21031_amd64.deb
+    #sudo dpkg -i bcompare-4.1.5.21031_amd64.deb
+    #cecho "trial licence" $red
+fi
+
+cecho "<<<<<< Install thefuck. Continue?[Y/n]" $yellow
+#ans=$(askForContinue)
+ans=1
+if [ $ans == 1 ]; then
+    sudo apt-get install -y python-pip
+    sudo -H pip install thefuck
+    #echo "eval $(thefuck --alias)" >> ~/.zshrc
 fi
 
 #cecho "<<<<<< Google Chrome. Continue?[Y/n] >>>>>>" $yellow
@@ -498,7 +487,7 @@ fi
 #    #Ref: http://www.linuxidc.com/Linux/2014-04/100645.htm
 #    cd ~/softwares
 #    if [ ! -f "google-chrome-stable_current_amd64.deb" ]; then
-#        wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+#        wget -nc https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 #    fi
 #    cecho "Use the Software center to install the deb since dpkg is not work!" $red
 #    # sudo dpkg -i google-chrome-stable_current_amd64.deb
@@ -506,15 +495,48 @@ fi
 #fi
 
 cecho "<<<<<< Install Skype. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
+#ans=$(askForContinue)
+ans=1
 if [ $ans == 1 ];then
     cd ~/softwares
     if [ ! -f "skype-ubuntu-precise_4.3.0.37-1_i386.deb" ]; then
-        wget download.skype.com/linux/skype-ubuntu-precise_4.3.0.37-1_i386.deb
+        wget -nc download.skype.com/linux/skype-ubuntu-precise_4.3.0.37-1_i386.deb
     fi
     cecho "Use the Software center to install the deb since dpkg is not work!" $red
     # sudo dpkg -i skype-ubuntu-precise_4.3.0.37-1_i386.deb
 fi
+
+cecho "<<<<<< Install mercury Mw150us wireless driver. Continue?[Y/n] >>>>>>" $yellow
+ans=$(askForContinue)
+if [ $ans == 1 ];then
+    #Ref: http://jarhead.blog.163.com/blog/static/175217041201317102236535/
+    #Ref: http://forum.ubuntu.org.cn/viewtopic.php?t=421982
+    cd ~/softwares
+    if [ ! -d "rtl8188eu" ]; then
+        # echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
+        # source ~/.bashrc
+        # git clone https://github.com/lwfinger/rtl8188eu.git
+        wget -nc -O rtl8188eu.zip https://github.com/lwfinger/rtl8188eu/archive/master.zip
+        unzip rtl8188eu.zip
+    fi
+    cd rtl8188eu
+    sudo apt-get install -y build-essential
+    sudo apt-get install -y linux-headers-$(uname -r)
+    make
+    sudo make install
+    # The next can be undo
+    #sudo echo "8188eu" >> /etc/modules
+    cecho "Logout to use Mw150us wireless" $red
+fi
+
+cecho "<<<<<< Install Google Hosts. Continue?[Y/n] >>>>>>" $yellow
+ans=$(askForContinue)
+if [ $ans == 1 ];then
+    cecho "By your own hand! Follow the bellow link!" $green
+    cecho "http://laod.cn/hosts/2016-google-hosts.html" $green
+fi
+
+
 
 cecho "<<<<<< Install Emacs 24.5. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
@@ -528,20 +550,40 @@ if [ $ans == 1 ];then
     ## or
     cd ~/softwares
     if [ ! -f "emacs-24.5.tar.gz" ]; then
-        wget http://ftp.gnu.org/gnu/emacs/emacs-24.5.tar.gz
+        wget -nc http://ftp.gnu.org/gnu/emacs/emacs-24.5.tar.gz
         tar -xzvf emacs-24.5.tar.gz
     fi
     cd emacs-24.5
-    sudo apt-get install libjpeg-dev
+    sudo apt-get install -y libjpeg-dev
     sleep 1
-    sudo apt-get install libgif-dev
+    sudo apt-get install -y libgif-dev
     sleep 1
-    sudo apt-get install libtiff5-dev
+    sudo apt-get install -y libtiff5-dev
     sleep 1
     ./configure
     make
     sudo make install
 fi
+
+cecho "<<<<<< Softlink emacs. Continue?[Y/n] >>>>>>" $yellow
+ans=$(askForContinue)
+if [ $ans == 1 ];then
+    if [ ! -d "$homeDir/bxgithub" ]; then
+        mkdir ~/bxgithub
+    fi
+    cd ~/bxgithub
+    if [ ! -d "$homeDir/bxgithub/emacs-c-ide-demo" ]; then
+        # echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
+        # source ~/.bashrc
+        # git clone https://github.com/baoxianzhang/emacs-c-ide-demo.git
+        wget -nc -O emacs-c-ide-demo.zip https://github.com/baoxianzhang/emacs-c-ide-demo/archive/master.zip
+        unzip emacs-c-ide-demo.zip
+    fi
+    rm ~/.emacs.d -rf
+    ln -s ~/bxgithub/emacs-c-ide-demo ~/.emacs.d
+fi
+
+
 
 cecho "<<<<<< Install virtualbox. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
@@ -549,7 +591,7 @@ if [ $ans == 1 ];then
     #Ref: https://www.virtualbox.org/
     cd ~/softwares
     if [ ! -f "virtualbox-5.0_5.0.16-105871~Ubuntu~trusty_amd64.deb" ]; then
-        wget http://download.virtualbox.org/virtualbox/5.0.16/virtualbox-5.0_5.0.16-105871~Ubuntu~trusty_amd64.deb
+        wget -nc http://download.virtualbox.org/virtualbox/5.0.16/virtualbox-5.0_5.0.16-105871~Ubuntu~trusty_amd64.deb
     fi
     #echo "Use the Software center to install the deb since dpkg is not work!"
     sudo dpkg -i virtualbox-5.0_5.0.16-105871~Ubuntu~trusty_amd64.deb
@@ -566,7 +608,7 @@ if [ $ans == 1 ];then
         cd ~/softwares
         #boot VT-x AMD-v to support 64 bit
         #VirtualBox guest additions
-        sudo apt-get install linux-headers-generic build-essential dkms -y
+        sudo apt-get install -y linux-headers-generic build-essential dkms -y
         cecho "find the VirtualBox Guest Additions in the Device, and click and install it. Continue?[Y/n]" $green
         ans=$(askForContinue)
         if [ $ans == 1 ];then
@@ -574,7 +616,7 @@ if [ $ans == 1 ];then
             cecho "Install the Oracle VM VirtualBox Extension Pack to use the usb" $green
             ##Ref: http://www.xiaojian.org/article/310.html
             if [ ! -f "Oracle_VM_VirtualBox_Extension_Pack-5.0.16-105871.vbox-extpack" ];then
-                wget http://download.virtualbox.org/virtualbox/5.0.16/Oracle_VM_VirtualBox_Extension_Pack-5.0.16-105871.vbox-extpack
+                wget -nc http://download.virtualbox.org/virtualbox/5.0.16/Oracle_VM_VirtualBox_Extension_Pack-5.0.16-105871.vbox-extpack
             fi
             VBoxManage extpack install Oracle_VM_VirtualBox_Extension_Pack-5.0.16-105871.vbox-extpack
             cecho "Run: sudo addgroup zhangbaoxian vboxusers. Continue?[Y/n]" $yellow
@@ -590,13 +632,13 @@ if [ $ans == 1 ];then
    fi
 fi
 
-cecho "<<<<<< Install vagrant. Continue?[Y/n] >>>>>>" $yellow
+cecho "<<<<<< Install vagrant and trusty64. Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     #Ref: http://rmingwang.com/vagrant-commands-and-config.html   https://www.vagrantup.com/docs/boxes.html
     cd ~/softwares
     if [ ! -f "vagrant_1.8.1_x86_64.deb" ]; then
-        wget https://releases.hashicorp.com/vagrant/1.8.1/vagrant_1.8.1_x86_64.deb
+        wget -nc https://releases.hashicorp.com/vagrant/1.8.1/vagrant_1.8.1_x86_64.deb
     fi
     sudo dpkg -i vagrant_1.8.1_x86_64.deb
     cecho "<<<<<< Install ubuntu/trusty64. Continue?[Y/n] >>>>>>" $yellow
@@ -605,7 +647,7 @@ if [ $ans == 1 ];then
             mkdir -p ~/virtualbox/vagrant
         fi
         #Ref: https://atlas.hashicorp.com/boxes/search
-        #wget https://github.com/kraksoft/vagrant-box-ubuntu/releases/download/14.04/ubuntu-14.04-amd64.box
+        #wget -nc https://github.com/kraksoft/vagrant-box-ubuntu/releases/download/14.04/ubuntu-14.04-amd64.box
         cd ~/virtualbox/vagrant
         if [ ! -d "box" ]; then
             mkdir box
@@ -622,14 +664,6 @@ if [ $ans == 1 ];then
         #vagrant ssh
         #vagrant halt
     fi
-fi
-
-cecho "<<<<<< Install go-for-it. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
-if [ $ans == 1 ];then
-    sudo add-apt-repository ppa:mank319/go-for-it
-    sudo apt-get update
-    sudo apt-get install go-for-it
 fi
 
 cecho "<<<<<< Install SecureCRT 7.3. Continue?[Y/n] >>>>>>" $yellow
@@ -652,36 +686,12 @@ if [ $ans == 1 ];then
     cecho "sudo cp xtensa-lx106-elf /usr/src/ -r" $green
     cecho "Add to the PATH!" $green
     #echo "export PATH=$PATH:/usr/src/xtensa-lx106-elf/bin" >> ~/.zshrc
-    wget https://doc-0o-3o-docs.googleusercontent.com/docs/securesc/ha0ro937gcuc7l7deffksulhg5h7mbp1/c66ev5j18rjbov5hsvkefgttllsrrrk2/1461578400000/00407590198758729148/*/0B5bwBE9A5dBXT0plVndobnU1dTg?e=download
+    wget -nc https://doc-0o-3o-docs.googleusercontent.com/docs/securesc/ha0ro937gcuc7l7deffksulhg5h7mbp1/c66ev5j18rjbov5hsvkefgttllsrrrk2/1461578400000/00407590198758729148/*/0B5bwBE9A5dBXT0plVndobnU1dTg?e=download
     tar -xjvf xtensa-lx06.tar.bz
     iscp xtensa-lx106-elf /usr/src/ -r
 fi
 
 
-cecho "<<<<<< Install fzf. Continue?[Y/n]" $yellow
-ans=$(askForContinue)
-if [ $ans == 1 ]; then
-    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-    ~/.fzf/install
-fi
-
-cecho "<<<<<< Install meld or bcompare. Continue?[Y/n]" $yellow
-ans=$(askForContinue)
-cd ~/softwares/
-if [ $ans == 1 ]; then
-    #sudo apt-get install meld
-    wget http://www.scootersoftware.com/bcompare-4.1.5.21031_amd64.deb
-    sudo dpkg -i bcompare-4.1.5.21031_amd64.deb
-    cecho "trial licence" $red
-fi
-
-cecho "<<<<<< Install thefuck. Continue?[Y/n]" $yellow
-ans=$(askForContinue)
-if [ $ans == 1 ]; then
-    sudo apt-get install python-pip
-    sudo -H pip install thefuck
-    #echo "eval $(thefuck --alias)" >> ~/.zshrc
-fi
 
 cecho "<<<<<< Install ubuntu flat themes and icons. Continue?[Y/n]" $yellow
 ans=$(askForContinue)
@@ -692,17 +702,17 @@ if [ $ans == 1 ]; then
     echo "install the Ubuntu tweak tool"
     sudo add-apt-repository ppa:tualatrix/ppa
     sudo apt-get update
-    sudo apt-get install ubuntu-tweak
+    sudo apt-get install -y ubuntu-tweak
     echo ""
     echo "install themes"
-    wget -O flatTheme.zip https://github.com/anmoljagetia/Flatabulous/archive/master.zip
+    wget -nc -O flatTheme.zip https://github.com/anmoljagetia/Flatabulous/archive/master.zip
     sudo unzip flatTheme.zip -d /usr/share/themes/
     echo ""
 
     echo "install the icons"
     sudo add-apt-repository ppa:noobslab/icons
     sudo apt-get update
-    sudo apt-get install ultra-flat-icons
+    sudo apt-get install -y ultra-flat-icons
     #sudo apt-get install ultra-flat-icons-orange
     #sudo apt-get install ultra-flat-icons-gree
     echo ""
@@ -753,3 +763,22 @@ fi;
 echo ""
 cecho "Done， Happy Hacking!" $red
 echo ""
+
+
+
+#cecho "<<<<<< Install SogouPinyin Input method. Continue?[Y/n] >>>>>>" $yellow
+#ans=$(askForContinue)
+#if [ $ans == 1 ];then
+#    #Ref:  http://jingyan.baidu.com/article/08b6a591cb06f114a8092209.html
+#    cd ~/softwares
+#    if [ ! -r sogou_64.deb ]; then
+#        sudo apt-get install fcitx libssh2-1
+#        wget -nc "http://pinyin.sogou.com/linux/download.php?f=linux&bit=64" -O "sogou_64.deb"
+#    fi
+#    sudo dpkg -i sogou_64.deb
+#    cecho "<<<<<< Finished to install SougouPin, Please configure it >>>>>>" $green
+#    cecho "System Settings > Language Support > Install/Remove Languages > install the Chinese language" $green
+#    cecho "Logout the system to use sougou input method after finish all the installation!" $green
+#fi
+
+
