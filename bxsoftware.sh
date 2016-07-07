@@ -40,15 +40,17 @@ cecho() {
 cecho "<<<<<< Softwares install begin on Ubuntu 14.04 >>>>>>" $yellow
 cecho "Please connect the wifi and check the wifi! " $red
 
-cecho "<<<<<< Update the software, not upgrade system. Continue?[Y/n] >>>>>>" $yellow
+cecho "<<<<<< Update the software, not upgrade system. >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
     sudo apt-get update
 fi
 
-cecho "<<<<<< Install apps using apt-get. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
-if [ $ans == 1 ];then
+# include the flags which software to install
+. ./softwaresInstallFlag.sh
+
+if [ $FLAG_APT_TET_SOFTWARE_INSTALL == 1 ];then
+    cecho "<<<<<< Install apps using apt-get. >>>>>>" $yellow
     # Keep-alive: update existing `sudo` time stamp until the script has finished.
     while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
@@ -70,7 +72,7 @@ if [ $ans == 1 ];then
         luajit
         exuberant-ctags
         curl
-        siversearcher-ag
+        #siversearcher-ag
         sqlite3
         sshpass
         #terminator
@@ -88,10 +90,13 @@ if [ $ans == 1 ];then
         audacity
         python-pip
         vim
-        google-chrome-stable
+        chromium-browser
+        #google-chrome-stable
         npm
         expect
         unzip
+        tmux
+        meld
     )
     cecho "Please edit the apps you need to install and save it!" $red
     read nothing
@@ -130,11 +135,8 @@ if [ ! -d "$homeDir/softwares" ]; then
     mkdir ~/softwares
 fi
 
-
-cecho "<<<<<< Install git 2.7.3. Continue?[Y/n] >>>>>>" $yellow
-#ans=$(askForContinue)
-ans=1
-if [ $ans == 1 ];then
+if [ $FLAG_GIT_2dot7dot3_INSTALL == 1 ];then
+    cecho "<<<<<< Install git 2.7.3. >>>>>>" $yellow
     # Magit requires Git >= 1.9.4, you are using 1.9.1.
     cd ~/softwares
     #sudo apt-get remove git
@@ -154,10 +156,9 @@ if [ $ans == 1 ];then
     source ~/.bashrc
 fi
 
-cecho "<<<<<< Configure git email name and editor. Continue?[Y/n] >>>>>> " $yellow
-#ans=$(askForContinue)
-ans=1
-if [ $ans == 1 ];then
+
+if [ $FLAG_GIT_FLOW_COMPLETION_INSTALL == 1 ];then
+    cecho "<<<<<< Configure git email name and editor. >>>>>> " $yellow
     cecho "<<<<<< Fix ~/.gitconfig file to your own cofiguration. >>>>>> "$green
 echo "#[user]
 #	email = baoxianzhit@gmail.com
@@ -173,16 +174,13 @@ echo "#[user]
 #	default = simple
 " >> ~/.gitconfig
     vi ~/.gitconfig
-
 #    git config --global user.email "baoxianzhit@gmail.com"
 #    git config --global user.name "baoxianzhang"
 #    git config --global core.editor vim
 fi
 
-cecho "<<<<<< Install git flow completion. Continue?[Y/n] >>>>>>" $yellow
-#ans=$(askForContinue)
-ans=1
-if [ $ans == 1 ];then
+if [ $FLAG_GIT_FLOW_COMPLETION_INSTALL == 1 ];then
+    cecho "<<<<<< Install git flow completion. >>>>>>" $yellow
     cd
     if [ ! -d "$homeDir/code" ]; then
         mkdir -p code
@@ -193,15 +191,29 @@ if [ $ans == 1 ];then
     if [ ! -d "git-flow-completion" ]; then
         #git clone https://github.com/bobthecow/git-flow-completion.git
         wget -nc -O git-flow-completion.zip https://github.com/bobthecow/git-flow-completion/archive/master.zip
-        unzip git-flow-completion.zip
+        unzip -o git-flow-completion.zip
+        mv git-flow-completion-master git-flow-completion
         #echo "source ~/code/git-flow-completion/git-flow-completion.zsh" >> ~/.zshrc
     fi
 fi
 
-cecho "<<<<<< Install cmake. Continue?[Y/n] >>>>>>" $yellow
-#ans=$(askForContinue)
-ans=1
-if [ $ans == 1 ];then
+if [ $FLAG_AUTOJUMP_INSTALL == 1 ];then
+    cecho "<<<<<< Install silversearch-ag. >>>>>>" $yellow
+    cd ~/softwares
+    if [ ! -d "silversearch-ag" ]; then
+        wget -nc -O silversearch-ag.zip https://codeload.github.com/mizuno-as/silversearcher-ag/zip/master
+        unzip -o silversearch-ag.zip
+        mv silversearch-ag-master silversearch-ag
+        sudo apt-get install liblzma-dev -y
+        cd silversearch-ag
+        ./build.sh
+        ./configure
+        sudo make install
+    fi
+fi
+
+if [ $FLAG_CMAKE_INSTALL == 1 ];then
+    cecho "<<<<<< Install cmake. >>>>>>" $yellow
     #Ref: https://cmake.org/
     cd ~/softwares
     if [ ! -f "cmake-3.5.0.tar.gz" ]; then
@@ -217,10 +229,8 @@ if [ $ans == 1 ];then
     fi
 fi
 
-cecho "<<<<<< Install zsh. Continue?[Y/n] >>>>>>" $yellow
-#ans=$(askForContinue)
-ans=1
-if [ $ans == 1 ];then
+if [ $FLAG_ZSH_INSTALL == 1 ];then
+    cecho "<<<<<< Install zsh. >>>>>>" $yellow
     #Ref: http://zhuanlan.zhihu.com/mactalk/19556676ls
     #Restart and use the zsh
     cd ~/softwares
@@ -232,10 +242,8 @@ if [ $ans == 1 ];then
     echo "Logout to use zsh"
 fi
 
-cecho "<<<<<< Install autojump. Continue?[Y/n] >>>>>>" $yellow
-#ans=$(askForContinue)
-ans=1
-if [ $ans == 1 ];then
+if [ $FLAG_AUTOJUMP_INSTALL == 1 ];then
+    cecho "<<<<<< Install autojump. >>>>>>" $yellow
     #Ref: https://github.com/wting/autojump
     cd ~/softwares
     if [ ! -f "autojump_v21.1.2.tar.gz" ]; then
@@ -250,10 +258,8 @@ if [ $ans == 1 ];then
     fi
 fi
 
-cecho "<<<<<< Install ctags. Continue?[Y/n] >>>>>>" $yellow
-#ans=$(askForContinue)
-ans=1
-if [ $ans == 1 ];then
+if [ $FLAG_CTAGS_INSTALL == 1 ];then
+    cecho "<<<<<< Install ctags. >>>>>>" $yellow
     sudo apt-get install -y exuberant-ctags
     cd ~/softwares
     if [ ! -f "ctags-5.8.tar.gz" ]; then
@@ -267,10 +273,8 @@ if [ $ans == 1 ];then
     cecho "Usage: ctags-exuberant -R *" $green
 fi
 
-cecho "<<<<<< Install gtags. Continue?[Y/n] >>>>>>" $yellow
-#ans=$(askForContinue)
-ans=1
-if [ $ans == 1 ];then
+if [ $FLAG_GTAGS_INSTALL == 1 ];then
+    cecho "<<<<<< Install gtags. >>>>>>" $yellow
     cd ~/softwares
     if [ ! -f "global-6.5.2.tar.gz" ]; then
         wget -nc http://tamacom.com/global/global-6.5.2.tar.gz
@@ -286,10 +290,8 @@ if [ $ans == 1 ];then
     cecho "Usage: gtags" $green
 fi
 
-cecho "<<<<<< Install spf13 vim. Continue?[Y/n] >>>>>>" $yellow
-#ans=$(askForContinue)
-ans=1
-if [ $ans == 1 ];then
+if [ $FLAG_SPF13VIM_INSTALL == 1 ];then
+    cecho "<<<<<< Install spf13 vim. >>>>>>" $yellow
     #echo "<<<<<< Install roboust zhou vim >>>>>>"
     #Ref: http://www.vim.org/download.php
     cd ~/softwares
@@ -298,11 +300,12 @@ if [ $ans == 1 ];then
         # source ~/.bashrc
         # git clone https://github.com/vim/vim.git
         wget -nc -O vim.zip https://github.com/vim/vim/archive/master.zip
-        unzip vim.zip
+        unzip -o vim.zip
+        mv vim-master vim
     fi
     sudo apt-get remove --purge vim vim-runtime vim-gnome vim-tiny vim-common vim-gui-common
     sudo apt-get build-dep vim-gnome
-    sudo apt-get install -y liblua5.1-dev luajit libluajit-5.1 python-dev ruby-dev libperl-dev libncurses5-dev libgnome2-dev libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev
+    sudo apt-get install liblua5.1-dev luajit libluajit-5.1 python-dev ruby-dev libperl-dev libncurses5-dev libgnome2-dev libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev -y
     sudo rm -rf /usr/local/share/vim
     sudo rm /usr/bin/vim
     sudo mkdir /usr/include/lua5.1/include
@@ -327,40 +330,29 @@ if [ $ans == 1 ];then
     sudo make install
     curl http://j.mp/spf13-vim3 -L -o - | sh
     cecho "Start vim and begin to install the plugin!" $green
-fi
-
-cecho "<<<<<< Install vim plugin in the other terninal. Continue?[Y/n] >>>>>>" $yellow
-#ans=$(askForContinue)
-ans=1
-if [ $ans == 1 ];then
+    cecho "<<<<<< Install vim plugin in the other terninal. >>>>>>" $yellow
     gnome-terminal -x bash -c "vim"
 fi
 
-cecho "<<<<<< Set my local settings in vim. Continue?[Y/n] >>>>>>" $yellow
-#ans=$(askForContinue)
-ans=1
-if [ $ans == 1 ];then
+if [ $FLAG_MYVIM_LOCAL_SETTINGS_CONFIG == 1 ];then
+    cecho "<<<<<< Set my local settings in vim. >>>>>>" $yellow
     rm ~/.vimrc.local
     ln -s ~/bxgithub/myfile/vimrc.local ~/.vimrc.local 
 fi
 
-cecho "<<<<<< Install arm-none-eabi-gcc 4.9.3. Continue?[Y/n] >>>>>>" $yellow
-#ans=$(askForContinue)
-ans=1
-if [ $ans == 1 ];then
+if [ $FLAG_ARM_NONE_EABI_GCC_4.9.3_INSTALL == 1 ];then
+    cecho "<<<<<< Install arm-none-eabi-gcc 4.9.3. >>>>>>" $yellow
     cd ~/softwares
     sudo apt-get install -y lib32ncurses5 lib32z1 lib32bz2-1.0
     wget -nc https://launchpad.net/gcc-arm-embedded/4.9/4.9-2015-q3-update/+download/gcc-arm-none-eabi-4_9-2015q3-20150921-linux.tar.bz2
     tar -jxf gcc-arm-none-eabi-4_9-2015q3-20150921-linux.tar.bz2
-    sudo cp gcc-arm-none-eabi-4_9-2014q3 /usr/src/ -r
+    sudo cp gcc-arm-none-eabi-4_9-2015q3 /usr/src/ -r
     #echo "export PATH=$PATH:/usr/src/gcc-arm-none-eabi-4_9-2015q3/bin" >> ~/.zshrc
     #source ~/.zshrc
 fi
 
-cecho "<<<<<< Softlink zshrc. Continue?[Y/n] >>>>>>" $yellow
-#ans=$(askForContinue)
-ans=1
-if [ $ans == 1 ];then
+if [ $FLAG_SOFTLINK_ZSHRC_INSTALL == 1 ];then
+    cecho "<<<<<< Softlink zshrc. >>>>>>" $yellow
     if [ ! -d "$homeDir/bxgithub" ]; then
         mkdir ~/bxgithub
     fi
@@ -370,16 +362,15 @@ if [ $ans == 1 ];then
         # source ~/.bashrc
         # git clone https://github.com/baoxianzhang/myfile.git
         wget -nc -O myfile.zip https://github.com/baoxianzhang/myfile/archive/master.zip
-        unzip myfile.zip
+        unzip -o myfile.zip
+        mv myfile-master myfile
     fi
     rm ~/.zshrc
     ln -s ~/bxgithub/myfile/zshrc ~/.zshrc
 fi
 
-cecho "<<<<<< Softlink tmux. Continue?[Y/n] >>>>>>" $yellow
-#ans=$(askForContinue)
-ans=1
-if [ $ans == 1 ];then
+if [ $FLAG_SOFTLINK_TMUX_INSTALL == 1 ];then
+    cecho "<<<<<< Softlink tmux. >>>>>>" $yellow
     if [ ! -d "$homeDir/bxgithub" ]; then
         mkdIr ~/bxgithub
     fi
@@ -387,22 +378,21 @@ if [ $ans == 1 ];then
     if [ ! -d "$homeDir/bxgithub/myfile" ]; then
         # git clone https://github.com/baoxianzhang/myfile.git
         wget -nc -O myfile.zip https://github.com/baoxianzhang/myfile/archive/master.zip
-        unzip myfile.zip
+        unzip -o myfile.zip
+        mv myfile-master myfile
     fi
     rm ~/.tmux.conf
     ln -s ~/bxgithub/myfile/tmux.conf ~/.tmux.conf
 fi
 
-cecho "<<<<<< Install stlink. Continue?[Y/n] >>>>>>" $yellow
-#ans=$(askForContinue)
-ans=1
-if [ $ans == 1 ];then
+if [ $FLAG_STLINK_INSTALL == 1 ];then
+    cecho "<<<<<< Install stlink. >>>>>>" $yellow
     cd ~/softwares
     if [ ! -d "stlink" ]; then
         git clone git://github.com/texane/stlink.git
     fi
     cd stlink
-    sudo apt-get install -y pk-config
+    sudo apt-get install -y pkg-config
     sudo apt-get install -y intltool
     sudo apt-get install -y libsgutils2-dev libusb-1.0.0-dev
     sudo apt-get install -y autoconf automake libtool
@@ -419,10 +409,8 @@ if [ $ans == 1 ];then
     sudo udevadm trigger
 fi
 
-cecho "<<<<<< Install GoldenDict. Continue?[Y/n] >>>>>>" $yellow
-#ans=$(askForContinue)
-ans=1
-if [ $ans == 1 ];then
+if [ $FLAG_GOLDENDICT_INSTALL == 1 ];then
+    cecho "<<<<<< Install GoldenDict. >>>>>>" $yellow
     sudo apt-get install -y goldendict
     ##configure the dict source
     ##http://abloz.com/huzheng/stardict-dic/zh_CN/
@@ -443,72 +431,28 @@ if [ $ans == 1 ];then
     cecho "start: goldendict, and configure it" $green
 fi
 
-cecho "<<<<<< Install fzf. Continue?[Y/n]" $yellow
-#ans=$(askForContinue)
-ans=1
-if [ $ans == 1 ]; then
+if [ $FLAG_FZF_INSTALL == 1 ]; then
+cecho "<<<<<< Install fzf. " $yellow
     git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
     ~/.fzf/install
 fi
 
-cecho "<<<<<< Install go-for-it. Continue?[Y/n] >>>>>>" $yellow
-#ans=$(askForContinue)
-ans=1
-if [ $ans == 1 ];then
+if [ $FLAG_GO_FOR_IT_INSTALL == 1 ];then
+    cecho "<<<<<< Install go-for-it. >>>>>>" $yellow
     sudo add-apt-repository ppa:mank319/go-for-it
     sudo apt-get update
     sudo apt-get install -y go-for-it
 fi
 
-
-cecho "<<<<<< Install meld for compare. Continue?[Y/n]" $yellow
-#ans=$(askForContinue)
-ans=1
-cd ~/softwares/
-if [ $ans == 1 ]; then
-    sudo apt-get install -y meld
-    #wget -nc http://www.scootersoftware.com/bcompare-4.1.5.21031_amd64.deb
-    #sudo dpkg -i bcompare-4.1.5.21031_amd64.deb
-    #cecho "trial licence" $red
-fi
-
-cecho "<<<<<< Install thefuck. Continue?[Y/n]" $yellow
-#ans=$(askForContinue)
-ans=1
-if [ $ans == 1 ]; then
+if [ $FLAG_THEFUCK_INSTALL == 1 ]; then
+    cecho "<<<<<< Install thefuck. " $yellow
     sudo apt-get install -y python-pip
     sudo -H pip install thefuck
     #echo "eval $(thefuck --alias)" >> ~/.zshrc
 fi
 
-#cecho "<<<<<< Google Chrome. Continue?[Y/n] >>>>>>" $yellow
-#ans=$(askForContinue)
-#if [ $ans == 1 ];then
-#    #Ref: http://www.linuxidc.com/Linux/2014-04/100645.htm
-#    cd ~/softwares
-#    if [ ! -f "google-chrome-stable_current_amd64.deb" ]; then
-#        wget -nc https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-#    fi
-#    cecho "Use the Software center to install the deb since dpkg is not work!" $red
-#    # sudo dpkg -i google-chrome-stable_current_amd64.deb
-#    cecho "Usage: google-chrome-stable" $green
-#fi
-
-cecho "<<<<<< Install Skype. Continue?[Y/n] >>>>>>" $yellow
-#ans=$(askForContinue)
-ans=1
-if [ $ans == 1 ];then
-    cd ~/softwares
-    if [ ! -f "skype-ubuntu-precise_4.3.0.37-1_i386.deb" ]; then
-        wget -nc download.skype.com/linux/skype-ubuntu-precise_4.3.0.37-1_i386.deb
-    fi
-    cecho "Use the Software center to install the deb since dpkg is not work!" $red
-    # sudo dpkg -i skype-ubuntu-precise_4.3.0.37-1_i386.deb
-fi
-
-cecho "<<<<<< Install mercury Mw150us wireless driver. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
-if [ $ans == 1 ];then
+if [ $FLAG_MERCURY_MW150US_WIRELESS_INSTALL == 1 ];then
+    cecho "<<<<<< Install mercury Mw150us wireless driver. >>>>>>" $yellow
     #Ref: http://jarhead.blog.163.com/blog/static/175217041201317102236535/
     #Ref: http://forum.ubuntu.org.cn/viewtopic.php?t=421982
     cd ~/softwares
@@ -517,7 +461,8 @@ if [ $ans == 1 ];then
         # source ~/.bashrc
         # git clone https://github.com/lwfinger/rtl8188eu.git
         wget -nc -O rtl8188eu.zip https://github.com/lwfinger/rtl8188eu/archive/master.zip
-        unzip rtl8188eu.zip
+        unzip -o rtl8188eu.zip
+        mv rtl8188eu-master rtl8188eu
     fi
     cd rtl8188eu
     sudo apt-get install -y build-essential
@@ -529,18 +474,8 @@ if [ $ans == 1 ];then
     cecho "Logout to use Mw150us wireless" $red
 fi
 
-cecho "<<<<<< Install Google Hosts. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
-if [ $ans == 1 ];then
-    cecho "By your own hand! Follow the bellow link!" $green
-    cecho "http://laod.cn/hosts/2016-google-hosts.html" $green
-fi
-
-
-
-cecho "<<<<<< Install Emacs 24.5. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
-if [ $ans == 1 ];then
+if [ $FLAG_EMACS24dot5_INSTALL == 1 ];then
+cecho "<<<<<< Install Emacs 24.5. >>>>>>" $yellow
     #if [ ! -f "emacs" ]; then
     #git clone https://github.com/emacs-mirror/emacs.git
     #./configure
@@ -565,9 +500,8 @@ if [ $ans == 1 ];then
     sudo make install
 fi
 
-cecho "<<<<<< Softlink emacs. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
-if [ $ans == 1 ];then
+if [ $FLAG_SOFTLINK_EMACS_INSTALL == 1 ];then
+    cecho "<<<<<< Softlink emacs. >>>>>>" $yellow
     if [ ! -d "$homeDir/bxgithub" ]; then
         mkdir ~/bxgithub
     fi
@@ -577,17 +511,34 @@ if [ $ans == 1 ];then
         # source ~/.bashrc
         # git clone https://github.com/baoxianzhang/emacs-c-ide-demo.git
         wget -nc -O emacs-c-ide-demo.zip https://github.com/baoxianzhang/emacs-c-ide-demo/archive/master.zip
-        unzip emacs-c-ide-demo.zip
+        unzip -o emacs-c-ide-demo.zip
+        mv emacs-c-ide-demo-master emacs-c-ide-demo
     fi
     rm ~/.emacs.d -rf
     ln -s ~/bxgithub/emacs-c-ide-demo ~/.emacs.d
 fi
 
+if [ $FLAG_SILVERSEARCH_AG_INSTALL == 1 ];then
+    cecho "<<<<<< Install silversearch-ag. >>>>>>" $yellow
+    sudo apt-get install silversearch-ag -y
+fi
 
+if [ $FLAG_GOOGLEPINYIN_INSTALL == 1 ];then
+    cecho "<<<<<< Install googlepinyin Input method. >>>>>>" $yellow
+    #Ref: http://blog.sina.com.cn/s/blog_8ec233c80101huyz.html
+    cd ~/softwares
+    sudo apt-get install ibus-googlepinyin -y
+    sudo apt-get install ibus ibus-clutter ibus-gtk ibus-gtk3 ibus-qt4 -y
+    cecho "<<<<<< Finished to install googlePinyin, Please configure it! >>>>>>" $green
+    cecho "Install Chinese language: System Settings > Language Support > Install/Remove Languages > install the Chinese language" $green
+    #cecho "Try: "im-switch -s ibus" to start ibus frame" $green
+    cecho "Try: "ibus-setup" to set the input method" $green
+    cecho "Try: "ibus-daemon -drx" to find the input method icon" $green
+    cecho "Logout the system to use input method after finish all the installation!" $green
+fi
 
-cecho "<<<<<< Install virtualbox. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
-if [ $ans == 1 ];then
+if [ $FLAG_VIRTUALBOX_INSTALL == 1 ];then
+    cecho "<<<<<< Install virtualbox. >>>>>>" $yellow
     #Ref: https://www.virtualbox.org/
     cd ~/softwares
     if [ ! -f "virtualbox-5.0_5.0.16-105871~Ubuntu~trusty_amd64.deb" ]; then
@@ -598,11 +549,14 @@ if [ $ans == 1 ];then
     cecho "if failed, click the deb, use the software center to install it." $red
 fi
 
-cecho "<<<<<< Install virtualbox win 7 and win 7 addition. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
-if [ $ans == 1 ];then
+if [ $FLAG_VIRTUALBOX_WIN7_INSTALL == 1 ];then
+    cecho "<<<<<< Install virtualbox win 7 and win 7 addition. >>>>>>" $yellow
     cecho "Please install the iso first! Continue?[Y/n]" $yellow
-    virtualbox
+    ans=$(askForContinue)
+    if [ $ans == 1 ];then
+        virtualbox
+    fi
+    cecho "Finish? Continue?[Y/n]" $yellow
     ans=$(askForContinue)
     if [ $ans == 1 ];then
         cd ~/softwares
@@ -627,59 +581,44 @@ if [ $ans == 1 ];then
             ## Find the devigid and add to the devgid next line
             #sudo echo "none /proc/bus/usb usbfs devgid=125,devmode=664 0 0" >> /etc/fstab
             #if not work, please reinstall virtualbox!
-
         fi
    fi
 fi
 
-cecho "<<<<<< Install vagrant and trusty64. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
-if [ $ans == 1 ];then
+if [ $FLAG_VAGRANT_INSTALL == 1 ];then
+    cecho "<<<<<< Install vagrant. >>>>>>" $yellow
     #Ref: http://rmingwang.com/vagrant-commands-and-config.html   https://www.vagrantup.com/docs/boxes.html
     cd ~/softwares
     if [ ! -f "vagrant_1.8.1_x86_64.deb" ]; then
         wget -nc https://releases.hashicorp.com/vagrant/1.8.1/vagrant_1.8.1_x86_64.deb
     fi
     sudo dpkg -i vagrant_1.8.1_x86_64.deb
-    cecho "<<<<<< Install ubuntu/trusty64. Continue?[Y/n] >>>>>>" $yellow
-    if [ $ans == 1 ];then
-        if [ ! -d "$homeDir/virtualbox/vagrant" ]; then
-            mkdir -p ~/virtualbox/vagrant
-        fi
-        #Ref: https://atlas.hashicorp.com/boxes/search
-        #wget -nc https://github.com/kraksoft/vagrant-box-ubuntu/releases/download/14.04/ubuntu-14.04-amd64.box
-        cd ~/virtualbox/vagrant
-        if [ ! -d "box" ]; then
-            mkdir box
-        fi
-        cd box
-        vagrant box add ubuntu/trusty64
-        cd ..
-        if [ ! -d "trust64" ]; then
-            mkdir trust64
-        fi
-        cd trust64
-        vagrant init ubuntu/trusty64
-        #vagrant up
-        #vagrant ssh
-        #vagrant halt
+fi
+
+if [ $FLAG_VAGRANT_TRUSTY64_INSTALL == 1 ];then
+    cecho "<<<<<< Install ubuntu/trusty64. >>>>>>" $yellow
+    if [ ! -d "$homeDir/virtualbox/vagrant" ]; then
+        mkdir -p ~/virtualbox/vagrant
     fi
+    #Ref: https://atlas.hashicorp.com/boxes/search
+    #wget -nc https://github.com/kraksoft/vagrant-box-ubuntu/releases/download/14.04/ubuntu-14.04-amd64.box
+    cd ~/virtualbox/vagrant
+    if [ ! -d "box" ]; then
+        mkdir box
+    fi
+    cd box
+    vagrant box add ubuntu/trusty64
+    cd ..
+    if [ ! -d "trust64" ]; then
+        mkdir trust64
+    fi
+    cd trust64
+    vagrant init ubuntu/trusty64
+    cecho "Hint: vagrant up, vagrant ssh, vagrant halt" $blue
 fi
 
-cecho "<<<<<< Install SecureCRT 7.3. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
-if [ $ans == 1 ];then
-    cecho "Please install by your own hand. Follow the link below!" $green
-    cecho "http://blog.csdn.net/chszs/article/details/40623169" $green
-    cecho "Download deb and crack in baiduyun pan" $green
-    cecho "$sudo dpkg -i scrt-7.3.0-657.ubuntu13-64.x86_64.deb" $green
-    cecho "$sudo perl securecrt_linux_crack.pl /usr/bin/SecureCRT" $green
-
-fi
-
-cecho "<<<<<< Download xtensa and install it. Continue?[Y/n] >>>>>>" $yellow
-ans=$(askForContinue)
-if [ $ans == 1 ];then
+if [ $FLAG_XTENSA_INSTALL == 1 ];then
+    cecho "<<<<<< Download xtensa and install it. >>>>>>" $yellow
     #gcc-xtensa in github: https://github.com/jcmvbkbc/gcc-xtensa
     cecho "Please install by your own hand. Follow the link and steps below!" $green
     cecho "https://drive.google.com/folderview?id=0B5bwBE9A5dBXaExvdDExVFNrUXM&usp=sharing" $green
@@ -691,11 +630,40 @@ if [ $ans == 1 ];then
     iscp xtensa-lx106-elf /usr/src/ -r
 fi
 
+if [ $FLAG_SKYPE_INSTALL == 1 ];then
+    cecho "<<<<<< Install Skype. >>>>>>" $yellow
+    cd ~/softwares
+    if [ ! -f "skype-ubuntu-precise_4.3.0.37-1_i386.deb" ]; then
+        wget -nc download.skype.com/linux/skype-ubuntu-precise_4.3.0.37-1_i386.deb
+    fi
+    cecho "Use the Software center to install the deb since dpkg is not work!" $red
+    cecho "Press any key to continue!" $green
+    read nothing
+    # sudo dpkg -i skype-ubuntu-precise_4.3.0.37-1_i386.deb
+fi
+
+if [ $FLAG_GOOGLE_HOSTS_INSTALL == 1 ];then
+    cecho "<<<<<< Install Google Hosts. >>>>>>" $yellow
+    cecho "By your own hand! Follow the bellow link!" $green
+    cecho "http://laod.cn/hosts/2016-google-hosts.html" $green
+    cecho "Press any key to continue!" $green
+    read nothing
+fi
+
+if [ $FLAG_SECURECRT7dot3_INSTALL == 1 ];then
+    cecho "<<<<<< Install SecureCRT 7.3. >>>>>>" $yellow
+    cecho "Please install by your own hand. Follow the link below!" $green
+    cecho "http://blog.csdn.net/chszs/article/details/40623169" $green
+    cecho "Download deb and crack in baiduyun pan" $green
+    cecho "$sudo dpkg -i scrt-7.3.0-657.ubuntu13-64.x86_64.deb" $green
+    cecho "$sudo perl securecrt_linux_crack.pl /usr/bin/SecureCRT" $green
+    cecho "Press any key to continue!" $green
+    read nothing
+fi
 
 
-cecho "<<<<<< Install ubuntu flat themes and icons. Continue?[Y/n]" $yellow
-ans=$(askForContinue)
-if [ $ans == 1 ]; then
+if [ $FLAG_FLAT_THEMES_ICONS_INSTALL == 1 ]; then
+    cecho "<<<<<< Install ubuntu flat themes and icons. >>>>>>" $yellow
     echo "install the flat themes and icons for ubuntu ..."
     echo -e "\033[40;32m You can refer: https://blog.anmoljagetia.me/flatabulous-ubuntu-theme/  website to deploy you theme 033[0m"
     echo ""
@@ -707,6 +675,7 @@ if [ $ans == 1 ]; then
     echo "install themes"
     wget -nc -O flatTheme.zip https://github.com/anmoljagetia/Flatabulous/archive/master.zip
     sudo unzip flatTheme.zip -d /usr/share/themes/
+    sudo mv /usr/share/themes/flatTheme-master /usr/share/flatTheme
     echo ""
 
     echo "install the icons"
@@ -727,13 +696,12 @@ Restart your computer, and you should be good to go!
 EOF
 fi;
 
-cecho "<<<<<< Install shadowsocks. Continue?[Y/n]" $yellow
-ans=$(askForContinue)
-if [ $ans == 1 ]; then
+if [ $FLAG_SHADOWSOCKS_INSTALL == 1 ]; then
+   cecho "<<<<<< Install shadowsocks. " $yellow
    echo "sudo pip install shadowsocks";
    sudo -H pip install shadowsocks
    echo -e "\033[40;32m deploy the proxy server on your remote vps: server[1,2,3] \033[0m"
-  
+
    SS_CFG="/etc/shadowsocks.json"
    if [ ! -f "$SS_CFG" ]; then
      echo "no found shadowsocks config file: /etc/shadowsocks.json";
@@ -763,22 +731,3 @@ fi;
 echo ""
 cecho "Done， Happy Hacking!" $red
 echo ""
-
-
-
-#cecho "<<<<<< Install SogouPinyin Input method. Continue?[Y/n] >>>>>>" $yellow
-#ans=$(askForContinue)
-#if [ $ans == 1 ];then
-#    #Ref:  http://jingyan.baidu.com/article/08b6a591cb06f114a8092209.html
-#    cd ~/softwares
-#    if [ ! -r sogou_64.deb ]; then
-#        sudo apt-get install fcitx libssh2-1
-#        wget -nc "http://pinyin.sogou.com/linux/download.php?f=linux&bit=64" -O "sogou_64.deb"
-#    fi
-#    sudo dpkg -i sogou_64.deb
-#    cecho "<<<<<< Finished to install SougouPin, Please configure it >>>>>>" $green
-#    cecho "System Settings > Language Support > Install/Remove Languages > install the Chinese language" $green
-#    cecho "Logout the system to use sougou input method after finish all the installation!" $green
-#fi
-
-

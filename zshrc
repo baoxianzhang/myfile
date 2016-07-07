@@ -54,7 +54,7 @@ plugins=(git)
 # User configuration
 
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
-export PATH=$PATH:/usr/src/gcc-arm-none-eabi-4_8-2014q3/bin
+export PATH=$PATH:/usr/src/gcc-arm-none-eabi-4_9-2015q3/bin
 export PATH=$PATH:/usr/src/xtensa-lx106-elf/bin
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -116,11 +116,9 @@ alias neutron='cd ~/molmc_code/intorobot_neutron/'
 alias openwrt='cd ~/molmc_code/openwrtgithub/'
 alias firmware='cd ~/molmc_code/firmware/'
 alias spark='cd ~/code/sparkcorefirmware/'
-alias es='cd ~/molmc_code/esp_iot_sdk_v1.5.1/'
+alias ota='cd ~/molmc_code/ota/'
 alias pub='cd ~/molmc_code/pub/'
 alias myfile='cd ~/bxgithub/myfile/'
-alias ss='sslocal -s jp06-60.ssv7.net -p 30122 -b 127.0.0.1 -l 1080 -k LGJckcFy64ZQ -m aes-256-cfb -q 2>&1 > /dev/null'
-alias tmnl='gnome-terminal'
 alias scpdefaultparam="scp ~/molmc_code/pub/default-param/* root@192.168.8.1:~/"
 alias lstty="ls /dev/tty*"
 alias pullgit="/home/zhangbaoxian/bxgithub/myfile/gitpull"
