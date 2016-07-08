@@ -36,24 +36,22 @@ cecho() {
   # Reset # Reset to normal.
   return
 }
+# Keep-alive: update existing `sudo` time stamp until the script has finished.
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 cecho "<<<<<< Softwares install begin on Ubuntu 14.04 >>>>>>" $yellow
 cecho "Please connect the wifi and check the wifi! " $red
 
-cecho "<<<<<< Update the software, not upgrade system. >>>>>>" $yellow
-ans=$(askForContinue)
-if [ $ans == 1 ];then
+if [ $FLAG_APT_GET_UPDATE == 1 ];then
+    cecho "<<<<<< Update the software, not upgrade system. >>>>>>" $yellow
     sudo apt-get update
 fi
 
 # include the flags which software to install
 . ./softwaresInstallFlag.sh
 
-if [ $FLAG_APT_TET_SOFTWARE_INSTALL == 1 ];then
+if [ $FLAG_APT_GET_SOFTWARE_INSTALL == 1 ];then
     cecho "<<<<<< Install apps using apt-get. >>>>>>" $yellow
-    # Keep-alive: update existing `sudo` time stamp until the script has finished.
-    while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
-
     # sed -i "s/IP_REDIS_CONFIG/192.168.33.13/g" `grep 'IP_REDIS_CONFIG' -rl .`
     apps=(
         # Utilities
@@ -342,7 +340,7 @@ if [ $FLAG_MYVIM_LOCAL_SETTINGS_CONFIG == 1 ];then
     ln -s ~/bxgithub/myfile/vimrc.local ~/.vimrc.local 
 fi
 
-if [ $FLAG_ARM_NONE_EABI_GCC_4.9.3_INSTALL == 1 ];then
+if [ $FLAG_ARM_NONE_EABI_GCC_4dot9dot3_INSTALL == 1 ];then
     cecho "<<<<<< Install arm-none-eabi-gcc 4.9.3. >>>>>>" $yellow
     cd ~/softwares
     sudo apt-get install -y lib32ncurses5 lib32z1 lib32bz2-1.0
