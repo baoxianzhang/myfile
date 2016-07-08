@@ -97,6 +97,8 @@ if [ $FLAG_APT_TET_SOFTWARE_INSTALL == 1 ];then
         unzip
         tmux
         meld
+        openssh-client
+        openssh-server
     )
     cecho "Please edit the apps you need to install and save it!" $red
     read nothing
