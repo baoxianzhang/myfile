@@ -190,4 +190,5 @@ export PATH=$PATH:/usr/lib/git-core/
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 eval $(thefuck --alias)
 export PATH=$PATH:/usr/src/xtensa-lx106-elf/bin
+export PATH=$PATH:/usr/lib/git-core
 export PARTICLE_DEVELOP=1
