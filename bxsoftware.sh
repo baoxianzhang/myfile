@@ -42,13 +42,13 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 cecho "<<<<<< Softwares install begin on Ubuntu 14.04 >>>>>>" $yellow
 cecho "Please connect the wifi and check the wifi! " $red
 
+# include the flags which software to install
+. ./softwaresInstallFlag.sh
+
 if [ $FLAG_APT_GET_UPDATE == 1 ];then
     cecho "<<<<<< Update the software, not upgrade system. >>>>>>" $yellow
     sudo apt-get update
 fi
-
-# include the flags which software to install
-. ./softwaresInstallFlag.sh
 
 if [ $FLAG_APT_GET_SOFTWARE_INSTALL == 1 ];then
     cecho "<<<<<< Install apps using apt-get. >>>>>>" $yellow
@@ -58,7 +58,6 @@ if [ $FLAG_APT_GET_SOFTWARE_INSTALL == 1 ];then
         # add your install apt softwares in lines
         # for example, audacious
         # git 
-        git 
         git-flow
         g++
         build-essential
@@ -87,7 +86,7 @@ if [ $FLAG_APT_GET_SOFTWARE_INSTALL == 1 ];then
         galculator
         audacity
         python-pip
-        vim
+        #vim
         chromium-browser
         #google-chrome-stable
         npm
@@ -108,7 +107,7 @@ if [ $FLAG_APT_GET_SOFTWARE_INSTALL == 1 ];then
 
     vi apps.tmp
     apps=$(cat apps.tmp)
-    rm apps.tmp
+    rm -f apps.tmp
 
     cecho "Now, the following apps will be installed!" $red
     for item in ${apps}; do
@@ -235,8 +234,8 @@ if [ $FLAG_ZSH_INSTALL == 1 ];then
     #Restart and use the zsh
     cd ~/softwares
     sudo apt-get install -y zsh
-    # echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
-    # source ~/.bashrc
+    echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
+    source ~/.bashrc
     wget -nc https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
     chsh -s /bin/zsh
     echo "Logout to use zsh"
@@ -307,7 +306,7 @@ if [ $FLAG_SPF13VIM_INSTALL == 1 ];then
     sudo apt-get build-dep vim-gnome
     sudo apt-get install liblua5.1-dev luajit libluajit-5.1 python-dev ruby-dev libperl-dev libncurses5-dev libgnome2-dev libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev -y
     sudo rm -rf /usr/local/share/vim
-    sudo rm /usr/bin/vim
+    sudo rm -rf /usr/bin/vim
     sudo mkdir /usr/include/lua5.1/include
     sudo mv /usr/include/lua5.1/*.h /usr/include/lua5.1/include/
     sudo ln -s /usr/bin/luajit-2.0.0-beta9 /usr/bin/luajit
@@ -336,7 +335,7 @@ fi
 
 if [ $FLAG_MYVIM_LOCAL_SETTINGS_CONFIG == 1 ];then
     cecho "<<<<<< Set my local settings in vim. >>>>>>" $yellow
-    rm ~/.vimrc.local
+    rm -rf ~/.vimrc.local
     ln -s ~/bxgithub/myfile/vimrc.local ~/.vimrc.local 
 fi
 
@@ -365,7 +364,7 @@ if [ $FLAG_SOFTLINK_ZSHRC_INSTALL == 1 ];then
         unzip -o myfile.zip
         mv myfile-master myfile
     fi
-    rm ~/.zshrc
+    rm -f ~/.zshrc
     ln -s ~/bxgithub/myfile/zshrc ~/.zshrc
 fi
 
@@ -381,7 +380,7 @@ if [ $FLAG_SOFTLINK_TMUX_INSTALL == 1 ];then
         unzip -o myfile.zip
         mv myfile-master myfile
     fi
-    rm ~/.tmux.conf
+    rm -rf ~/.tmux.conf
     ln -s ~/bxgithub/myfile/tmux.conf ~/.tmux.conf
 fi
 
@@ -719,7 +718,7 @@ if [ $FLAG_SHADOWSOCKS_INSTALL == 1 ]; then
     "method":"aes-256-cfb",
     "fast_open": false
    }
-   EOF
+EOF
 
   echo -e "\033[40;32m you can start the shadowsocks server on remote vps: sudo ssserver -c /etc/shadowsocks.json -d start \033[0m"
   #sudo ssserver -c $SS_CFG -d stop
@@ -731,3 +730,4 @@ fi;
 echo ""
 cecho "Done， Happy Hacking!" $red
 echo ""
+

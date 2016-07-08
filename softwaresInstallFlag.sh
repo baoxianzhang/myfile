@@ -2,6 +2,7 @@
 #Author: baoxian zhang[baoxianzhang] <baoxianzhit@gmail.com>
 #
 # This file include the flags which softwares you need
+
 FLAG_APT_GET_UPDATE=0
 FLAG_APT_GET_SOFTWARE_INSTALL=0
 FLAG_GIT_2dot7dot3_INSTALL=0
