@@ -156,7 +156,7 @@ if [ $FLAG_GIT_2dot7dot3_INSTALL == 1 ];then
 fi
 
 
-if [ $FLAG_GIT_FLOW_COMPLETION_INSTALL == 1 ];then
+if [ $FLAG_GIT_EMAIL_NAME_CONFIG == 1 ];then
     cecho "<<<<<< Configure git email name and editor. >>>>>> " $yellow
     cecho "<<<<<< Fix ~/.gitconfig file to your own cofiguration. >>>>>> "$green
 echo "#[user]
@@ -196,7 +196,7 @@ if [ $FLAG_GIT_FLOW_COMPLETION_INSTALL == 1 ];then
     fi
 fi
 
-if [ $FLAG_AUTOJUMP_INSTALL == 1 ];then
+if [ $FLAG_SILVERSEARCH_AG_INSTALL == 1 ];then
     cecho "<<<<<< Install silversearch-ag. >>>>>>" $yellow
     cd ~/softwares
     if [ ! -d "silversearch-ag" ]; then
@@ -517,10 +517,10 @@ if [ $FLAG_SOFTLINK_EMACS_INSTALL == 1 ];then
     ln -s ~/bxgithub/emacs-c-ide-demo ~/.emacs.d
 fi
 
-if [ $FLAG_SILVERSEARCH_AG_INSTALL == 1 ];then
-    cecho "<<<<<< Install silversearch-ag. >>>>>>" $yellow
-    sudo apt-get install silversearch-ag -y
-fi
+#if [ $FLAG_SILVERSEARCH_AG_INSTALL == 1 ];then
+#    cecho "<<<<<< Install silversearch-ag. >>>>>>" $yellow
+#    sudo apt-get install silversearch-ag -y
+#fi
 
 if [ $FLAG_GOOGLEPINYIN_INSTALL == 1 ];then
     cecho "<<<<<< Install googlepinyin Input method. >>>>>>" $yellow
