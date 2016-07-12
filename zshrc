@@ -84,7 +84,28 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+# alias for useful command
+alias dstat='dstat -cdlmnpsy'
+alias multitail='multitail'
+alias rsync=rsync
+alias vifm=vifm
+alias ranger=ranger
+alias sl=sl
 alias rm='trash-put'
+#
+# git config
+# gitignore: https://github.com/github/gitignore
+alias gaa='git add .'
+alias gcv='git commit --verbose'
+alias gco='git checkout'
+alias gs='git status'
+alias gb='git branch'
+alias gd='git diff'
+alias grh='git reset --hard'
+alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+
+#
+# alias for self
 alias bx45='sshpass -p zhangbaoxian ssh zhangbaoxian@192.168.0.45'
 alias lz45='sshpass -p luozheng ssh luozheng@192.168.0.45'
 alias zj45='sshpass -p zhongjin ssh  zhongjin@192.168.0.45'
@@ -94,8 +115,6 @@ alias dc='cd ~/Documents/'
 alias dl='cd ~/Downloads/'
 alias dt='cd ~/Desktop/'
 alias tl='cd ~/Templates/'
-alias c='clear'
-alias compile='make clean && make && cp firmware.hex ~/Templates/'
 alias vi='vim'
 alias o='nautilus ./'
 alias encodeI='iconv -f GBK -t UTF-8 '
@@ -110,13 +129,13 @@ alias scpIntoyunAtom='scp ~/molmc_code/intorobot_atom/out/intorobot_stm32_server
 alias scpIntoyunNeutron='scp ~/molmc_code/intorobot_neutron/out/intorobot_stm32_server.tar.gz root@112.124.117.64:/tmp/'
 alias shutdown='sudo shutdown -h now'
 alias reboot='sudo reboot'
-alias makecopy='cd ~/molmc_code/intorobot_neutron/ && make clean && make ; rm ~/Templates/firmare.hex; cp ~/molmc_code/intorobot_neutron/firmware-neutron/build/firmware.hex ~/Templates/'
 alias atom='cd ~/molmc_code/intorobot_atom/'
 alias neutron='cd ~/molmc_code/intorobot_neutron/'
 alias openwrt='cd ~/molmc_code/openwrtgithub/'
 alias firmware='cd ~/molmc_code/firmware/'
 alias spark='cd ~/code/sparkcorefirmware/'
 alias ota='cd ~/molmc_code/ota/'
+alias fac_test='cd ~/molmc_code/encry_intorobot/factest_neutron/'
 alias pub='cd ~/molmc_code/pub/'
 alias myfile='cd ~/bxgithub/myfile/'
 alias scpdefaultparam="scp ~/molmc_code/pub/default-param/* root@192.168.8.1:~/"
@@ -126,17 +145,6 @@ alias pushgit="/home/zhangbaoxian/bxgithub/myfile/gitpush"
 alias pullgithub="/home/zhangbaoxian/bxgithub/myfile/githubpull"
 alias pushgithub="/home/zhangbaoxian/bxgithub/myfile/githubpush"
 alias tmux='tmux -2'
-
-# git config
-# gitignore: https://github.com/github/gitignore
-alias gaa='git add .'
-alias gcv='git commit --verbose'
-alias gco='git checkout'
-alias gs='git status'
-alias gb='git branch'
-alias gd='git diff'
-alias grh='git reset --hard'
-alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 
 scpIntoyunTmp() {
     scp $1 root@112.124.117.64:/tmp/
