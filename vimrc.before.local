@@ -1,8 +1,11 @@
 " set global clipboard
 set clipboard=unnamed  "yank and paste with the system clipboard"
+let mapleader = ','
+let g:mapleader = ','
+
 
 "================ Key Mapping ==================
-"map <leader><space>        :FixWhitespace<cr>
+map <leader><space>        :FixWhitespace<cr>
 " normal no recursive mapping
 nnoremap <leader>p           :CtrlP<CR>
 nnoremap <leader>b           :CtrlPBuffer<CR>
@@ -14,13 +17,13 @@ nnoremap <Leader>aq          :Ag -Q<space>
 nnoremap <Leader>as          :Ag ''<left>
 nnoremap <leader>n           :NERDTreeToggle<CR>
 nnoremap <leader>]           :TagbarToggle<CR>
-nnoremap <leader>it          :IndentLinesToggle<CR>
-nnoremap <leader>0           :GundoToggle<CR>
+""nnoremap <leader>it          :IndentLinesToggle<CR>
+""nnoremap <leader>0           :GundoToggle<CR>
 nnoremap <Leader>ga          :Gcommit --amend<CR>
 nnoremap <Leader>gpf         :Gpush -f
 nnoremap <Leader>gpd         :Gpush --dry<CR>
 nnoremap <Leader>gpr         :Gpull --rebase<CR>
-nnoremap <Leader>gfc         :Git checkout %<CR>
+nnoremap <Leader>gco         :Git checkout %<CR>
 nnoremap <Leader>gfr         :Gremove<CR>
 nnoremap <Leader>gP          :Git push -u origin<space>
 
@@ -36,7 +39,6 @@ vmap <Leader>w <ESC><ESC>:w<CR>
 noremap <leader>gh           :! open https://github.com<CR>
 noremap <leader>gg           :! open https://google.com<CR>
 noremap <leader>g            :GitGutterToggle<CR>
-"noremap <silent><leader>/    :nohls<CR> " 去掉搜索高亮
 noremap <leader>nep          :set noexpandtab<CR>
 noremap <C-h>                <C-w>h
 noremap <C-j>                <C-w>j
@@ -44,9 +46,9 @@ noremap <C-k>                <C-w>k
 noremap <C-l>                <C-w>l
 
 " nomal mapping
-nmap s                       <Plug>(easymotion-s)
-"nmap t                       <Plug>(easymotion-s2)
-nmap <Leader>cp              :!xclip -i -selection clipboard % <CR><CR>
+nmap <leader>s                       <Plug>(easymotion-s)
+nmap <leader>t                       <Plug>(easymotion-s2)
+""nmap <Leader>cp              :!xclip -i -selection clipboard % <CR><CR>
 
 " no listchars
 nmap <Leader>L               :set list!<CR>
@@ -112,14 +114,6 @@ let GtagsCscope_Auto_Load = 1
 let CtagsCscope_Auto_Map = 1
 let GtagsCscope_Quiet = 1
 
-""" vim-multiple-cursors
-""let g:multi_cursor_use_default_mapping=0
-""" Default mapping
-""let g:multi_cursor_next_key='<C-m>'
-""let g:multi_cursor_prev_key='<C-p>'
-""let g:multi_cursor_skip_key='<C-x>'
-""let g:multi_cursor_quit_key='<Esc>'
-
 " vim-signature
 " m[a-zA-Z]   打标签
 " '[a-zA-Z]   跳转到标签位置
@@ -130,10 +124,10 @@ let GtagsCscope_Quiet = 1
 " not add the after
 
 " myself config
-imap <C-G>l <Right>
-imap <C-G>h <Left>
-imap <C-G><C-L> <C-Right>
-imap <C-G><C-H> <C-Left>
+imap <C-A>l <Right>
+imap <C-A>h <Left>
+imap <C-A><C-L> <C-Right>
+imap <C-A><C-H> <C-Left>
 
 """""""""新文件标题""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""新建.c,.h,.sh,.java文件，自动插入文件头 

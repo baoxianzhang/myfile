@@ -2,3 +2,7 @@ Bundle 'ervandew/ag'
 Bundle 'vim-scripts/gtags.vim'
 Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'junegunn/seoul256.vim'
+Bundle 'bronson/vim-trailing-whitespace'
+Bundle 'sjl/gundo.vim', {'on': 'GundoToggle'}
+Bundle 'junegunn/vim-github-dashboard', { 'on': ['GHDashboard', 'GHActivity'] }
+Bundle 'airblade/vim-gitgutter'
