@@ -171,6 +171,34 @@ imap <C-G><C-H> <C-Left>
 """"    "新建文件后，自动定位到文件末尾
 """"    autocmd BufNewFile * normal G
 """"endfunction
+autocmd BufNewFile *.cpp,*.[ch] exec ":call SetTitleLocalCpp()"
+autocmd BufNewFile *.sh exec ":call SetTitleLocalShell()"
+function! SetTitleLocalCpp()
+    "如果文件类型为.c .cpp .h文件
+    call setline(1, "/*************************************************************************")
+    call append(line("."),   " File Name   : ".expand("%"))
+    call append(line(".")+1, " Author      : zhangbaoxian")
+    call append(line(".")+2, " Mail        : baoxianzhit@gmail.com ")
+    call append(line(".")+3, " Created Time: ".strftime("%c"))
+    call append(line(".")+4, " ************************************************************************/")
+    call append(line(".")+5, "")
+    "新建文件后，自动定位到文件末尾
+    autocmd BufNewFile * normal G
+endfunction
+
+function! SetTitleLocalShell()
+    "如果文件类型为.sh文件
+    call setline(1,"\#########################################################################")
+    call append(line("."),   "\# File Name   : ".expand("%"))
+    call append(line(".")+1, "\# Author      : zhangbaoxian")
+    call append(line(".")+2, "\# Mail        : baoxianzhit@gmail.com")
+    call append(line(".")+3, "\# Created Time: ".strftime("%c"))
+    call append(line(".")+4, "\#########################################################################")
+    call append(line(".")+5, "\#!/bin/sh")
+    call append(line(".")+6, "")
+    "新建文件后，自动定位到文件末尾
+    autocmd BufNewFile * normal G
+endfunction
 
 "C，C++ 按F5编译运行
 map <F5> :call CompileRunGcc()<CR>
