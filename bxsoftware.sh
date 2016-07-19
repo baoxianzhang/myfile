@@ -58,6 +58,7 @@ if [ $FLAG_APT_GET_SOFTWARE_INSTALL == 1 ];then
         # add your install apt softwares in lines
         # for example, audacious
         # git 
+        git-core
         git-flow
         g++
         build-essential
@@ -96,6 +97,7 @@ if [ $FLAG_APT_GET_SOFTWARE_INSTALL == 1 ];then
         meld
         openssh-client
         openssh-server
+        ranger
     )
     cecho "Please edit the apps you need to install and save it!" $red
     read nothing
@@ -293,50 +295,58 @@ if [ $FLAG_SPF13VIM_INSTALL == 1 ];then
     cecho "<<<<<< Install spf13 vim. >>>>>>" $yellow
     #echo "<<<<<< Install roboust zhou vim >>>>>>"
     #Ref: http://www.vim.org/download.php
-    cd ~/softwares
-    if [ ! -d "vim" ]; then
-        # echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
-        # source ~/.bashrc
-        # git clone https://github.com/vim/vim.git
-        wget -nc -O vim.zip https://github.com/vim/vim/archive/master.zip
-        unzip -o vim.zip
-        mv vim-master vim
+    if [ $FLAG_VIM_INSTALL == 1 ];then
+         cecho "<<<<<< Install vim. >>>>>>" $yellow
+         cd ~/softwares
+         if [ ! -d "vim" ]; then
+            # echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
+            # source ~/.bashrc
+            # git clone https://github.com/vim/vim.git
+            wget -nc -O vim.zip https://github.com/vim/vim/archive/master.zip
+            unzip -o vim.zip
+            mv vim-master vim
+         fi
+         sudo apt-get remove --purge vim vim-runtime vim-gnome vim-tiny vim-common vim-gui-common
+         sudo apt-get build-dep vim-gnome
+         sudo apt-get install liblua5.1-dev luajit libluajit-5.1 python-dev ruby-dev libperl-dev libncurses5-dev libgnome2-dev libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev -y
+         sudo rm -rf /usr/local/share/vim
+         sudo rm -rf /usr/bin/vim
+         sudo mkdir /usr/include/lua5.1/include
+         sudo mv /usr/include/lua5.1/*.h /usr/include/lua5.1/include/
+         sudo ln -s /usr/bin/luajit-2.0.0-beta9 /usr/bin/luajit
+         cd vim/src
+         make distclean
+         ./configure --with-features=huge \
+                     --enable-rubyinterp \
+                     --enable-largefile \
+                     --disable-netbeans \
+                     --enable-pythoninterp \
+                     --with-python-config-dir=/usr/lib/python2.7/config \
+                     --enable-perlinterp \
+                     --enable-luainterp \
+                     --with-luajit \
+                     --enable-gui=auto \
+                     --enable-fail-if-missing \
+                     --with-lua-prefix=/usr/include/lua5.1 \
+                     --enable-cscope
+         make
+         sudo make install
     fi
-    sudo apt-get remove --purge vim vim-runtime vim-gnome vim-tiny vim-common vim-gui-common
-    sudo apt-get build-dep vim-gnome
-    sudo apt-get install liblua5.1-dev luajit libluajit-5.1 python-dev ruby-dev libperl-dev libncurses5-dev libgnome2-dev libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev -y
-    sudo rm -rf /usr/local/share/vim
-    sudo rm -rf /usr/bin/vim
-    sudo mkdir /usr/include/lua5.1/include
-    sudo mv /usr/include/lua5.1/*.h /usr/include/lua5.1/include/
-    sudo ln -s /usr/bin/luajit-2.0.0-beta9 /usr/bin/luajit
-    cd vim/src
-    make distclean
-    ./configure --with-features=huge \
-                --enable-rubyinterp \
-                --enable-largefile \
-                --disable-netbeans \
-                --enable-pythoninterp \
-                --with-python-config-dir=/usr/lib/python2.7/config \
-                --enable-perlinterp \
-                --enable-luainterp \
-                --with-luajit \
-                --enable-gui=auto \
-                --enable-fail-if-missing \
-                --with-lua-prefix=/usr/include/lua5.1 \
-                --enable-cscope
-    make
-    sudo make install
-    curl http://j.mp/spf13-vim3 -L -o - | sh
-    cecho "Start vim and begin to install the plugin!" $green
-    cecho "<<<<<< Install vim plugin in the other terninal. >>>>>>" $yellow
-    gnome-terminal -x bash -c "vim"
-fi
 
-if [ $FLAG_MYVIM_LOCAL_SETTINGS_CONFIG == 1 ];then
-    cecho "<<<<<< Set my local settings in vim. >>>>>>" $yellow
-    rm -rf ~/.vimrc.local
-    ln -s ~/bxgithub/myfile/vimrc.local ~/.vimrc.local 
+    if [ $FLAG_MYVIM_LOCAL_SETTINGS_CONFIG == 1 ];then
+        cecho "<<<<<< Set my local settings in vim. >>>>>>" $yellow
+        rm -rf ~/.vimrc.before.local
+        ln -s ~/bxgithub/myfile/vimrc.before.local ~/.vimrc.before.local
+        rm -rf ~/.vimrc.bundles.local
+        ln -s ~/bxgithub/myfile/vimrc.bundles.local ~/.vimrc.bundles.local
+    fi
+    cecho "<<<<<< Please be sure, the network can reach outside. >>>>>>" $red
+    #read nothing
+    curl http://j.mp/spf13-vim3 -L -o - | sh
+
+    #cecho "Start vim and begin to install the plugin!" $green
+    #cecho "<<<<<< Install vim plugin in the other terninal. >>>>>>" $yellow
+    #gnome-terminal -x bash -c "vim"
 fi
 
 if [ $FLAG_ARM_NONE_EABI_GCC_4dot9dot3_INSTALL == 1 ];then

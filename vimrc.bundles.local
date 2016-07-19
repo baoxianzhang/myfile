@@ -1,0 +1,4 @@
+Bundle 'ervandew/ag'
+Bundle 'vim-scripts/gtags.vim'
+Bundle 'kien/rainbow_parentheses.vim'
+Bundle 'junegunn/seoul256.vim'

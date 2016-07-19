@@ -1,0 +1,197 @@
+" set global clipboard
+set clipboard=unnamed  "yank and paste with the system clipboard"
+set ruler             "show where you are
+
+"================ Key Mapping ==================
+"map <leader><space>        :FixWhitespace<cr>
+" normal no recursive mapping
+nnoremap <leader>p           :CtrlP<CR>
+nnoremap <leader>b           :CtrlPBuffer<CR>
+nnoremap <leader>f           :CtrlPMRU<CR>
+nnoremap <leader>T           :CtrlPClearCache<CR>:CtrlP<CR>
+nnoremap <Leader>aa          :Ag!<space>
+nnoremap <Leader>aw          :Ag! -w<space>
+nnoremap <Leader>aq          :Ag -Q<space>
+nnoremap <Leader>as          :Ag ''<left>
+nnoremap <leader>n           :NERDTreeToggle<CR>
+nnoremap <leader>]           :TagbarToggle<CR>
+nnoremap <leader>it          :IndentLinesToggle<CR>
+nnoremap <leader>0           :GundoToggle<CR>
+nnoremap <Leader>ga          :Gcommit --amend<CR>
+nnoremap <Leader>gpf         :Gpush -f
+nnoremap <Leader>gpd         :Gpush --dry<CR>
+nnoremap <Leader>gpr         :Gpull --rebase<CR>
+nnoremap <Leader>gfc         :Git checkout %<CR>
+nnoremap <Leader>gfr         :Gremove<CR>
+nnoremap <Leader>gP          :Git push -u origin<space>
+
+" Remove the Windows ^M - when the encodings gets messed up
+"noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+
+" Fast saving
+map <Leader>w :w<CR>
+imap <Leader>w <ESC>:w<CR>
+vmap <Leader>w <ESC><ESC>:w<CR>
+
+" no recursive normal and visual mode mapping
+noremap <leader>gh           :! open https://github.com<CR>
+noremap <leader>gg           :! open https://google.com<CR>
+noremap <leader>g            :GitGutterToggle<CR>
+"noremap <silent><leader>/    :nohls<CR> " 去掉搜索高亮
+noremap <leader>nep          :set noexpandtab<CR>
+noremap <C-h>                <C-w>h
+noremap <C-j>                <C-w>j
+noremap <C-k>                <C-w>k
+noremap <C-l>                <C-w>l
+
+" nomal mapping
+nmap s                       <Plug>(easymotion-s)
+"nmap t                       <Plug>(easymotion-s2)
+nmap <Leader>cp              :!xclip -i -selection clipboard % <CR><CR>
+
+" no listchars
+nmap <Leader>L               :set list!<CR>
+
+" command line mode no recursive mode mapping
+cnoremap <C-k>               <t_ku>
+cnoremap <C-a>               <Home>
+cnoremap <C-e>               <End>
+"cnoremap w!!                 %!sudo tee > /dev/null %
+
+"" visual mode mapping
+vmap v                      <Plug>(expand_region_expand)
+vmap V                      <Plug>(expand_region_shrink)
+vnoremap <                  <gv
+vnoremap >                  >gv
+
+" Close the current buffer (w/o closing the current window)
+map <leader>bd :Bclose<cr>
+
+" Close all the buffers
+map <leader>bda :1,1000 bd!<cr>
+
+" Useful mappings for managing tabs
+map <leader>tn :tabnew<cr>
+map <leader>to :tabonly<cr>
+map <leader>tc :tabclose<cr>
+map <leader>tm :tabmove
+map <leader>tj :tabnext
+map <leader>tk :tabprevious
+
+" Let 'tl' toggle between this and the last accessed tab
+let g:lasttab = 1
+nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
+au TabLeave * let g:lasttab = tabpagenr()
+
+" Opens a new tab with the current buffer's path
+" Super useful when editing files in the same directory
+map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
+
+" Switch CWD to the directory of the open buffer
+map <leader>cd :cd %:p:h<cr>:pwd<cr>
+
+" Specify the behavior when switching between buffers
+try
+  set switchbuf=useopen,usetab,newtab
+  set stal=2
+catch
+endtry
+
+" Fix Cursor in TMUX
+if exists('$TMUX')
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
+
+" gtags
+set cscopetag                  " 使用 cscope 作为 tags 命令
+set cscopeprg='gtags-cscope'   " 使用 gtags-cscope 代替 cscope
+let GtagsCscope_Auto_Load = 1
+let CtagsCscope_Auto_Map = 1
+let GtagsCscope_Quiet = 1
+
+""" vim-multiple-cursors
+""let g:multi_cursor_use_default_mapping=0
+""" Default mapping
+""let g:multi_cursor_next_key='<C-m>'
+""let g:multi_cursor_prev_key='<C-p>'
+""let g:multi_cursor_skip_key='<C-x>'
+""let g:multi_cursor_quit_key='<Esc>'
+
+" vim-signature
+" m[a-zA-Z]   打标签
+" '[a-zA-Z]   跳转到标签位置
+" '. 最后一次变更的地方
+" '' 跳回来的地方
+" m<space>    去除所有标签
+
+" not add the after
+
+" myself config
+imap <C-G>l <Right>
+imap <C-G>h <Left>
+imap <C-G><C-L> <C-Right>
+imap <C-G><C-H> <C-Left>
+
+"""""新文件标题""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"新建.c,.h,.sh,.java文件，自动插入文件头 
+autocmd BufNewFile *.cpp,*.[ch],*.sh exec ":call SetTitle()"
+""定义函数SetTitle，自动插入文件头
+func SetTitle()
+    "如果文件类型为.sh文件
+    if &filetype == 'sh'
+        call setline(1,"\#########################################################################")
+        call append(line("."), "\# File Name: ".expand("%"))
+        call append(line(".")+1, "\# Author: zhangbaoxian")
+        call append(line(".")+2, "\# mail: baoxianzhit@gmail.com")
+        call append(line(".")+3, "\# Created Time: ".strftime("%c"))
+        call append(line(".")+4, "\#########################################################################")
+        call append(line(".")+5, "\#!/bin/sh")
+        call append(line(".")+6, "")
+    else
+        call setline(1, "/*************************************************************************")
+        call append(line("."), "    > File Name: ".expand("%"))
+        call append(line(".")+1, "    > Author: zhangbaoxian")
+        call append(line(".")+2, "    > Mail: baoxianzhit@gmail.com ")
+        call append(line(".")+3, "    > Created Time: ".strftime("%c"))
+        call append(line(".")+4, " ************************************************************************/")
+        call append(line(".")+5, "")
+    endif
+    if &filetype == 'cpp'
+        call append(line(".")+6, "#include<iostream>")
+        call append(line(".")+7, "using namespace std;")
+        call append(line(".")+8, "")
+    endif
+    if &filetype == 'c'
+        call append(line(".")+6, "#include<stdio.h>")
+        call append(line(".")+7, "")
+    endif
+    "新建文件后，自动定位到文件末尾
+    autocmd BufNewFile * normal G
+endfunc
+
+"C，C++ 按F5编译运行
+map <F5> :call CompileRunGcc()<CR>
+func! CompileRunGcc()
+    exec "w"
+    if &filetype == 'c'
+        exec "!g++ % -o %<"
+        exec "! ./%<"
+    elseif &filetype == 'cpp'
+        exec "!g++ % -o %<"
+        exec "! ./%<"
+    elseif &filetype == 'sh'
+        :!./%
+    endif
+endfunc
+"C,C++的调试
+map <F8> :call Rungdb()<CR>
+func! Rungdb()
+    exec "w"
+    exec "!g++ % -g -o %<"
+    exec "!gdb ./%<"
+endfunc
+
