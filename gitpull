@@ -1,7 +1,0 @@
-#!/usr/bin/expect
-spawn git pull --rebase
-expect "*Username*"
-send "zhangbaoxian\r"
-expect "*Password:"
-send "baoxianz20070961\r"
-interact
