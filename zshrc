@@ -92,6 +92,7 @@ alias vifm=vifm
 alias ranger=ranger
 alias sl=sl
 alias rm='trash-put'
+# tree -L 2
 #
 # git config
 # gitignore: https://github.com/github/gitignore
@@ -134,6 +135,7 @@ alias atom='cd ~/molmc_code/intorobot_atom/'
 alias neutron='cd ~/molmc_code/intorobot_neutron/'
 alias openwrt='cd ~/molmc_code/openwrtgithub/'
 alias firmware='cd ~/molmc_code/firmware/'
+alias halFirmware='cd ~/molmc_code/intorobot-firmware-hal/hal/src/neutron/'
 alias down_neutron='cd ~/molmc_code/firmware/build/release/intorobot-bin/1.3.1.160704/neutron/'
 alias spark='cd ~/code/sparkfirmware/'
 alias ota='cd ~/molmc_code/ota/'

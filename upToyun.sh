@@ -44,7 +44,8 @@ file_dir=$(cd "$(dirname "$0")"; pwd)
 cecho "file_dir=${file_dir}" $green
 openwrt_dir=${file_dir}/openwrtgithub
 pub_dir=${file_dir}/pub
-atom_dir=${file_dir}/intorobot_atom
+atom_dir=${file_dir}/firmware
+ota_pub_dir=${file_dir}/ota
 
 openwrt_binname=openwrt-ramips-mt7620-atom-squashfs-sysupgrade
 intoyun_webip="112.124.117.64"
@@ -80,23 +81,25 @@ if [ $platform == "intoyun" ];then
     ans=$(askForContinue)
     if [ $ans == 1 ];then
         cd ${atom_dir}
-        make
+        make PLATFORM=atom clean all
         cecho "Compile finish!" $green
         cecho "<<<<<<< cp to openwrt bin! Continue?[Y/n] >>>>>>" $yellow
         ans=$(askForContinue)
         if [ $ans == 1 ];then
-            cp ./out/core-firmware.bin $openwrt_dir/files/root/intorobot/default-firmware/default-firmware.bin
+            cp ./build/target/main/platform-0/default-atom.bin $openwrt_dir/files/root/intorobot/default-firmware/default-firmware.bin
             cecho "copy finish!" $green
         fi
     fi
 
-    cecho "<<<<<<< Compile openwrt and cp to pub dir! Continue?[Y/n] >>>>>>" $yellow
+    cecho "<<<<<<< Compile openwrt! Continue?[Y/n] >>>>>>" $yellow
     ans=$(askForContinue)
     if [ $ans == 1 ];then
         cd ${openwrt_dir}
         make j=4
         cecho "Compile finish!" $green
-        cecho "<<<<<< Copy openwrt-ramips-atom bin to pub dir! Continue?[Y/n] >>>>>> " $yellow
+    fi
+
+    cecho "<<<<<< Copy openwrt-ramips-atom bin to pub dir! Continue?[Y/n] >>>>>> " $yellow
         ans=$(askForContinue)
         if [ $ans == 1 ];then
             if [ ! -d "${pub_dir}/${date_dir}" ]; then
@@ -111,15 +114,6 @@ if [ $platform == "intoyun" ];then
             md5sum openwrt-ramips-${openwrt_ver}.bin > md5sums
             sed -i "s/  openwrt-ramips-${openwrt_ver}.bin/ \*openwrt-ramips-${openwrt_ver}.bin/g" `grep 'openwrt-ramips' -rl .`
         fi
-    fi
-
-    cecho "<<<<<<< Compile atom stm32 release_server_pack and cp to platform /tmp! Continue?[Y/n] >>>>>>" $yellow
-    ans=$(askForContinue)
-    if [ $ans == 1 ];then
-        cd ${atom_dir}
-        make release_server_pack
-        cecho "Compile finish!" $green
-    fi
 
     cecho "<<<<<< tar the openwrt version file! Continue?[Y/n] >>>>>>" $yellow
     ans=$(askForContinue)
@@ -129,21 +123,18 @@ if [ $platform == "intoyun" ];then
     fi
 fi
 
-cecho "<<<<<<< cp release_server_pack to platform /tmp! Continue?[Y/n] >>>>>>" $yellow
+cecho "<<<<<<< cp base_intorobot.tar.gz to platform /tmp! Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)
 if [ $ans == 1 ];then
-    cd ${atom_dir}
-    scp ./out/intorobot_stm32_server.tar.gz root@$platform_webip:/tmp/
-    cecho "scp finish!" $green
+    cd ${ota_pub_dir}
+    ./ota_release.sh
+    if [ $platform == "intoyun" ];then
+        cecho "Now ssh intoyun && ./atomNeutronInstall.sh" $green
+        ./ota_release.sh publish
+    elif [ $platform == "intorobot" ];then
+        cecho "Tell zhongjin to update the release_server_pack to intorobot" $red
+    fi
 fi
-if [ $platform == "intoyun" ];then
-    cecho "Now ssh intoyun && cd /var/" $green
-    cecho "Run ./firmware_install.sh" $green
-    ssh root@112.124.117.64
-elif [ $platform == "intorobot" ];then
-    cecho "Tell zhongjin to update the release_server_pack to intorobot" $red
-fi
-
 
 cecho "<<<<<< scp openwrt version tar.gz  to platform /tmp! Continue?[Y/n] >>>>>>" $yellow
 ans=$(askForContinue)

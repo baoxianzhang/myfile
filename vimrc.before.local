@@ -124,10 +124,10 @@ let GtagsCscope_Quiet = 1
 " not add the after
 
 " myself config
-imap <C-A>l <Right>
-imap <C-A>h <Left>
-imap <C-A><C-L> <C-Right>
-imap <C-A><C-H> <C-Left>
+imap <C-G>l <Right>
+imap <C-G>h <Left>
+imap <C-G><C-L> <C-Right>
+imap <C-G><C-H> <C-Left>
 
 """""""""新文件标题""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""新建.c,.h,.sh,.java文件，自动插入文件头 
