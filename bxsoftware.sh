@@ -291,48 +291,47 @@ if [ $FLAG_GTAGS_INSTALL == 1 ];then
     cecho "Usage: gtags" $green
 fi
 
+#Ref: http://www.vim.org/download.php
+if [ $FLAG_VIM_INSTALL == 1 ];then
+     cecho "<<<<<< Install vim. >>>>>>" $yellow
+     cd ~/softwares
+     if [ ! -d "vim" ]; then
+        # echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
+        # source ~/.bashrc
+        # git clone https://github.com/vim/vim.git
+        wget -nc -O vim.zip https://github.com/vim/vim/archive/master.zip
+        unzip -o vim.zip
+        mv vim-master vim
+     fi
+     sudo apt-get remove --purge vim vim-runtime vim-gnome vim-tiny vim-common vim-gui-common
+     sudo apt-get build-dep vim-gnome
+     sudo apt-get install liblua5.1-dev luajit libluajit-5.1 python-dev ruby-dev libperl-dev libncurses5-dev libgnome2-dev libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev -y
+     sudo rm -rf /usr/local/share/vim
+     sudo rm -rf /usr/bin/vim
+     sudo mkdir /usr/include/lua5.1/include
+     sudo mv /usr/include/lua5.1/*.h /usr/include/lua5.1/include/
+     sudo ln -s /usr/bin/luajit-2.0.0-beta9 /usr/bin/luajit
+     cd vim/src
+     make distclean
+     ./configure --with-features=huge \
+                 --enable-rubyinterp \
+                 --enable-largefile \
+                 --disable-netbeans \
+                 --enable-pythoninterp \
+                 --with-python-config-dir=/usr/lib/python2.7/config \
+                 --enable-perlinterp \
+                 --enable-luainterp \
+                 --with-luajit \
+                 --enable-gui=auto \
+                 --enable-fail-if-missing \
+                 --with-lua-prefix=/usr/include/lua5.1 \
+                 --enable-cscope
+     make
+     sudo make install
+fi
+
 if [ $FLAG_SPF13VIM_INSTALL == 1 ];then
     cecho "<<<<<< Install spf13 vim. >>>>>>" $yellow
-    #echo "<<<<<< Install roboust zhou vim >>>>>>"
-    #Ref: http://www.vim.org/download.php
-    if [ $FLAG_VIM_INSTALL == 1 ];then
-         cecho "<<<<<< Install vim. >>>>>>" $yellow
-         cd ~/softwares
-         if [ ! -d "vim" ]; then
-            # echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
-            # source ~/.bashrc
-            # git clone https://github.com/vim/vim.git
-            wget -nc -O vim.zip https://github.com/vim/vim/archive/master.zip
-            unzip -o vim.zip
-            mv vim-master vim
-         fi
-         sudo apt-get remove --purge vim vim-runtime vim-gnome vim-tiny vim-common vim-gui-common
-         sudo apt-get build-dep vim-gnome
-         sudo apt-get install liblua5.1-dev luajit libluajit-5.1 python-dev ruby-dev libperl-dev libncurses5-dev libgnome2-dev libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev -y
-         sudo rm -rf /usr/local/share/vim
-         sudo rm -rf /usr/bin/vim
-         sudo mkdir /usr/include/lua5.1/include
-         sudo mv /usr/include/lua5.1/*.h /usr/include/lua5.1/include/
-         sudo ln -s /usr/bin/luajit-2.0.0-beta9 /usr/bin/luajit
-         cd vim/src
-         make distclean
-         ./configure --with-features=huge \
-                     --enable-rubyinterp \
-                     --enable-largefile \
-                     --disable-netbeans \
-                     --enable-pythoninterp \
-                     --with-python-config-dir=/usr/lib/python2.7/config \
-                     --enable-perlinterp \
-                     --enable-luainterp \
-                     --with-luajit \
-                     --enable-gui=auto \
-                     --enable-fail-if-missing \
-                     --with-lua-prefix=/usr/include/lua5.1 \
-                     --enable-cscope
-         make
-         sudo make install
-    fi
-
     if [ $FLAG_MYVIM_LOCAL_SETTINGS_CONFIG == 1 ];then
         cecho "<<<<<< Set my local settings in vim. >>>>>>" $yellow
         rm -rf ~/.vimrc.before.local
@@ -342,7 +341,8 @@ if [ $FLAG_SPF13VIM_INSTALL == 1 ];then
     fi
     cecho "<<<<<< Please be sure, the network can reach outside. >>>>>>" $red
     #read nothing
-    curl http://j.mp/spf13-vim3 -L -o - | sh
+    #curl http://j.mp/spf13-vim3 -L -o - | sh
+    curl https://github.com/baoxianzhang/myfile/bootstrap.sh -L -o - | sh
 
     #cecho "Start vim and begin to install the plugin!" $green
     #cecho "<<<<<< Install vim plugin in the other terninal. >>>>>>" $yellow
@@ -484,7 +484,7 @@ if [ $FLAG_MERCURY_MW150US_WIRELESS_INSTALL == 1 ];then
 fi
 
 if [ $FLAG_EMACS24dot5_INSTALL == 1 ];then
-cecho "<<<<<< Install Emacs 24.5. >>>>>>" $yellow
+    cecho "<<<<<< Install Emacs 24.5. >>>>>>" $yellow
     #if [ ! -f "emacs" ]; then
     #git clone https://github.com/emacs-mirror/emacs.git
     #./configure
@@ -509,23 +509,42 @@ cecho "<<<<<< Install Emacs 24.5. >>>>>>" $yellow
     sudo make install
 fi
 
-if [ $FLAG_SOFTLINK_EMACS_INSTALL == 1 ];then
-    cecho "<<<<<< Softlink emacs. >>>>>>" $yellow
+if [ $FLAG_SPACEMACS_INSTALL == 1 ]; then
+    cecho "<<<<<< Install Spacemacs. >>>>>>" yellow
     if [ ! -d "$homeDir/bxgithub" ]; then
-        mkdir ~/bxgithub
+        mkdir -p ~/bxgithub/
     fi
-    cd ~/bxgithub
-    if [ ! -d "$homeDir/bxgithub/emacs-c-ide-demo" ]; then
-        # echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
-        # source ~/.bashrc
-        # git clone https://github.com/baoxianzhang/emacs-c-ide-demo.git
-        wget -nc -O emacs-c-ide-demo.zip https://github.com/baoxianzhang/emacs-c-ide-demo/archive/master.zip
-        unzip -o emacs-c-ide-demo.zip
-        mv emacs-c-ide-demo-master emacs-c-ide-demo
+    cd ~/bxgithub/
+    if [ ! -d "$homeDir/bxgithub/spacemacs" ]; then
+        git clone git@github.com:baoxianzhang/spacemacs.git
     fi
-    rm ~/.emacs.d -rf
-    ln -s ~/bxgithub/emacs-c-ide-demo ~/.emacs.d
+    rm -rf ~/.emacs.d
+    ln -s ~/bxgithub/spacemacs ~/.emacs.d
 fi
+
+if [ $FLAG_SOFTLINK_SPACEMACS_CONFIG == 1 ]; then
+    cecho "<<<<<< Softlink Spacemacs. >>>>>>" yellow
+    rm -rf ~/.spacemacs
+    ln -s ~/bxgithub/myfile/spacemacs ~/.spacemacs
+fi
+
+#if [ $FLAG_SOFTLINK_EMACS_INSTALL == 1 ];then
+    #cecho "<<<<<< Softlink emacs. >>>>>>" $yellow
+    #if [ ! -d "$homeDir/bxgithub" ]; then
+        #mkdir ~/bxgithub
+    #fi
+    #cd ~/bxgithub
+    #if [ ! -d "$homeDir/bxgithub/emacs-c-ide-demo" ]; then
+        ## echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
+        ## source ~/.bashrc
+        ## git clone https://github.com/baoxianzhang/emacs-c-ide-demo.git
+        #wget -nc -O emacs-c-ide-demo.zip https://github.com/baoxianzhang/emacs-c-ide-demo/archive/master.zip
+        #unzip -o emacs-c-ide-demo.zip
+        #mv emacs-c-ide-demo-master emacs-c-ide-demo
+    #fi
+    #rm ~/.emacs.d -rf
+    #ln -s ~/bxgithub/emacs-c-ide-demo ~/.emacs.d
+#fi
 
 #if [ $FLAG_SILVERSEARCH_AG_INSTALL == 1 ];then
 #    cecho "<<<<<< Install silversearch-ag. >>>>>>" $yellow
