@@ -93,6 +93,8 @@ alias ranger=ranger
 alias sl=sl
 alias rm='trash-put'
 # tree -L 2
+# alias emacs='emacsclient -c'
+
 #
 # git config
 # gitignore: https://github.com/github/gitignore
