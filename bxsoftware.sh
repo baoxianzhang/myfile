@@ -70,7 +70,7 @@ if [ $FLAG_APT_GET_SOFTWARE_INSTALL == 1 ];then
         luajit
         exuberant-ctags
         curl
-        #siversearcher-ag
+        silversearcher-ag
         sqlite3
         sshpass
         #terminator
@@ -204,7 +204,7 @@ if [ $FLAG_SILVERSEARCH_AG_INSTALL == 1 ];then
     if [ ! -d "silversearch-ag" ]; then
         wget -nc -O silversearch-ag.zip https://codeload.github.com/mizuno-as/silversearcher-ag/zip/master
         unzip -o silversearch-ag.zip
-        mv silversearch-ag-master silversearch-ag
+        mv silversearcher-ag-master silversearch-ag
         sudo apt-get install liblzma-dev -y
         cd silversearch-ag
         ./build.sh

@@ -91,7 +91,7 @@ alias rsync=rsync
 alias vifm=vifm
 alias ranger=ranger
 alias sl=sl
-alias rm='trash-put'
+#alias rm='trash-put'
 # tree -L 2
 # alias emacs='emacsclient -c'
 
@@ -146,10 +146,6 @@ alias pub='cd ~/molmc_code/pub/'
 alias myfile='cd ~/bxgithub/myfile/'
 alias scpdefaultparam="scp ~/molmc_code/pub/default-param/* root@192.168.8.1:~/"
 alias lstty="ls /dev/tty*"
-alias pullgit="/home/zhangbaoxian/bxgithub/myfile/gitpull"
-alias pushgit="/home/zhangbaoxian/bxgithub/myfile/gitpush"
-alias pullgithub="/home/zhangbaoxian/bxgithub/myfile/githubpull"
-alias pushgithub="/home/zhangbaoxian/bxgithub/myfile/githubpush"
 alias tmux='tmux -2'
 
 scpIntoyunTmp() {
