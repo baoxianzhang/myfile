@@ -2,7 +2,8 @@
 set clipboard=unnamed  "yank and paste with the system clipboard"
 let mapleader = ','
 let g:mapleader = ','
-
+"You can configure ag.nvim to always start searching from your project root instead of the cwd
+let g:ag_working_path_mode="r"
 
 "================ Key Mapping ==================
 map <leader><space>        :FixWhitespace<cr>

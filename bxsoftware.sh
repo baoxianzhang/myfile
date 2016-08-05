@@ -609,6 +609,8 @@ if [ $FLAG_VIRTUALBOX_WIN7_INSTALL == 1 ];then
             ## Find the devigid and add to the devgid next line
             #sudo echo "none /proc/bus/usb usbfs devgid=125,devmode=664 0 0" >> /etc/fstab
             #if not work, please reinstall virtualbox!
+            # Add Drag function on the host and the virtualbox
+            # Settings->General->Advanced: choose shared Clipboard Bidirectional; Drag'n Drop: Bidrectional.
         fi
    fi
 fi

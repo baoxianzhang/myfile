@@ -91,7 +91,7 @@ alias rsync=rsync
 alias vifm=vifm
 alias ranger=ranger
 alias sl=sl
-#alias rm='trash-put'
+alias rm='trash-put'
 # tree -L 2
 # alias emacs='emacsclient -c'
 
