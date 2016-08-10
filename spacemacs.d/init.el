@@ -29,7 +29,7 @@ values."
      github
      (vinegar :variables vinegar-reuse-dired-buffer t)
      ;; git
-     ;; markdown
+     markdown
      org
      (shell :variables
             shell-default-height 30
@@ -37,10 +37,12 @@ values."
      spell-checking
      syntax-checking
      (chinese :variables chinese-enable-youdao-dict t)
-     (ibuffer :variables ibuffer-group-buffers-by 'projects)
+     ;; (ibuffer :variables ibuffer-group-buffers-by 'projects)
      (c-c++ :variables
             c-c++-default-mode-for-headers 'c++-mode)
-     ;; version-control
+     (colors :variables
+             colors-enable-nyan-cat-progress-bar t)
+     version-control
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -252,8 +254,8 @@ before packages are loaded. If you are unsure, you should try in setting them in
   ;;         ("gnu-cn"   . "https://elpa.zilongshanren.com/gnu/")))
   ;; https://github.com/syl20bnr/spacemacs/issues/2705
   ;; (setq tramp-mode nil)
-  (setq tramp-ssh-controlmaster-options
-        "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
+  ;; (setq tramp-ssh-controlmaster-options
+  ;;       "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
   )
 
 (defun dotspacemacs/user-config ()
@@ -263,23 +265,32 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
-  (global-hungry-delete-mode t)
-  (global-set-key (kbd "s-/") 'hippie-expand)
-  (global-set-key (kbd "C-c a") 'org-agenda)
-  (define-key global-map (kbd "C-c y") 'youdao-dictionary-search-at-point+)
-  (setq c++-tab-always-indent t)
-  (setq c-basic-offset 4)                  ;; Default is 2
-  (setq c-indent-level 4)                  ;; Default is 2
-  (setq c++-basic-offset 4)                  ;; Default is 2
-  (setq c++-indent-level 4)                  ;; Default is 2
-  (setq auto-mode-alist
-        (append
-         '(("\\.ino\\'" . c++-mode)
-         '(("\\.c\\'" . c++-mode)
-           auto-mode-alist))
-        ))
-  )
-(setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
-(load custom-file 'no-error 'no-message)
+   (global-hungry-delete-mode t)
+   (global-set-key (kbd "s-/") 'hippie-expand)
+   (global-set-key (kbd "C-c a") 'org-agenda)
+   (define-key global-map (kbd "C-c y") 'youdao-dictionary-search-at-point+)
+   (setq c++-tab-always-indent t)
+   (setq c-basic-offset 4)                  ;; Default is 2
+   (setq c-indent-level 4)                  ;; Default is 2
+   (setq c++-basic-offset 4)                  ;; Default is 2
+   (setq c++-indent-level 4)                  ;; Default is 2
+   (add-to-list 'auto-mode-alist '("\\.ino\\'" . c++-mode))
+   (global-linum-mode t)
+   (turn-on-fci-mode);; 80 chars column
+   (evil-leader/set-key
+     "ri" 'indent-region
+     "dt" 'dired-move-to-first-file
+     "dy" 'put-file-name-on-clipboard
+     "tt" 'helm-gtags-dwim
+     "tk" 'helm-gtags-pop-stack
+     )
+   ;;(setq auto-mode-alist
+   ;;      (append
+   ;;       '(("\\.ino\\'" . c++-mode)
+   ;;         auto-mode-alist))
+   ;;      )
+   )
+;; (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
+;; (load custom-file 'no-error 'no-message)
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
