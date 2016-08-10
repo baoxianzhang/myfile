@@ -147,7 +147,7 @@ alias myfile='cd ~/bxgithub/myfile/'
 alias scpdefaultparam="scp ~/molmc_code/pub/default-param/* root@192.168.8.1:~/"
 alias lstty="ls /dev/tty*"
 alias tmux='tmux -2'
-
+alias crt='sudo SecureCRT'
 scpIntoyunTmp() {
     scp $1 root@112.124.117.64:/tmp/
     #command scp $1 root@112.124.117.64:/tmp/
