@@ -275,8 +275,9 @@ you should place your code here."
   (setq auto-mode-alist
         (append
          '(("\\.ino\\'" . c++-mode)
+         '(("\\.c\\'" . c++-mode)
            auto-mode-alist))
-        )
+        ))
   )
 (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
 (load custom-file 'no-error 'no-message)
