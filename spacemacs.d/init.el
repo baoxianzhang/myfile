@@ -28,7 +28,7 @@ values."
      emacs-lisp
      ;; github
      (vinegar :variables vinegar-reuse-dired-buffer t)
-     ;; git
+     git
      markdown
      org
      (shell :variables
