@@ -26,7 +26,7 @@ values."
      auto-completion
      better-defaults
      emacs-lisp
-     github
+     ;; github
      (vinegar :variables vinegar-reuse-dired-buffer t)
      ;; git
      markdown
@@ -40,8 +40,8 @@ values."
      ;; (ibuffer :variables ibuffer-group-buffers-by 'projects)
      (c-c++ :variables
             c-c++-default-mode-for-headers 'c++-mode)
-     (colors :variables
-             colors-enable-nyan-cat-progress-bar t)
+     ;; (colors :variables
+     ;;         colors-enable-nyan-cat-progress-bar t)
      version-control
      )
    ;; List of additional packages that will be installed without being
@@ -266,7 +266,7 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
    (global-hungry-delete-mode t)
-   (global-set-key (kbd "s-/") 'hippie-expand)
+   ;; (global-set-key (kbd "s-/") 'hippie-expand)
    (global-set-key (kbd "C-c a") 'org-agenda)
    (define-key global-map (kbd "C-c y") 'youdao-dictionary-search-at-point+)
    (setq c++-tab-always-indent t)
@@ -277,13 +277,13 @@ you should place your code here."
    (add-to-list 'auto-mode-alist '("\\.ino\\'" . c++-mode))
    (global-linum-mode t)
    (turn-on-fci-mode);; 80 chars column
-   (evil-leader/set-key
-     "ri" 'indent-region
-     "dt" 'dired-move-to-first-file
-     "dy" 'put-file-name-on-clipboard
-     "tt" 'helm-gtags-dwim
-     "tk" 'helm-gtags-pop-stack
-     )
+   ;; (evil-leader/set-kei
+   ;;   "ri" 'indent-region
+   ;;   "dt" 'dired-move-to-first-file
+   ;;   "dy" 'put-file-name-on-clipboard
+   ;;   "tt" 'helm-gtags-dwim
+   ;;   "tk" 'helm-gtags-pop-stack
+   ;;   )
    ;;(setq auto-mode-alist
    ;;      (append
    ;;       '(("\\.ino\\'" . c++-mode)

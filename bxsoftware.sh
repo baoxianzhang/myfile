@@ -524,8 +524,8 @@ fi
 
 if [ $FLAG_SOFTLINK_SPACEMACS_CONFIG == 1 ]; then
     cecho "<<<<<< Softlink Spacemacs. >>>>>>" yellow
-    rm -rf ~/.spacemacs
-    ln -s ~/bxgithub/myfile/spacemacs ~/.spacemacs
+    rm -rf ~/.spacemacs.d
+    ln -s ~/bxgithub/myfile/spacemacs.d ~/.spacemacs.d
 fi
 
 #if [ $FLAG_SOFTLINK_EMACS_INSTALL == 1 ];then
