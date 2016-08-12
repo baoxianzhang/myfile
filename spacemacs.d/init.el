@@ -27,21 +27,24 @@ values."
      better-defaults
      emacs-lisp
      ;; github
-     (vinegar :variables vinegar-reuse-dired-buffer t)
+     (vinegar :variables
+              vinegar-reuse-dired-buffer t)
      git
      markdown
-     org
+     (org :variables
+          org-enable-github-support t)
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom)
      spell-checking
      syntax-checking
-     (chinese :variables chinese-enable-youdao-dict t)
+     (chinese :variables
+              chinese-enable-youdao-dict t)
      ;; (ibuffer :variables ibuffer-group-buffers-by 'projects)
      (c-c++ :variables
             c-c++-default-mode-for-headers 'c++-mode)
-     ;; (colors :variables
-     ;;         colors-enable-nyan-cat-progress-bar t)
+     (colors :variables
+             colors-enable-nyan-cat-progress-bar t)
      version-control
      )
    ;; List of additional packages that will be installed without being
@@ -267,7 +270,25 @@ explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
    (global-hungry-delete-mode t)
    ;; (global-set-key (kbd "s-/") 'hippie-expand)
-   (global-set-key (kbd "C-c a") 'org-agenda)
+   ;; (seq org-agenda-file '("~/org"))
+   ;; (global-set-key (kbd "C-c a") 'org-agenda)
+   ;; (setq org-capture-templates
+   ;;       '(("t" "Todo" entry (file+headline "~/.emacs.d/gtd.org" "工作安排")
+   ;;          "* TODO [#B] %?\n  %i\n"
+   ;;          :empty-lines 1)))
+   ;; (global-set-key (kbd "C-c r") 'org-capture)
+   ;; (setq org-agenda-files (quote ("~/gtd.org")))
+   (setq org-capture-templates
+         '(("t" "Todo" entry (file+headline "~/org/gtd.org" "工作安排")
+            "* TODO [#B] %?\n  %i\n"
+            :empty-lines 1)
+           ))
+   (setq org-agenda-files (list "~/org/TODO.org"
+                                "~/org/gtd.org"
+                                "~/org/work.org"
+                                "~/org/life.org" 
+                                "~/org/self.org"))
+
    (define-key global-map (kbd "C-c y") 'youdao-dictionary-search-at-point+)
    (setq c++-tab-always-indent t)
    (setq c-basic-offset 4)                  ;; Default is 2
@@ -294,3 +315,16 @@ you should place your code here."
 ;; (load custom-file 'no-error 'no-message)
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(org-agenda-files nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
+ '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))

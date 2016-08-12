@@ -92,6 +92,7 @@ alias vifm=vifm
 alias ranger=ranger
 alias sl=sl
 alias rm='trash-put'
+alias homedistusage='sudo du -d 1 -k /home/* | sort -n -r'
 # tree -L 2
 # alias emacs='emacsclient -c'
 
@@ -166,6 +167,9 @@ flash00000() {
     st-flash --reset write $1 0x8000000
 }
 
+distUsage(){
+    sudo du -d 1 -k $1/* | sort -n -r
+}
 
 #mcd() {
 #    mkdir -p "$1";
