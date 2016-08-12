@@ -660,6 +660,21 @@ if [ $FLAG_XTENSA_INSTALL == 1 ];then
     iscp xtensa-lx106-elf /usr/src/ -r
 fi
 
+if [ $FLAG_SYSTEM_INDICATOR_INSTALL == 1 ];then
+    cecho "<<<<<< Install System Indicator. >>>>>>" $yellow
+    cd ~/softwares
+    sudo add-apt-repository ppa:indicator-multiload/stable-daily
+    sudo apt-get update
+    sudo apt-get install indicator-multiload
+fi
+
+if [ $FLAG_LAUNCHERFODERS_INSTALL == 1 ];then
+    cecho "<<<<<< Install LauncherFolders. >>>>>>" $yellow
+    cd ~/softwares
+    wget http://unity-folders.exceptionfound.com/unity-launcher-folders_1.0.3_all.deb
+    sudo dpkg -i unity-launcher-folders_1.0.3_all.deb
+fi
+
 if [ $FLAG_SKYPE_INSTALL == 1 ];then
     cecho "<<<<<< Install Skype. >>>>>>" $yellow
     cd ~/softwares

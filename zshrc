@@ -80,6 +80,16 @@ source $ZSH/oh-my-zsh.sh
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
+###############useful tools
+# tweak
+# privacy indicator    http://www.florian-diesch.de/software/indicator-privacy/
+# Launcher Folders     http://unity-folders.exceptionfound.com/
+# TLP power save for notebook
+# Macbuntu 14.04 theme
+# Compizconfig setting manager
+# Preload
+# WifiAssist
+#
 #
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
