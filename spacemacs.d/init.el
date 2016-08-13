@@ -39,6 +39,8 @@ values."
      spell-checking
      syntax-checking
      (chinese :variables
+              chinese-default-input-method 'chinese-pyim
+              chinese-enable-fcitx t
               chinese-enable-youdao-dict t)
      ;; (ibuffer :variables ibuffer-group-buffers-by 'projects)
      (c-c++ :variables
@@ -46,6 +48,7 @@ values."
      (colors :variables
              colors-enable-nyan-cat-progress-bar t)
      version-control
+     gtags
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -286,10 +289,13 @@ you should place your code here."
    (setq org-agenda-files (list "~/org/TODO.org"
                                 "~/org/gtd.org"
                                 "~/org/work.org"
-                                "~/org/life.org" 
+                                "~/org/life.org"
                                 "~/org/self.org"))
 
-   (define-key global-map (kbd "C-c y") 'youdao-dictionary-search-at-point+)
+   ;; (define-key global-map (kbd "C-c y") 'youdao-dictionary-search-at-point+)
+   (spacemacs/set-leader-keys "o y" 'youdao-dictionary-search-at-point+)
+   (spacemacs/set-leader-keys "o d" 'find-by-pinyin-dired)
+
    (setq c++-tab-always-indent t)
    (setq c-basic-offset 4)                  ;; Default is 2
    (setq c-indent-level 4)                  ;; Default is 2
@@ -298,6 +304,8 @@ you should place your code here."
    (add-to-list 'auto-mode-alist '("\\.ino\\'" . c++-mode))
    (global-linum-mode t)
    (turn-on-fci-mode);; 80 chars column
+   ;; (require 'chinese-pyim-greatdict)
+   ;; (chinese-pyim-greatdict-enable)
    ;; (evil-leader/set-kei
    ;;   "ri" 'indent-region
    ;;   "dt" 'dired-move-to-first-file
