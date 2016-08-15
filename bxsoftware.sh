@@ -98,6 +98,7 @@ if [ $FLAG_APT_GET_SOFTWARE_INSTALL == 1 ];then
         openssh-client
         openssh-server
         ranger
+        ksnapshot
     )
     cecho "Please edit the apps you need to install and save it!" $red
     read nothing

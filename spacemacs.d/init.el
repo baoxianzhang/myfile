@@ -306,7 +306,7 @@ you should place your code here."
    (setq c++-indent-level 4)                  ;; Default is 2
    (add-to-list 'auto-mode-alist '("\\.ino\\'" . c++-mode))
    ;; (global-linum-mode t)
-   (turn-on-fci-mode);; 80 chars column
+   ;; (turn-on-fci-mode);; 80 chars column
    ;; (require 'chinese-pyim-greatdict)
    ;; (chinese-pyim-greatdict-enable)
    ;; (evil-leader/set-kei
