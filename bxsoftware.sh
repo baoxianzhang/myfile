@@ -99,6 +99,9 @@ if [ $FLAG_APT_GET_SOFTWARE_INSTALL == 1 ];then
         openssh-server
         ranger
         ksnapshot
+        nodejs-legacy
+        curl
+        npm
     )
     cecho "Please edit the apps you need to install and save it!" $red
     read nothing
@@ -695,6 +698,24 @@ if [ $FLAG_GOOGLE_HOSTS_INSTALL == 1 ];then
     cecho "Press any key to continue!" $green
     read nothing
 fi
+
+if [ $FLAG_ZEAL_FOR_SPACEMACE_INSTALL == 1 ];then
+    cecho "<<<<<< Install ZEAL FOR SPACEMACS. >>>>>>" $yellow
+    sudo add-apt-repository ppa:zeal-developers/ppa
+    sudo apt-get update
+    sudo apt-get install zeal
+fi
+
+if [ $FLAG_WAKATIME_FOR_SPACEMACE_INSTALL == 1 ]; then
+    cecho "<<<<<< Install wakatime for spacemacs. >>>>>> " $yellow
+    sudo pip install wakatime
+fi
+
+if [ $FLAG_PANDOC_FOR_SPACEMACE_INSTALL == 1 ]; then
+    cecho "<<<<<< Install pandoc for spacemacs. >>>>>> " $yellow
+    sudo apt-get install pandoc
+fi
+
 
 if [ $FLAG_SECURECRT7dot3_INSTALL == 1 ];then
     cecho "<<<<<< Install SecureCRT 7.3. >>>>>>" $yellow

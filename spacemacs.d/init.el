@@ -30,6 +30,7 @@ values."
      (vinegar :variables
               vinegar-reuse-dired-buffer t)
      git
+     github
      markdown
      (org :variables
           org-enable-github-support t)
@@ -54,6 +55,14 @@ values."
      games
      ranger
      ;; fasd
+     ;; dash
+     command-log
+     pandoc
+     ;; (wakatime :variables
+     ;;           wakatime-api-key  "w"
+     ;;           ;; use the actual wakatime path
+     ;;           wakatime-cli-path "/usr/local/bin/wakatime")
+     ;; ycmd
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
