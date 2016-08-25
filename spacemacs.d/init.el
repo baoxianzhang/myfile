@@ -326,16 +326,17 @@ you should place your code here."
   (setq c++-basic-offset 4)                  ;; Default is 2
   (setq c++-indent-level 4)                  ;; Default is 2
   (add-to-list 'auto-mode-alist '("\\.ino\\'" . c++-mode))
-  (define-key evil-normal-state-map (kbd "C-]")   'helm-gtags-find-tag)
+  ;; (define-key evil-normal-state-map (kbd "C-]")   'helm-gtags-find-tag)
   (define-key evil-normal-state-map (kbd "C-t")   'evil-jump-backward)
   ;; key bindings
   (add-hook 'helm-gtags-mode-hook
             '(lambda ()
                (local-set-key (kbd "M-s") 'helm-gtags-find-symbol)
                (local-set-key (kbd "M-l") 'helm-gtags-select)
-               (local-set-key (kbd "C-c g r") 'helm-gtags-find-rtag)
+               ;; (local-set-key (kbd "C-c g r") 'helm-gtags-find-rtag)
                (local-set-key (kbd "C-]") 'helm-gtags-find-tag)
-               (local-set-key (kbd "C-t") 'helm-gtags-pop-stack)))
+               ;; (local-set-key (kbd "C-t") 'helm-gtags-pop-stack)
+               ))
   ;; (defun company-yasnippet-or-completion ()
   ;;   (interactive)
   ;;   (if (yas/expansion-at-point)
