@@ -19,18 +19,30 @@ values."
    dotspacemacs-configuration-layers
    '(
      ;; ----------------------------------------------------------------
+
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     auto-completion
+     (auto-completion :variables
+                      auto-completion-return-key-behavior 'complete
+                      auto-completion-tab-key-behavior 'cycle
+                      auto-completion-complete-with-key-sequence nil
+                      auto-completion-complete-with-key-sequence-delay 0.1
+                      ;; auto-completion-private-snippets-directory nil
+                      auto-completion-private-snippets-directory "~/.spacemacs.d/snippets/"
+                      auto-completion-enable-snippets-in-popup t
+                      auto-completion-enable-help-tooltip t
+                      auto-completion-enable-sort-by-usage t
+                      )
+
      better-defaults
      emacs-lisp
      ;; github
-     (vinegar :variables
-              vinegar-reuse-dired-buffer t)
+     ;; (vinegar :variables
+     ;;          vinegar-reuse-dired-buffer t)
      git
-     github
+     ;; github
      markdown
      (org :variables
           org-enable-github-support t)
@@ -49,15 +61,15 @@ values."
      (colors :variables
              colors-enable-nyan-cat-progress-bar t)
      version-control
-     ;; gtags
+     gtags
      ;; cscope
      ;; erc
      games
      ranger
      ;; fasd
      ;; dash
-     command-log
-     pandoc
+     ;; command-log
+     ;; pandoc
      ;; (wakatime :variables
      ;;           wakatime-api-key  "w"
      ;;           ;; use the actual wakatime path
@@ -91,7 +103,7 @@ values."
    ;; This variable has no effect if Emacs is launched with the parameter
    ;; `--insecure' which forces the value of this variable to nil.
    ;; (default t)
-   dotspacemacs-elpa-https t
+   dotspacemacs-elpa-https nil
    ;; Maximum allowed time in seconds to contact an ELPA repository.
    dotspacemacs-elpa-timeout 5
    ;; If non nil then spacemacs will check for updates at startup
@@ -117,7 +129,7 @@ values."
    dotspacemacs-startup-lists '(recents projects)
    ;; Number of recent files to show in the startup buffer. Ignored if
    ;; `dotspacemacs-startup-lists' doesn't include `recents'. (default 5)
-   dotspacemacs-startup-recent-list-size 10 
+   dotspacemacs-startup-recent-list-size 10
    ;; Default major mode of the scratch buffer (default `text-mode')
    dotspacemacs-scratch-mode 'text-mode
    ;; List of themes, the first of the list is loaded when spacemacs starts.
@@ -235,7 +247,7 @@ values."
    ;; derivatives. If set to `relative', also turns on relative line numbers.
    ;; (default nil)
    ;; dotspacemacs-line-numbers nil
-   dotspacemacs-line-numbers 'relative
+   dotspacemacs-line-numbers t
    ;; If non-nil smartparens-strict-mode will be enabled in programming modes.
    ;; (default nil)
    dotspacemacs-smartparens-strict-mode nil
@@ -286,51 +298,87 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
-   (global-hungry-delete-mode t)
-   ;; (global-set-key (kbd "s-/") 'hippie-expand)
-   ;; (seq org-agenda-file '("~/org"))
-   ;; (global-set-key (kbd "C-c a") 'org-agenda)
-   ;; (setq org-capture-templates
-   ;;       '(("t" "Todo" entry (file+headline "~/.emacs.d/gtd.org" "工作安排")
-   ;;          "* TODO [#B] %?\n  %i\n"
-   ;;          :empty-lines 1)))
-   ;; (global-set-key (kbd "C-c r") 'org-capture)
-   ;; (setq org-agenda-files (quote ("~/gtd.org")))
-   (setq org-capture-templates
-         '(("t" "Todo" entry (file+headline "~/org/gtd.org" "工作安排")
-            "* TODO [#B] %?\n  %i\n"
-            :empty-lines 1)
-           ))
-   (setq org-agenda-files (list "~/org/TODO.org"
-                                "~/org/gtd.org"))
+  (global-hungry-delete-mode t)
+  ;; (global-set-key (kbd "s-/") 'hippie-expand)
+  ;; (seq org-agenda-file '("~/org"))
+  ;; (global-set-key (kbd "C-c a") 'org-agenda)
+  ;; (setq org-capture-templates
+  ;;       '(("t" "Todo" entry (file+headline "~/.emacs.d/gtd.org" "工作安排")
+  ;;          "* TODO [#B] %?\n  %i\n"
+  ;;          :empty-lines 1)))
+  ;; (global-set-key (kbd "C-c r") 'org-capture)
+  ;; (setq org-agenda-files (quote ("~/gtd.org")))
+  (setq org-capture-templates
+        '(("t" "Todo" entry (file+headline "~/org/gtd.org" "工作安排")
+           "* TODO [#B] %?\n  %i\n"
+           :empty-lines 1)
+          ))
+  (setq org-agenda-files (list "~/org/TODO.org"
+                               "~/org/gtd.org"))
 
-   ;; (define-key global-map (kbd "C-c y") 'youdao-dictionary-search-at-point+)
-   (spacemacs/set-leader-keys "o y" 'youdao-dictionary-search-at-point+)
-   (spacemacs/set-leader-keys "o d" 'find-by-pinyin-dired)
+  ;; (define-key global-map (kbd "C-c y") 'youdao-dictionary-search-at-point+)
+  (spacemacs/set-leader-keys "o y" 'youdao-dictionary-search-at-point+)
+  (spacemacs/set-leader-keys "o d" 'find-by-pinyin-dired)
 
-   (setq c++-tab-always-indent t)
-   (setq c-basic-offset 4)                  ;; Default is 2
-   (setq c-indent-level 4)                  ;; Default is 2
-   (setq c++-basic-offset 4)                  ;; Default is 2
-   (setq c++-indent-level 4)                  ;; Default is 2
-   (add-to-list 'auto-mode-alist '("\\.ino\\'" . c++-mode))
-   ;; (global-linum-mode t)
-   ;; (turn-on-fci-mode);; 80 chars column
-   ;; (require 'chinese-pyim-greatdict)
-   ;; (chinese-pyim-greatdict-enable)
-   ;; (evil-leader/set-kei
-   ;;   "ri" 'indent-region
-   ;;   "dt" 'dired-move-to-first-file
-   ;;   "dy" 'put-file-name-on-clipboard
-   ;;   "tt" 'helm-gtags-dwim
-   ;;   "tk" 'helm-gtags-pop-stack
-   ;;   )
-   ;;(setq auto-mode-alist
-   ;;      (append
-   ;;       '(("\\.ino\\'" . c++-mode)
-   ;;         auto-mode-alist))
-   ;;      )
-   )
+  (setq c++-tab-always-indent t)
+  (setq c-basic-offset 4)                  ;; Default is 2
+  (setq c-indent-level 4)                  ;; Default is 2
+  (setq c++-basic-offset 4)                  ;; Default is 2
+  (setq c++-indent-level 4)                  ;; Default is 2
+  (add-to-list 'auto-mode-alist '("\\.ino\\'" . c++-mode))
+  (define-key evil-normal-state-map (kbd "C-]")   'helm-gtags-find-tag)
+  ;; key bindings
+  (add-hook 'helm-gtags-mode-hook
+            '(lambda ()
+               (local-set-key (kbd "M-s") 'helm-gtags-find-symbol)
+               (local-set-key (kbd "M-l") 'helm-gtags-select)
+               (local-set-key (kbd "C-c g r") 'helm-gtags-find-rtag)
+               (local-set-key (kbd "C-]") 'helm-gtags-find-tag)
+               (local-set-key (kbd "C-t") 'helm-gtags-pop-stack)))
+  ;; (defun company-yasnippet-or-completion ()
+  ;;   (interactive)
+  ;;   (if (yas/expansion-at-point)
+  ;;       (progn (company-abort)
+  ;;              (yas/expand))
+  ;;     (company-complete-common)))
+
+  ;; (defun yas/expansion-at-point ()
+  ;;   (first (yas--current-key)))
+
+  ;; ;; (define-key company-active-map (kbd "TAB") 'company-yasnippet-or-completion)
+  ;; ;; (define-key company-active-map (kbd "<tab>") 'company-yasnippet-or-completion)
+  ;; (yas-global-mode 1)
+  ;; (setq yas/snippet-dirs (append '("~/.emacs.d/snippets/") yas/snippet-dirs))
+
+  ;; ;; automatic reload after snippets changed
+  ;; (defun reload-yasnippets-on-save-snippets ()
+  ;;   (when (string-match "/snippets/" buffer-file-name)
+  ;;     (yas/reload-all)
+  ;;     ))
+  ;; (add-hook 'after-save-hook 'reload-yasnippets-on-save-snippets)
+  ;; (define-key ggtags-mode-map (kbd "C-]") ' ggtags-find-tag-dwim)
+  ;; (define-key ggtags-mode-map (kbd "C-t") 'pop-tag-mark)
+  ;; (define-key ggtags-mode-map (kbd "M-r") 'ggtags-find-reference)
+  ;; (define-key ggtags-mode-map (kbd "C-c g c") 'ggtags-create-tags)
+  ;; (define-key ggtags-mode-map (kbd "C-c g u") 'ggtags-update-tags)
+
+  ;; (global-linum-mode t)
+  ;; (turn-on-fci-mode);; 80 chars column
+  ;; (require 'chinese-pyim-greatdict)
+  ;; (chinese-pyim-greatdict-enable)
+  ;; (evil-leader/set-kei
+  ;;   "ri" 'indent-region
+  ;;   "dt" 'dired-move-to-first-file
+  ;;   "dy" 'put-file-name-on-clipboard
+  ;;   "tt" 'helm-gtags-dwim
+  ;;   "tk" 'helm-gtags-pop-stack
+  ;;   )
+  ;;(setq auto-mode-alist
+  ;;      (append
+  ;;       '(("\\.ino\\'" . c++-mode)
+  ;;         auto-mode-alist))
+  ;;      )
+  )
 ;; (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
 ;; (load custom-file 'no-error 'no-message)
 ;; Do not write anything past this comment. This is where Emacs will

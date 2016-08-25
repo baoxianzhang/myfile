@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: pymongo insert_one
+# key: pymongoinsertone 
+# --
+ENTITY = {"K1": "V1",
+          "K2": {"K21": "V21"}}
+OBJECTID = COLL.insert_one(ENTITY).inserted_id

@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: config pymongo 
+# key: pymongo  
+# --
+
+from pymongo import MongoClient
+
+
+Host_mongo = 'localhost'
+Port_mongo = 27017
+
+MONGO_CLIENT = MongoClient(Host_mongo, Port_mongo)
+DB_MONGO = MONGO_CLIENT["database??"]
+COLL = DB_MONGO['collection??']

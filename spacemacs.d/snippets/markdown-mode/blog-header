@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: the header of blog
+# key: boketou 
+# --
+---
+layout: post
+title: ${title}
+description: ${d}
+category: ${blog} 
+---
+

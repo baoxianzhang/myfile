@@ -163,6 +163,11 @@ alias crt='sudo SecureCRT'
 alias sl='ls'
 alias LS='ls'
 alias SL='ls'
+alias lnmyemacs='touch ~/.emacs.d && rm ~/.emacs.d -f && ln -s ~/bxgithub/mygithubspacemacs ~/.emacs.d'
+alias lnoriginemacs='touch ~/.emacs.d && rm ~/.emacs.d -f && ln -s ~/bxgithub/originspacemacs ~/.emacs.d'
+alias lnmyspacemacs='touch ~/.spacemacs.d && rm ~/.spacemacs.d -f && ln -s ~/bxgithub/myfile/spacemacs.d ~/.spacemacs.d'
+alias lnzlspacemacs='touch ~/.spacemacs.d && rm ~/.spacemacs.d -f && ln -s ~/bxgithub/spacemacs-private ~/.spacemacs.d'
+alias springemacs='pkill -SIGUSR2 emacs'
 scpIntoyunTmp() {
     scp $1 root@112.124.117.64:/tmp/
     #command scp $1 root@112.124.117.64:/tmp/

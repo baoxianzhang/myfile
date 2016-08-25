@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: insert code in org
+# key: orginsertcode 
+# --
+#+BEGIN_SRC
+    $0
+#+END_SRC

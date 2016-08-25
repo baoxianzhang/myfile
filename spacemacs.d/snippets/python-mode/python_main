@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: python main function
+# key: pmain
+# --
+
+def main():
+    print "start your main()"
+
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: record 
+# key: record 
+# --
+-record($1, {$2}).

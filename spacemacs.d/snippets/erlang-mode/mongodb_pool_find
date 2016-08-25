@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: mongodb_pool:find/3 
+# key: mongodb_pool_find3 
+# --
+%% mongodb_pool:find/3
+mongodb_pool:find({global, pool1},
+                  <<"collName">>,
+                  {'$query', {'$and', [{field1, {'$gt', 3}},
+                                      {field2, {'$lt', 10}},
+                                      {isRight, true}]}},
+                   '$orderby', {field1, -1})

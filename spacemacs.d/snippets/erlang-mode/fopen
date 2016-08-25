@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: file open
+# key: fopen
+# --
+
+
+File *fp = fopen(${file}, ${"r"})

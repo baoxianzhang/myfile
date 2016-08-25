@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: create redis connection 
+# key: strictredis 
+# --
+import redis
+
+
+
+Host_redis = 'localhost'
+Port_redis = 6379
+DB = 0
+REDIS_CLIENT = redis.StrictRedis(host = Host_redis,
+                            port = Port_redis,
+                            db = DB)

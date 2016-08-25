@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: spec of function 
+# key: fspec 
+# --
+-spec $0($1::$2) -> $3.

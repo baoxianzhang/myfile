@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: binary string to objectid 
+# key: binary_string_to_objectid 
+# --
+
+
+%%%-----------------------------------------------------------------------------
+%%% @doc This method is used to generate objectid from binary string
+%%%      from:[http://stackoverflow.com/questions/10383395/how-to-convert-objectid-to-binary-subtype-3-uuid-with-mongodb-erlang-and-bson]
+%%%      input BinaryString, and return objectid
+%%% @end
+%%%-----------------------------------------------------------------------------
+binary_string_to_objectid(BinaryString) ->
+    binary_string_to_objectid(BinaryString, []).
+
+binary_string_to_objectid(<<>>, Result) ->
+    {list_to_binary(lists:reverse(Result))};
+binary_string_to_objectid(<<BS:2/binary, Bin/binary>>, Result) ->
+    binary_string_to_objectid(Bin, [erlang:binary_to_integer(BS, 16)|Result]).
+

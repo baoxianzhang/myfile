@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: mongodb_pool:find/4 
+# key: mongodb_pool:find4 
+# --
+%% mongodb_pool:find/4, make projector true to just get objectId and fields 
+mongodb_pool:find({global, pool1},
+                  <<"collName">>,
+                  {'$query', {'$and', [{<<"field1">>, {'$gt', 3}},
+                                      {<<"field2">>, {'$lt', 10}},
+                                      {<<"isRight">>, true}]},
+                   '$orderby', {field1, -1}},
+                   [{projector, {<<"field1">>, true, <<"field2">>, true}}])
