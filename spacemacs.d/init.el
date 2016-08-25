@@ -326,7 +326,7 @@ you should place your code here."
   (setq c++-basic-offset 4)                  ;; Default is 2
   (setq c++-indent-level 4)                  ;; Default is 2
   (add-to-list 'auto-mode-alist '("\\.ino\\'" . c++-mode))
-  ;; (define-key evil-normal-state-map (kbd "C-]")   'helm-gtags-find-tag)
+  (define-key evil-normal-state-map (kbd "C-]")   'helm-gtags-find-tag)
   (define-key evil-normal-state-map (kbd "C-t")   'evil-jump-backward)
   ;; key bindings
   (add-hook 'helm-gtags-mode-hook
