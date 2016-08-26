@@ -1,0 +1,13 @@
+* 工作安排
+
+** TODO [#B] lwip TCP/IP protocol stack learning. 
+Lwip laonawumu
+
+** TODO [#B] PX4 algorithm learning.
+
+** TODO [#B] gitbook to keep a notebook.
+
+** TODO [#B] spacemacs blog and GDB and doxygen.
+
+** TODO [#B] gcc dirctory content learning.
+

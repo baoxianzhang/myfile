@@ -309,12 +309,12 @@ you should place your code here."
   ;; (global-set-key (kbd "C-c r") 'org-capture)
   ;; (setq org-agenda-files (quote ("~/gtd.org")))
   (setq org-capture-templates
-        '(("t" "Todo" entry (file+headline "~/org/gtd.org" "工作安排")
+        '(("t" "Todo" entry (file+headline "~/bxgithub/myfile/spacemacs.d/org/gtd.org" "工作安排")
            "* TODO [#B] %?\n  %i\n"
            :empty-lines 1)
           ))
-  (setq org-agenda-files (list "~/org/TODO.org"
-                               "~/org/gtd.org"))
+  ;; (setq org-agenda-files (list "~/org/TODO.org"
+                               ;; "~/org/gtd.org"))
 
   ;; (define-key global-map (kbd "C-c y") 'youdao-dictionary-search-at-point+)
   (spacemacs/set-leader-keys "o y" 'youdao-dictionary-search-at-point+)
