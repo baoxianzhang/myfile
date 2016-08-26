@@ -345,8 +345,8 @@ if [ $FLAG_SPF13VIM_INSTALL == 1 ];then
     fi
     cecho "<<<<<< Please be sure, the network can reach outside. >>>>>>" $red
     #read nothing
-    #curl http://j.mp/spf13-vim3 -L -o - | sh
-    curl https://github.com/baoxianzhang/myfile/bootstrap.sh -L -o - | sh
+    curl http://j.mp/spf13-vim3 -L -o - | sh
+    #curl https://github.com/baoxianzhang/myfile/bootstrap.sh -L -o - | sh
 
     #cecho "Start vim and begin to install the plugin!" $green
     #cecho "<<<<<< Install vim plugin in the other terninal. >>>>>>" $yellow
