@@ -313,8 +313,8 @@ you should place your code here."
            "* TODO [#B] %?\n  %i\n"
            :empty-lines 1)
           ))
-  ;; (setq org-agenda-files (list "~/org/TODO.org"
-                               ;; "~/org/gtd.org"))
+  (setq org-agenda-files (list "~/bxgithub/myfile/spacemacs.d/org/gtd.org"
+                               ))
 
   ;; (define-key global-map (kbd "C-c y") 'youdao-dictionary-search-at-point+)
   (spacemacs/set-leader-keys "o y" 'youdao-dictionary-search-at-point+)
@@ -385,3 +385,16 @@ you should place your code here."
 ;; (load custom-file 'no-error 'no-message)
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(org-agenda-files nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
+ '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
