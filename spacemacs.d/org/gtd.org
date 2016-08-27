@@ -12,4 +12,3 @@ Lwip laonawumu
 ** TODO [#B] gcc dirctory content learning.
 
 ** TODO [#B] https://www.reddit.com for cpp haskell
-
