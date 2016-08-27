@@ -312,31 +312,19 @@ unwanted space when exporting org-mode to html."
       ;;http://www.howardism.org/Technical/Emacs/journaling-org.html
       ;;add multi-file journal
       (setq org-capture-templates
-            '(("t" "Todo" entry (file+headline "~/org-notes/gtd.org" "Workspace")
+            '(("t" "Todo" entry (file+headline "~/bxgithub/myfile/spacemacs.d/org/gtd.org" "Workspace")
                "* TODO [#B] %?\n  %i\n"
                :empty-lines 1)
-              ("n" "notes" entry (file+headline "~/org-notes/!notes.org" "Quick notes")
+              ("n" "notes" entry (file+headline "~/bxgithub/myfile/spacemacs.d/org/!notes.org" "Quick notes")
                "* %?\n  %i\n %U"
                :empty-lines 1)
-              ("b" "Blog Ideas" entry (file+headline "~/org-notes/!notes.org" "Blog Ideas")
+              ("b" "Blog Ideas" entry (file+headline "~/bxgithub/myfile/spacemacs.d/org/!notes.org" "Blog Ideas")
                "* TODO [#B] %?\n  %i\n %U"
                :empty-lines 1)
               ("s" "Code Snippet" entry
-               (file "~/org-notes/snippets.org")
+               (file "~/bxgithub/myfile/spacemacs.d/org/snippets.org")
                "* %?\t%^g\n#+BEGIN_SRC %^{language}\n\n#+END_SRC")
-              ("w" "work" entry (file+headline "~/org-notes/gtd.org" "Cocos2D-X")
-               "* TODO [#A] %?\n  %i\n %U"
-               :empty-lines 1)
-              ("c" "Chrome" entry (file+headline "~/org-notes/!notes.org" "Quick notes")
-               "* TODO [#C] %?\n %(leo/retrieve-chrome-current-tab-url)\n %i\n %U"
-               :empty-lines 1)
-              ("l" "links" entry (file+headline "~/org-notes/!notes.org" "Quick notes")
-               "* TODO [#C] %?\n  %i\n %a \n %U"
-               :empty-lines 1)
-              ("j" "Journal Entry"
-               entry (file+datetree "~/org-notes/!journal.org")
-               "* %?"
-               :empty-lines 1)))
+               ))
 
       ;;An entry without a cookie is treated just like priority ' B '.
       ;;So when create new task, they are default 重要且紧急
@@ -348,7 +336,6 @@ unwanted space when exporting org-mode to html."
               ("wc" "不重要且紧急的任务" tags-todo "+PRIORITY=\"C\"")
               ("b" "Blog" tags-todo "BLOG")
               ("p" . "项目安排")
-              ("pw" tags-todo "PROJECT+WORK+CATEGORY=\"cocos2d-x\"")
               ("pl" tags-todo "PROJECT+DREAM+CATEGORY=\"leo\"")
               ("W" "Weekly Review"
                ((stuck "") ;; review stuck projects as designated by org-stuck-projects
@@ -552,7 +539,7 @@ holding contextual information."
       (evilified-state-evilify org-octopress-summary-mode org-octopress-summary-mode-map)
       (add-hook 'org-octopress-summary-mode-hook
                 #'(lambda () (local-set-key (kbd "q") 'bury-buffer)))
-      (setq org-blog-dir "~/bxgithub/baoxianzhang.github.io/")
+      (setq org-blog-dir "~/bxgithub/myHexoBlog/")
       (setq org-octopress-directory-top org-blog-dir)
       (setq org-octopress-directory-posts (concat org-blog-dir "source/_posts"))
       (setq org-octopress-directory-org-top org-blog-dir)

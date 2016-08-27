@@ -90,7 +90,6 @@ if [ $FLAG_APT_GET_SOFTWARE_INSTALL == 1 ];then
         #vim
         chromium-browser
         #google-chrome-stable
-        npm
         expect
         unzip
         tmux

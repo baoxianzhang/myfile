@@ -75,12 +75,17 @@ values."
      ;;           ;; use the actual wakatime path
      ;;           wakatime-cli-path "/usr/local/bin/wakatime")
      ;; ycmd
+     leo
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(
+                                      ;; orgule
+                                      ;; emacs-ctable
+                                      ;; org-octopress
+                                      )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -286,9 +291,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
   ;;         ("org-cn"   . "https://elpa.zilongshanren.com/org/")
   ;;         ("gnu-cn"   . "https://elpa.zilongshanren.com/gnu/")))
   ;; https://github.com/syl20bnr/spacemacs/issues/2705
-  ;; (setq tramp-mode nil)
-  ;; (setq tramp-ssh-controlmaster-options
-  ;;       "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
+
   )
 
 (defun dotspacemacs/user-config ()
@@ -299,15 +302,6 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   (global-hungry-delete-mode t)
-  ;; (global-set-key (kbd "s-/") 'hippie-expand)
-  ;; (seq org-agenda-file '("~/org"))
-  ;; (global-set-key (kbd "C-c a") 'org-agenda)
-  ;; (setq org-capture-templates
-  ;;       '(("t" "Todo" entry (file+headline "~/.emacs.d/gtd.org" "工作安排")
-  ;;          "* TODO [#B] %?\n  %i\n"
-  ;;          :empty-lines 1)))
-  ;; (global-set-key (kbd "C-c r") 'org-capture)
-  ;; (setq org-agenda-files (quote ("~/gtd.org")))
   (setq org-capture-templates
         '(("t" "Todo" entry (file+headline "~/bxgithub/myfile/spacemacs.d/org/gtd.org" "工作安排")
            "* TODO [#B] %?\n  %i\n"
@@ -337,49 +331,11 @@ you should place your code here."
                (local-set-key (kbd "C-]") 'helm-gtags-find-tag)
                ;; (local-set-key (kbd "C-t") 'helm-gtags-pop-stack)
                ))
-  ;; (defun company-yasnippet-or-completion ()
-  ;;   (interactive)
-  ;;   (if (yas/expansion-at-point)
-  ;;       (progn (company-abort)
-  ;;              (yas/expand))
-  ;;     (company-complete-common)))
-
-  ;; (defun yas/expansion-at-point ()
-  ;;   (first (yas--current-key)))
-
-  ;; ;; (define-key company-active-map (kbd "TAB") 'company-yasnippet-or-completion)
-  ;; ;; (define-key company-active-map (kbd "<tab>") 'company-yasnippet-or-completion)
-  ;; (yas-global-mode 1)
-  ;; (setq yas/snippet-dirs (append '("~/.emacs.d/snippets/") yas/snippet-dirs))
-
-  ;; ;; automatic reload after snippets changed
-  ;; (defun reload-yasnippets-on-save-snippets ()
-  ;;   (when (string-match "/snippets/" buffer-file-name)
-  ;;     (yas/reload-all)
-  ;;     ))
-  ;; (add-hook 'after-save-hook 'reload-yasnippets-on-save-snippets)
-  ;; (define-key ggtags-mode-map (kbd "C-]") ' ggtags-find-tag-dwim)
-  ;; (define-key ggtags-mode-map (kbd "C-t") 'pop-tag-mark)
-  ;; (define-key ggtags-mode-map (kbd "M-r") 'ggtags-find-reference)
-  ;; (define-key ggtags-mode-map (kbd "C-c g c") 'ggtags-create-tags)
-  ;; (define-key ggtags-mode-map (kbd "C-c g u") 'ggtags-update-tags)
-
-  ;; (global-linum-mode t)
-  ;; (turn-on-fci-mode);; 80 chars column
-  ;; (require 'chinese-pyim-greatdict)
-  ;; (chinese-pyim-greatdict-enable)
-  ;; (evil-leader/set-kei
-  ;;   "ri" 'indent-region
-  ;;   "dt" 'dired-move-to-first-file
-  ;;   "dy" 'put-file-name-on-clipboard
-  ;;   "tt" 'helm-gtags-dwim
-  ;;   "tk" 'helm-gtags-pop-stack
-  ;;   )
-  ;;(setq auto-mode-alist
-  ;;      (append
-  ;;       '(("\\.ino\\'" . c++-mode)
-  ;;         auto-mode-alist))
-  ;;      )
+  (setq org-octopress-directory-top       "~/bxgithub/myHexoBlog/source")
+  (setq org-octopress-directory-posts     "~/bxgithub/myHexoBlog/source/_posts")
+  (setq org-octopress-directory-org-top   "~/bxgithub/myHexoBlog/source")
+  (setq org-octopress-directory-org-posts "~/bxgithub/myHexoBlog/source/blog")
+  (setq org-octopress-setup-file          "~/bxgithub/myHexoBlog/setupfile.org")
   )
 ;; (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
 ;; (load custom-file 'no-error 'no-message)
