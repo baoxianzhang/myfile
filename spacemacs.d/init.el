@@ -29,7 +29,6 @@ values."
                       auto-completion-tab-key-behavior 'cycle
                       auto-completion-complete-with-key-sequence nil
                       auto-completion-complete-with-key-sequence-delay 0.1
-                      ;; auto-completion-private-snippets-directory nil
                       auto-completion-private-snippets-directory "~/.spacemacs.d/snippets/"
                       auto-completion-enable-snippets-in-popup t
                       auto-completion-enable-help-tooltip t
@@ -84,7 +83,7 @@ values."
    dotspacemacs-additional-packages '(
                                       ;; orgule
                                       ;; emacs-ctable
-                                      o;rg-octopress
+                                      org-octopress
                                       )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
