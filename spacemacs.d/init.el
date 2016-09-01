@@ -13,7 +13,7 @@ values."
    dotspacemacs-distribution 'spacemacs
    ;; List of additional paths where to look for configuration layers.
    ;; Paths must have a trailing slash (i.e. `~/.mycontribs/')
-   dotspacemacs-configuration-layer-path '()
+   dotspacemacs-configuration-layer-path '("~/.spacemacs.d/layers/")
    ;; List of configuration layers to load. If it is the symbol `all' instead
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
@@ -75,7 +75,7 @@ values."
      ;;           ;; use the actual wakatime path
      ;;           wakatime-cli-path "/usr/local/bin/wakatime")
      ;; ycmd
-     leo
+     ;; leo
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -84,7 +84,7 @@ values."
    dotspacemacs-additional-packages '(
                                       ;; orgule
                                       ;; emacs-ctable
-                                      ;; org-octopress
+                                      o;rg-octopress
                                       )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
@@ -251,8 +251,8 @@ values."
    ;; If non nil line numbers are turned on in all `prog-mode' and `text-mode'
    ;; derivatives. If set to `relative', also turns on relative line numbers.
    ;; (default nil)
-   ;; dotspacemacs-line-numbers nil
-   dotspacemacs-line-numbers t
+   dotspacemacs-line-numbers nil
+   ;; dotspacemacs-line-numbers t
    ;; If non-nil smartparens-strict-mode will be enabled in programming modes.
    ;; (default nil)
    dotspacemacs-smartparens-strict-mode nil
@@ -331,12 +331,26 @@ you should place your code here."
                (local-set-key (kbd "C-]") 'helm-gtags-find-tag)
                ;; (local-set-key (kbd "C-t") 'helm-gtags-pop-stack)
                ))
+  (require 'org-octopress)
   (setq org-octopress-directory-top       "~/bxgithub/myHexoBlog/source")
   (setq org-octopress-directory-posts     "~/bxgithub/myHexoBlog/source/_posts")
   (setq org-octopress-directory-org-top   "~/bxgithub/myHexoBlog/source")
   (setq org-octopress-directory-org-posts "~/bxgithub/myHexoBlog/source/blog")
   (setq org-octopress-setup-file          "~/bxgithub/myHexoBlog/setupfile.org")
-  )
+
+  (defun paste-with-Xclipboard ()
+    (shell-command-to-string "xsel -ob"))
+
+  (defun copy-to-Xclipboard (text &optional push)
+    (let ((process-connection-type nil))
+      (let ((proc (start-process "copy_to_X" "*Messages*" "xsel" "-ib")))
+        (process-send-string proc text)
+        (process-send-eof proc))))
+  (setq interprogram-cut-function 'copy-to-Xclipboard)
+  (setq interprogram-paste-function 'paste-with-Xclipboard)
+
+
+)
 ;; (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
 ;; (load custom-file 'no-error 'no-message)
 ;; Do not write anything past this comment. This is where Emacs will
@@ -346,7 +360,9 @@ you should place your code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(org-agenda-files nil))
+ '(pyim-dicts
+   (quote
+    ((:name "BigDict-01" :file "/home/zhangbaoxian/.emacs.d/pyim/dicts/pyim-bigdict.pyim.gz" :coding utf-8-unix :dict-type pinyin-dict)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

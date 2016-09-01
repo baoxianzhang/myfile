@@ -73,6 +73,7 @@ if [ $FLAG_APT_GET_SOFTWARE_INSTALL == 1 ];then
         silversearcher-ag
         sqlite3
         sshpass
+        xsel
         #terminator
         nginx
         gawk
@@ -101,6 +102,7 @@ if [ $FLAG_APT_GET_SOFTWARE_INSTALL == 1 ];then
         nodejs-legacy
         curl
         npm
+        markdown
     )
     cecho "Please edit the apps you need to install and save it!" $red
     read nothing
@@ -705,6 +707,15 @@ if [ $FLAG_ZEAL_FOR_SPACEMACE_INSTALL == 1 ];then
     sudo apt-get install zeal
 fi
 
+if [ $FLAG_SCEL2PYIM_FOR_SPACEMACE_INSTALL == 1 ]; then
+    cd ~/softwares/
+    cecho "<<<<<< Install scel2pyim for spacemacs chinese layer. >>>>>> " $yellow
+    git clone git@github.com:E-Neo/scel2pyim.git
+    gcc -o scel2pyim scel2pyim.c
+    sudo cp scel2pyim /usr/local/bin/
+    #sogou pin cell library path: /usr/share/sogou-qimpanel/cell/defaultCell/
+fi
+
 if [ $FLAG_WAKATIME_FOR_SPACEMACE_INSTALL == 1 ]; then
     cecho "<<<<<< Install wakatime for spacemacs. >>>>>> " $yellow
     sudo pip install wakatime
@@ -715,6 +726,12 @@ if [ $FLAG_PANDOC_FOR_SPACEMACE_INSTALL == 1 ]; then
     sudo apt-get install pandoc
 fi
 
+if [ $FLAG_HAROOPAD_FOR_MARKDOWN_INSTALL == 1 ]; then
+    cecho "<<<<<< Install Haroopad for Markdown. >>>>>> " $yellow
+    cd ~/softwares/
+    wget https://bitbucket.org/rhiokim/haroopad-download/downloads/haroopad-v0.13.1-x64.deb
+    sudo dpkg -i haroopad-v0.13.1-x64.deb
+fi
 
 if [ $FLAG_SECURECRT7dot3_INSTALL == 1 ];then
     cecho "<<<<<< Install SecureCRT 7.3. >>>>>>" $yellow
