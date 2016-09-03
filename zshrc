@@ -104,6 +104,7 @@ alias ranger=ranger
 alias sl=sl
 alias rm='trash-put'
 alias homedistusage='sudo du -d 1 -k /home/* | sort -n -r'
+alias screenshot='gnome-screenshot -a'
 # tree -L 2
 # alias emacs='emacsclient -c'
 
@@ -132,6 +133,7 @@ alias dt='cd ~/Desktop/'
 alias tl='cd ~/Templates/'
 alias halneutron='cd ~/molmc_code/firmware/hal/src/neutron/'
 alias vi='vim'
+alias em='emacs'
 alias o='nautilus ./'
 alias encodeI='iconv -f GBK -t UTF-8 '
 alias encodeE='enca -L zh_CN -x utf-8 '

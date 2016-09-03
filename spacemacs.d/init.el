@@ -34,7 +34,6 @@ values."
                       auto-completion-enable-help-tooltip t
                       auto-completion-enable-sort-by-usage t
                       )
-
      better-defaults
      emacs-lisp
      ;; github
@@ -51,8 +50,8 @@ values."
      spell-checking
      syntax-checking
      (chinese :variables
-              chinese-default-input-method 'chinese-pyim
-              chinese-enable-fcitx t
+              ;; chinese-default-input-method 'chinese-pyim
+              ;; chinese-enable-fcitx t
               chinese-enable-youdao-dict t)
      ;; (ibuffer :variables ibuffer-group-buffers-by 'projects)
      (c-c++ :variables
@@ -313,12 +312,14 @@ you should place your code here."
   (spacemacs/set-leader-keys "o y" 'youdao-dictionary-search-at-point+)
   (spacemacs/set-leader-keys "o d" 'find-by-pinyin-dired)
 
+  (add-to-list 'auto-mode-alist '("\\.ino\\'" . c++-mode))
+
   (setq c++-tab-always-indent t)
   (setq c-basic-offset 4)                  ;; Default is 2
   (setq c-indent-level 4)                  ;; Default is 2
   (setq c++-basic-offset 4)                  ;; Default is 2
   (setq c++-indent-level 4)                  ;; Default is 2
-  (add-to-list 'auto-mode-alist '("\\.ino\\'" . c++-mode))
+
   (define-key evil-normal-state-map (kbd "C-]")   'helm-gtags-find-tag)
   (define-key evil-normal-state-map (kbd "C-t")   'evil-jump-backward)
   ;; key bindings
@@ -337,19 +338,48 @@ you should place your code here."
   (setq org-octopress-directory-org-posts "~/bxgithub/myHexoBlog/source/blog")
   (setq org-octopress-setup-file          "~/bxgithub/myHexoBlog/setupfile.org")
 
-  (defun paste-with-Xclipboard ()
-    (shell-command-to-string "xsel -ob"))
+  ;; (defun paste-with-Xclipboard ()
+  ;;   (shell-command-to-string "xsel -ob"))
 
-  (defun copy-to-Xclipboard (text &optional push)
-    (let ((process-connection-type nil))
-      (let ((proc (start-process "copy_to_X" "*Messages*" "xsel" "-ib")))
-        (process-send-string proc text)
-        (process-send-eof proc))))
-  (setq interprogram-cut-function 'copy-to-Xclipboard)
-  (setq interprogram-paste-function 'paste-with-Xclipboard)
+  ;; (defun copy-to-Xclipboard (text &optional push)
+  ;;   (let ((process-connection-type nil))
+  ;;     (let ((proc (start-process "copy_to_X" "*Messages*" "xsel" "-ib")))
+  ;;       (process-send-string proc text)
+  ;;       (process-send-eof proc))))
+  ;; (setq interprogram-cut-function 'copy-to-Xclipboard)
+  ;; (setq interprogram-paste-function 'paste-with-Xclipboard)
+
+  ;; https://emacs-china.org/t/ranger-golden-ratio/964/2
+  (defun my-ranger ()
+    (interactive)
+    (if golden-ratio-mode
+        (progn
+          (golden-ratio-mode -1)
+          (ranger)
+          (setq golden-ratio-previous-enable t))
+      (progn
+        (ranger)
+        (setq golden-ratio-previous-enable nil))))
+
+  (defun my-quit-ranger ()
+    (interactive)
+    (if golden-ratio-previous-enable
+        (progn
+          (ranger-close)
+          (golden-ratio-mode 1))
+      (ranger-close)))
+
+  (with-eval-after-load 'ranger
+    (progn
+      (define-key ranger-normal-mode-map (kbd "q") 'my-quit-ranger)))
+
+  (spacemacs/set-leader-keys "ar" 'my-ranger)
 
 
 )
+
+
+
 ;; (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
 ;; (load custom-file 'no-error 'no-message)
 ;; Do not write anything past this comment. This is where Emacs will
