@@ -83,6 +83,7 @@ values."
                                       ;; orgule
                                       ;; emacs-ctable
                                       org-octopress
+                                      hideif
                                       )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
@@ -337,6 +338,15 @@ you should place your code here."
   (setq org-octopress-directory-org-top   "~/bxgithub/myHexoBlog/source")
   (setq org-octopress-directory-org-posts "~/bxgithub/myHexoBlog/source/blog")
   (setq org-octopress-setup-file          "~/bxgithub/myHexoBlog/setupfile.org")
+
+  (require 'hideif)
+  (setq hide-ifdef-initially t)
+  (add-hook 'c-mode-common-hook
+            (lambda ()
+              (setq hide-ifdef-shadow t)
+              (setq hide-ifdef-mode t)
+              (hide-ifdefs)
+              ))
 
   ;; (defun paste-with-Xclipboard ()
   ;;   (shell-command-to-string "xsel -ob"))
