@@ -7,3 +7,6 @@ Bundle 'sjl/gundo.vim', {'on': 'GundoToggle'}
 Bundle 'junegunn/vim-github-dashboard', { 'on': ['GHDashboard', 'GHActivity'] }
 Bundle 'airblade/vim-gitgutter'
 Bundle 'Numkil/ag.nvim'
+"https://github.com/Shougo/neocomplete.vim/issues/536
+Bundle 'Konfekt/FastFold'
+Bundle 'Konfekt/FoldText'

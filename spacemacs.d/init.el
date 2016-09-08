@@ -84,6 +84,7 @@ values."
                                       ;; emacs-ctable
                                       org-octopress
                                       hideif
+                                      spaceline
                                       )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
@@ -384,7 +385,10 @@ you should place your code here."
       (define-key ranger-normal-mode-map (kbd "q") 'my-quit-ranger)))
 
   (spacemacs/set-leader-keys "ar" 'my-ranger)
+  (setq smerge-command-prefix "\C-cv")
 
+  (require 'spaceline-config)
+  (spaceline-spacemacs-theme)
 
 )
 
