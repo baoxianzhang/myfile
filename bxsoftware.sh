@@ -103,6 +103,15 @@ if [ $FLAG_APT_GET_SOFTWARE_INSTALL == 1 ];then
         curl
         npm
         markdown
+        manpages
+        manpages-de
+        manpages-de-dev
+        manpages-dev
+        manpages-posix
+        manpages-posix-dev
+        linux-doc
+        libcorelinux-doc
+        libstc++6-4.7-doc
     )
     cecho "Please edit the apps you need to install and save it!" $red
     read nothing
