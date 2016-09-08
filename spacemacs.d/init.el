@@ -316,12 +316,6 @@ you should place your code here."
 
   (add-to-list 'auto-mode-alist '("\\.ino\\'" . c++-mode))
 
-  (setq c++-tab-always-indent t)
-  (setq c-basic-offset 4)                  ;; Default is 2
-  (setq c-indent-level 4)                  ;; Default is 2
-  (setq c++-basic-offset 4)                  ;; Default is 2
-  (setq c++-indent-level 4)                  ;; Default is 2
-
   (define-key evil-normal-state-map (kbd "C-]")   'helm-gtags-find-tag)
   (define-key evil-normal-state-map (kbd "C-t")   'evil-jump-backward)
   ;; key bindings
@@ -387,10 +381,14 @@ you should place your code here."
   (spacemacs/set-leader-keys "ar" 'my-ranger)
   (setq smerge-command-prefix "\C-cv")
 
-
   (require 'spaceline-config)
   (spaceline-spacemacs-theme)
 
+  (setq c++-tab-always-indent t)
+  (setq c-basic-offset 4)                  ;; Default is 2
+  (setq c-indent-level 4)                  ;; Default is 2
+  (setq c++-basic-offset 4)                  ;; Default is 2
+  (setq c++-indent-level 4)                  ;; Default is 2
 )
 
 

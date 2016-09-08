@@ -104,7 +104,9 @@ alias ranger=ranger
 alias sl=sl
 alias rm='trash-put'
 alias homedistusage='sudo du -d 1 -k /home/* | sort -n -r'
-alias screenshot='gnome-screenshot -a'
+alias screenshota='gnome-screenshot -a'
+alias screenshotw='gnome-screenshot -w'
+alias screenshotc='gnome-screenshot -c'
 # tree -L 2
 # alias emacs='emacsclient -c'
 
