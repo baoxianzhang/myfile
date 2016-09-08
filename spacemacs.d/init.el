@@ -387,6 +387,7 @@ you should place your code here."
   (spacemacs/set-leader-keys "ar" 'my-ranger)
   (setq smerge-command-prefix "\C-cv")
 
+
   (require 'spaceline-config)
   (spaceline-spacemacs-theme)
 
