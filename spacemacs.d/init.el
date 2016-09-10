@@ -85,6 +85,7 @@ values."
                                       org-octopress
                                       hideif
                                       spaceline
+                                      google-c-style
                                       )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
@@ -384,11 +385,23 @@ you should place your code here."
   (require 'spaceline-config)
   (spaceline-spacemacs-theme)
 
+  (add-to-list 'load-path (expand-file-name "~/.spacemacs.d/elpa/plugins/doxymacs/lisp"))
+  (require 'doxymacs)
+  (require 'google-c-style)
+  (add-hook 'c-mode-common-hook 'google-set-c-style)
+  (add-hook 'c-mode-common-hook 'google-make-newline-indent)
+  (add-hook 'c-mode-common-hook 'doxymacs-mode)
+  (add-hook 'c++-mode-hook 'google-set-c-style)
+  (add-hook 'c++-mode-hook 'google-make-newline-indent)
+  (add-hook 'c++-mode-hook 'doxymacs-mode)
+
+  ;; (setq c-default-style "stroustrup")
   (setq c++-tab-always-indent t)
   (setq c-basic-offset 4)                  ;; Default is 2
   (setq c-indent-level 4)                  ;; Default is 2
   (setq c++-basic-offset 4)                  ;; Default is 2
   (setq c++-indent-level 4)                  ;; Default is 2
+
 )
 
 

@@ -13,6 +13,7 @@
                                       ;; zilongshanren-misc
                                       ;; zilongshanren-programming
                                       ;; zilongshanren-ui
-                                      leo-org
+                                      ;; leo-org
                                       ;; zilongshanren-better-defaults
+                                      ;; leo-doxygen
                                       ))
