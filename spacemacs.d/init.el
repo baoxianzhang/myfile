@@ -387,15 +387,17 @@ you should place your code here."
 
   (add-to-list 'load-path (expand-file-name "~/.spacemacs.d/elpa/plugins/doxymacs/lisp"))
   (require 'doxymacs)
-  (require 'google-c-style)
-  (add-hook 'c-mode-common-hook 'google-set-c-style)
-  (add-hook 'c-mode-common-hook 'google-make-newline-indent)
+  ;; (require 'google-c-style)
+  ;; (add-hook 'c-mode-common-hook 'google-set-c-style)
+  ;; (add-hook 'c-mode-common-hook 'google-make-newline-indent)
   (add-hook 'c-mode-common-hook 'doxymacs-mode)
-  (add-hook 'c++-mode-hook 'google-set-c-style)
-  (add-hook 'c++-mode-hook 'google-make-newline-indent)
+  ;; (add-hook 'c++-mode-hook 'google-set-c-style)
+  ;; (add-hook 'c++-mode-hook 'google-make-newline-indent)
   (add-hook 'c++-mode-hook 'doxymacs-mode)
 
   ;; (setq c-default-style "stroustrup")
+  (add-hook 'c++-mode-hook (lambda ()
+                             (electric-indent-local-mode -1)))
   (setq c++-tab-always-indent t)
   (setq c-basic-offset 4)                  ;; Default is 2
   (setq c-indent-level 4)                  ;; Default is 2
