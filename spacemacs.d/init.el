@@ -64,6 +64,7 @@ values."
      ;; erc
      games
      ranger
+     pdf-tools
      ;; fasd
      ;; dash
      ;; command-log
@@ -73,6 +74,7 @@ values."
      ;;           ;; use the actual wakatime path
      ;;           wakatime-cli-path "/usr/local/bin/wakatime")
      ;; ycmd
+
      ;; leo
      )
    ;; List of additional packages that will be installed without being
@@ -293,7 +295,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
   ;;         ("gnu-cn"   . "https://elpa.zilongshanren.com/gnu/")))
   ;; https://github.com/syl20bnr/spacemacs/issues/2705
 
-  )
+)
 
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.

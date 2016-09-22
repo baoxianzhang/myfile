@@ -113,6 +113,13 @@ if [ $FLAG_APT_GET_SOFTWARE_INSTALL == 1 ];then
         linux-doc
         libcorelinux-doc
         libstc++6-4.7-doc
+        # pdf-tools for emacs
+        libpng-dev
+        libz-dev
+        libpoppler-glib-dev
+        libpoppler-private-dev
+        imagemagick
+
     )
     cecho "Please edit the apps you need to install and save it!" $red
     read nothing
@@ -735,6 +742,28 @@ if [ $FLAG_PANDOC_FOR_SPACEMACE_INSTALL == 1 ]; then
     cecho "<<<<<< Install pandoc for spacemacs. >>>>>> " $yellow
     sudo apt-get install pandoc
 fi
+
+#if [ $FLAG_PDFTOOL_FOR_SPACEMACE_INSTALL == 1 ]; then
+#    cecho "<<<<<< Install pdf-tool for spacemacs. >>>>>> " $yellow
+#    # https://github.com/politza/pdf-tools
+#    cd ~/softwares/
+#    # or
+#    # git clone https://anongit.freedesktop.org/git/poppler/poppler.git
+#    # wget https://poppler.freedesktop.org/poppler-0.47.0.tar.xz
+#    # tar -xvf poppler-0.47.0.tar.xz
+#    # cd poppler
+#    # ./autogen.sh
+#    # ./configure
+#    # make
+#    # sudo make install
+#
+#    git clone git@github.com:politza/pdf-tools.git
+#    cd pdf-tools
+#    make install-server-deps
+#    make -s
+#    make install-package
+#fi
+
 
 if [ $FLAG_HAROOPAD_FOR_MARKDOWN_INSTALL == 1 ]; then
     cecho "<<<<<< Install Haroopad for Markdown. >>>>>> " $yellow
