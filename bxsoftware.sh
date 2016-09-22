@@ -103,10 +103,7 @@ if [ $FLAG_APT_GET_SOFTWARE_INSTALL == 1 ];then
         curl
         npm
         markdown
-<<<<<<< 412fd94d2a16554c6d1bf985d38a6faf4e748667
-=======
         # man page
->>>>>>> add man page of c c++ linux core install
         manpages
         manpages-de
         manpages-de-dev

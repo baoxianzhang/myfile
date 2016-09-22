@@ -173,6 +173,10 @@ alias lnoriginemacs='touch ~/.emacs.d && rm ~/.emacs.d -f && ln -s ~/bxgithub/or
 alias lnmyspacemacs='touch ~/.spacemacs.d && rm ~/.spacemacs.d -f && ln -s ~/bxgithub/myfile/spacemacs.d ~/.spacemacs.d'
 alias lnzlspacemacs='touch ~/.spacemacs.d && rm ~/.spacemacs.d -f && ln -s ~/bxgithub/spacemacs-private ~/.spacemacs.d'
 alias springemacs='pkill -SIGUSR2 emacs'
+alias espApp="sudo ~/molmc_code/intorobot-firmware-hal/tools/esptool/esptool -v -cb 921600 -cd nodemcu -cp /dev/ttyUSB0 -ca 0x14000 -cf $1"
+alias espbootloader="sudo ~/molmc_code/intorobot-firmware-hal/tools/esptool/esptool -v -cb 921600 -cd nodemcu -cp /dev/ttyUSB0 -ca 0x00000 -cf $1"
+
+
 scpIntoyunTmp() {
     scp $1 root@112.124.117.64:/tmp/
     #command scp $1 root@112.124.117.64:/tmp/
@@ -229,5 +233,5 @@ export PATH=$PATH:/usr/lib/git-core/
 #eval $(thefuck --alias)
 export PATH=$PATH:/usr/src/xtensa-lx106-elf/bin
 export PATH=$PATH:/usr/lib/git-core
-export PARTICLE_DEVELOP=1
+export INTOROBOT_DEVELOP=1
 export TERM=xterm-256color

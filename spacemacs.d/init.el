@@ -252,7 +252,7 @@ values."
    ;; If non nil line numbers are turned on in all `prog-mode' and `text-mode'
    ;; derivatives. If set to `relative', also turns on relative line numbers.
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers t
    ;; dotspacemacs-line-numbers t
    ;; If non-nil smartparens-strict-mode will be enabled in programming modes.
    ;; (default nil)
@@ -386,14 +386,14 @@ you should place your code here."
   (spaceline-spacemacs-theme)
 
   (add-to-list 'load-path (expand-file-name "~/.spacemacs.d/elpa/plugins/doxymacs/lisp"))
-  (require 'doxymacs)
-  ;; (require 'google-c-style)
+  ;; (require 'doxymacs)
+  (require 'google-c-style)
   ;; (add-hook 'c-mode-common-hook 'google-set-c-style)
   ;; (add-hook 'c-mode-common-hook 'google-make-newline-indent)
-  (add-hook 'c-mode-common-hook 'doxymacs-mode)
+  ;; (add-hook 'c-mode-common-hook 'doxymacs-mode)
   ;; (add-hook 'c++-mode-hook 'google-set-c-style)
   ;; (add-hook 'c++-mode-hook 'google-make-newline-indent)
-  (add-hook 'c++-mode-hook 'doxymacs-mode)
+  ;; (add-hook 'c++-mode-hook 'doxymacs-mode)
 
   ;; (setq c-default-style "stroustrup")
   (add-hook 'c++-mode-hook (lambda ()
@@ -403,6 +403,10 @@ you should place your code here."
   (setq c-indent-level 4)                  ;; Default is 2
   (setq c++-basic-offset 4)                  ;; Default is 2
   (setq c++-indent-level 4)                  ;; Default is 2
+
+  ;; org-mode 自动换行
+  (add-hook 'org-mode-hook (lambda () (setq truncate-lines t)))
+
 
 )
 
