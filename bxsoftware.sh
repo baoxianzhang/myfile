@@ -505,8 +505,8 @@ if [ $FLAG_MERCURY_MW150US_WIRELESS_INSTALL == 1 ];then
     cecho "Logout to use Mw150us wireless" $red
 fi
 
-if [ $FLAG_EMACS24dot5_INSTALL == 1 ];then
-    cecho "<<<<<< Install Emacs 24.5. >>>>>>" $yellow
+if [ $FLAG_EMACS_INSTALL == 1 ];then
+    cecho "<<<<<< Install Emacs. >>>>>>" $yellow
     #if [ ! -f "emacs" ]; then
     #git clone https://github.com/emacs-mirror/emacs.git
     #./configure
@@ -515,11 +515,11 @@ if [ $FLAG_EMACS24dot5_INSTALL == 1 ];then
     #fi
     ## or
     cd ~/softwares
-    if [ ! -f "emacs-24.5.tar.gz" ]; then
-        wget -nc http://ftp.gnu.org/gnu/emacs/emacs-24.5.tar.gz
-        tar -xzvf emacs-24.5.tar.gz
+    if [ ! -f "emacs-25.1.tar.gz" ]; then
+        wget -nc http://ftpmirror.gnu.org/emacs/emacs-25.1.tar.gz
+        tar -xzvf emacs-25.1.tar.gz
     fi
-    cd emacs-24.5
+    cd emacs-25.1
     sudo apt-get install -y libjpeg-dev
     sleep 1
     sudo apt-get install -y libgif-dev
