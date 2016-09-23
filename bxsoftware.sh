@@ -743,6 +743,16 @@ if [ $FLAG_PANDOC_FOR_SPACEMACE_INSTALL == 1 ]; then
     sudo apt-get install pandoc
 fi
 
+if [ $FLAG_DASH_ZEAL_DOCSETS_FOR_SPACEMACE_INSTALL == 1 ]; then
+    cecho "<<<<<< Install zeal docsets for spacemacs. >>>>>> " $yellow
+    cd ~/bxgithub/
+    git clone git@github.com:baoxianzhang/myconfigresources.git
+    cd myconfigresources
+    chmod +x install.sh
+    ./install.sh
+fi
+
+
 #if [ $FLAG_PDFTOOL_FOR_SPACEMACE_INSTALL == 1 ]; then
 #    cecho "<<<<<< Install pdf-tool for spacemacs. >>>>>> " $yellow
 #    # https://github.com/politza/pdf-tools

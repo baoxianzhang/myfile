@@ -65,7 +65,7 @@ values."
      games
      ranger
      pdf-tools
-     (dash :variables dash-helm-dash-docset-path "~/bxgithub/myconfigresources/zeal/docsets")
+     (dash :variables helm-dash-docsets-newpath "~/bxgithub/myconfigresources/zeal/docsets")
      ;; fasd
      ;; dash
      ;; command-log
