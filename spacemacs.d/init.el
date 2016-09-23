@@ -65,7 +65,7 @@ values."
      games
      ranger
      pdf-tools
-     ;; dash
+     (dash :variables dash-helm-dash-docset-path "~/bxgithub/myconfigresources/zeal/docsets")
      ;; fasd
      ;; dash
      ;; command-log
@@ -388,7 +388,7 @@ you should place your code here."
   (require 'spaceline-config)
   (spaceline-spacemacs-theme)
 
-  (add-to-list 'load-path (expand-file-name "~/.spacemacs.d/elpa/plugins/doxymacs/lisp"))
+  ;; (add-to-list 'load-path (expand-file-name "~/.spacemacs.d/elpa/plugins/doxymacs/lisp"))
   ;; (require 'doxymacs)
   (require 'google-c-style)
   ;; (add-hook 'c-mode-common-hook 'google-set-c-style)
