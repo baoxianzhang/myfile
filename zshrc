@@ -234,4 +234,5 @@ export PATH=$PATH:/usr/lib/git-core/
 export PATH=$PATH:/usr/src/xtensa-lx106-elf/bin
 export PATH=$PATH:/usr/lib/git-core
 export INTOROBOT_DEVELOP=1
+export PARTICLE_DEVELOP=1
 export TERM=xterm-256color
