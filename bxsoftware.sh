@@ -66,7 +66,6 @@ if [ $FLAG_APT_GET_SOFTWARE_INSTALL == 1 ];then
         python3
         openssh-server
         trash-cli
-        ibus-googlepinyin
         luajit
         exuberant-ctags
         curl
@@ -103,16 +102,6 @@ if [ $FLAG_APT_GET_SOFTWARE_INSTALL == 1 ];then
         curl
         npm
         markdown
-        # man page
-        manpages
-        manpages-de
-        manpages-de-dev
-        manpages-dev
-        manpages-posix
-        manpages-posix-dev
-        linux-doc
-        libcorelinux-doc
-        libstc++6-4.7-doc
         # pdf-tools for emacs
         libpng-dev
         libz-dev
@@ -420,7 +409,7 @@ if [ $FLAG_STLINK_INSTALL == 1 ];then
     cecho "<<<<<< Install stlink. >>>>>>" $yellow
     cd ~/softwares
     if [ ! -d "stlink" ]; then
-        git clone git://github.com/texane/stlink.git
+        git clone https://github.com/texane/stlink.git
     fi
     cd stlink
     sudo apt-get install -y pkg-config
@@ -538,7 +527,7 @@ if [ $FLAG_SPACEMACS_INSTALL == 1 ]; then
     fi
     cd ~/bxgithub/
     if [ ! -d "$homeDir/bxgithub/spacemacs" ]; then
-        git clone git@github.com:baoxianzhang/spacemacs.git
+        git clone https://github.com/baoxianzhang/spacemacs.git
     fi
     rm -rf ~/.emacs.d
     ln -s ~/bxgithub/spacemacs ~/.emacs.d
@@ -727,7 +716,7 @@ fi
 if [ $FLAG_SCEL2PYIM_FOR_SPACEMACE_INSTALL == 1 ]; then
     cd ~/softwares/
     cecho "<<<<<< Install scel2pyim for spacemacs chinese layer. >>>>>> " $yellow
-    git clone git@github.com:E-Neo/scel2pyim.git
+    git clone https://github.com/E-Neo/scel2pyim.git
     gcc -o scel2pyim scel2pyim.c
     sudo cp scel2pyim /usr/local/bin/
     #sogou pin cell library path: /usr/share/sogou-qimpanel/cell/defaultCell/
@@ -746,7 +735,7 @@ fi
 if [ $FLAG_DASH_ZEAL_DOCSETS_FOR_SPACEMACE_INSTALL == 1 ]; then
     cecho "<<<<<< Install zeal docsets for spacemacs. >>>>>> " $yellow
     cd ~/bxgithub/
-    git clone git@github.com:baoxianzhang/myconfigresources.git
+    git clone https://github.com/baoxianzhang/myconfigresources.git
     cd myconfigresources
     chmod +x install.sh
     ./install.sh
