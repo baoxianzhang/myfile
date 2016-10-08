@@ -227,7 +227,7 @@ extract () {
 
 [[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && . ~/.autojump/etc/profile.d/autojump.sh
 source ~/code/git-flow-completion/git-flow-completion.plugin.zsh
-#/usr/bin/setxkbmap -option "ctrl:swapcaps"
+/usr/bin/setxkbmap -option "ctrl:swapcaps"
 export PATH=$PATH:/usr/lib/git-core/
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 #eval $(thefuck --alias)
