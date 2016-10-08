@@ -586,7 +586,7 @@ if [ $FLAG_VIRTUALBOX_INSTALL == 1 ];then
     cecho "if failed, click the deb, use the software center to install it." $red
     wget -nc http://download.virtualbox.org/virtualbox/5.1.6/Oracle_VM_VirtualBox_Extension_Pack-5.1.6-110634.vbox-extpack
     cecho "Install the extpack by your hand." $red
-
+    cecho "sudo usermod -aG vboxusers <host>" $red # for USB
 fi
 
 if [ $FLAG_VIRTUALBOX_WIN7_INSTALL == 1 ];then
