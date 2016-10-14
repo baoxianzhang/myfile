@@ -134,6 +134,7 @@ alias dc='cd ~/Documents/'
 alias dl='cd ~/Downloads/'
 alias dt='cd ~/Desktop/'
 alias tl='cd ~/Templates/'
+alias mf='cd ~/bxgithub/myfile'
 alias halneutron='cd ~/molmc_code/firmware/hal/src/neutron/'
 alias vi='vim'
 alias em='emacs'
@@ -173,7 +174,7 @@ alias lnoriginemacs='touch ~/.emacs.d && rm ~/.emacs.d -f && ln -s ~/bxgithub/or
 alias lnmyspacemacs='touch ~/.spacemacs.d && rm ~/.spacemacs.d -f && ln -s ~/bxgithub/myfile/spacemacs.d ~/.spacemacs.d'
 alias lnzlspacemacs='touch ~/.spacemacs.d && rm ~/.spacemacs.d -f && ln -s ~/bxgithub/spacemacs-private ~/.spacemacs.d'
 alias springemacs='pkill -SIGUSR2 emacs'
-alias espApp="sudo ~/molmc_code/intorobot-firmware-hal/tools/esptool/esptool -v -cb 921600 -cd nodemcu -cp /dev/ttyUSB0 -ca 0x14000 -cf $1"
+alias espApp="sudo ~/molmc_code/intorobot-firmware-hal/tools/esptool/esptool -v -cb 921600 -cd nodemcu -cp /dev/ttyUSB0 -ca 0x8000 -cf $1"
 alias espbootloader="sudo ~/molmc_code/intorobot-firmware-hal/tools/esptool/esptool -v -cb 921600 -cd nodemcu -cp /dev/ttyUSB0 -ca 0x00000 -cf $1"
 
 
@@ -229,10 +230,12 @@ extract () {
 source ~/code/git-flow-completion/git-flow-completion.plugin.zsh
 #/usr/bin/setxkbmap -option "ctrl:swapcaps"
 export PATH=$PATH:/usr/lib/git-core/
+export PATH=$PATH:~/code/esp/xtensa-esp32-elf/bin
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 #eval $(thefuck --alias)
 export PATH=$PATH:/usr/src/xtensa-lx106-elf/bin
 export PATH=$PATH:/usr/lib/git-core
 export INTOROBOT_DEVELOP=1
 export PARTICLE_DEVELOP=1
+export IDF_PATH=~/code/esp/esp-idf
 export TERM=xterm-256color

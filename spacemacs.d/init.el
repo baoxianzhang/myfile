@@ -4,6 +4,7 @@
 
 (defun dotspacemacs/layers ()
   "Configuration Layers declaration.
+
 You should not put any user code in this function besides modifying the variable
 values."
   (setq-default
@@ -410,6 +411,21 @@ you should place your code here."
   ;; org-mode 自动换行
   (add-hook 'org-mode-hook (lambda () (setq truncate-lines t)))
 
+  (setq helm-dash-browser-func 'eww)
+
+  (defun hidden-dos-eol ()
+    "Do not show ^M in files containing mixed UNIX and DOS line endings."
+    (interactive)
+    (unless buffer-display-table
+      (setq buffer-display-table (make-display-table)))
+    (aset buffer-display-table ?\^M []))
+
+
+  (defun remove-dos-eol ()
+    "Replace DOS eolns CR LF with Unix eolns CR"
+    (interactive)
+    (goto-char (point-min))
+    (while (search-forward "\r" nil t) (replace-match "")))
 
 )
 
