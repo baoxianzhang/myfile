@@ -66,7 +66,6 @@ if [ $FLAG_APT_GET_SOFTWARE_INSTALL == 1 ];then
         python3
         openssh-server
         trash-cli
-        ibus-googlepinyin
         luajit
         exuberant-ctags
         curl
@@ -103,23 +102,11 @@ if [ $FLAG_APT_GET_SOFTWARE_INSTALL == 1 ];then
         curl
         npm
         markdown
-        # man page
-        manpages
-        manpages-de
-        manpages-de-dev
-        manpages-dev
-        manpages-posix
-        manpages-posix-dev
-        linux-doc
-        libcorelinux-doc
-        libstc++6-4.7-doc
         # pdf-tools for emacs
         libpng-dev
         libz-dev
         libpoppler-glib-dev
         libpoppler-private-dev
-        imagemagick
-
     )
     cecho "Please edit the apps you need to install and save it!" $red
     read nothing
@@ -243,7 +230,7 @@ if [ $FLAG_CMAKE_INSTALL == 1 ];then
         wget -nc https://cmake.org/files/v3.5/cmake-3.5.0.tar.gz
         tar -xvzf cmake-3.5.0.tar.gz
     fi
-    if [ -d "cmake-3.5.0" ]; then
+    if [ ! -d "cmake-3.5.0" ]; then
         cd cmake-3.5.0
         #if the second times or more, comment the next two lines
         ./configure
@@ -420,7 +407,7 @@ if [ $FLAG_STLINK_INSTALL == 1 ];then
     cecho "<<<<<< Install stlink. >>>>>>" $yellow
     cd ~/softwares
     if [ ! -d "stlink" ]; then
-        git clone git://github.com/texane/stlink.git
+        git clone https://github.com/texane/stlink.git
     fi
     cd stlink
     sudo apt-get install -y pkg-config
@@ -532,20 +519,22 @@ if [ $FLAG_EMACS_INSTALL == 1 ];then
 fi
 
 if [ $FLAG_SPACEMACS_INSTALL == 1 ]; then
-    cecho "<<<<<< Install Spacemacs. >>>>>>" yellow
+    cecho "<<<<<< Install Spacemacs. >>>>>>" $yellow
     if [ ! -d "$homeDir/bxgithub" ]; then
         mkdir -p ~/bxgithub/
     fi
     cd ~/bxgithub/
     if [ ! -d "$homeDir/bxgithub/spacemacs" ]; then
-        git clone git@github.com:baoxianzhang/spacemacs.git
+        git clone https://github.com/baoxianzhang/spacemacs.git
+	cd spacemacs
+	git checkout develop
     fi
     rm -rf ~/.emacs.d
     ln -s ~/bxgithub/spacemacs ~/.emacs.d
 fi
 
 if [ $FLAG_SOFTLINK_SPACEMACS_CONFIG == 1 ]; then
-    cecho "<<<<<< Softlink Spacemacs. >>>>>>" yellow
+    cecho "<<<<<< Softlink Spacemacs. >>>>>>" $yellow
     rm -rf ~/.spacemacs.d
     ln -s ~/bxgithub/myfile/spacemacs.d ~/.spacemacs.d
 fi
@@ -588,15 +577,16 @@ if [ $FLAG_GOOGLEPINYIN_INSTALL == 1 ];then
 fi
 
 if [ $FLAG_VIRTUALBOX_INSTALL == 1 ];then
-    cecho "<<<<<< Install virtualbox. >>>>>>" $yellow
+    cecho "<<<<<< Install virtualbox in ubuntu 16.04. >>>>>>" $yellow
     #Ref: https://www.virtualbox.org/
     cd ~/softwares
-    if [ ! -f "virtualbox-5.0_5.0.16-105871~Ubuntu~trusty_amd64.deb" ]; then
-        wget -nc http://download.virtualbox.org/virtualbox/5.0.16/virtualbox-5.0_5.0.16-105871~Ubuntu~trusty_amd64.deb
-    fi
+    wget -nc http://download.virtualbox.org/virtualbox/5.1.6/virtualbox-5.1_5.1.6-110634~Ubuntu~xenial_amd64.deb
     #echo "Use the Software center to install the deb since dpkg is not work!"
-    sudo dpkg -i virtualbox-5.0_5.0.16-105871~Ubuntu~trusty_amd64.deb
+    sudo dpkg -i virtualbox-5.1_5.1.6-110634~Ubuntu~xenial_amd64.deb
     cecho "if failed, click the deb, use the software center to install it." $red
+    wget -nc http://download.virtualbox.org/virtualbox/5.1.6/Oracle_VM_VirtualBox_Extension_Pack-5.1.6-110634.vbox-extpack
+    cecho "Install the extpack by your hand." $red
+    cecho "sudo usermod -aG vboxusers <host>" $red # for USB
 fi
 
 if [ $FLAG_VIRTUALBOX_WIN7_INSTALL == 1 ];then
@@ -727,7 +717,8 @@ fi
 if [ $FLAG_SCEL2PYIM_FOR_SPACEMACE_INSTALL == 1 ]; then
     cd ~/softwares/
     cecho "<<<<<< Install scel2pyim for spacemacs chinese layer. >>>>>> " $yellow
-    git clone git@github.com:E-Neo/scel2pyim.git
+    git clone https://github.com/E-Neo/scel2pyim.git
+    cd scel2pyim
     gcc -o scel2pyim scel2pyim.c
     sudo cp scel2pyim /usr/local/bin/
     #sogou pin cell library path: /usr/share/sogou-qimpanel/cell/defaultCell/
@@ -746,33 +737,11 @@ fi
 if [ $FLAG_DASH_ZEAL_DOCSETS_FOR_SPACEMACE_INSTALL == 1 ]; then
     cecho "<<<<<< Install zeal docsets for spacemacs. >>>>>> " $yellow
     cd ~/bxgithub/
-    git clone git@github.com:baoxianzhang/myconfigresources.git
+    git clone https://github.com/baoxianzhang/myconfigresources.git
     cd myconfigresources
     chmod +x install.sh
     ./install.sh
 fi
-
-
-#if [ $FLAG_PDFTOOL_FOR_SPACEMACE_INSTALL == 1 ]; then
-#    cecho "<<<<<< Install pdf-tool for spacemacs. >>>>>> " $yellow
-#    # https://github.com/politza/pdf-tools
-#    cd ~/softwares/
-#    # or
-#    # git clone https://anongit.freedesktop.org/git/poppler/poppler.git
-#    # wget https://poppler.freedesktop.org/poppler-0.47.0.tar.xz
-#    # tar -xvf poppler-0.47.0.tar.xz
-#    # cd poppler
-#    # ./autogen.sh
-#    # ./configure
-#    # make
-#    # sudo make install
-#
-#    git clone git@github.com:politza/pdf-tools.git
-#    cd pdf-tools
-#    make install-server-deps
-#    make -s
-#    make install-package
-#fi
 
 
 if [ $FLAG_HAROOPAD_FOR_MARKDOWN_INSTALL == 1 ]; then
@@ -793,6 +762,14 @@ if [ $FLAG_SECURECRT7dot3_INSTALL == 1 ];then
     read nothing
 fi
 
+#if [ $FLAG_SHADOWSOCKS_INSTALL == 1 ];then
+#    cecho "<<<<<< Install Shadwsocks. >>>>>>" $yellow
+#    sudo apt-get install python-pip
+#    sudo pip install shadowsocks
+#    cecho "add SwitchyOmega.crx plugin to google chrome" $green
+#    cecho "in input/output restore from file add *.bak and choose auto switch" $green
+#    cecho "chmod +x shadowsock.sh and ./shadowsocks" $green
+#fi
 
 if [ $FLAG_FLAT_THEMES_ICONS_INSTALL == 1 ]; then
     cecho "<<<<<< Install ubuntu flat themes and icons. >>>>>>" $yellow
