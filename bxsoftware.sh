@@ -687,17 +687,33 @@ if [ $FLAG_LAUNCHERFODERS_INSTALL == 1 ];then
     sudo dpkg -i unity-launcher-folders_1.0.3_all.deb
 fi
 
+#if [ $FLAG_SKYPE_INSTALL == 1 ];then
+#    cecho "<<<<<< Install Skype. >>>>>>" $yellow
+#    cd ~/softwares
+#    if [ ! -f "skype-ubuntu-precise_4.3.0.37-1_i386.deb" ]; then
+#        wget -nc download.skype.com/linux/skype-ubuntu-precise_4.3.0.37-1_i386.deb
+#    fi
+#    cecho "Use the Software center to install the deb since dpkg is not work!" $red
+#    cecho "Press any key to continue!" $green
+#    read nothing
+#    # sudo dpkg -i skype-ubuntu-precise_4.3.0.37-1_i386.deb
+#fi
+
 if [ $FLAG_SKYPE_INSTALL == 1 ];then
     cecho "<<<<<< Install Skype. >>>>>>" $yellow
     cd ~/softwares
-    if [ ! -f "skype-ubuntu-precise_4.3.0.37-1_i386.deb" ]; then
-        wget -nc download.skype.com/linux/skype-ubuntu-precise_4.3.0.37-1_i386.deb
+    if [ ! -f "skypeforlinux-64-alpha.deb" ]; then
+        wget -nc https://go.skype.com/skypeforlinux-64-alpha.deb
+        sudo gdebi skypeforlinux-64-alpha.deb
     fi
-    cecho "Use the Software center to install the deb since dpkg is not work!" $red
-    cecho "Press any key to continue!" $green
-    read nothing
+    #cecho "Use the Software center to install the deb since dpkg is not work!" $red
+    #cecho "Press any key to continue!" $green
+    #read nothing
     # sudo dpkg -i skype-ubuntu-precise_4.3.0.37-1_i386.deb
 fi
+
+
+
 
 if [ $FLAG_GOOGLE_HOSTS_INSTALL == 1 ];then
     cecho "<<<<<< Install Google Hosts. >>>>>>" $yellow
