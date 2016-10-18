@@ -107,6 +107,9 @@ if [ $FLAG_APT_GET_SOFTWARE_INSTALL == 1 ];then
         libz-dev
         libpoppler-glib-dev
         libpoppler-private-dev
+        flashplugin-installer
+        adobe-flashplugin
+
     )
     cecho "Please edit the apps you need to install and save it!" $red
     read nothing
@@ -361,7 +364,8 @@ fi
 if [ $FLAG_ARM_NONE_EABI_GCC_4dot9dot3_INSTALL == 1 ];then
     cecho "<<<<<< Install arm-none-eabi-gcc 4.9.3. >>>>>>" $yellow
     cd ~/softwares
-    sudo apt-get install -y lib32ncurses5 lib32z1 lib32bz2-1.0
+    sudo apt-get install -y lib32ncurses5 lib32z1
+    #lib32bz2-1.0
     wget -nc https://launchpad.net/gcc-arm-embedded/4.9/4.9-2015-q3-update/+download/gcc-arm-none-eabi-4_9-2015q3-20150921-linux.tar.bz2
     tar -jxf gcc-arm-none-eabi-4_9-2015q3-20150921-linux.tar.bz2
     sudo cp gcc-arm-none-eabi-4_9-2015q3 /usr/src/ -r
@@ -414,11 +418,11 @@ if [ $FLAG_STLINK_INSTALL == 1 ];then
     sudo apt-get install -y intltool
     sudo apt-get install -y libsgutils2-dev libusb-1.0.0-dev
     sudo apt-get install -y autoconf automake libtool
-    ./autogen.sh
-    ./configure
+    #./autogen.sh
+    #./configure
     make
-    sudo install -s -m 775 st-util /usr/bin/st-util
-    sudo install -s -m 775 st-flash /usr/bin/st-flash
+    sudo install -s -m 775 build/Release/src/gdbserver/st-util /usr/bin/st-util
+    sudo install -s -m 775 build/Release/st-flash /usr/bin/st-flash
     sudo install -m 644 ./etc/udev/rules.d/49-stlinkv1.rules /etc/udev/rules.d/49-stlinkv1.rules
     sudo install -m 644 ./etc/udev/rules.d/49-stlinkv2.rules /etc/udev/rules.d/49-stlinkv2.rules
     sudo install -m 644 ./etc/udev/rules.d/49-stlinkv2-1.rules /etc/udev/rules.d/49-stlinkv2-1.rules
