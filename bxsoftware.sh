@@ -373,6 +373,17 @@ if [ $FLAG_ARM_NONE_EABI_GCC_4dot9dot3_INSTALL == 1 ];then
     #source ~/.zshrc
 fi
 
+if [ $FLAG_ESPTOOL_INSTALL == 1 ];then
+    cecho "<<<<<< Install esptool. >>>>>>" $yellow
+    cd ~/softwares
+    wget -nc https://github.com/igrr/esptool-ck/releases/download/0.4.9/esptool-0.4.9-linux64.tar.gz
+    tar -zxf esptool-0.4.9-linux64.tar.gz
+    sudo cp esptool-0.4.9-linux64 /usr/src/esptool -r
+    #source ~/.zshrc
+fi
+
+
+
 if [ $FLAG_SOFTLINK_ZSHRC_INSTALL == 1 ];then
     cecho "<<<<<< Softlink zshrc. >>>>>>" $yellow
     if [ ! -d "$homeDir/bxgithub" ]; then

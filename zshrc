@@ -55,6 +55,7 @@ plugins=(git)
 
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
 export PATH=$PATH:/usr/src/gcc-arm-none-eabi-4_9-2015q3/bin
+export PATH=$PATH:/usr/src/esptool
 export PATH=$PATH:/usr/src/xtensa-lx106-elf/bin
 export PATH=$PATH:/usr/src
 # export MANPATH="/usr/local/man:$MANPATH"
