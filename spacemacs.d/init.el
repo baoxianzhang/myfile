@@ -337,6 +337,8 @@ you should place your code here."
         (org-display-inline-images)
       (error nil)))
 
+  (add-hook 'doc-view-mode-hook 'auto-revert-mode)
+
   (spacemacs/set-leader-keys "o y" 'youdao-dictionary-search-at-point+)
   (spacemacs/set-leader-keys "o d" 'find-by-pinyin-dired)
 

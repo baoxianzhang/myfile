@@ -745,10 +745,11 @@ if [ $FLAG_ZEAL_FOR_SPACEMACE_INSTALL == 1 ];then
     sudo apt-get install zeal
 fi
 
-if [ $FLAG_DITTA_FOR_SPACEMACE_INSTALL == 1 ];then
-    cecho "<<<<<< Install ditaa FOR SPACEMACS. >>>>>>" $yellow
-    sudo apt-get install graphviz
-    sudo apt-get install plantuml
+if [ $FLAG_LATEX_INSTALL == 1 ];then
+    cecho "<<<<<< Install LATEX. >>>>>>" $yellow
+    sudo apt-get install texlive-full
+    # latex editor
+    sudo apt-get install texmaker
 fi
 
 
