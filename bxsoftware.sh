@@ -745,6 +745,13 @@ if [ $FLAG_ZEAL_FOR_SPACEMACE_INSTALL == 1 ];then
     sudo apt-get install zeal
 fi
 
+if [ $FLAG_DITTA_FOR_SPACEMACE_INSTALL == 1 ];then
+    cecho "<<<<<< Install ditaa FOR SPACEMACS. >>>>>>" $yellow
+    sudo apt-get install graphviz
+    sudo apt-get install plantuml
+fi
+
+
 if [ $FLAG_SCEL2PYIM_FOR_SPACEMACE_INSTALL == 1 ]; then
     cd ~/softwares/
     cecho "<<<<<< Install scel2pyim for spacemacs chinese layer. >>>>>> " $yellow
