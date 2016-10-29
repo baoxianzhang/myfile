@@ -453,14 +453,12 @@ if [ $FLAG_GOLDENDICT_INSTALL == 1 ];then
         mkdir GodlenDict
     fi
     cd ~/GodlenDict
-    if [ ! -f "stardict-langdao-ec-gb-2.4.2.tar.bz2"];then
-        wget -nc http://abloz.com/huzheng/stardict-dic/zh_CN/stardict-langdao-ec-gb-2.4.2.tar.bz2
-        wget -nc http://abloz.com/huzheng/stardict-dic/zh_CN/stardict-langdao-ce-gb-2.4.2.tar.bz2
-        wget -nc http://abloz.com/huzheng/stardict-dic/zh_CN/stardict-oxford-gb-2.4.2.tar.bz2
-        tar -xjvf stardict-langdao-ec-gb-2.4.2.tar.bz2
-        tar -xjvf stardict-langdao-ce-gb-2.4.2.tar.bz2
-        tar -xjvf stardict-oxford-gb-2.4.2.tar.bz2
-    fi
+    wget -nc http://abloz.com/huzheng/stardict-dic/zh_CN/stardict-langdao-ec-gb-2.4.2.tar.bz2
+    wget -nc http://abloz.com/huzheng/stardict-dic/zh_CN/stardict-langdao-ce-gb-2.4.2.tar.bz2
+    wget -nc http://abloz.com/huzheng/stardict-dic/zh_CN/stardict-oxford-gb-2.4.2.tar.bz2
+    tar -xjvf stardict-langdao-ec-gb-2.4.2.tar.bz2
+    tar -xjvf stardict-langdao-ce-gb-2.4.2.tar.bz2
+    tar -xjvf stardict-oxford-gb-2.4.2.tar.bz2
     cecho "start: goldendict, and configure it" $green
 fi
 

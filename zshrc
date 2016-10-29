@@ -141,6 +141,7 @@ alias halneutron='cd ~/molmc_code/firmware/hal/src/neutron/'
 alias vi='vim'
 alias em='emacs'
 alias o='nautilus ./'
+alias arduino='. ~/softwares/arduino-1.6.12/arduino'
 alias encodeI='iconv -f GBK -t UTF-8 '
 alias encodeE='enca -L zh_CN -x utf-8 '
 alias rmkeygen='ssh-keygen -f "/home/${USERNAME}/.ssh/known_hosts" -R 192.168.8.1'
@@ -234,12 +235,12 @@ extract () {
 source ~/code/git-flow-completion/git-flow-completion.plugin.zsh
 /usr/bin/setxkbmap -option "ctrl:swapcaps"
 export PATH=$PATH:/usr/lib/git-core/
-export PATH=$PATH:~/code/esp/xtensa-esp32-elf/bin
+export PATH=$PATH:~/softwares/xtensa-esp32-elf/bin
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 #eval $(thefuck --alias)
 export PATH=$PATH:/usr/src/xtensa-lx106-elf/bin
 export PATH=$PATH:/usr/lib/git-core
 export INTOROBOT_DEVELOP=1
 export PARTICLE_DEVELOP=1
-export IDF_PATH=~/code/esp/esp-idf
+export IDF_PATH=~/code/esp-idf
 export TERM=xterm-256color
