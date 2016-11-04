@@ -108,6 +108,9 @@ alias homedistusage='sudo du -d 1 -k /home/* | sort -n -r'
 alias screenshota='gnome-screenshot -a'
 alias screenshotw='gnome-screenshot -w'
 alias screenshotc='gnome-screenshot -c'
+# 给USB设备增加读写权限, logout to effect
+# sudo usermod -a -G dialout $USER
+#
 # tree -L 2
 # alias emacs='emacsclient -c'
 
