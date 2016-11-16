@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: try .. except ... 
-# key: tryexcept 
-# --
-try:
-    ()
-except Exception as err:
-    logger.error("") 

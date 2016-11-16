@@ -538,9 +538,9 @@ if [ $FLAG_SPACEMACS_INSTALL == 1 ]; then
     fi
     cd ~/bxgithub/
     if [ ! -d "$homeDir/bxgithub/spacemacs" ]; then
-        git clone https://github.com/baoxianzhang/spacemacs.git
-	cd spacemacs
-	git checkout develop
+        git clone https://github.com/syl20bnr/spacemacs.git
+	    cd spacemacs
+	    git checkout develop
     fi
     rm -rf ~/.emacs.d
     ln -s ~/bxgithub/spacemacs ~/.emacs.d

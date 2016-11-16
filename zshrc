@@ -183,7 +183,7 @@ alias lnmyspacemacs='touch ~/.spacemacs.d && rm ~/.spacemacs.d -f && ln -s ~/bxg
 alias lnzlspacemacs='touch ~/.spacemacs.d && rm ~/.spacemacs.d -f && ln -s ~/bxgithub/spacemacs-private ~/.spacemacs.d'
 alias springemacs='pkill -SIGUSR2 emacs'
 alias espApp="sudo ~/molmc_code/intorobot-firmware-hal/tools/esptool/esptool -v -cb 921600 -cd nodemcu -cp /dev/ttyUSB0 -ca 0x8000 -cf $1"
-alias espbootloader="sudo ~/molmc_code/intorobot-firmware-hal/tools/esptool/esptool -v -cb 921600 -cd nodemcu -cp /dev/ttyUSB0 -ca 0x00000 -cf $1"
+alias espbootloader="sudo ~/molmc/intorobot-firmware-hal/tools/esptool/esptool -v -cb 921600 -cd nodemcu -cp /dev/ttyUSB0 -ca 0x00000 -cf $1"
 
 
 scpIntoyunTmp() {

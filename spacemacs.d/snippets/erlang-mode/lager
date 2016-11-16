@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: lager:error 
-# key: lager 
-# --
-lager:error("~n~p:~p:$1=~p~n", [?MODULE, ?LINE, $1]),

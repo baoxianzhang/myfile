@@ -27,7 +27,7 @@ values."
    ;; If non-nil layers with lazy install support are lazy installed.
    ;; List of additional paths where to look for configuration layers.
    ;; Paths must have a trailing slash (i.e. `~/.mycontribs/')
-   dotspacemacs-configuration-layer-path '("~/.spacemacs.d/layers/")
+   dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
@@ -37,51 +37,24 @@ values."
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      ivy
-     (auto-completion :variables
-                      auto-completion-return-key-behavior 'complete
-                      auto-completion-tab-key-behavior 'cycle
-                      auto-completion-complete-with-key-sequence nil
-                      auto-completion-complete-with-key-sequence-delay 0.1
-                      auto-completion-private-snippets-directory "~/.spacemacs.d/snippets/"
-                      auto-completion-enable-snippets-in-popup t
-                      auto-completion-enable-help-tooltip t
-                      auto-completion-enable-sort-by-usage t
-                      )
+     auto-completion
      better-defaults
      emacs-lisp
      git
      markdown
-     (org :variables
-          org-enable-github-support t)
+     org
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom)
      ;; spell-checking
      ;; syntax-checking
      version-control
-     (chinese :variables
-              ;; chinese-default-input-method 'chinese-pyim
-              ;; chinese-enable-fcitx t
-              chinese-enable-youdao-dict t)
-     (c-c++ :variables
-            c-c++-default-mode-for-headers 'c++-mode)
-     (colors :variables
-             colors-enable-nyan-cat-progress-bar t)
-     games
-     ranger
-     pdf-tools
-     (dash :variables helm-dash-docsets-newpath "~/bxgithub/myconfigresources/zeal/docsets")
-
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(
-                                      ;; org-octopress
-                                      hideif
-                                      ;; spaceline
-                                      )
+   dotspacemacs-additional-packages '()
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -144,7 +117,7 @@ values."
    ;; `recents' `bookmarks' `projects' `agenda' `todos'."
    ;; List sizes may be nil, in which case
    ;; `spacemacs-buffer-startup-lists-length' takes effect.
-   dotspacemacs-startup-lists '((recents . 10)
+   dotspacemacs-startup-lists '((recents . 5)
                                 (projects . 7))
    ;; True if the home buffer should respond to resize events.
    dotspacemacs-startup-buffer-responsive t
@@ -153,15 +126,14 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(monokai
-                         spacemacs-dark
+   dotspacemacs-themes '(spacemacs-dark
                          spacemacs-light)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 13
+                               :size 16
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -261,7 +233,7 @@ values."
    ;; If non nil the frame is maximized when Emacs starts up.
    ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
    ;; (default nil) (Emacs 24.4+ only)
-   dotspacemacs-maximized-at-startup t
+   dotspacemacs-maximized-at-startup nil
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's active or selected.
    ;; Transparency can be toggled through `toggle-transparency'. (default 90)
@@ -283,7 +255,7 @@ values."
    ;; If non nil line numbers are turned on in all `prog-mode' and `text-mode'
    ;; derivatives. If set to `relative', also turns on relative line numbers.
    ;; (default nil)
-   dotspacemacs-line-numbers t
+   dotspacemacs-line-numbers nil
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
    dotspacemacs-folding-method 'evil
@@ -324,13 +296,6 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
-
-  ;; (setq configuration-layer--elpa-archives
-  ;;       '(("melpa-cn" . "https://elpa.zilongshanren.com/melpa/")
-  ;;         ("org-cn"   . "https://elpa.zilongshanren.com/org/")
-  ;;         ("gnu-cn"   . "https://elpa.zilongshanren.com/gnu/")))
-  ;; https://github.com/syl20bnr/spacemacs/issues/2705
-
   )
 
 (defun dotspacemacs/user-config ()
@@ -340,142 +305,6 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
-  (global-hungry-delete-mode t)
-
-  (defun bh/display-inline-images ()
-    (condition-case nil
-        (org-display-inline-images)
-      (error nil)))
-
-  (add-hook 'doc-view-mode-hook 'auto-revert-mode)
-
-  (spacemacs/set-leader-keys "o y" 'youdao-dictionary-search-at-point+)
-  (spacemacs/set-leader-keys "o d" 'find-by-pinyin-dired)
-
-  (require 'hideif)
-  (setq hide-ifdef-initially t)
-  (add-hook 'c-mode-common-hook
-            (lambda ()
-              (setq hide-ifdef-shadow t)
-              (setq hide-ifdef-mode t)
-              (hide-ifdefs)
-              ))
-
-  ;; https://emacs-china.org/t/ranger-golden-ratio/964/2
-  (defun my-ranger ()
-    (interactive)
-    (if golden-ratio-mode
-        (progn
-          (golden-ratio-mode -1)
-          (ranger)
-          (setq golden-ratio-previous-enable t))
-      (progn
-        (ranger)
-        (setq golden-ratio-previous-enable nil))))
-
-  (defun my-quit-ranger ()
-    (interactive)
-    (if golden-ratio-previous-enable
-        (progn
-          (ranger-close)
-          (golden-ratio-mode 1))
-      (ranger-close)))
-
-  (with-eval-after-load 'ranger
-    (progn
-      (define-key ranger-normal-mode-map (kbd "q") 'my-quit-ranger)))
-
-  (spacemacs/set-leader-keys "ar" 'my-ranger)
-  (setq smerge-command-prefix "\C-cv")
-
-  ;; (require 'spaceline-config)
-  ;; (spaceline-spacemacs-theme)
-
-
-  (add-to-list 'auto-mode-alist '("\\.ino\\'" . c++-mode))
-
-
-  (setq helm-dash-browser-func 'eww)
-
-  (defun hidden-dos-eol ()
-    "Do not show ^M in files containing mixed UNIX and DOS line endings."
-    (interactive)
-    (unless buffer-display-table
-      (setq buffer-display-table (make-display-table)))
-    (aset buffer-display-table ?\^M []))
-
-
-  (defun remove-dos-eol ()
-    "Replace DOS eolns CR LF with Unix eolns CR"
-    (interactive)
-    (goto-char (point-min))
-    (while (search-forward "\r" nil t) (replace-match "")))
-
-
-
-  (add-hook 'c++-mode-hook (lambda ()
-                             (electric-indent-local-mode -1)))
-  (setq c++-tab-always-indent t)
-  (setq c-basic-offset 4)                  ;; Default is 2
-  (setq c-indent-level 4)                  ;; Default is 2
-  (setq c++-basic-offset 4)                  ;; Default is 2
-  (setq c++-indent-level 4)                  ;; Default is 2
-
-
-
-  ;; (require 'org-octopress)
-  ;; (setq org-octopress-directory-top       "~/bxgithub/myHexoBlog/source")
-  ;; (setq org-octopress-directory-posts     "~/bxgithub/myHexoBlog/source/_posts")
-  ;; (setq org-octopress-directory-org-top   "~/bxgithub/myHexoBlog/source")
-  ;; (setq org-octopress-directory-org-posts "~/bxgithub/myHexoBlog/source/blog")
-  ;; (setq org-octopress-setup-file          "~/bxgithub/myHexoBlog/setupfile.org")
-
-
-  ;; org-mode 自动换行
-  ;; (add-hook 'org-mode-hook (lambda () (setq truncate-lines t)))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  ;; (setq org-capture-templates
-  ;;       '(("t" "Todo" entry (file+headline "~/bxgithub/myfile/spacemacs.d/org/gtd.org" "工作安排")
-  ;;          "* TODO [#B] %?\n  %i\n"
-  ;;          :empty-lines 1)
-  ;;         ))
-  ;; (setq org-agenda-files (list "~/bxgithub/myfile/spacemacs.d/org/gtd.org"
-  ;;                              ))
-  ;; ;; for ditaa
-  ;; (setq org-ditaa-jar-path "~/bxgithub/myfile/spacemacs.d/ditaa.jar")
-
-  ;; (org-babel-do-load-languages
-  ;;  'org-babel-load-languages
-  ;;  '(;; other Babel languages
-  ;;    (ditaa . t)
-  ;;    ;; (plantuml . t)
-  ;;    ;; (dot . t)
-  ;;    (sh . t)
-  ;;    (python . t)
-  ;;    ;; (R . t)
-  ;;    ;; (plantuml . t)
-  ;;    ;; (dot . t)
-  ;;    (C . t)
-  ;;    (org . t)
-  ;;    (latex . t)
-  ;;    ))
-
-  ;; (add-hook 'org-babel-after-execute-hook 'bh/display-inline-images 'append)
-
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -487,7 +316,7 @@ you should place your code here."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (yaml-mode jinja2-mode ansible-doc ansible zeal-at-point org-octopress ctable orglue org-mac-link epic google-c-style counsel-dash helm-dash youdao-dictionary names chinese-word-at-point typit mmt ranger rainbow-mode rainbow-identifiers pdf-tools tablist pangu-spacing pacmacs dash-functional find-by-pinyin-dired disaster company-c-headers color-identifiers-mode cmake-mode clang-format chinese-pyim chinese-pyim-basedict ace-pinyin pinyinlib ace-jump-mode 2048-game company-quickhelp pos-tip xterm-color smeargle shell-pop orgit org-projectile pcache org-present org org-pomodoro alert log4e gntp org-download mwim multi-term mmm-mode markdown-toc markdown-mode magit-gitflow htmlize gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md evil-magit magit magit-popup git-commit with-editor eshell-z eshell-prompt-extras esh-help diff-hl company-statistics company auto-yasnippet yasnippet ac-ispell auto-complete ws-butler window-numbering which-key wgrep volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spacemacs-theme spaceline smex restart-emacs request rainbow-delimiters quelpa popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint ivy-purpose ivy-hydra info+ indent-guide ido-vertical-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-make google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump define-word counsel-projectile column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link))))
+    (company yasnippet auto-complete pcache org alert log4e gntp markdown-mode gitignore-mode fringe-helper git-gutter+ git-gutter magit magit-popup git-commit with-editor wgrep smex ivy-purpose ivy-hydra counsel-projectile counsel swiper ivy zeal-at-point youdao-dictionary xterm-color ws-butler window-numbering which-key web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package typit toc-org spacemacs-theme spaceline smeargle shell-pop restart-emacs ranger rainbow-mode rainbow-identifiers rainbow-delimiters quelpa popwin persp-mode pdf-tools pcre2el paradox pangu-spacing pacmacs orgit org-projectile org-present org-pomodoro org-plus-contrib org-download org-bullets open-junk-file neotree mwim multi-term move-text monokai-theme mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode linum-relative link-hint json-mode js2-refactor js-doc info+ indent-guide ido-vertical-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-purpose helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-dash helm-company helm-c-yasnippet helm-ag google-translate google-c-style golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md flyspell-correct-helm flx-ido find-by-pinyin-dired fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help elisp-slime-nav dumb-jump disaster diff-hl define-word company-tern company-statistics company-quickhelp company-c-headers company-auctex column-enforce-mode color-identifiers-mode coffee-mode cmake-mode clean-aindent-mode clang-format chinese-pyim auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile auctex-latexmk aggressive-indent adaptive-wrap ace-window ace-pinyin ace-link ace-jump-helm-line ac-ispell 2048-game))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: hmset redis 
-# key: redishmset 
-# --
-
-entity = {FIELD1: VAL1,
-          FIELD2: VAL2}
-rclient.hmset(KEY, entity)
