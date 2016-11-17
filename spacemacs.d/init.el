@@ -70,7 +70,9 @@ values."
      games
      ranger
      pdf-tools
-     (dash :variables helm-dash-docset-newpath "~/bxgithub/myconfigresources/zeal/docsets")
+     (dash :variables helm-dash-docset-newpath "~/bxgithub/myconfigresources/zeal/docsets"
+           helm-dash-browser-func 'eww)
+     (gtags :variables gtags-enable-by-default t)
 
 
      )
@@ -316,6 +318,12 @@ values."
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
    ;; (default nil)
    dotspacemacs-whitespace-cleanup nil
+
+   ;; C and C++ style
+   c-default-style '("bsd")
+   c-basic-offset 4
+   tab-width 4
+
    ))
 
 (defun dotspacemacs/user-init ()
@@ -416,13 +424,22 @@ you should place your code here."
 
   (add-hook 'c++-mode-hook (lambda ()
                              (electric-indent-local-mode -1)))
-  (setq c++-tab-always-indent t)
-  (setq c-basic-offset 4)                  ;; Default is 2
-  (setq c-indent-level 4)                  ;; Default is 2
-  (setq c++-basic-offset 4)                  ;; Default is 2
-  (setq c++-indent-level 4)                  ;; Default is 2
+  ;; (setq c++-tab-always-indent t)
+  ;; (setq c-basic-offset 4)                  ;; Default is 2
+  ;; (setq c-indent-level 4)                  ;; Default is 2
+  ;; (setq c++-basic-offset 4)                  ;; Default is 2
+  ;; (setq c++-indent-level 4)                  ;; Default is 2
+  ;; (defun my-c++-mode-hook ()
+  ;;   (setq c-basic-offset 4)
+  ;;    (c-set-offset 'innamespace 0)
+  ;;    )
+  ;; (add-hook 'c++-mode-hook 'my-c++-mode-hook)
 
+  (defconst my-cc-style
+    '("gnu"
+      (c-offsets-alist . ((innamespace . [0])))))
 
+  (c-add-style "my-cc-style" my-cc-style)
 
   ;; (require 'org-octopress)
   ;; (setq org-octopress-directory-top       "~/bxgithub/myHexoBlog/source")
@@ -488,7 +505,7 @@ you should place your code here."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (yaml-mode jinja2-mode ansible-doc ansible zeal-at-point org-octopress ctable orglue org-mac-link epic google-c-style counsel-dash helm-dash youdao-dictionary names chinese-word-at-point typit mmt ranger rainbow-mode rainbow-identifiers pdf-tools tablist pangu-spacing pacmacs dash-functional find-by-pinyin-dired disaster company-c-headers color-identifiers-mode cmake-mode clang-format chinese-pyim chinese-pyim-basedict ace-pinyin pinyinlib ace-jump-mode 2048-game company-quickhelp pos-tip xterm-color smeargle shell-pop orgit org-projectile pcache org-present org org-pomodoro alert log4e gntp org-download mwim multi-term mmm-mode markdown-toc markdown-mode magit-gitflow htmlize gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md evil-magit magit magit-popup git-commit with-editor eshell-z eshell-prompt-extras esh-help diff-hl company-statistics company auto-yasnippet yasnippet ac-ispell auto-complete ws-butler window-numbering which-key wgrep volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spacemacs-theme spaceline smex restart-emacs request rainbow-delimiters quelpa popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint ivy-purpose ivy-hydra info+ indent-guide ido-vertical-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-make google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump define-word counsel-projectile column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link))))
+    (ggtags yaml-mode jinja2-mode ansible-doc ansible zeal-at-point org-octopress ctable orglue org-mac-link epic google-c-style counsel-dash helm-dash youdao-dictionary names chinese-word-at-point typit mmt ranger rainbow-mode rainbow-identifiers pdf-tools tablist pangu-spacing pacmacs dash-functional find-by-pinyin-dired disaster company-c-headers color-identifiers-mode cmake-mode clang-format chinese-pyim chinese-pyim-basedict ace-pinyin pinyinlib ace-jump-mode 2048-game company-quickhelp pos-tip xterm-color smeargle shell-pop orgit org-projectile pcache org-present org org-pomodoro alert log4e gntp org-download mwim multi-term mmm-mode markdown-toc markdown-mode magit-gitflow htmlize gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md evil-magit magit magit-popup git-commit with-editor eshell-z eshell-prompt-extras esh-help diff-hl company-statistics company auto-yasnippet yasnippet ac-ispell auto-complete ws-butler window-numbering which-key wgrep volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spacemacs-theme spaceline smex restart-emacs request rainbow-delimiters quelpa popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint ivy-purpose ivy-hydra info+ indent-guide ido-vertical-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-make google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump define-word counsel-projectile column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
