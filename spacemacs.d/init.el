@@ -70,7 +70,8 @@ values."
      games
      ranger
      pdf-tools
-     (dash :variables helm-dash-docsets-newpath "~/bxgithub/myconfigresources/zeal/docsets")
+     (dash :variables helm-dash-docset-newpath "~/bxgithub/myconfigresources/zeal/docsets")
+
 
      )
    ;; List of additional packages that will be installed without being

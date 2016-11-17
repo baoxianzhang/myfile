@@ -778,6 +778,8 @@ if [ $FLAG_DASH_ZEAL_DOCSETS_FOR_SPACEMACE_INSTALL == 1 ]; then
     cd myconfigresources
     chmod +x install.sh
     ./install.sh
+    rm ~/.local/share/Zeal/Zeal/docsets
+    ln -s ~/bxgithub/myconfigresources/zeal/docsets ~/.local/share/Zeal/Zeal/docsets
 fi
 
 
