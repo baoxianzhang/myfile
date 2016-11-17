@@ -320,7 +320,7 @@ values."
    dotspacemacs-whitespace-cleanup nil
 
    ;; C and C++ style
-   c-default-style '("bsd")
+   ;; c-default-style '("bsd")
    c-basic-offset 4
    tab-width 4
 

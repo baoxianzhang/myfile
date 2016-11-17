@@ -210,20 +210,32 @@ if [ $FLAG_GIT_FLOW_COMPLETION_INSTALL == 1 ];then
     fi
 fi
 
-if [ $FLAG_SILVERSEARCH_AG_INSTALL == 1 ];then
-    cecho "<<<<<< Install silversearch-ag. >>>>>>" $yellow
+#if [ $FLAG_SILVERSEARCH_AG_INSTALL == 1 ];then
+    #cecho "<<<<<< Install silversearch-ag. >>>>>>" $yellow
+    #cd ~/softwares
+    #if [ ! -d "silversearch-ag" ]; then
+        #wget -nc -O silversearch-ag.zip https://codeload.github.com/mizuno-as/silversearcher-ag/zip/master
+        #unzip -o silversearch-ag.zip
+        #mv silversearcher-ag-master silversearch-ag
+        #sudo apt-get install liblzma-dev -y
+        #cd silversearch-ag
+        #./build.sh
+        #./configure
+        #sudo make install
+    #fi
+#fi
+
+if [ $FLAG_RIPGREP_INSTALL == 1 ];then
+    cecho "<<<<<< Install ripgrep. >>>>>>" $yellow
     cd ~/softwares
-    if [ ! -d "silversearch-ag" ]; then
-        wget -nc -O silversearch-ag.zip https://codeload.github.com/mizuno-as/silversearcher-ag/zip/master
-        unzip -o silversearch-ag.zip
-        mv silversearcher-ag-master silversearch-ag
-        sudo apt-get install liblzma-dev -y
-        cd silversearch-ag
-        ./build.sh
-        ./configure
-        sudo make install
+    if [ ! -f "ripgrep-0.2.9-x86_64-unknown-linux-musl.tar.gz" ]; then
+        wget -nc -O ripgrep-0.2.9-x86_64-unknown-linux-musl.tar.gz https://github.com/BurntSushi/ripgrep/releases/download/0.2.9/ripgrep-0.2.9-x86_64-unknown-linux-musl.tar.gz
+        tar -xzvf ripgrep-0.2.9-x86_64-unknown-linux-musl.tar.gz
+        sudo cp ripgrep-0.2.9-x86_64-unknown-linux-musl/rg /usr/local/bin/
     fi
 fi
+
+
 
 if [ $FLAG_CMAKE_INSTALL == 1 ];then
     cecho "<<<<<< Install cmake. >>>>>>" $yellow
