@@ -184,7 +184,7 @@ alias lnzlspacemacs='touch ~/.spacemacs.d && rm ~/.spacemacs.d -f && ln -s ~/bxg
 alias springemacs='pkill -SIGUSR2 emacs'
 alias espApp="sudo ~/molmc_code/intorobot-firmware-hal/tools/esptool/esptool -v -cb 921600 -cd nodemcu -cp /dev/ttyUSB0 -ca 0x8000 -cf $1"
 alias espbootloader="sudo ~/molmc/intorobot-firmware-hal/tools/esptool/esptool -v -cb 921600 -cd nodemcu -cp /dev/ttyUSB0 -ca 0x00000 -cf $1"
-
+alias xmind='cd ~/Downloads/XMind_amd64/ && ./XMind && cd -'
 
 scpIntoyunTmp() {
     scp $1 root@112.124.117.64:/tmp/
