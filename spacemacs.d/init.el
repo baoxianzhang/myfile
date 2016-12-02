@@ -36,7 +36,8 @@ values."
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     ivy
+     ;; ivy
+     helm
      (auto-completion :variables
                       auto-completion-return-key-behavior 'complete
                       auto-completion-tab-key-behavior 'cycle
@@ -71,13 +72,14 @@ values."
      ranger
      pdf-tools
      (dash :variables helm-dash-docset-newpath "~/bxgithub/myconfigresources/zeal/docsets"
-           )
-           ;; helm-dash-browser-func 'eww)
-     ;; (gtags :variables gtags-enable-by-default t)
-     gtags
-     cscope
-     semantic
-     smex
+           ;; )
+           helm-dash-browser-func 'eww)
+     (gtags :variables gtags-enable-by-default t)
+     ;; gtags
+     ;; cscope
+     ;; semantic
+     yaml
+     rust
 
      )
    ;; List of additional packages that will be installed without being
@@ -324,9 +326,9 @@ values."
    dotspacemacs-whitespace-cleanup nil
 
    ;; C and C++ style
-   ;; c-default-style '("bsd")
-   ;; c-basic-offset 4
-   ;; tab-width 4
+   c-default-style '("bsd")
+   c-basic-offset 4
+   tab-width 4
 
    ))
 
@@ -356,9 +358,12 @@ you should place your code here."
   (global-hungry-delete-mode t)
 
   (setq helm-dash-browser-func 'eww)
+  ;; (setq debug-on-error t)
 
   ;; (define-key evil-normal-state-map (kbd "C-]")   'cscope-find-global-definition)
-  (define-key evil-normal-state-map (kbd "C-]")   'cscope-find-global-definition-no-prompting)
+  ;; (define-key evil-normal-state-map (kbd "C-]")   'cscope-find-global-definition-no-prompting)
+
+  (define-key evil-normal-state-map (kbd "C-]")   'helm-gtags-find-tag)
   (define-key evil-normal-state-map (kbd "C-t")   'evil-jump-backward)
 
   (defun bh/display-inline-images ()
@@ -465,17 +470,6 @@ you should place your code here."
 
 
 
-
-
-
-
-
-
-
-
-
-
-
   ;; (setq org-capture-templates
   ;;       '(("t" "Todo" entry (file+headline "~/bxgithub/myfile/spacemacs.d/org/gtd.org" "工作安排")
   ;;          "* TODO [#B] %?\n  %i\n"
@@ -515,7 +509,7 @@ you should place your code here."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (stickyfunc-enhance srefactor etags-select xcscope ggtags yaml-mode jinja2-mode ansible-doc ansible zeal-at-point org-octopress ctable orglue org-mac-link epic google-c-style counsel-dash helm-dash youdao-dictionary names chinese-word-at-point typit mmt ranger rainbow-mode rainbow-identifiers pdf-tools tablist pangu-spacing pacmacs dash-functional find-by-pinyin-dired disaster company-c-headers color-identifiers-mode cmake-mode clang-format chinese-pyim chinese-pyim-basedict ace-pinyin pinyinlib ace-jump-mode 2048-game company-quickhelp pos-tip xterm-color smeargle shell-pop orgit org-projectile pcache org-present org org-pomodoro alert log4e gntp org-download mwim multi-term mmm-mode markdown-toc markdown-mode magit-gitflow htmlize gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md evil-magit magit magit-popup git-commit with-editor eshell-z eshell-prompt-extras esh-help diff-hl company-statistics company auto-yasnippet yasnippet ac-ispell auto-complete ws-butler window-numbering which-key wgrep volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spacemacs-theme spaceline smex restart-emacs request rainbow-delimiters quelpa popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint ivy-purpose ivy-hydra info+ indent-guide ido-vertical-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-make google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump define-word counsel-projectile column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link))))
+    (helm-themes helm-swoop helm-purpose helm-projectile helm-mode-manager helm-gtags helm-gitignore helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag ace-jump-helm-line toml-mode racer cargo rust-mode stickyfunc-enhance srefactor etags-select xcscope ggtags yaml-mode jinja2-mode ansible-doc ansible zeal-at-point org-octopress ctable orglue org-mac-link epic google-c-style counsel-dash helm-dash youdao-dictionary names chinese-word-at-point typit mmt ranger rainbow-mode rainbow-identifiers pdf-tools tablist pangu-spacing pacmacs dash-functional find-by-pinyin-dired disaster company-c-headers color-identifiers-mode cmake-mode clang-format chinese-pyim chinese-pyim-basedict ace-pinyin pinyinlib ace-jump-mode 2048-game company-quickhelp pos-tip xterm-color smeargle shell-pop orgit org-projectile pcache org-present org org-pomodoro alert log4e gntp org-download mwim multi-term mmm-mode markdown-toc markdown-mode magit-gitflow htmlize gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md evil-magit magit magit-popup git-commit with-editor eshell-z eshell-prompt-extras esh-help diff-hl company-statistics company auto-yasnippet yasnippet ac-ispell auto-complete ws-butler window-numbering which-key wgrep volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spacemacs-theme spaceline smex restart-emacs request rainbow-delimiters quelpa popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint ivy-purpose ivy-hydra info+ indent-guide ido-vertical-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-make google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump define-word counsel-projectile column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

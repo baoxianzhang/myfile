@@ -301,11 +301,15 @@ fi
 if [ $FLAG_GTAGS_INSTALL == 1 ];then
     cecho "<<<<<< Install gtags. >>>>>>" $yellow
     cd ~/softwares
-    if [ ! -f "global-6.5.2.tar.gz" ]; then
-        wget -nc http://tamacom.com/global/global-6.5.2.tar.gz
-        tar -xzvf global-6.5.2.tar.gz
+    # if [ ! -f "global-6.5.2.tar.gz" ]; then
+    #     wget -nc http://tamacom.com/global/global-6.5.2.tar.gz
+    #     tar -xzvf global-6.5.2.tar.gz
+    # fi
+    if [ ! -f "global-6.5.5.tar.gz" ]; then
+        wget -nc http://tamacom.com/global/global-6.5.5.tar.gz
+        tar -xzvf global-6.5.5.tar.gz
     fi
-    cd global-6.5.2
+    cd global-6.5.5
     sudo apt-get install -y libsdl1.2-dev
     sudo apt-get install -y ncurses-bin
     sudo apt-get install -y libncurses5-dev
