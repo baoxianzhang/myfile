@@ -144,9 +144,16 @@ fi
 
 cd
 homeDir=$(pwd)
-if [ ! -d "$homeDir/softwares" ]; then
-    mkdir ~/softwares
-fi
+# if [ ! -d "$homeDir/softwares" ]; then
+#     mkdir ~/softwares
+# fi
+# if [ ! -d "$homeDir/bxgithub" ]; then
+#     mkdir ~/bxgithub
+# fi
+
+mkdir -p ~/bxgithub
+mkdir -p ~/softwares
+mkdir -p ~/code
 
 if [ $FLAG_GIT_2dot7dot3_INSTALL == 1 ];then
     cecho "<<<<<< Install git 2.7.3. >>>>>>" $yellow
@@ -194,10 +201,6 @@ fi
 
 if [ $FLAG_GIT_FLOW_COMPLETION_INSTALL == 1 ];then
     cecho "<<<<<< Install git flow completion. >>>>>>" $yellow
-    cd
-    if [ ! -d "$homeDir/code" ]; then
-        mkdir -p code
-    fi
     cd ~/code
     # echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
     # source ~/.bashrc
@@ -402,9 +405,6 @@ fi
 
 if [ $FLAG_SOFTLINK_ZSHRC_INSTALL == 1 ];then
     cecho "<<<<<< Softlink zshrc. >>>>>>" $yellow
-    if [ ! -d "$homeDir/bxgithub" ]; then
-        mkdir ~/bxgithub
-    fi
     cd ~/bxgithub
     if [ ! -d "$homeDir/bxgithub/myfile" ]; then
         # echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
@@ -420,9 +420,6 @@ fi
 
 if [ $FLAG_SOFTLINK_TMUX_INSTALL == 1 ];then
     cecho "<<<<<< Softlink tmux. >>>>>>" $yellow
-    if [ ! -d "$homeDir/bxgithub" ]; then
-        mkdIr ~/bxgithub
-    fi
     cd ~/bxgithub
     if [ ! -d "$homeDir/bxgithub/myfile" ]; then
         # git clone https://github.com/baoxianzhang/myfile.git
@@ -545,6 +542,17 @@ if [ $FLAG_EMACS_INSTALL == 1 ];then
     ./configure
     make
     sudo make install
+fi
+
+if [ $FLAG_RUST_INSTALL == 1 ]; then
+    cecho "<<<<<< Install Rust. >>>>>>" $yellow
+    cd ~/softwares/
+    wget -nc https://static.rust-lang.org/dist/rust-1.13.0-x86_64-unknown-linux-gnu.tar.gz
+    tar -xzvf rust-1.13.0-x86_64-unknown-linux-gnu.tar.gz
+    cd rust-1.13.0-x86_64-unknown-linux-gnu
+    sudo ./install.sh
+    cargo install racer
+    cargo install rustfmt
 fi
 
 if [ $FLAG_SPACEMACS_INSTALL == 1 ]; then
