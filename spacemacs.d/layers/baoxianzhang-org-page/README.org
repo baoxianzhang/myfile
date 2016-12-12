@@ -1,7 +1,7 @@
-#+TITLE: baoxianzhang layer
+#+TITLE: baoxianzhang-org-page layer
 
 # The maximum height of the logo should be 200 pixels.
-# [[img/baoxianzhang.png]]
+[[img/baoxianzhang-org-page.png]]
 
 # TOC links should be GitHub style anchors.
 * Table of Contents                                        :TOC_4_gh:noexport:
@@ -10,12 +10,11 @@
  - [[#key-bindings][Key bindings]]
 
 * Description
-This layer does my personal additional layer. This layer is the main layer, which 
-include other layers. Please see the layers.el for details.
+This layer adds org-page and blog-admin packages for blog.
 
 * Install
 To use this configuration layer, add it to your =~/.spacemacs=. You will need to
-add =baoxianzhang= to the existing =dotspacemacs-configuration-layers= list in this
+add =baoxianzhang-org-page= to the existing =dotspacemacs-configuration-layers= list in this
 file.
 
 * Key bindings
