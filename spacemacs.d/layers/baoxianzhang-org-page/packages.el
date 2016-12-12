@@ -72,7 +72,7 @@
 ;;                          op/site-main-title "baoxianzhang's blog"
 ;;                          op/site-sub-title "Way to geek"
 ;;                          op/site-domain "https://baoxianzhang.github.io"
-;;                          ;; op/theme-root-directory "~/src/"
+;;                          ;; op/theme-root-directory "~/bxgithub/myfile/spacemacs.d/layers/src/"
 ;;                          ;; op/theme 'org-page-theme-kactus
 ;;                          op/personal-github-link "http://github.com/baoxianzhang"
 ;;                          ;; op/personal-google-analytics-id "UA-xxxxxxxx-x"
@@ -125,8 +125,8 @@
                          op/site-main-title "baoxianzhang's blog"
                          op/site-sub-title "Way to geek"
                          op/site-domain "https://baoxianzhang.github.io"
-                         ;; op/theme-root-directory "~/src/"
-                         ;; op/theme 'org-page-theme-kactus
+                         op/theme-root-directory "~/bxgithub/myfile/spacemacs.d/layers/baoxianzhang-org-page/theme"
+                         op/theme 'org-page-theme-kactus
                          op/personal-github-link "http://github.com/baoxianzhang"
                          ;; op/personal-google-analytics-id "UA-xxxxxxxx-x"
                          )
