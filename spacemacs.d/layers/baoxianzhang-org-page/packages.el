@@ -151,8 +151,7 @@
                        blog-admin-backend-org-page-drafts "_drafts" ;; directory to save draft
                        blog-admin-backend-org-page-config-file "~/bxgithub/baoxianzhang.github.io/config.el" ;; if nil init.el is used
                        )
-                   (evilified-state-evilify-map blog-admin-mode-map
-                     :mode blog-admin-mode)
+                   ;; (evilified-state-evilify-map blog-admin-mode-map :mode blog-admin-mode)
                    (spacemacs/set-leader-keys
                      "abb" 'blog-admin-start)
                    (setq blog-admin-backend-org-page-template-org-post

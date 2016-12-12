@@ -10,7 +10,7 @@
 ;;; License: GPLv3
 
 (configuration-layer/declare-layers '(
-                                      ;; baoxianzhang-org-page
+                                      baoxianzhang-org-page
                                       ;; baoxianzhang-better-defaults
                                       ;; baoxianzhang-misc
                                       ;; baoxianzhang-org
