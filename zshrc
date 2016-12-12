@@ -242,6 +242,7 @@ export PATH=$PATH:~/softwares/xtensa-esp32-elf/bin
 #eval $(thefuck --alias)
 export PATH=$PATH:/usr/src/xtensa-lx106-elf/bin
 export PATH=$PATH:/usr/lib/git-core
+export PATH=$PATH:~/.cargo/bin
 export INTOROBOT_DEVELOP=1
 export PARTICLE_DEVELOP=1
 export IDF_PATH=~/code/esp-idf

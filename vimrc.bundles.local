@@ -10,4 +10,4 @@ Bundle 'Numkil/ag.nvim'
 "https://github.com/Shougo/neocomplete.vim/issues/536
 Bundle 'Konfekt/FastFold'
 Bundle 'Konfekt/FoldText'
-"Bundle 'rust-lang/rust.vim'
+Bundle 'CodeFalling/gtrans'

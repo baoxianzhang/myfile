@@ -217,3 +217,10 @@ func! Rungdb()
     exec "!gdb ./%<"
 endfunc
 
+"goole translation plug Gtrans setting
+let g:gtrans_input_language = 'en'
+let g:gtrans_output_language = 'zh-CN'
+nmap <C-s> :Gtrans<CR>
+imap <C-s> <ESC>:Gtrans<CR>i
+vmap <C-s> :call Gtrans()<CR>
+

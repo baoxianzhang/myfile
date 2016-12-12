@@ -65,7 +65,9 @@ values."
               ;; chinese-enable-fcitx t
               chinese-enable-youdao-dict t)
      (c-c++ :variables
-            c-c++-default-mode-for-headers 'c++-mode)
+            c-c++-default-mode-for-headers 'c++-mode
+            ;; :mode "\\.ino\\'" )
+            )
      (colors :variables
              colors-enable-nyan-cat-progress-bar t)
      ;; games
@@ -85,6 +87,9 @@ values."
             latex-enable-auto-fill t
             latex-enable-folding t)
 
+
+     ;; my layer
+     baoxianzhang
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -381,6 +386,7 @@ you should place your code here."
   (spacemacs/set-leader-keys "o y" 'youdao-dictionary-search-at-point+)
   (spacemacs/set-leader-keys "o d" 'find-by-pinyin-dired)
 
+  ;;;###autoload
   (require 'hideif)
   (setq hide-ifdef-initially t)
   (add-hook 'c-mode-common-hook
@@ -461,6 +467,23 @@ you should place your code here."
 
   (c-add-style "my-cc-style" my-cc-style)
 
+
+  ;; configuration for org-mode
+  (setq org-agenda-files (list "~/bxgithub/myfile/spacemacs.d/org/gtd.org"
+                               "~/bxgithub/myfile/spacemacs.d/org/work.org"
+                               ))
+  ;; org-mode 自动换行
+  (add-hook 'org-mode-hook (lambda () (setq truncate-lines t)))
+
+  ;; (setq org-capture-templates
+  ;;       '(("t" "Todo" entry (file+headline "~/bxgithub/myfile/spacemacs.d/org/gtd.org" "工作安排")
+  ;;          "* TODO [#B] %?\n  %i\n"
+  ;;          :empty-lines 1)
+  ;;         ))
+
+
+
+
   ;; (require 'org-octopress)
   ;; (setq org-octopress-directory-top       "~/bxgithub/myHexoBlog/source")
   ;; (setq org-octopress-directory-posts     "~/bxgithub/myHexoBlog/source/_posts")
@@ -469,19 +492,7 @@ you should place your code here."
   ;; (setq org-octopress-setup-file          "~/bxgithub/myHexoBlog/setupfile.org")
 
 
-  ;; org-mode 自动换行
-  ;; (add-hook 'org-mode-hook (lambda () (setq truncate-lines t)))
 
-
-
-
-  ;; (setq org-capture-templates
-  ;;       '(("t" "Todo" entry (file+headline "~/bxgithub/myfile/spacemacs.d/org/gtd.org" "工作安排")
-  ;;          "* TODO [#B] %?\n  %i\n"
-  ;;          :empty-lines 1)
-  ;;         ))
-  ;; (setq org-agenda-files (list "~/bxgithub/myfile/spacemacs.d/org/gtd.org"
-  ;;                              ))
   ;; ;; for ditaa
   ;; (setq org-ditaa-jar-path "~/bxgithub/myfile/spacemacs.d/ditaa.jar")
 
