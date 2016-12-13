@@ -126,7 +126,7 @@
                          op/site-sub-title "Way to geek"
                          op/site-domain "https://baoxianzhang.github.io"
                          ;;op/theme-root-directory "~/bxgithub/myfile/spacemacs.d/layers/baoxianzhang-org-page/theme"
-                         ;;op/theme 'org-page-theme-kactus
+                         op/theme 'kactus
                          op/personal-github-link "http://github.com/baoxianzhang"
                          ;; op/personal-google-analytics-id "UA-xxxxxxxx-x"
                          )
@@ -149,7 +149,7 @@
                        blog-admin-backend-new-post-in-drafts t
                        blog-admin-backend-new-post-with-same-name-dir t
                        blog-admin-backend-org-page-drafts "_drafts" ;; directory to save draft
-                       blog-admin-backend-org-page-config-file "~/bxgithub/baoxianzhang.github.io/config.el" ;; if nil init.el is used
+                       ;; blog-admin-backend-org-page-config-file "~/bxgithub/baoxianzhang.github.io/config.el" ;; if nil init.el is used
                        )
                    ;; (evilified-state-evilify-map blog-admin-mode-map :mode blog-admin-mode)
                    (spacemacs/set-leader-keys
