@@ -125,8 +125,8 @@
                          op/site-main-title "baoxianzhang's blog"
                          op/site-sub-title "Way to geek"
                          op/site-domain "https://baoxianzhang.github.io"
-                         op/theme-root-directory "~/bxgithub/myfile/spacemacs.d/layers/baoxianzhang-org-page/theme"
-                         op/theme 'org-page-theme-kactus
+                         ;;op/theme-root-directory "~/bxgithub/myfile/spacemacs.d/layers/baoxianzhang-org-page/theme"
+                         ;;op/theme 'org-page-theme-kactus
                          op/personal-github-link "http://github.com/baoxianzhang"
                          ;; op/personal-google-analytics-id "UA-xxxxxxxx-x"
                          )
@@ -154,6 +154,7 @@
                    ;; (evilified-state-evilify-map blog-admin-mode-map :mode blog-admin-mode)
                    (spacemacs/set-leader-keys
                      "abb" 'blog-admin-start)
+                   (add-hook 'blog-admin-backend-after-new-post-hook 'find-file) ;; Open post after create new post
                    (setq blog-admin-backend-org-page-template-org-post
                          "#+TITLE: %s
 #+AUTHOR: Baoxian Zhang
