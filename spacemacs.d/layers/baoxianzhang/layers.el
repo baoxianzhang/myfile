@@ -10,6 +10,58 @@
 ;;; License: GPLv3
 
 (configuration-layer/declare-layers '(
+                                      (auto-completion :variables
+                                                       auto-completion-return-key-behavior 'complete
+                                                       auto-completion-tab-key-behavior 'cycle
+                                                       auto-completion-complete-with-key-sequence nil
+                                                       auto-completion-complete-with-key-sequence-delay 0.1
+                                                       auto-completion-private-snippets-directory "~/.spacemacs.d/snippets/"
+                                                       auto-completion-enable-snippets-in-popup t
+                                                       auto-completion-enable-help-tooltip t
+                                                       auto-completion-enable-sort-by-usage t
+                                                       )
+                                      better-defaults
+                                      emacs-lisp
+                                      git
+                                      markdown
+                                      (org :variables
+                                           org-enable-github-support t)
+                                      (shell :variables
+                                             shell-default-height 30
+                                             shell-default-position 'bottom)
+                                      ;; spell-checking
+                                      ;; syntax-checking
+                                      version-control
+                                      (chinese :variables
+                                               ;; chinese-default-input-method 'chinese-pyim
+                                               ;; chinese-enable-fcitx t
+                                               chinese-enable-youdao-dict t)
+                                      (c-c++ :variables
+                                             c-c++-default-mode-for-headers 'c++-mode
+                                             ;; :mode "\\.ino\\'" )
+                                             )
+                                      (colors :variables
+                                              colors-enable-nyan-cat-progress-bar t)
+                                      ;; games
+                                      ranger
+                                      pdf-tools
+                                      (dash :variables helm-dash-docset-newpath "~/bxgithub/myconfigresources/zeal/docsets"
+                                            ;; )
+                                            helm-dash-browser-func 'eww)
+                                      (gtags :variables gtags-enable-by-default t)
+                                      ;; gtags
+                                      ;; cscope
+                                      ;; semantic
+                                      yaml
+                                      (rust :variables rust-format-on-save t)
+                                      (latex :variables
+                                             latex-build-command "LaTeX"
+                                             latex-enable-auto-fill t
+                                             latex-enable-folding t)
+
+
+
+
                                       baoxianzhang-org-page
                                       ;; baoxianzhang-better-defaults
                                       ;; baoxianzhang-misc

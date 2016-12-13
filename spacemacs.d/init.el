@@ -36,57 +36,6 @@ values."
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     ;; ivy
-     ;; helm
-     (auto-completion :variables
-                      auto-completion-return-key-behavior 'complete
-                      auto-completion-tab-key-behavior 'cycle
-                      auto-completion-complete-with-key-sequence nil
-                      auto-completion-complete-with-key-sequence-delay 0.1
-                      auto-completion-private-snippets-directory "~/.spacemacs.d/snippets/"
-                      auto-completion-enable-snippets-in-popup t
-                      auto-completion-enable-help-tooltip t
-                      auto-completion-enable-sort-by-usage t
-                      )
-     better-defaults
-     emacs-lisp
-     git
-     markdown
-     (org :variables
-          org-enable-github-support t)
-     (shell :variables
-            shell-default-height 30
-            shell-default-position 'bottom)
-     ;; spell-checking
-     ;; syntax-checking
-     version-control
-     (chinese :variables
-              ;; chinese-default-input-method 'chinese-pyim
-              ;; chinese-enable-fcitx t
-              chinese-enable-youdao-dict t)
-     (c-c++ :variables
-            c-c++-default-mode-for-headers 'c++-mode
-            ;; :mode "\\.ino\\'" )
-            )
-     (colors :variables
-             colors-enable-nyan-cat-progress-bar t)
-     ;; games
-     ranger
-     pdf-tools
-     (dash :variables helm-dash-docset-newpath "~/bxgithub/myconfigresources/zeal/docsets"
-           ;; )
-           helm-dash-browser-func 'eww)
-     (gtags :variables gtags-enable-by-default t)
-     ;; gtags
-     ;; cscope
-     ;; semantic
-     yaml
-     (rust :variables rust-format-on-save t)
-     (latex :variables
-            latex-build-command "LaTeX"
-            latex-enable-auto-fill t
-            latex-enable-folding t)
-
 
      ;; my layer
      baoxianzhang
@@ -96,10 +45,8 @@ values."
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(
-                                      ;; org-octopress
-                                      hideif
-                                      ;; spaceline
-                                      )
+
+                                        )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -333,12 +280,6 @@ values."
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
    ;; (default nil)
    dotspacemacs-whitespace-cleanup nil
-
-   ;; C and C++ style
-   c-default-style '("bsd")
-   c-basic-offset 4
-   tab-width 4
-
    ))
 
 (defun dotspacemacs/user-init ()
@@ -349,13 +290,7 @@ executes.
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
 
-  ;; (setq configuration-layer--elpa-archives
-  ;;       '(("melpa-cn" . "https://elpa.zilongshanren.com/melpa/")
-  ;;         ("org-cn"   . "https://elpa.zilongshanren.com/org/")
-  ;;         ("gnu-cn"   . "https://elpa.zilongshanren.com/gnu/")))
-  ;; https://github.com/syl20bnr/spacemacs/issues/2705
-
-  )
+ )
 
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
@@ -364,157 +299,8 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
-  (global-hungry-delete-mode t)
-  (add-hook 'doc-view-mode-hook 'auto-revert-mode)
 
-  ;; (setq helm-dash-browser-func 'eww)
-  ;; (setq debug-on-error t)
-
-  ;; (define-key evil-normal-state-map (kbd "C-]")   'cscope-find-global-definition)
-  ;; (define-key evil-normal-state-map (kbd "C-]")   'cscope-find-global-definition-no-prompting)
-
-  (define-key evil-normal-state-map (kbd "C-]")   'helm-gtags-find-tag)
-  (define-key evil-normal-state-map (kbd "C-t")   'evil-jump-backward)
-
-  (defun bh/display-inline-images ()
-    (condition-case nil
-        (org-display-inline-images)
-      (error nil)))
-
-  (add-hook 'doc-view-mode-hook 'auto-revert-mode)
-
-  (spacemacs/set-leader-keys "o y" 'youdao-dictionary-search-at-point+)
-  (spacemacs/set-leader-keys "o d" 'find-by-pinyin-dired)
-
-  ;;;###autoload
-  (require 'hideif)
-  (setq hide-ifdef-initially t)
-  (add-hook 'c-mode-common-hook
-            (lambda ()
-              (setq hide-ifdef-shadow t)
-              (setq hide-ifdef-mode t)
-              (hide-ifdefs)
-              ))
-
-  ;; https://emacs-china.org/t/ranger-golden-ratio/964/2
-  (defun my-ranger ()
-    (interactive)
-    (if golden-ratio-mode
-        (progn
-          (golden-ratio-mode -1)
-          (ranger)
-          (setq golden-ratio-previous-enable t))
-      (progn
-        (ranger)
-        (setq golden-ratio-previous-enable nil))))
-
-  (defun my-quit-ranger ()
-    (interactive)
-    (if golden-ratio-previous-enable
-        (progn
-          (ranger-close)
-          (golden-ratio-mode 1))
-      (ranger-close)))
-
-  (with-eval-after-load 'ranger
-    (progn
-      (define-key ranger-normal-mode-map (kbd "q") 'my-quit-ranger)))
-
-  (spacemacs/set-leader-keys "ar" 'my-ranger)
-  (setq smerge-command-prefix "\C-cv")
-
-  ;; (require 'spaceline-config)
-  ;; (spaceline-spacemacs-theme)
-
-
-  (add-to-list 'auto-mode-alist '("\\.ino\\'" . c++-mode))
-
-
-  (setq helm-dash-browser-func 'eww)
-
-  (defun hidden-dos-eol ()
-    "Do not show ^M in files containing mixed UNIX and DOS line endings."
-    (interactive)
-    (unless buffer-display-table
-      (setq buffer-display-table (make-display-table)))
-    (aset buffer-display-table ?\^M []))
-
-
-  (defun remove-dos-eol ()
-    "Replace DOS eolns CR LF with Unix eolns CR"
-    (interactive)
-    (goto-char (point-min))
-    (while (search-forward "\r" nil t) (replace-match "")))
-
-
-
-  (add-hook 'c++-mode-hook (lambda ()
-                             (electric-indent-local-mode -1)))
-  ;; (setq c++-tab-always-indent t)
-  ;; (setq c-basic-offset 4)                  ;; Default is 2
-  ;; (setq c-indent-level 4)                  ;; Default is 2
-  ;; (setq c++-basic-offset 4)                  ;; Default is 2
-  ;; (setq c++-indent-level 4)                  ;; Default is 2
-  ;; (defun my-c++-mode-hook ()
-  ;;   (setq c-basic-offset 4)
-  ;;    (c-set-offset 'innamespace 0)
-  ;;    )
-  ;; (add-hook 'c++-mode-hook 'my-c++-mode-hook)
-
-  (defconst my-cc-style
-    '("gnu"
-      (c-offsets-alist . ((innamespace . [0])))))
-
-  (c-add-style "my-cc-style" my-cc-style)
-
-
-  ;; configuration for org-mode
-  (setq org-agenda-files (list "~/bxgithub/myfile/spacemacs.d/org/gtd.org"
-                               "~/bxgithub/myfile/spacemacs.d/org/work.org"
-                               ))
-  ;; org-mode 自动换行
-  (add-hook 'org-mode-hook (lambda () (setq truncate-lines t)))
-
-  ;; (setq org-capture-templates
-  ;;       '(("t" "Todo" entry (file+headline "~/bxgithub/myfile/spacemacs.d/org/gtd.org" "工作安排")
-  ;;          "* TODO [#B] %?\n  %i\n"
-  ;;          :empty-lines 1)
-  ;;         ))
-
-
-
-
-  ;; (require 'org-octopress)
-  ;; (setq org-octopress-directory-top       "~/bxgithub/myHexoBlog/source")
-  ;; (setq org-octopress-directory-posts     "~/bxgithub/myHexoBlog/source/_posts")
-  ;; (setq org-octopress-directory-org-top   "~/bxgithub/myHexoBlog/source")
-  ;; (setq org-octopress-directory-org-posts "~/bxgithub/myHexoBlog/source/blog")
-  ;; (setq org-octopress-setup-file          "~/bxgithub/myHexoBlog/setupfile.org")
-
-
-
-  ;; ;; for ditaa
-  ;; (setq org-ditaa-jar-path "~/bxgithub/myfile/spacemacs.d/ditaa.jar")
-
-  ;; (org-babel-do-load-languages
-  ;;  'org-babel-load-languages
-  ;;  '(;; other Babel languages
-  ;;    (ditaa . t)
-  ;;    ;; (plantuml . t)
-  ;;    ;; (dot . t)
-  ;;    (sh . t)
-  ;;    (python . t)
-  ;;    ;; (R . t)
-  ;;    ;; (plantuml . t)
-  ;;    ;; (dot . t)
-  ;;    (C . t)
-  ;;    (org . t)
-  ;;    (latex . t)
-  ;;    ))
-
-  ;; (add-hook 'org-babel-after-execute-hook 'bh/display-inline-images 'append)
-
-  )
+)
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.

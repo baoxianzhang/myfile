@@ -30,7 +30,7 @@
 ;;; Code:
 
 (defconst baoxianzhang-packages
-  '()
+  '(hideif)
   "The list of Lisp packages required by the baoxianzhang layer.
 
 Each entry is either:
@@ -99,3 +99,11 @@ Each entry is either:
 
 ;; Note: A package will not be installed unless at least one layer defines an init function for it. That is to say, in a certain sense, the init function does mandatory setup while the pre-init and post-init functions do optional setup. This can be used for managing cross-layer dependencies, which we will discuss later.
 ;;; packages.el ends here
+
+(defun baoxianzhang/init-hideif ()
+  (use-package
+    hideif
+    :config (progn
+              )
+    )
+)

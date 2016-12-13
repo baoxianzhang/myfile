@@ -9,6 +9,48 @@
 ;;
 ;;; License: GPLv3
 
+(defun bh/display-inline-images ()
+  (condition-case nil
+      (org-display-inline-images)
+    (error nil)))
+
+;; https://emacs-china.org/t/ranger-golden-ratio/964/2
+(defun my-ranger ()
+  (interactive)
+  (if golden-ratio-mode
+      (progn
+        (golden-ratio-mode -1)
+        (ranger)
+        (setq golden-ratio-previous-enable t))
+    (progn
+      (ranger)
+      (setq golden-ratio-previous-enable nil))))
+
+(defun my-quit-ranger ()
+  (interactive)
+  (if golden-ratio-previous-enable
+      (progn
+        (ranger-close)
+        (golden-ratio-mode 1))
+    (ranger-close)))
+
+(defun hidden-dos-eol ()
+  "Do not show ^M in files containing mixed UNIX and DOS line endings."
+  (interactive)
+  (unless buffer-display-table
+    (setq buffer-display-table (make-display-table)))
+  (aset buffer-display-table ?\^M []))
+
+
+(defun remove-dos-eol ()
+  "Replace DOS eolns CR LF with Unix eolns CR"
+  (interactive)
+  (goto-char (point-min))
+  (while (search-forward "\r" nil t) (replace-match "")))
+
+
+
+
 
 
 

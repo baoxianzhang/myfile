@@ -9,6 +9,17 @@
 ;;
 ;;; License: GPLv3
 
+(define-key evil-normal-state-map (kbd "C-]")   'helm-gtags-find-tag)
+(define-key evil-normal-state-map (kbd "C-t")   'evil-jump-backward)
+
+(spacemacs/set-leader-keys "o y" 'youdao-dictionary-search-at-point+)
+(spacemacs/set-leader-keys "o d" 'find-by-pinyin-dired)
+
+(spacemacs/set-leader-keys "ar" 'my-ranger)
+(setq smerge-command-prefix "\C-cv")
+
+
+
 
 
 
