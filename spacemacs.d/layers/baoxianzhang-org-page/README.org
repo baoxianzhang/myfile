@@ -7,6 +7,7 @@
 * Table of Contents                                        :TOC_4_gh:noexport:
  - [[#description][Description]]
  - [[#install][Install]]
+ - [[#usage][Usage]]
  - [[#key-bindings][Key bindings]]
 
 * Description
@@ -16,6 +17,14 @@ This layer adds org-page and blog-admin packages for blog.
 To use this configuration layer, add it to your =~/.spacemacs=. You will need to
 add =baoxianzhang-org-page= to the existing =dotspacemacs-configuration-layers= list in this
 file.
+
+* Usage
+1. 确认当前 repository 在 source branch 下，if not, git checkout source
+2. open emacs, M-x op/new-post
+3. write your blog and save it
+4. git add new blog (under source branch) and commit it ( in emacs, you can use magit, it would be much easier to do the process)
+5. git push source，push source 到 center branch。这个不是必须的，因为博客本身只需要 html 文件，也就是 master 的文件。但是既然有了 center server，何不把 source 备份呢
+6. M-x op/do-publication, 第一个问题选择 y，第二个问题选择 no，因为不用发布到其他文件夹，第三第四个问题选择 y
 
 * Key bindings
 
