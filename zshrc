@@ -247,3 +247,4 @@ export INTOROBOT_DEVELOP=1
 export PARTICLE_DEVELOP=1
 export IDF_PATH=~/code/esp-idf
 export TERM=xterm-256color
+source /opt/ros/kinetic/setup.zsh

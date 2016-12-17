@@ -43,11 +43,11 @@
                            (electric-indent-local-mode -1)))
 
 
-(defconst my-cc-style
-  '("gnu"
-    (c-offsets-alist . ((innamespace . [0])))))
+;; (defconst my-cc-style
+;;   '("gnu"
+;;     (c-offsets-alist . ((innamespace . [0])))))
 
-(c-add-style "my-cc-style" my-cc-style)
+;; (c-add-style "my-cc-style" my-cc-style)
 
 (setq org-agenda-files (list "~/bxgithub/myfile/spacemacs.d/org/gtd.org"
                              "~/bxgithub/myfile/spacemacs.d/org/work.org"
@@ -57,9 +57,11 @@
 
 
  ;; C and C++ style
-(setq c-default-style '("bsd") )
-(setq c-basic-offset 4)
-(setq tab-width 4)
+(setq c-default-style "linux"
+      c-basic-offset 4)
+;; (setq c-default-style '("linux") )
+;; (setq c-basic-offset 4)
+;; (setq tab-width 4)
 
   ;; (setq org-capture-templates
   ;;       '(("t" "Todo" entry (file+headline "~/bxgithub/myfile/spacemacs.d/org/gtd.org" "工作安排")
