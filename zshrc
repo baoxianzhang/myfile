@@ -103,7 +103,7 @@ alias rsync=rsync
 alias vifm=vifm
 alias ranger=ranger
 alias sl=sl
-alias rm='trash-put'
+#alias rm='trash-put'
 alias homedistusage='sudo du -d 1 -k /home/* | sort -n -r'
 alias screenshota='gnome-screenshot -a'
 alias screenshotw='gnome-screenshot -w'
@@ -129,11 +129,6 @@ alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%
 
 #
 # alias for self
-alias bx45='sshpass -p zhangbaoxian ssh zhangbaoxian@192.168.0.45'
-alias lz45='sshpass -p luozheng ssh luozheng@192.168.0.45'
-alias zj45='sshpass -p zhongjin ssh  zhongjin@192.168.0.45'
-alias ssh77='sshpass -p vagrant ssh vagrant@192.168.0.77'
-alias sshIntoyun='ssh root@112.124.117.64'
 alias dc='cd ~/Documents/'
 alias dl='cd ~/Downloads/'
 alias dt='cd ~/Desktop/'
@@ -247,4 +242,4 @@ export INTOROBOT_DEVELOP=1
 export PARTICLE_DEVELOP=1
 export IDF_PATH=~/code/esp-idf
 export TERM=xterm-256color
-source /opt/ros/kinetic/setup.zsh
+source /opt/ros/indigo/setup.zsh

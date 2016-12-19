@@ -88,7 +88,7 @@ if [ $FLAG_APT_GET_SOFTWARE_INSTALL == 1 ];then
         audacity
         python-pip
         #vim
-        chromium-browser
+        #chromium-browser
         #google-chrome-stable
         expect
         unzip
@@ -108,7 +108,7 @@ if [ $FLAG_APT_GET_SOFTWARE_INSTALL == 1 ];then
         libpoppler-glib-dev
         libpoppler-private-dev
         flashplugin-installer
-        adobe-flashplugin
+        #adobe-flashplugin
 
     )
     cecho "Please edit the apps you need to install and save it!" $red
@@ -533,6 +533,12 @@ if [ $FLAG_EMACS_INSTALL == 1 ];then
         tar -xzvf emacs-25.1.tar.gz
     fi
     cd emacs-25.1
+    sudo apt-get install -y libgtk2.0-dev
+    sleep 1
+    sudo apt-get install -y libxpm-dev
+    sleep 1
+    sudo apt-get install -y libncurses5-dev
+    sleep 1
     sudo apt-get install -y libjpeg-dev
     sleep 1
     sudo apt-get install -y libgif-dev
@@ -741,6 +747,7 @@ if [ $FLAG_SKYPE_INSTALL == 1 ];then
     cd ~/softwares
     if [ ! -f "skypeforlinux-64-alpha.deb" ]; then
         wget -nc https://go.skype.com/skypeforlinux-64-alpha.deb
+        sudo apt-get install gdebi
         sudo gdebi skypeforlinux-64-alpha.deb
     fi
     #cecho "Use the Software center to install the deb since dpkg is not work!" $red
