@@ -10,9 +10,9 @@
 ;;; License: GPLv3
 
 ;; (setq configuration-layer--elpa-archives
-;;       '(("melpa-cn" . "https://elpa.zilongshanren.com/melpa/")
-;;         ("org-cn"   . "https://elpa.zilongshanren.com/org/")
-;;         ("gnu-cn"   . "https://elpa.zilongshanren.com/gnu/")))
+;;      '(("melpa-cn" . "https://elpa.zilongshanren.com/melpa/")
+;;        ("org-cn"   . "https://elpa.zilongshanren.com/org/")
+;;        ("gnu-cn"   . "https://elpa.zilongshanren.com/gnu/")))
 ;; https://github.com/syl20bnr/spacemacs/issues/2705
 
 

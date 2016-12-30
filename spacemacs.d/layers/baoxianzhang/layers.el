@@ -54,10 +54,10 @@
                                       ;; semantic
                                       yaml
                                       (rust :variables rust-format-on-save t)
-                                      (latex :variables
-                                             latex-build-command "LaTeX"
-                                             latex-enable-auto-fill t
-                                             latex-enable-folding t)
+                                      ;; (latex :variables
+                                      ;;       latex-build-command "LaTeX"
+                                      ;;       latex-enable-auto-fill t
+                                      ;;       latex-enable-folding t)
 
 
 

@@ -290,6 +290,20 @@ executes.
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
 
+
+
+;; zilongshanren
+;;   (setq configuration-layer--elpa-archives
+;;         '(("melpa-cn" . "https://elpa.zilongshanren.com/melpa/")
+;;           ("org-cn"   . "https://elpa.zilongshanren.com/org/")
+;;           ("gnu-cn"   . "https://elpa.zilongshanren.com/gnu/")))
+
+
+  (setq-default
+   configuration-layer--elpa-archives
+   '(("melpa-cn" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
+     ("gnu-cn" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
+     ("org-cn" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/org/")))
  )
 
 (defun dotspacemacs/user-config ()
@@ -318,5 +332,19 @@ you should place your code here."
 This is an auto-generated function, do not modify its content directly, use
 Emacs customize menu instead.
 This function is called at the very end of Spacemacs initialization."
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (rainbow-mode spinner adaptive-wrap org org-plus-contrib evil-unimpaired zeal-at-point youdao-dictionary chinese-word-at-point yaml-mode xterm-color ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package unfill toml-mode toc-org spacemacs-theme spaceline powerline smeargle shell-pop restart-emacs ranger rainbow-identifiers rainbow-delimiters racer popwin persp-mode pdf-tools tablist pcre2el paradox pangu-spacing ox-gfm orgit org-projectile org-present org-pomodoro alert log4e gntp org-page git mustache simple-httpd ht org-download org-bullets open-junk-file neotree mwim multi-term move-text mmm-mode markdown-toc markdown-mode magit-gitflow macrostep lorem-ipsum linum-relative link-hint info+ indent-guide ido-vertical-mode hydra hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-purpose window-purpose imenu-list helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-gtags helm-gitignore request helm-flx helm-descbinds helm-dash helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md ggtags flx-ido flx find-by-pinyin-dired fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode company-auctex package-build monokai-theme))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
 )
 

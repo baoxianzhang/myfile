@@ -107,7 +107,7 @@ if [ $FLAG_APT_GET_SOFTWARE_INSTALL == 1 ];then
         libz-dev
         libpoppler-glib-dev
         libpoppler-private-dev
-        flashplugin-installer
+        # flashplugin-installer
         #adobe-flashplugin
 
     )
@@ -372,8 +372,12 @@ if [ $FLAG_SPF13VIM_INSTALL == 1 ];then
     fi
     cecho "<<<<<< Please be sure, the network can reach outside. >>>>>>" $red
     #read nothing
-    curl http://j.mp/spf13-vim3 -L -o - | sh
+    #curl http://j.mp/spf13-vim3 -L -o - | sh
     #curl https://github.com/baoxianzhang/myfile/bootstrap.sh -L -o - | sh
+    cd ~/softwares
+    wget https://raw.githubusercontent.com/spf13/spf13-vim/3.0/bootstrap.sh
+    chmod +x bootstrap.sh
+    ./bootstrap.sh	
 
     #cecho "Start vim and begin to install the plugin!" $green
     #cecho "<<<<<< Install vim plugin in the other terninal. >>>>>>" $yellow
