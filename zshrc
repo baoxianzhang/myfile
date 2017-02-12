@@ -142,6 +142,7 @@ alias o='nautilus ./'
 alias arduino='. ~/softwares/arduino-1.6.12/arduino'
 alias encodeI='iconv -f GBK -t UTF-8 '
 alias encodeE='enca -L zh_CN -x utf-8 '
+#alias encodeAll="encodeE $(find ./ *)"
 alias rmkeygen='ssh-keygen -f "/home/${USERNAME}/.ssh/known_hosts" -R 192.168.8.1'
 alias sshAtom='ssh root@192.168.8.1'
 alias telAtom='telnet 192.168.8.1'
@@ -179,6 +180,7 @@ alias lnzlspacemacs='touch ~/.spacemacs.d && rm ~/.spacemacs.d -f && ln -s ~/bxg
 alias springemacs='pkill -SIGUSR2 emacs'
 alias espApp="sudo ~/molmc_code/intorobot-firmware-hal/tools/esptool/esptool -v -cb 921600 -cd nodemcu -cp /dev/ttyUSB0 -ca 0x8000 -cf $1"
 alias espbootloader="sudo ~/molmc/intorobot-firmware-hal/tools/esptool/esptool -v -cb 921600 -cd nodemcu -cp /dev/ttyUSB0 -ca 0x00000 -cf $1"
+alias aptinstall="sudo apt-get install"
 
 scpIntoyunTmp() {
     scp $1 root@112.124.117.64:/tmp/
@@ -238,8 +240,11 @@ export PATH=$PATH:~/softwares/xtensa-esp32-elf/bin
 export PATH=$PATH:/usr/src/xtensa-lx106-elf/bin
 export PATH=$PATH:/usr/lib/git-core
 export PATH=$PATH:~/.cargo/bin
+export PATH=$PATH:~/softwares/Zotero_linux-x86_64
 export INTOROBOT_DEVELOP=1
 export PARTICLE_DEVELOP=1
 export IDF_PATH=~/code/esp-idf
 export TERM=xterm-256color
-source /opt/ros/indigo/setup.zsh
+# source /opt/ros/indigo/setup.zsh
+source /opt/ros/kinetic/setup.zsh
+source ~/catkin_ws/devel/setup.zsh
