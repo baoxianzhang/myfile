@@ -1,0 +1,34 @@
+*  My personal software install script and configuration files on Ubuntu
+
+** Why should I make a script to install software on ubuntu?
+    Since I have use ubuntu for several years, it is annoying to 
+reinstall the software when the system broken down for reasons.
+There is a lot of software used in my daily work and life. When
+the system is broken down, it will almost take me one or two days
+to restore my system and software. Put the software install
+command to script, save the time and remind me the software install
+methods.
+
+** Why should I save the configuration files?
+    Efficient use of softwares increase productivity. Saving the good
+configuration files keep me using software consistent and efficient.
+
+** My software install script in ubuntu
+    + bxsoftware.sh
+    The software install script
+    + softwareInstallFlag.sh
+    The software install switch for the script
+
+** my configuration files
+*** zsh
+    + oh-my-zsh
+    + zshrc
+*** spacemacs
+    + spacemacs
+    + spacemacs.d
+*** vim
+    + spf13
+    + vimrc.before.local
+    + vimrc.bundles.local
+*** tmux
+    + tmux.conf
