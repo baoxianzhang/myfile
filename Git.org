@@ -1,0 +1,622 @@
+* Git
+#author: baoxian zhang
+#date:   20170423
+#inc:    STI
+Git 是免费的开源的分布式版本控制系统，是目前世界上被最广泛使用的现代软件版本管理系统。
+https://git-scm.com
+https://git-scm.com/docs
+https://github.com
+** Git 的由来
+Linus Torvalds->Linux kernal(1991)->BitKeeper(2002)->Git(2005)
+Linus 在 1991 年创建了开源的 Linux 之后，在 2002 年以前，Linus 和维护者都是用 diff 的方式手工 merge contributors 的源代码。Linus 后面选择了 BitKeeper 来维护合并代码。但有人对 BitKeeper 进行逆向，破解。
+BitKeeper 收回了 Linus 的免费使用权。Linus 开始着手开发 Git 作为一种过渡方案来替代 BitKeeper。后面 Git 逐渐成熟，大家都开始使用 Git。
+** Git 与 SVN
+Git 使用的是分散式架构，Distributed Version Control System。
+相对于 SVN 是集中式版本管理软件,Git 并不将代码的所有修改历史保存在中心服务器中。所有参与项目开发者都拥有各自代码的完整拷贝，并在自己的代码拷贝中开发。
+*** 特点
+Git 与 SVN 比较:
+1. 去中心化
+SVN 必须从中心仓库获取与提交代码，这种也是 Git 的主要方式。但实际中每个机器上的仓库都是一个完整的库。你可以 pull 张三的库，然后 push 给李四。例如,github 还有一个 Fork 功能。
+2. 本地提交
+本地就是一个完整的开发仓库，可以实现本体提交，本地回滚。SVN 需要有中心服务器的参与。
+3. 分支策略
+SVN 是复制一份代码到分支目录，而 Git 是通过的分支点做一个标记。
+"Branch is cheap."
+
+*** 开发模式
+SVN 的开发模式是：
+1. 写代码
+2. 从服务器拉回服务器的当前版本，并解决服务起版本库与本地代码的冲突
+3. 将本地代码提交到服务器
+Git 的开发模式：
+1. 写代码
+2. 提交到本地版本库
+3. 从服务器拉回服务器的当前版本库，并解决服务起版本库与本地代码的冲突
+4. 将远程库与本地代码合并结果提交到本地版本库
+5. 将本地版本库推到服务器
+
+https://git.wiki.kernel.org/index.php/GitSvnComparsion
+1. git  faster
+2. svn is sub, git is all
+3. git smaller, for mozilla project 30x
+SVN contains two copies: one for actually work, another hidden in .svn/ to aid operation such as status, diff.
+Git working directory requires only one small index file.
+5. git branch is simpler.
+
+
+** Git 的机理
+
+不同于某些版本管理软件，Git 在决定代码修改历史以及保存形式的时候不会被文件名的变化所愚弄，Git 关注的是文件的内容本身。在实际操作中，代码文件经历频繁的再命名，分解和合并。
+Git 在每次 commit 的时候都会生成一个快照，而非差异比较。Git 只关心文件数据的整体是否发生变化，而大多数其他系统只关心文件内容的具体差异。这类系统(如 SVN）每次记录有哪些文件做了更新，以及都更新了哪些行的什么内容。
+
+[[file:img/SVN.png]]   [[file:img/GIT.png]]
+Git 并不保存这些前后变化的差异数据。实际上，Git 更像是把变化的文件做快照后，记录在一个微型的文件系统中。每次提交更新时，它会纵览一遍所有文件的信息并对文件作一快照，然后保存了一个指向这次快照的索引。为了提高性能，若文件没有变化，Git 不会再次保存，二十对上次保存的快照作一链接。
+Git 的工作方式就如右图所示。
+
+Git 保存的不是文件的变化或者差异，而是一系列不同时刻的文件快照。在提交操作时，Git 会保存一个提交对象(commit object).
+该提交对象会保存一个指向暂存内容快照(tree object)的指针。
+还包含了作者的姓名和邮箱、提交时输入的信息以及指向它的父对象的指针。
+首次提交产生的提交对象没有父对象，普通提交操作产生的提交对象有一个父对象，而由多个分支合并产生的提交对象有多个父对象。
+1. 暂存操作
+$ git add README test.rb LICENSE
+$ git commit -m 'initial commit of my project'
+当使用 git commit 新建一个提交对象前，Git 会先计算每一个子目录的校验和，然后在 Git 仓库中将这些目录保存为(tree)对象。之后 Git 创建的提交对象，处理包含相关的提交信息之外，还包含着指向这个树对象的指针。
+现在，Git 参数中有 5 个对象:
+三个表示文件快照内容的 blob 对象
+一个记录着目录树内容及其中哥哥文件对应 blob 对象索引的 tree 对象
+一个包含指向 tree 对象的索引和其他提交信息元数据的 commit 对象
+[[file:img/gitcommittreeblob.png]]
+作写修改后再次提交，那么这次的提交对象包含上次提交对象的指针。两次提交后，仓库历史会变成如下
+[[file:img/gitcommittreeblob1.png]]
+
+Git 对象
+[[www.tuicool.com/articles/eui213m][Git 由浅入深之存储原理]]
+commit, tree, blob 
+存储对象在.git/objects，初始中只有 pack 和 info 目录
+
+git cat-file -p <contain> or <SHA>
+
+
+
+Git 支持许多数据传输协议：
+git://
+http(s)://
+user@server:/path.git 表示的 SSH 传输协议
+
+
+.gitignore 对某些文件或者某些文件夹不进行版本控制
+[[https://github.com/github/gitignore][A collection of useful .gitignore templates]]
+
+
+
+** Git 安装
+*** Windows
+https://git-scm.com
+
+*** Ubuntu
+sudo apt-get install git
+
+** Git 命令
+*** 四个工作阶段：
+[[file:src/git4stage.png]] [[file:src/git4basic.png]]
+workspace: 工作目录的内容是你当前看到的，也是最新的
+index: 又称为暂存区，标记了当前工作目录中，哪些内容是被 git 管理的, git status 可以查看
+local repository: 本地仓库保存了提交的各个版本
+remote repository: 远程仓库是本地仓库的异地备份
+
+*** git init
+对仓库进行初始化
+如果是远程服务器的话使用：git init --bare
+*** git status
+列出仓库工作目录下的文件状态，以及提示相应的操作，这个应该是使用频率最高的命令。
+*** git config
+/etc/gitconfig --system
+~/.gitconfig   --global
+.git/config    --local 
+
+git config --global user.name "Johndoe"
+git config --global user.email Johndoe@example.com
+git config --global alias.unstage 'reset HEAD --'
+git config --global alias.last 'log -1 HEAD'
+git config --global merge.tool vimdiff
+git config --help
+git config --list
+
+--add --get --unset
+git config --global --add user.name "john"
+git config --global --get user.name
+git config --global --unset user.name
+*** git add
+把修改的文件和文件夹增加到暂存区
+git add <file>
+git add <folder>
+git add . : add all in current directory
+*** git commit
+把暂存区的内容存入到本地仓库
+git commit -m "message"
+git commit --amend "message" :撤销本地仓库的提交信息，提交新的修改信息
+file:src/gitcommit.png
+
+Git 最佳实践：commit msg
+http://blog.jobbole.com/109197/?utm_source=blog.jobbole.com&utm_medium=relatedPosts
+git commit 的信息需要简明的表示做的是啥，不要 update, fix 这些完全不知道什么用途的信息。
+Tips:
+1. One thing one commit
+在提交 commit 的时候尽量保持这个 commit 只做一件事情，比如实现摸个功能或者修改了配置文件。
+因为:
++如果每个 commit 都是一件事情，阅读整个项目代码就可以通过 commit 的信息比较容易理解当初的开发过程。
++cherry-pick，从一个分支的 commit"拷贝"到另外一个分支。如果 commit 非常清楚，cherry-pick 就比较轻松。    
++code review 中，阅读代码就比较痛苦。
+2. thoughtbot 规范
+# 50-character subject line
+#
+# 72-character wrapped longer description. This should answer:
+#
+# * Why was this change necessary?
+# * How does it address the problem?
+# * Are there any side effects?
+#
+# Include a link to the ticket, if any.
+AnglularJS Example:
+fix($compile): couple of unit tests for IE9
+ 
+Older IEs serialize html uppercased, but IE9 does not...
+Would be better to expect case insensitive, unfortunately jasmine does
+not allow to user regexps for throw expectations.
+ 
+Closes #392
+Breaks foo.bar api, foo.baz should be used instead
+
+type 
+feat (feature)
+fix (bug fix)
+docs (documentation)
+refactor
+test (when adding missing tests)
+主题结尾不要使用"."，开头首字母不要大写，使用祈使语态，比如使用 change，而不是 changed.
+*** git push
+git push <remote> <branch> 推送某一分支
+git push <remote> --force  强制推送
+git push <remote> --all    推送所有分支，不包括 tags
+git push <remote> --tags   推送本地标签
+git push -u <remote> <branch>
+*** git fetch
+git fetch <remote>拉取所有分支
+git fetch <remote> <branch> 拉取特定分支
+只是拉取而已，并没有合并到你的仓库
+*** git pull
+拉取远程主机某个分支的更新，再与本地指定分支合并。
+git fetch + git merge
+git pull <remote> <remote-branch>:<local-branch>
+git pull --rebase
+*** git branch
+git branch 列出仓库所有分支
+git branch -d <branch> :save, Git 会阻止你删除包含未合并更改的分支。 
+git branch -D <branch> :强制删除制定分支
+git branch --set-upstream master origin/next 指定 master 分支追踪 origin/next 分支
+*** git brame
+查看文件的每个部分是谁修改的
+git brame <file-name>
+*** git stash
+当你正在进行项目中某一部分的工作，里面的东西处于一个比较杂乱的状态，二你想转到其他的分支上进行一些工作。你不想提交进行到一般的工作，否则你无法回到这个工作点
+git stash save "name"
+git stash pop
+git stash apply "name"
+git stash list
+git stash drop "name"
+
+*** git log
+两个高级用法: 一是自定义提交的输出格式，而是过滤输出哪些提交。
+git log --online 每个提交压缩到一行中。
+0e25143 Merge branch 'feature'
+ad8621a Fix a bug in the feature
+16b36c6 Add a new feature
+23ad9ad Add the initial code base
+
+
+git log --decorate 显示提交的所有引用(如分支、标签)
+git log --oneline --decorate
+0e25143 (HEAD, master) Merge branch 'feature'
+ad8621a (feature) Fix a bug in the feature
+16b36c6 Add a new feature
+23ad9ad (tag: v0.9) Add the initial code base
+
+git log --stat 显示每次提交的文件增删数量 
+git log -p 输出提交所有的删改
+git shortlog 每个提交按作者分类
+git log --graph 绘制一个 ASCII 图像来展示提交历史的分支结构
+git log --graph --oneline --decorate
+git log --pretty=format:"<string>" 
+如下：%cn %h %cd 这三个占位符会分贝替换为作者名字、缩略标识和提交日期。
+
+git log --pretty=format:"%cn committed %h on %cd"
+This results in the following format for each commit:
+
+John committed 400e4b7 on Fri Jun 24 12:30:04 2014 -0500
+John committed 89ab2cf on Thu Jun 23 17:09:42 2014 -0500
+Mary committed 180e223 on Wed Jun 22 17:21:19 2014 -0500
+John committed f12ca28 on Wed Jun 22 13:50:31 2014 -0500
+
+git log -<n>显示最新的 n 次提交
+git log --after <or --before>
+git log --after="20140701" --before="20140704"
+git log --author="John"
+git log --grep="JRA-224"搜索提交的信息
+git log -- <files> 某文件的历史
+git log -S "Hello" 搜索源代码的历史
+git log <since>..<until>显示两个分支的区别
+git log master..feature 包含了在 feature 分支而不在 master 分支的所有提交。
+
+*** git remote
+git remote -v
+git remote add origin <url>
+git remote rm <name>
+git remote rename <old-name> <new-name>
+*** git diff
+比较不同
+[[file:src/gitdiff.png]]
+*** git rebase
+又称衍合，变基，是合并的另外一种选择
+git rebase master
+[[file:src/gitrebase.png]]
+git rebase --onto master 169a6
+git rebase --interactive 丢弃、重排、修改、合并提交
+git rebase -i 
+git rebase -i master 
+
+它会打开一个文本编辑器，显示所有将被移动的提交：
+
+pick 33d5b7a Message for commit #1
+pick 9480b3d Message for commit #2
+pick 5c67e61 Message for commit #3
+这个列表定义了 rebase 将被执行后分支会是什么样的。更改 pick 命令或者重新排序，这个分支的历史就能如你所愿了。比如说，如果第二个提交修复了第一个提交中的小问题，你可以用 fixup 命令把它们合到一个提交中：
+
+pick 33d5b7a Message for commit #1
+fixup 9480b3d Message for commit #2
+pick 5c67e61 Message for commit #3
+保存后关闭文件，Git 会根据你的指令来执行 rebase，项目历史看上去会是这样：
+
+<add git rebase -i image>
+pick 采用这个提交
+squash 这个提交和前一个提交合并成为一个新的提交
+edit 修改这个提交，比如如果这个提交修改了两个文件，你想每个文件都提交一次。
+把某一行中删除，git 会把这个提交从历史中移除。
+
+Rebase 的黄金法则
+绝不要在公共的分之上使用它
+
+*** git fetch
+git fetch <remote>拉取所有分支
+git fetch <remote> <branch> 拉取特定分支
+
+*** git reset
+把当前分支指向另一个位置，并相应的变动工作目录和索引。
+git reset HEAD~3
+[[file:src/gitreset.png]]
+reset 有 3 种常用的模式：
+--soft, 只改变提交点，暂存区和工作目录的内容都不改变
+--mixed, 改变提交点，同时改变暂存区的内容，这是默认的回滚方式 
+--hard，暂存区和工作目录的内容都会被修改到与提交点完全一致的状态
+这些标记和 HEAD 作为参数一起使用。
+git rest--mixed HEAD 将你当前的改动从暂存区移除，但保留在工作目录中。
+git reset --hard HEAD 舍弃你没有提交的改动。
+*** git checkout
+切换分支，撤销在暂存区的文件修改作用
+git checkout maint
+[[file:src/gitcheckout.png]]
+git checkout <existing-branch>
+git checkout -b <new-branch>
+git checkout -b <new-branch> <existing-branch>
+git checkout -- <file> :撤销在暂存区的文件修改作用
+*** git revert
+撤销一个提交的同事会创建一个新的提交。
+[[file:img/gitrevertbefore.png]]
+[[file:img/gitrevertafter.png]]
+*** git merge
+把不同分支合并起来
+git merge <branch> 合并指定分支
+快速合并和三方合并
+[[file:src/gitmerge.png]]
+
+git merge --no-ff    : no fast forward
+[[file:src/gitmergenoff.png]]
+git merge 
+[[file:src/gitmergeff.png]]
+*** git reflog
+引用日志是 Git 的安全网。它记录了你在仓库中做的所有更改，不管你有没有提交。你也可以认为这是你本地更改的完整历史记录。
+运行 git reflog 命令查看引用日志。它应该会打印出像下面这样的信息：
+
+400e4b7 HEAD@{0}: checkout: moving from master to HEAD~2
+0e25143 HEAD@{1}: commit (amend): 将一些很赞的新特性引入`master`
+00f5425 HEAD@{2}: commit (merge): 合并'feature'分支
+ad8621a HEAD@{3}: commit: 结束 feature 分支开发
+说人话就是：
+
+你刚刚切换到 HEAD~2
+你刚刚修改了一个提交信息
+你刚刚把 feature 分支合并到了 master 分支
+你刚刚提交了一份缓存
+HEAD{<n>}语法允许你引用保存在日志中的提交。这和上一节的 HEAD~<n>引用差不多，不过<n>指的是引用日志中的对象，而不是提交历史。
+
+你可以用办法回到之前可能已经丢失的状态。比如，你刚刚用 git reset 方法粉碎了新的 feature 分支。你的引用日志看上去可能会是这样的：
+
+ad8621a HEAD@{0}: reset: moving to HEAD~3
+298eb9f HEAD@{1}: commit: 一些提交信息
+bbe9012 HEAD@{2}: commit: 继续开发
+9cb79fa HEAD@{3}: commit: 开始新特性开发
+git reset 前的三个提交现在都成了悬挂的了，也就是说除了引用日志之外没有办法再引用到它们。现在，假设你意识到了你不应该丢掉你全部的工作。你只需要切换到 HEAD@{1}这个提交就能回到你运行 git reset 之前仓库的状态。
+
+git checkout HEAD@{1}
+这会让你处于 HEAD 分离的状态。你可以从这里开始，创建新的分支，继续你的工作。
+
+
+
+other:
+refspec 将本地分支和远程分支对应起来。我们可以通过它用本地的 Git 命令管理远程分支，设置一些高级的 git push 和 git fetch 行为。
+refspec 的定义是这样的：[+]<src>:<dst>。<src>参数是本地的源分支，<dst>是远程的目标分支。可选的+号强制远程仓库采用非快速向前的更新策略。
+refspec 可以和 git push 一起使用，用来指定远程的分支的名称。比如，下面这个命令将 master 分支推送到远程 origin，就像一般的 git push 一样，但它使用 qa-master 作为远程仓库中的分支名。对于 QA 团队来说，这个方法非常有用。
+
+git push origin master:refs/heads/qa-master
+你也可以用 refspec 来删除远程分支。feature 分支的工作流经常会遇到这种情况，将 feature 分支推送到远程仓库中（比如说为了备份）。你删除本地的 feature 分支之后，远程的 feature 分支依然存在，虽然现在我们已经不再需要它。你可以 push 一个<src>参数为空的 refspec 来删除它们，就像这样：
+
+git push origin:some-feature
+这非常方便，因为你不需要登录到你的远程仓库然后手动删除这些远程分支。注意，在 Git v1.7.0 之后你可以用--delete 标记代替上面这个方法。下面这个命令和上面的命令作用相同：
+
+git push origin --delete some-feature
+
+
+在 Git 配置文件中增加几行，你就可以更改 git fetch 的行为。默认地，git fetch 会 fetch 远程仓库中所有分支。原因就是.git/config 文件的这段配置：
+
+[remote "origin"]
+    url = https://git@github.com:mary/example-repo.git
+    fetch = +refs/heads/*:refs/remotes/origin/*
+fetch 这一行告诉 git fetch 从 origin 仓库中下载所有分支。但是，一些工作流不需要所有分支。比如，很多持续集成工作流只关心 master 分支。为了做到这一点，我们需要将 fetch 这行改成下面这样：
+
+[remote "origin"]
+    url = https://git@github.com:mary/example-repo.git
+    fetch = +refs/heads/master:refs/remotes/origin/master
+你还可以类似地修改 git push 的配置。比如，如果你总是将 master 分支推送到 origin 仓库的 qa-master 分支（就像我们之前做的一样），你要把配置文件改成这样：
+
+[remote "origin"]
+    url = https://git@github.com:mary/example-repo.git
+    fetch = +refs/heads/master:refs/remotes/origin/master
+    push = refs/heads/master:refs/heads/qa-master
+refspec 给了你完全的掌控权，可以定制 Git 命令如何在仓库之间转移分支。你可以重命名或是删除你的本地分支，fetch 或是 push 不同的分支名，修改 git push 和 git fetch 的设置，只对你想要的分支进行操作。
+
+
+~符号让你访问父节点的提交。比如说，下面这个命令显示 HEAD 祖父节点的提交：
+
+git show HEAD~2
+
+~符号总是选择合并提交的第一个父节点。如果你想选择其他父节点，你需要用^符号来指定。比如说，HEAD 是一个合并提交，下面这个命令返回 HEAD 的第二个父节点：
+
+git show HEAD^2
+
+*** git show
+git show HEAD^
+*** git tag
+git tag -a v1.0 -m "xxx"
+*** git submodule
+git submodule add  <url> <submodule-name>
+会生成一个.gitmoudles 文件
+git submodule init
+git submoudle update
+git rm -r submodule
+
+** 命令的区别
+*** reset checkout revert
+它们都用来撤销代码仓库的某些更改，前两个命令不仅可以作用于提交，还可以作用于特定文件。
+| 命令     | 作用域   | 常用情景                                             |
+| reset    | 提交层面 | 在私有分支上舍弃一些没有提交的更改                   |
+| reset    | 文件层面 | 将文件从暂存区中变为某一个版本内容或 HEAD 暂存区移除 |
+| checkout | 提交层面 | 切换分支或者查看旧版本                               |
+| checkout | 文件层面 | 舍弃工作目录的更改                                   |
+| revert   | 提交层面 | 在公共分支上回滚更改                                 |
+| revert   | 文件层面 | 没有                                                 |
+**** reset
+提交层面:
+reset 将一个分支的末端指向另一个提交。这个可以用来移除当前分支的一些提交。
+比如下面两条命令让 hotfix 分支向后回退了两个提交。
+git checkout hotfix
+git reset HEAD~2
+hotfix 分支末端的两个提交变成了悬挂提交。下次 Git 执行垃圾回收的时候，这两个提交会被删除。
+[[file:img/gitresetbefore.png]]
+[[file:img/gitresetafter.png]]
+当你传入 HEAD 以外的的其他提交的时候要格外小心，因为 reset 会重写当前分支的历史，因此，和 rebase 一样不要在公共分支上操作。
+
+文件层面:
+git reset HEAD~2 foo.py 将倒数第二个提交中的 foo.py 加入到暂存区，供下一个提交使用。
+--soft、--mixed、--hard 对文件层面的 git reset 毫无作用，因为暂存区的文件一定会变化，而工作目录的文件一定不变。
+
+**** checkout
+提交层面:
+切换分支，转移 HEAD 的指向。并不会移动分支。
+文件层面:
+更改的是工作目录的而不是暂存区的。
+git checkout HEAD~2 foo.py 将工作目录中的 foo.py 同步到了倒数第二个提交的 foo.py
+**** revert
+revert 撤销一个提交的同事会创建一个新的提交。这是一个安全的方法，它不会重写提交历史。比如下面的命令会找出倒数第二个提交，然后创建一个新的提交来撤销这些更改，然后把这个提交加入项目中。
+git checkout hotfix
+git revert HEAD~2
+[[file:img/gitrevertbefore.png]]
+[[file:img/gitrevertafter.png]]
+git revert 可以用在公共分支上，git reset 应该用在私有分支上。
+git revert 撤销已经提交的更改，git reset HEAD 撤销没有提交的更改。
+
+*** rebase merge
+rebase 变基，补丁重演
+merge 三分合并
+** Git 的工作流
+*** 中心化的工作流
+*** 基于功能分支的工作流
+*** Gitflow 工作流
+*** Fork 工作流
+** Git FLow
+[[file:img/git-flow-model.png]]
+**** master
+origin/master：master 产品级的代码
+**** develop
+origin/develop: develop 最新代码，也成集成分支，其他分支合并到这个分支来。
+**** feature
+从 devevop 来往 develop 去
+git checkout -b myfeature develop
+// do some work
+git checkout develop
+git merge --no-ff myfeature
+git branch -d myfeature
+git push origin develop
+**** release 
+从 develop 来往 develop,master 去
+git checkout -b release-1.2 develop
+// do some docs another relative to release
+git checkout master
+git merge --no-ff release-1.2
+git tag -a 1.2
+
+git checkout develop
+git merge --no-ff release-1.2
+
+git branch -d release-1.2
+
+**** hotfix
+从 master 来往 develop,master 去
+git checkout -b hotfix-1.2.1 master
+// do some hotfix
+git checkout master
+git merge --no-ff hotfix-1.2.1
+git tag -a 1.2.1
+git checkout develop
+git merge --no-ff hotfix-1.2.1
+git branch -d hotfix-1.2.1
+*** Windows
+   [[https://my.oschian.net/lunqi/blog/500881][使用 SourceTree]]
+[[file:img/sourcetree.png]]
+*** Ubuntu
+[[https://github.com/bobthecow/git-flow-completion][git-flow-completion]]
+**** git flow init
+**** git flow feature start myfeature
+**** git flow feature publish myfeature (opt)
+**** git flow feature pull origin myfeature
+**** git flow feature finish myfeature (opt)
+**** git push origin :myfeature (opt)
+**** git flow release start 1.0
+**** git flow release publish 1.0
+**** git flow release finish 1.0
+**** git push --tags
+**** git flow hotfix start hotfix-1.0.1
+**** git flow hotfix finish hotfix-1.0.1 
+*** 开发示例
+**** 团队负责人
+创建项目：在 gitlab 服务器创建一个 testGitflow，添加 README.md 除了默认的 master 分支外，在创建一个 develop 分支。
+通常 gitlab 中将 master 设置为保护分支，除了项目负责人之外，其他人无权向其推送代码。所以需要创建 develop。
+**** 其他成员
+***** 准备
+git clone git@www.mygitlab.com:test/testGitflow.git ~/git/testGitflow
+cd ~/git/testGitflow && git branch -a
+git checkout -b develop origin/develop
+***** 初始化
+git flow init
+***** 建立开发新功能分支
+git flow feature start myfeature
+***** 开始功能开发
+git add .
+git commit -m "message"
+如果多人开发新功能或者短时间内没有完成该功能，可以把该分支 publish 到中心仓库
+git flow feature publish myfeature
+其他开发成员可以拉取功能分支
+git flow feature pull origin myfeature
+通过下面命令将远程的分支代码 clone 下来
+git flow feature track myfeature
+
+***** 功能开发完毕
+git flow feature finish
+Note: 这种没有代码审查，有一个办法是：
+当项目负责人在 gitlab 上创建项目之后，团队成员 fork 一份，然后 clone 自己 fork 的代码进行开发，开发完成之后在 gitlab 上发起 pull request，这样请求相关人员审查代码，通过之后才能够合并到 develop 分支上。
+
+***** 预发布分支
+从服务器中拉取罪行的 develop 分支代码
+git checkout develop
+git pull --rebase
+git flow release start 1.0
+***** 完成预发布分支
+git flow release finish 1.0
+***** 修复 bug 分支
+拉取最新的 master 分支代码
+git checkout master
+git pull --rebase 
+git flow hotfix start bug1
+git flow hotfix finish bug1
+
+
+
+
+
+
+
+** Gitlab
+*** Gitlab 安装
+*** issue
+*** wiki
+** [[https://github.com/geeeeeeeeek/git-recipes/wiki/5.4-Git%E9%92%A9%E5%AD%90%EF%BC%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BD%A0%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%B5%81][Git hook]]
+**** 本地钩子
+.git/hook
+pre-commit
+pre-commit 脚本在每次你运行 git commit 命令时，Git 向你咨询提交信息或者生产提交对象时被执行。你可以用这个钩子来检查即将被提交的代码快照。比如说，你可以运行自动化测试，保证这个提交不会破坏现有的功能，如最简单的检查是否编译通过。
+prepare-commit-msg
+prepare-commit-msg 钩子在 pre-commit 在文本编辑器中生成提交信息之后被调用。这被用来方便地修改自动生成的 squash 或 merge 提交。
+commit-msg
+commit-msg 钩子和 prepare-commit-msg 钩子很像，但台会在用户输入提交信息之后被调用。这适合用来提醒开发者他们的提交信息不符合你团队的规范。
+post-commit
+post-commit 钩子在 commit-msg 钩子字后立即被运行。它无法更改 git commit 的结果，所以这主要用于通知用途。比如，你需要每次提交快照时向老板发封邮件（也许对大多数工作流来说这不是个好的想法），你可以加上这个 post-commit 钩子。
+你虽然可以用 post-commit 来触发本地的持续集成系统，但大多数适合你想用的是 post-receive 这个钩子。它运行在服务器而不是用户的本地机器，它同样在任何开发者推送代码时运行。
+post-checkout
+post-checkout 钩子和 post-commit 钩子很像，但它在你用 git checkout 查看引用的时候被调用。这是用来清理的你的工作目录中可能会令人困惑的生成文件。
+python 程序员经常遇到的问题是切换分支后那些之前生成的.pyc 文件。解析器有时使用.pyc 而不是.py 文件。为了避免歧义，你可以在每次用 post-checkout 切换到新的分支的时候，删除说有的.pyc 文件。
+pre-rebase
+pre-rebase 钩子在 git rebase 发生更改之前运行，确保不会有什么糟糕的事情发生。
+内置的 pre-rebase.sample 脚本是一个更复杂的例子。它在合适阻止 rebase 这方面更加智能。它会在检查你当前的分支是否已经合并到了下一个分支中去(也就是主分支）。如果是的话，rebase 可能会遇到问题，脚本会放弃这次 rebase。
+**** 服务器端钩子
+服务端钩子和本地钩子几乎一样，只不过它们存在于服务端的仓库中（比如说中心仓库，或者开发者的公共仓库）。当和官方仓库连接时，其中一些可以用来拒绝一些不符合规范的提交。
+
+这节中我们要讨论下面三个服务端钩子：
+
+pre-receive
+update
+post-receive
+这些钩子都允许你对 git push 的不同阶段做出响应。
+
+服务端钩子的输出会传送到客户端的控制台中，所以给开发者发送信息是很容易的。但你要记住这些脚本在结束完之前都不会返回控制台的控制权，所以你要小心那些长时间运行的操作。
+pre-receive
+
+pre-receive 钩子在有人用 git push 向仓库推送代码时被执行。它只存在于远端仓库中，而不是原来的仓库中。
+
+这个钩子在任意引用被更新钱被执行，所以这是强制推行开发规范的好地方。如果你不喜欢推送的那个人（多大仇= =），提交信息的格式，或者提交的更改，你都可以拒绝这次提交。虽然你不能阻止开发者写出糟糕的代码，但你可以用 pre-receive 防止这些代码流入官方的代码库。
+你可以用 SHA1 哈希字串，或者底层的 Git 命令，来检查将要引入的更改。一些常见的使用包括：
+
+拒绝将上游分支 rebase 的更改
+防止错综复杂的合并（非快速向前，会造成项目历史非线性）
+检查用户是否有正确的权限来做这些更改（大多用于中心化的 Git 工作流中）
+如果多个引用被推送，在 pre-receive 中返回非 0 状态，拒绝所有提交。如果你想一个个接受或拒绝分支，你需要使用 update 钩子
+
+update
+
+update 钩子在 pre-receive 之后被调用，用法也差不多。它也是在实际更新前被调用的，但它可以分别被每个推送上来的引用分别调用。也就是说如果用户尝试推送到 4 个分支，update 会被执行 4 次。
+
+post-receive
+
+post-receive 钩子在成功推送后被调用，适合用于发送通知。对很多工作流来说，这是一个比 post-commit 更好的发送通知的地方，因为这些更改在公共的服务器而不是用户的本地机器上。给其他开发者发送邮件或者触发一个持续集成系统都是 post-receive 常用的操作。
+
+这个脚本没有参数，但和 pre-receive 一样通过标准输入读取。
+
+** 参考
+*** [[https://git-scm.com][git 官网]]
+*** [[www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000][廖雪峰 git 博客]]
+*** [[https://github.com/geeeeeeeeek/git-recipes/wiki][git-recipes]]
+*** [[nvie.com/posts/a-successful-git-branching-model][A successful Git branching model]]
+*** [[blog.jobbole.com/769843][伯乐在线]]
+**** [[blog.jobbole.com/109197][Git 最佳实践:commit msg]]
+**** [[blog.jobbole.com/109466][Git 最佳实践:分支管理]]
+**** [[blog.jobbole.com/108834][SVN、GIT 日常看我就够了]]
+**** [[blog.jobbole.com/108828][Git 王者超神之路]]
+*** 《Git 权威指南》
+*** [[https://github.com/nvie/gitflow][gitflow in github]]
