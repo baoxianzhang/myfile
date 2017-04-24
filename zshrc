@@ -126,7 +126,6 @@ alias gb='git branch'
 alias gd='git diff'
 alias grh='git reset --hard'
 alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-
 #
 # alias for self
 alias dc='cd ~/Documents/'
@@ -232,7 +231,7 @@ extract () {
 
 [[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && . ~/.autojump/etc/profile.d/autojump.sh
 source ~/code/git-flow-completion/git-flow-completion.plugin.zsh
-/usr/bin/setxkbmap -option "ctrl:swapcaps"
+#/usr/bin/setxkbmap -option "ctrl:swapcaps"
 export PATH=$PATH:/usr/lib/git-core/
 export PATH=$PATH:~/softwares/xtensa-esp32-elf/bin
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -245,6 +244,11 @@ export INTOROBOT_DEVELOP=1
 export PARTICLE_DEVELOP=1
 export IDF_PATH=~/code/esp-idf
 export TERM=xterm-256color
-# source /opt/ros/indigo/setup.zsh
-source /opt/ros/kinetic/setup.zsh
-source ~/catkin_ws/devel/setup.zsh
+
+
+# For ROS
+source /opt/ros/indigo/setup.zsh
+source /home/zhangbaoxian/Projects/devel/setup.zsh
+export EDITOR='emacs -nw'
+#source /opt/ros/kinetic/setup.zsh
+#source ~/catkin_ws/devel/setup.zsh
