@@ -101,8 +101,17 @@
 
   ;; (add-hook 'org-babel-after-execute-hook 'bh/display-inline-images 'append)
 
+(defun ROS-c-mode-hook()
+  (setq c-basic-offset 2)
+  (setq indent-tabs-mode nil)
+  (c-set-offset 'substatement-open 0)
+  (c-set-offset 'innamespace 0)
+  (c-set-offset 'case-label '+)
+  (c-set-offset 'statement-case-open 0))
+(add-hook 'c-mode-common-hook 'ROS-c-mode-hook)
 
-
+;;; In order to get namespace indentation correct, .h files must be opened in C++ mode
+(add-to-list 'auto-mode-alist '("\\.h$" . c++-mode))
 
 
 
