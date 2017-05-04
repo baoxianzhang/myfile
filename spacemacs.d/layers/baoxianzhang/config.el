@@ -112,7 +112,5 @@
 
 ;;; In order to get namespace indentation correct, .h files must be opened in C++ mode
 (add-to-list 'auto-mode-alist '("\\.h$" . c++-mode))
-
-
-
-
+;;; roslaunch highlighting
+(add-to-list 'auto-mode-alist '("\\.launch$" . xml-mode))
