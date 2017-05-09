@@ -24,6 +24,7 @@
                                       emacs-lisp
                                       git
                                       markdown
+                                      python
                                       (org :variables
                                            org-enable-github-support t)
                                       (shell :variables
