@@ -107,6 +107,7 @@ if [ $FLAG_APT_GET_SOFTWARE_INSTALL == 1 ];then
         libz-dev
         libpoppler-glib-dev
         libpoppler-private-dev
+        nautilus-open-terminal
         # flashplugin-installer
         #adobe-flashplugin
 
