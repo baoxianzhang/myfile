@@ -59,8 +59,7 @@
                                       ;;       latex-build-command "LaTeX"
                                       ;;       latex-enable-auto-fill t
                                       ;;       latex-enable-folding t)
-
-
+                                      imenu-list
 
 
                                       baoxianzhang-org-page
