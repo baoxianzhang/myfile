@@ -60,6 +60,7 @@
                                       ;;       latex-enable-auto-fill t
                                       ;;       latex-enable-folding t)
                                       imenu-list
+                                      csv
 
 
                                       baoxianzhang-org-page
