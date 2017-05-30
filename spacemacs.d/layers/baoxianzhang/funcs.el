@@ -48,6 +48,19 @@
   (goto-char (point-min))
   (while (search-forward "\r" nil t) (replace-match "")))
 
+(defun run-ros-clang-format ()
+  "Runs clang-format on cpp, h files in Projects/ and reverts buffers"
+  (interactive)
+  (and
+   (string-match "/Projects/.*\\.\\(h\\|cpp\\)$" buffer-file-name)
+   (save-some-buffers 'no-confirm)
+   (shell-command (concat "clang-format-3.8 -style=file -i " buffer-file-name))
+   (message (concat "Saved and ran clang-format on " buffer-file-name))
+   (revert-buffer t t t)
+   )
+  )
+
+
 
 
 

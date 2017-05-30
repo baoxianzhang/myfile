@@ -49,7 +49,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git git-flow z extract vi-mode tmux zsh-autosuggestions colored-man-pages web-search)
 
 # User configuration
 
@@ -126,7 +126,6 @@ alias gb='git branch'
 alias gd='git diff'
 alias grh='git reset --hard'
 alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-
 #
 # alias for self
 alias dc='cd ~/Documents/'
@@ -209,30 +208,8 @@ distUsage(){
 #    cd "$1";
 #}
 
-extract () {
-    if [ -f $1 ] ; then
-      case $1 in
-        *.tar.bz2)   tar xjf $1     ;;
-        *.tar.gz)    tar xzf $1     ;;
-        *.bz2)       bunzip2 $1     ;;
-        *.rar)       unrar e $1     ;;
-        *.gz)        gunzip $1      ;;
-        *.tar)       tar xf $1      ;;
-        *.tbz2)      tar xjf $1     ;;
-        *.tgz)       tar xzf $1     ;;
-        *.zip)       unzip $1       ;;
-        *.Z)         uncompress $1  ;;
-        *.7z)        7z x $1        ;;
-        *)     echo "'$1' cannot be extracted via extract()" ;;
-         esac
-     else
-         echo "'$1' is not a valid file"
-     fi
-}
 
-[[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && . ~/.autojump/etc/profile.d/autojump.sh
-source ~/code/git-flow-completion/git-flow-completion.plugin.zsh
-/usr/bin/setxkbmap -option "ctrl:swapcaps"
+#/usr/bin/setxkbmap -option "ctrl:swapcaps"
 export PATH=$PATH:/usr/lib/git-core/
 export PATH=$PATH:~/softwares/xtensa-esp32-elf/bin
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -245,6 +222,7 @@ export INTOROBOT_DEVELOP=1
 export PARTICLE_DEVELOP=1
 export IDF_PATH=~/code/esp-idf
 export TERM=xterm-256color
+
 # source /opt/ros/indigo/setup.zsh
 source /opt/ros/kinetic/setup.zsh
 source ~/catkin_ws/devel/setup.zsh

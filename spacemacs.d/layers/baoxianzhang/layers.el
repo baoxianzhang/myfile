@@ -24,6 +24,7 @@
                                       emacs-lisp
                                       git
                                       markdown
+                                      python
                                       (org :variables
                                            org-enable-github-support t)
                                       (shell :variables
@@ -58,8 +59,8 @@
                                       ;;       latex-build-command "LaTeX"
                                       ;;       latex-enable-auto-fill t
                                       ;;       latex-enable-folding t)
-
-
+                                      imenu-list
+                                      csv
 
 
                                       baoxianzhang-org-page

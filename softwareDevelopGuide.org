@@ -1,0 +1,30 @@
+* Developer Guide
+This document is mainly about how to develop good software.
+
+** Principles
+*** Shared owership
+*** Be willing to work on anythin
+*** Ask for help
+
+** Motivation
+*** Self-Improve
+*** Self-
+
+** Coding Lauguage
+
+** Coding Tools
+*** Trello + Pomodora
+
+** Coding Style
+
+** Coding Resource
+
+** General Practices
+*** Issues
+*** Pull requests
+    
+** Some tips
+*** Use english to comment, to commit, to document
+*** Use std::cout instand of using namespace std;
+*** 
+

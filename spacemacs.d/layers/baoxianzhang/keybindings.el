@@ -17,6 +17,7 @@
 
 (spacemacs/set-leader-keys "ar" 'my-ranger)
 (setq smerge-command-prefix "\C-cv")
+(spacemacs/set-leader-keys "o f" 'run-ros-clang-format)
 
 
 
