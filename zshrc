@@ -248,3 +248,4 @@ export TERM=xterm-256color
 # source /opt/ros/indigo/setup.zsh
 source /opt/ros/kinetic/setup.zsh
 source ~/catkin_ws/devel/setup.zsh
+source ~/RRP/ros_robotics_project_ws/devel/setup.zsh
