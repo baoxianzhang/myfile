@@ -23,6 +23,7 @@ yellow='\033[0;33m'
 blue='\033[0;34m'
 magenta='\033[0;35m'
 cyan='\033[0;36m'
+SOFTWARE_PATH=~/Software
 
 #  Reset text attributes to normal + without clearing screen.
 #alias Reset="tput sgr0"
@@ -159,7 +160,7 @@ mkdir -p ~/code
 if [ $FLAG_GIT_2dot7dot3_INSTALL == 1 ];then
     cecho "<<<<<< Install git 2.7.3. >>>>>>" $yellow
     # Magit requires Git >= 1.9.4, you are using 1.9.1.
-    cd ~/softwares
+    cd $SOFTWARE_PATH
     #sudo apt-get remove git
     if [ ! -d "git-2.7.3" ]; then
         wget -nc https://www.kernel.org/pub/software/scm/git/git-2.7.3.tar.gz
@@ -216,7 +217,7 @@ fi
 
 #if [ $FLAG_SILVERSEARCH_AG_INSTALL == 1 ];then
     #cecho "<<<<<< Install silversearch-ag. >>>>>>" $yellow
-    #cd ~/softwares
+    #cd $SOFTWARE_PATH
     #if [ ! -d "silversearch-ag" ]; then
         #wget -nc -O silversearch-ag.zip https://codeload.github.com/mizuno-as/silversearcher-ag/zip/master
         #unzip -o silversearch-ag.zip
@@ -231,7 +232,7 @@ fi
 
 if [ $FLAG_RIPGREP_INSTALL == 1 ];then
     cecho "<<<<<< Install ripgrep. >>>>>>" $yellow
-    cd ~/softwares
+    cd $SOFTWARE_PATH
     if [ ! -f "ripgrep-0.2.9-x86_64-unknown-linux-musl.tar.gz" ]; then
         wget -nc -O ripgrep-0.2.9-x86_64-unknown-linux-musl.tar.gz https://github.com/BurntSushi/ripgrep/releases/download/0.2.9/ripgrep-0.2.9-x86_64-unknown-linux-musl.tar.gz
         tar -xzvf ripgrep-0.2.9-x86_64-unknown-linux-musl.tar.gz
@@ -244,7 +245,7 @@ fi
 if [ $FLAG_CMAKE_INSTALL == 1 ];then
     cecho "<<<<<< Install cmake. >>>>>>" $yellow
     #Ref: https://cmake.org/
-    cd ~/softwares
+    cd $SOFTWARE_PATH
     if [ ! -f "cmake-3.5.0.tar.gz" ]; then
         wget -nc https://cmake.org/files/v3.5/cmake-3.5.0.tar.gz
         tar -xvzf cmake-3.5.0.tar.gz
@@ -262,7 +263,7 @@ if [ $FLAG_ZSH_INSTALL == 1 ];then
     cecho "<<<<<< Install zsh. >>>>>>" $yellow
     #Ref: http://zhuanlan.zhihu.com/mactalk/19556676ls
     #Restart and use the zsh
-    cd ~/softwares
+    cd $SOFTWARE_PATH
     sudo apt-get install -y zsh
     echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
     source ~/.bashrc
@@ -274,7 +275,7 @@ fi
 if [ $FLAG_AUTOJUMP_INSTALL == 1 ];then
     cecho "<<<<<< Install autojump. >>>>>>" $yellow
     #Ref: https://github.com/wting/autojump
-    cd ~/softwares
+    cd $SOFTWARE_PATH
     if [ ! -f "autojump_v21.1.2.tar.gz" ]; then
         # echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
         # source ~/.bashrc
@@ -290,7 +291,7 @@ fi
 if [ $FLAG_CTAGS_INSTALL == 1 ];then
     cecho "<<<<<< Install ctags. >>>>>>" $yellow
     sudo apt-get install -y exuberant-ctags
-    cd ~/softwares
+    cd $SOFTWARE_PATH
     if [ ! -f "ctags-5.8.tar.gz" ]; then
         wget -nc http://prdownloads.sourceforge.net/ctags/ctags-5.8.tar.gz
         tar -xzvf ctags-5.8.tar.gz
@@ -304,7 +305,7 @@ fi
 
 if [ $FLAG_GTAGS_INSTALL == 1 ];then
     cecho "<<<<<< Install gtags. >>>>>>" $yellow
-    cd ~/softwares
+    cd $SOFTWARE_PATH
     # if [ ! -f "global-6.5.2.tar.gz" ]; then
     #     wget -nc http://tamacom.com/global/global-6.5.2.tar.gz
     #     tar -xzvf global-6.5.2.tar.gz
@@ -326,7 +327,7 @@ fi
 #Ref: http://www.vim.org/download.php
 if [ $FLAG_VIM_INSTALL == 1 ];then
      cecho "<<<<<< Install vim. >>>>>>" $yellow
-     cd ~/softwares
+     cd $SOFTWARE_PATH
      if [ ! -d "vim" ]; then
         # echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
         # source ~/.bashrc
@@ -375,7 +376,7 @@ if [ $FLAG_SPF13VIM_INSTALL == 1 ];then
     #read nothing
     #curl http://j.mp/spf13-vim3 -L -o - | sh
     #curl https://github.com/baoxianzhang/myfile/bootstrap.sh -L -o - | sh
-    cd ~/softwares
+    cd $SOFTWARE_PATH
     wget https://raw.githubusercontent.com/spf13/spf13-vim/3.0/bootstrap.sh
     chmod +x bootstrap.sh
     ./bootstrap.sh	
@@ -387,7 +388,7 @@ fi
 
 if [ $FLAG_ARM_NONE_EABI_GCC_4dot9dot3_INSTALL == 1 ];then
     cecho "<<<<<< Install arm-none-eabi-gcc 4.9.3. >>>>>>" $yellow
-    cd ~/softwares
+    cd $SOFTWARE_PATH
     sudo apt-get install -y lib32ncurses5 lib32z1
     #lib32bz2-1.0
     wget -nc https://launchpad.net/gcc-arm-embedded/4.9/4.9-2015-q3-update/+download/gcc-arm-none-eabi-4_9-2015q3-20150921-linux.tar.bz2
@@ -399,7 +400,7 @@ fi
 
 if [ $FLAG_ESPTOOL_INSTALL == 1 ];then
     cecho "<<<<<< Install esptool. >>>>>>" $yellow
-    cd ~/softwares
+    cd $SOFTWARE_PATH
     wget -nc https://github.com/igrr/esptool-ck/releases/download/0.4.9/esptool-0.4.9-linux64.tar.gz
     tar -zxf esptool-0.4.9-linux64.tar.gz
     sudo cp esptool-0.4.9-linux64 /usr/src/esptool -r
@@ -438,7 +439,7 @@ fi
 
 if [ $FLAG_STLINK_INSTALL == 1 ];then
     cecho "<<<<<< Install stlink. >>>>>>" $yellow
-    cd ~/softwares
+    cd $SOFTWARE_PATH
     if [ ! -d "stlink" ]; then
         git clone https://github.com/texane/stlink.git
     fi
@@ -504,7 +505,7 @@ if [ $FLAG_MERCURY_MW150US_WIRELESS_INSTALL == 1 ];then
     cecho "<<<<<< Install mercury Mw150us wireless driver. >>>>>>" $yellow
     #Ref: http://jarhead.blog.163.com/blog/static/175217041201317102236535/
     #Ref: http://forum.ubuntu.org.cn/viewtopic.php?t=421982
-    cd ~/softwares
+    cd $SOFTWARE_PATH
     if [ ! -d "rtl8188eu" ]; then
         # echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
         # source ~/.bashrc
@@ -532,7 +533,7 @@ if [ $FLAG_EMACS_INSTALL == 1 ];then
     #sudo make install
     #fi
     ## or
-    cd ~/softwares
+    cd $SOFTWARE_PATH
     if [ ! -f "emacs-25.1.tar.gz" ]; then
         wget -nc http://ftpmirror.gnu.org/emacs/emacs-25.1.tar.gz
         tar -xzvf emacs-25.1.tar.gz
@@ -557,7 +558,7 @@ fi
 
 if [ $FLAG_RUST_INSTALL == 1 ]; then
     cecho "<<<<<< Install Rust. >>>>>>" $yellow
-    cd ~/softwares/
+    cd $SOFTWARE_PATH
     wget -nc https://static.rust-lang.org/dist/rust-1.13.0-x86_64-unknown-linux-gnu.tar.gz
     tar -xzvf rust-1.13.0-x86_64-unknown-linux-gnu.tar.gz
     cd rust-1.13.0-x86_64-unknown-linux-gnu
@@ -613,7 +614,7 @@ fi
 if [ $FLAG_GOOGLEPINYIN_INSTALL == 1 ];then
     cecho "<<<<<< Install googlepinyin Input method. >>>>>>" $yellow
     #Ref: http://blog.sina.com.cn/s/blog_8ec233c80101huyz.html
-    cd ~/softwares
+    cd $SOFTWARE_PATH
     sudo apt-get install ibus-googlepinyin -y
     sudo apt-get install ibus ibus-clutter ibus-gtk ibus-gtk3 ibus-qt4 -y
     cecho "<<<<<< Finished to install googlePinyin, Please configure it! >>>>>>" $green
@@ -627,7 +628,7 @@ fi
 if [ $FLAG_VIRTUALBOX_INSTALL == 1 ];then
     cecho "<<<<<< Install virtualbox in ubuntu 16.04. >>>>>>" $yellow
     #Ref: https://www.virtualbox.org/
-    cd ~/softwares
+    cd $SOFTWARE_PATH
     wget -nc http://download.virtualbox.org/virtualbox/5.1.6/virtualbox-5.1_5.1.6-110634~Ubuntu~xenial_amd64.deb
     #echo "Use the Software center to install the deb since dpkg is not work!"
     sudo dpkg -i virtualbox-5.1_5.1.6-110634~Ubuntu~xenial_amd64.deb
@@ -647,7 +648,7 @@ if [ $FLAG_VIRTUALBOX_WIN7_INSTALL == 1 ];then
     cecho "Finish? Continue?[Y/n]" $yellow
     ans=$(askForContinue)
     if [ $ans == 1 ];then
-        cd ~/softwares
+        cd $SOFTWARE_PATH
         #boot VT-x AMD-v to support 64 bit
         #VirtualBox guest additions
         sudo apt-get install -y linux-headers-generic build-essential dkms
@@ -678,7 +679,7 @@ fi
 if [ $FLAG_VAGRANT_INSTALL == 1 ];then
     cecho "<<<<<< Install vagrant. >>>>>>" $yellow
     #Ref: http://rmingwang.com/vagrant-commands-and-config.html   https://www.vagrantup.com/docs/boxes.html
-    cd ~/softwares
+    cd $SOFTWARE_PATH
     if [ ! -f "vagrant_1.8.1_x86_64.deb" ]; then
         wget -nc https://releases.hashicorp.com/vagrant/1.8.1/vagrant_1.8.1_x86_64.deb
     fi
@@ -722,7 +723,7 @@ fi
 
 if [ $FLAG_SYSTEM_INDICATOR_INSTALL == 1 ];then
     cecho "<<<<<< Install System Indicator. >>>>>>" $yellow
-    cd ~/softwares
+    cd $SOFTWARE_PATH
     sudo add-apt-repository ppa:indicator-multiload/stable-daily
     sudo apt-get update
     sudo apt-get install indicator-multiload
@@ -730,14 +731,14 @@ fi
 
 if [ $FLAG_LAUNCHERFODERS_INSTALL == 1 ];then
     cecho "<<<<<< Install LauncherFolders. >>>>>>" $yellow
-    cd ~/softwares
+    cd $SOFTWARE_PATH
     wget http://unity-folders.exceptionfound.com/unity-launcher-folders_1.0.3_all.deb
     sudo dpkg -i unity-launcher-folders_1.0.3_all.deb
 fi
 
 #if [ $FLAG_SKYPE_INSTALL == 1 ];then
 #    cecho "<<<<<< Install Skype. >>>>>>" $yellow
-#    cd ~/softwares
+#    cd $SOFTWARE_PATH
 #    if [ ! -f "skype-ubuntu-precise_4.3.0.37-1_i386.deb" ]; then
 #        wget -nc download.skype.com/linux/skype-ubuntu-precise_4.3.0.37-1_i386.deb
 #    fi
@@ -749,7 +750,7 @@ fi
 
 if [ $FLAG_SKYPE_INSTALL == 1 ];then
     cecho "<<<<<< Install Skype. >>>>>>" $yellow
-    cd ~/softwares
+    cd $SOFTWARE_PATH
     if [ ! -f "skypeforlinux-64-alpha.deb" ]; then
         wget -nc https://go.skype.com/skypeforlinux-64-alpha.deb
         sudo apt-get install gdebi
@@ -788,7 +789,7 @@ fi
 
 
 if [ $FLAG_SCEL2PYIM_FOR_SPACEMACE_INSTALL == 1 ]; then
-    cd ~/softwares/
+    cd $SOFTWARE_PATH
     cecho "<<<<<< Install scel2pyim for spacemacs chinese layer. >>>>>> " $yellow
     git clone https://github.com/E-Neo/scel2pyim.git
     cd scel2pyim
@@ -821,7 +822,7 @@ fi
 
 if [ $FLAG_HAROOPAD_FOR_MARKDOWN_INSTALL == 1 ]; then
     cecho "<<<<<< Install Haroopad for Markdown. >>>>>> " $yellow
-    cd ~/softwares/
+    cd $SOFTWARE_PATH
     wget https://bitbucket.org/rhiokim/haroopad-download/downloads/haroopad-v0.13.1-x64.deb
     sudo dpkg -i haroopad-v0.13.1-x64.deb
 fi

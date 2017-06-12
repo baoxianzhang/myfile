@@ -226,7 +226,7 @@ export TERM=xterm-256color
 
 # For ROS
 source /opt/ros/indigo/setup.zsh
-source /home/zhangbaoxian/Projects/devel/setup.zsh
+source /home/zhangbaoxian/Project/catkin_ws/devel/setup.zsh
 export EDITOR='emacs -nw'
 #source /opt/ros/kinetic/setup.zsh
 #source ~/catkin_ws/devel/setup.zsh
