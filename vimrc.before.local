@@ -166,8 +166,8 @@ imap <C-G><C-H> <C-Left>
 """"    "新建文件后，自动定位到文件末尾
 """"    autocmd BufNewFile * normal G
 """"endfunction
-autocmd BufNewFile *.cpp,*.[ch] exec ":call SetTitleLocalCpp()"
-autocmd BufNewFile *.sh exec ":call SetTitleLocalShell()"
+"" "autocmd BufNewFile *.cpp,*.[ch] exec ":call SetTitleLocalCpp()"
+"" "autocmd BufNewFile *.sh exec ":call SetTitleLocalShell()"
 function! SetTitleLocalCpp()
     "如果文件类型为.c .cpp .h文件
     call setline(1, "/*************************************************************************")

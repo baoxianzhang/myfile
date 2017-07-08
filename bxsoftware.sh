@@ -1,6 +1,8 @@
 #! /bin/bash
 #Author: baoxian zhang[baoxianzhang] <baoxianzhit@gmail.com>
 #Date: Tuesday, 14-03-2016
+
+## Function
 function askForContinue()
 {
     read ANS
@@ -14,6 +16,21 @@ function askForContinue()
     esac
 }
 
+# Reset text attributes to normal + without clearing screen.
+# alias Reset="tput sgr0"
+
+# Color-echo.
+# arg $1 = message
+# arg $2 = Color
+cecho()
+{
+    echo -e "${2}${1}"
+    tput sgr0
+    # Reset # Reset to normal.
+    return
+}
+
+## Color Define
 # Set the colours you can use
 black='\033[0;30m'
 white='\033[0;37m'
@@ -23,20 +40,11 @@ yellow='\033[0;33m'
 blue='\033[0;34m'
 magenta='\033[0;35m'
 cyan='\033[0;36m'
-SOFTWARE_PATH=~/Software
 
-#  Reset text attributes to normal + without clearing screen.
-#alias Reset="tput sgr0"
+#Some pre-define variable
+SOFTWARE_PATH=~/Softwares
+MYGITHUB_DIR=~/bxgithub
 
-# Color-echo.
-# arg $1 = message
-# arg $2 = Color
-cecho() {
-  echo -e "${2}${1}"
-  tput sgr0
-  # Reset # Reset to normal.
-  return
-}
 # Keep-alive: update existing `sudo` time stamp until the script has finished.
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
@@ -58,9 +66,7 @@ if [ $FLAG_APT_GET_SOFTWARE_INSTALL == 1 ];then
         # Utilities
         # add your install apt softwares in lines
         # for example, audacious
-        # git 
-        git-core
-        git-flow
+        # git
         g++
         build-essential
         python
@@ -75,7 +81,7 @@ if [ $FLAG_APT_GET_SOFTWARE_INSTALL == 1 ];then
         sshpass
         xsel
         #terminator
-        nginx
+        # nginx
         gawk
         perl
         expat
@@ -88,8 +94,6 @@ if [ $FLAG_APT_GET_SOFTWARE_INSTALL == 1 ];then
         galculator
         audacity
         python-pip
-        #vim
-        #chromium-browser
         #google-chrome-stable
         expect
         unzip
@@ -127,62 +131,51 @@ if [ $FLAG_APT_GET_SOFTWARE_INSTALL == 1 ];then
 
     cecho "Now, the following apps will be installed!" $red
     for item in ${apps}; do
-      cecho "> ${item}" $magenta
+        cecho "> ${item}" $magenta
     done
     read nothing
 
     echo ""
 
     select yn in "Yes" "No"; do
-      case $yn in
-        Yes )
-            cecho "Ok! installing apps, please wait ... " $yellow
-            sudo apt-get install -y ${apps}
-            break;;
-        No ) break;;
-      esac
+        case $yn in
+            Yes )
+                cecho "Ok! installing apps, please wait ... " $yellow
+                sudo apt-get install -y ${apps}
+                break;;
+            No ) break;;
+        esac
     done
 fi
 
 cd
-homeDir=$(pwd)
-# if [ ! -d "$homeDir/softwares" ]; then
-#     mkdir ~/softwares
-# fi
-# if [ ! -d "$homeDir/bxgithub" ]; then
-#     mkdir ~/bxgithub
-# fi
 
-mkdir -p ~/bxgithub
-mkdir -p ~/softwares
-mkdir -p ~/code
+mkdir -p SOFTWARE_PATH
+mkdir -p MYGITHUB_PATH
 
-if [ $FLAG_GIT_2dot7dot3_INSTALL == 1 ];then
-    cecho "<<<<<< Install git 2.7.3. >>>>>>" $yellow
+if [ $FLAG_GIT_INSTALL == 1 ];then
+    cecho "<<<<<< Install git 2.13.1. >>>>>>" $yellow
     # Magit requires Git >= 1.9.4, you are using 1.9.1.
     cd $SOFTWARE_PATH
     #sudo apt-get remove git
-    if [ ! -d "git-2.7.3" ]; then
-        wget -nc https://www.kernel.org/pub/software/scm/git/git-2.7.3.tar.gz
+    if [ ! -d "git-2.13.1" ]; then
+        wget -nc https://www.kernel.org/pub/software/scm/git/git-2.13.1.tar.gz
         tar -xzvf git-2.7.3.tar.gz
     fi
-    cd git-2.7.3
+    cd git-2.13.1
     chmod +x configure
     ./configure
     sudo apt-get install -y zlib1g-dev
     sudo apt-get install -y curl
     make
     sudo make install
-    echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
-    sleep 3
-    source ~/.bashrc
 fi
 
 
 if [ $FLAG_GIT_EMAIL_NAME_CONFIG == 1 ];then
     cecho "<<<<<< Configure git email name and editor. >>>>>> " $yellow
     cecho "<<<<<< Fix ~/.gitconfig file to your own cofiguration. >>>>>> "$green
-echo "#[user]
+    echo "#[user]
 #	email = baoxianzhit@gmail.com
 #	name = baoxianzhang
 #[core]
@@ -196,39 +189,10 @@ echo "#[user]
 #	default = simple
 " >> ~/.gitconfig
     vi ~/.gitconfig
-#    git config --global user.email "baoxianzhit@gmail.com"
-#    git config --global user.name "baoxianzhang"
-#    git config --global core.editor vim
+    #    git config --global user.email "baoxianzhit@gmail.com"
+    #    git config --global user.name "baoxianzhang"
+    #    git config --global core.editor vim
 fi
-
-if [ $FLAG_GIT_FLOW_COMPLETION_INSTALL == 1 ];then
-    cecho "<<<<<< Install git flow completion. >>>>>>" $yellow
-    cd ~/code
-    # echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
-    # source ~/.bashrc
-    if [ ! -d "git-flow-completion" ]; then
-        #git clone https://github.com/bobthecow/git-flow-completion.git
-        wget -nc -O git-flow-completion.zip https://github.com/bobthecow/git-flow-completion/archive/master.zip
-        unzip -o git-flow-completion.zip
-        mv git-flow-completion-master git-flow-completion
-        #echo "source ~/code/git-flow-completion/git-flow-completion.zsh" >> ~/.zshrc
-    fi
-fi
-
-#if [ $FLAG_SILVERSEARCH_AG_INSTALL == 1 ];then
-    #cecho "<<<<<< Install silversearch-ag. >>>>>>" $yellow
-    #cd $SOFTWARE_PATH
-    #if [ ! -d "silversearch-ag" ]; then
-        #wget -nc -O silversearch-ag.zip https://codeload.github.com/mizuno-as/silversearcher-ag/zip/master
-        #unzip -o silversearch-ag.zip
-        #mv silversearcher-ag-master silversearch-ag
-        #sudo apt-get install liblzma-dev -y
-        #cd silversearch-ag
-        #./build.sh
-        #./configure
-        #sudo make install
-    #fi
-#fi
 
 if [ $FLAG_RIPGREP_INSTALL == 1 ];then
     cecho "<<<<<< Install ripgrep. >>>>>>" $yellow
@@ -240,18 +204,16 @@ if [ $FLAG_RIPGREP_INSTALL == 1 ];then
     fi
 fi
 
-
-
 if [ $FLAG_CMAKE_INSTALL == 1 ];then
-    cecho "<<<<<< Install cmake. >>>>>>" $yellow
+    cecho "<<<<<< Install cmake 3.9.0-rc2. >>>>>>" $yellow
     #Ref: https://cmake.org/
     cd $SOFTWARE_PATH
-    if [ ! -f "cmake-3.5.0.tar.gz" ]; then
-        wget -nc https://cmake.org/files/v3.5/cmake-3.5.0.tar.gz
-        tar -xvzf cmake-3.5.0.tar.gz
+    if [ ! -f "cmake-3.9.0-rc2.tar.gz" ]; then
+        wget -nc https://cmake.org/files/v3.9/cmake-3.9.0-rc2.tar.gz
+        tar -xvzf cmake-3.9.0-rc2.tar.gz
     fi
-    if [ ! -d "cmake-3.5.0" ]; then
-        cd cmake-3.5.0
+    if [ ! -d "cmake-3.9.0-rc2" ]; then
+        cd cmake-3.9.0-rc2
         #if the second times or more, comment the next two lines
         ./configure
         make
@@ -277,14 +239,10 @@ if [ $FLAG_AUTOJUMP_INSTALL == 1 ];then
     #Ref: https://github.com/wting/autojump
     cd $SOFTWARE_PATH
     if [ ! -f "autojump_v21.1.2.tar.gz" ]; then
-        # echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
-        # source ~/.bashrc
         wget -nc https://github.com/downloads/joelthelion/autojump/autojump_v21.1.2.tar.gz
         tar -xzvf autojump_v21.1.2.tar.gz
         cd autojump_v21.1.2
         ./install.sh
-        #echo "[[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && . ~/.autojump/etc/profile.d/autojump.sh" >> ~/.zshrc
-        #source ~/.zshrc
     fi
 fi
 
@@ -306,10 +264,6 @@ fi
 if [ $FLAG_GTAGS_INSTALL == 1 ];then
     cecho "<<<<<< Install gtags. >>>>>>" $yellow
     cd $SOFTWARE_PATH
-    # if [ ! -f "global-6.5.2.tar.gz" ]; then
-    #     wget -nc http://tamacom.com/global/global-6.5.2.tar.gz
-    #     tar -xzvf global-6.5.2.tar.gz
-    # fi
     if [ ! -f "global-6.5.5.tar.gz" ]; then
         wget -nc http://tamacom.com/global/global-6.5.5.tar.gz
         tar -xzvf global-6.5.5.tar.gz
@@ -324,43 +278,40 @@ if [ $FLAG_GTAGS_INSTALL == 1 ];then
     cecho "Usage: gtags" $green
 fi
 
-#Ref: http://www.vim.org/download.php
 if [ $FLAG_VIM_INSTALL == 1 ];then
-     cecho "<<<<<< Install vim. >>>>>>" $yellow
-     cd $SOFTWARE_PATH
-     if [ ! -d "vim" ]; then
-        # echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
-        # source ~/.bashrc
-        # git clone https://github.com/vim/vim.git
+    cecho "<<<<<< Install vim. >>>>>>" $yellow
+    #Ref: http://www.vim.org/download.php
+    cd $SOFTWARE_PATH
+    if [ ! -d "vim" ]; then
         wget -nc -O vim.zip https://github.com/vim/vim/archive/master.zip
         unzip -o vim.zip
         mv vim-master vim
-     fi
-     sudo apt-get remove --purge vim vim-runtime vim-gnome vim-tiny vim-common vim-gui-common
-     sudo apt-get build-dep vim-gnome
-     sudo apt-get install liblua5.1-dev luajit libluajit-5.1 python-dev ruby-dev libperl-dev libncurses5-dev libgnome2-dev libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev -y
-     sudo rm -rf /usr/local/share/vim
-     sudo rm -rf /usr/bin/vim
-     sudo mkdir /usr/include/lua5.1/include
-     sudo mv /usr/include/lua5.1/*.h /usr/include/lua5.1/include/
-     sudo ln -s /usr/bin/luajit-2.0.0-beta9 /usr/bin/luajit
-     cd vim/src
-     make distclean
-     ./configure --with-features=huge \
-                 --enable-rubyinterp \
-                 --enable-largefile \
-                 --disable-netbeans \
-                 --enable-pythoninterp \
-                 --with-python-config-dir=/usr/lib/python2.7/config \
-                 --enable-perlinterp \
-                 --enable-luainterp \
-                 --with-luajit \
-                 --enable-gui=auto \
-                 --enable-fail-if-missing \
-                 --with-lua-prefix=/usr/include/lua5.1 \
-                 --enable-cscope
-     make
-     sudo make install
+    fi
+    sudo apt-get remove --purge vim vim-runtime vim-gnome vim-tiny vim-common vim-gui-common
+    sudo apt-get build-dep vim-gnome
+    sudo apt-get install liblua5.1-dev luajit libluajit-5.1 python-dev ruby-dev libperl-dev libncurses5-dev libgnome2-dev libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev -y
+    sudo rm -rf /usr/local/share/vim
+    sudo rm -rf /usr/bin/vim
+    sudo mkdir /usr/include/lua5.1/include
+    sudo mv /usr/include/lua5.1/*.h /usr/include/lua5.1/include/
+    sudo ln -s /usr/bin/luajit-2.0.0-beta9 /usr/bin/luajit
+    cd vim/src
+    make distclean
+    ./configure --with-features=huge \
+                --enable-rubyinterp \
+                --enable-largefile \
+                --disable-netbeans \
+                --enable-pythoninterp \
+                --with-python-config-dir=/usr/lib/python2.7/config \
+                --enable-perlinterp \
+                --enable-luainterp \
+                --with-luajit \
+                --enable-gui=auto \
+                --enable-fail-if-missing \
+                --with-lua-prefix=/usr/include/lua5.1 \
+                --enable-cscope
+    make
+    sudo make install
 fi
 
 if [ $FLAG_SPF13VIM_INSTALL == 1 ];then
@@ -368,22 +319,15 @@ if [ $FLAG_SPF13VIM_INSTALL == 1 ];then
     if [ $FLAG_MYVIM_LOCAL_SETTINGS_CONFIG == 1 ];then
         cecho "<<<<<< Set my local settings in vim. >>>>>>" $yellow
         rm -rf ~/.vimrc.before.local
-        ln -s ~/bxgithub/myfile/vimrc.before.local ~/.vimrc.before.local
+        ln -s $MYGITHUB_PATH/myfile/vimrc.before.local ~/.vimrc.before.local
         rm -rf ~/.vimrc.bundles.local
-        ln -s ~/bxgithub/myfile/vimrc.bundles.local ~/.vimrc.bundles.local
+        ln -s $MYGITHUB_PATH/myfile/vimrc.bundles.local ~/.vimrc.bundles.local
     fi
-    cecho "<<<<<< Please be sure, the network can reach outside. >>>>>>" $red
-    #read nothing
-    #curl http://j.mp/spf13-vim3 -L -o - | sh
-    #curl https://github.com/baoxianzhang/myfile/bootstrap.sh -L -o - | sh
+
     cd $SOFTWARE_PATH
     wget https://raw.githubusercontent.com/spf13/spf13-vim/3.0/bootstrap.sh
     chmod +x bootstrap.sh
-    ./bootstrap.sh	
-
-    #cecho "Start vim and begin to install the plugin!" $green
-    #cecho "<<<<<< Install vim plugin in the other terninal. >>>>>>" $yellow
-    #gnome-terminal -x bash -c "vim"
+    ./bootstrap.sh
 fi
 
 if [ $FLAG_ARM_NONE_EABI_GCC_4dot9dot3_INSTALL == 1 ];then
@@ -394,8 +338,6 @@ if [ $FLAG_ARM_NONE_EABI_GCC_4dot9dot3_INSTALL == 1 ];then
     wget -nc https://launchpad.net/gcc-arm-embedded/4.9/4.9-2015-q3-update/+download/gcc-arm-none-eabi-4_9-2015q3-20150921-linux.tar.bz2
     tar -jxf gcc-arm-none-eabi-4_9-2015q3-20150921-linux.tar.bz2
     sudo cp gcc-arm-none-eabi-4_9-2015q3 /usr/src/ -r
-    #echo "export PATH=$PATH:/usr/src/gcc-arm-none-eabi-4_9-2015q3/bin" >> ~/.zshrc
-    #source ~/.zshrc
 fi
 
 if [ $FLAG_ESPTOOL_INSTALL == 1 ];then
@@ -404,37 +346,30 @@ if [ $FLAG_ESPTOOL_INSTALL == 1 ];then
     wget -nc https://github.com/igrr/esptool-ck/releases/download/0.4.9/esptool-0.4.9-linux64.tar.gz
     tar -zxf esptool-0.4.9-linux64.tar.gz
     sudo cp esptool-0.4.9-linux64 /usr/src/esptool -r
-    #source ~/.zshrc
 fi
-
-
 
 if [ $FLAG_SOFTLINK_ZSHRC_INSTALL == 1 ];then
     cecho "<<<<<< Softlink zshrc. >>>>>>" $yellow
-    cd ~/bxgithub
-    if [ ! -d "$homeDir/bxgithub/myfile" ]; then
-        # echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
-        # source ~/.bashrc
-        # git clone https://github.com/baoxianzhang/myfile.git
+    cd $MYGITHUB_PATH
+    if [ ! -d "$MYGITHUB_PATH/myfile" ]; then
         wget -nc -O myfile.zip https://github.com/baoxianzhang/myfile/archive/master.zip
         unzip -o myfile.zip
         mv myfile-master myfile
     fi
     rm -f ~/.zshrc
-    ln -s ~/bxgithub/myfile/zshrc ~/.zshrc
+    ln -s $MYGITHUB_PATH/myfile/zshrc ~/.zshrc
 fi
 
 if [ $FLAG_SOFTLINK_TMUX_INSTALL == 1 ];then
     cecho "<<<<<< Softlink tmux. >>>>>>" $yellow
-    cd ~/bxgithub
-    if [ ! -d "$homeDir/bxgithub/myfile" ]; then
-        # git clone https://github.com/baoxianzhang/myfile.git
+    cd $MYGITHUB_PATH
+    if [ ! -d "$MYGITHUB_PATH/myfile" ]; then
         wget -nc -O myfile.zip https://github.com/baoxianzhang/myfile/archive/master.zip
         unzip -o myfile.zip
         mv myfile-master myfile
     fi
     rm -rf ~/.tmux.conf
-    ln -s ~/bxgithub/myfile/tmux.conf ~/.tmux.conf
+    ln -s $MYGITHUB_PATH/myfile/tmux.conf ~/.tmux.conf
 fi
 
 if [ $FLAG_STLINK_INSTALL == 1 ];then
@@ -448,8 +383,6 @@ if [ $FLAG_STLINK_INSTALL == 1 ];then
     sudo apt-get install -y intltool
     sudo apt-get install -y libsgutils2-dev libusb-1.0.0-dev
     sudo apt-get install -y autoconf automake libtool
-    #./autogen.sh
-    #./configure
     make
     sudo install -s -m 775 build/Release/src/gdbserver/st-util /usr/bin/st-util
     sudo install -s -m 775 build/Release/st-flash /usr/bin/st-flash
@@ -467,11 +400,11 @@ if [ $FLAG_GOLDENDICT_INSTALL == 1 ];then
     ##configure the dict source
     ##http://abloz.com/huzheng/stardict-dic/zh_CN/
     ##download the dict source stardict-langdao-ce-gb-2.4.2, stardict-langdao-ec-gb-2.4.2, stardict-oxford-gb-2.4.2
-    cd ~/
+    cd
     if [ ! -d "GoldenDict" ];then
         mkdir GodlenDict
     fi
-    cd ~/GodlenDict
+    cd ~/GoldenDict
     wget -nc http://abloz.com/huzheng/stardict-dic/zh_CN/stardict-langdao-ec-gb-2.4.2.tar.bz2
     wget -nc http://abloz.com/huzheng/stardict-dic/zh_CN/stardict-langdao-ce-gb-2.4.2.tar.bz2
     wget -nc http://abloz.com/huzheng/stardict-dic/zh_CN/stardict-oxford-gb-2.4.2.tar.bz2
@@ -482,7 +415,7 @@ if [ $FLAG_GOLDENDICT_INSTALL == 1 ];then
 fi
 
 if [ $FLAG_FZF_INSTALL == 1 ]; then
-cecho "<<<<<< Install fzf. " $yellow
+    cecho "<<<<<< Install fzf. " $yellow
     git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
     ~/.fzf/install
 fi
@@ -507,9 +440,6 @@ if [ $FLAG_MERCURY_MW150US_WIRELESS_INSTALL == 1 ];then
     #Ref: http://forum.ubuntu.org.cn/viewtopic.php?t=421982
     cd $SOFTWARE_PATH
     if [ ! -d "rtl8188eu" ]; then
-        # echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
-        # source ~/.bashrc
-        # git clone https://github.com/lwfinger/rtl8188eu.git
         wget -nc -O rtl8188eu.zip https://github.com/lwfinger/rtl8188eu/archive/master.zip
         unzip -o rtl8188eu.zip
         mv rtl8188eu-master rtl8188eu
@@ -526,13 +456,6 @@ fi
 
 if [ $FLAG_EMACS_INSTALL == 1 ];then
     cecho "<<<<<< Install Emacs. >>>>>>" $yellow
-    #if [ ! -f "emacs" ]; then
-    #git clone https://github.com/emacs-mirror/emacs.git
-    #./configure
-    #make
-    #sudo make install
-    #fi
-    ## or
     cd $SOFTWARE_PATH
     if [ ! -f "emacs-25.1.tar.gz" ]; then
         wget -nc http://ftpmirror.gnu.org/emacs/emacs-25.1.tar.gz
@@ -556,27 +479,17 @@ if [ $FLAG_EMACS_INSTALL == 1 ];then
     sudo make install
 fi
 
-if [ $FLAG_RUST_INSTALL == 1 ]; then
-    cecho "<<<<<< Install Rust. >>>>>>" $yellow
-    cd $SOFTWARE_PATH
-    wget -nc https://static.rust-lang.org/dist/rust-1.13.0-x86_64-unknown-linux-gnu.tar.gz
-    tar -xzvf rust-1.13.0-x86_64-unknown-linux-gnu.tar.gz
-    cd rust-1.13.0-x86_64-unknown-linux-gnu
-    sudo ./install.sh
-    cargo install racer
-    cargo install rustfmt
-fi
 
 if [ $FLAG_SPACEMACS_INSTALL == 1 ]; then
     cecho "<<<<<< Install Spacemacs. >>>>>>" $yellow
     if [ ! -d "$homeDir/bxgithub" ]; then
-        mkdir -p ~/bxgithub/
+        mkdir -p $MYGITHUB_PATH
     fi
     cd ~/bxgithub/
-    if [ ! -d "$homeDir/bxgithub/spacemacs" ]; then
+    if [ ! -d "$MYGITHUB_PATH/spacemacs" ]; then
         git clone https://github.com/syl20bnr/spacemacs.git
-	    cd spacemacs
-	    git checkout develop
+        cd spacemacs
+        git checkout develop
     fi
     rm -rf ~/.emacs.d
     ln -s ~/bxgithub/spacemacs ~/.emacs.d
@@ -586,43 +499,6 @@ if [ $FLAG_SOFTLINK_SPACEMACS_CONFIG == 1 ]; then
     cecho "<<<<<< Softlink Spacemacs. >>>>>>" $yellow
     rm -rf ~/.spacemacs.d
     ln -s ~/bxgithub/myfile/spacemacs.d ~/.spacemacs.d
-fi
-
-#if [ $FLAG_SOFTLINK_EMACS_INSTALL == 1 ];then
-    #cecho "<<<<<< Softlink emacs. >>>>>>" $yellow
-    #if [ ! -d "$homeDir/bxgithub" ]; then
-        #mkdir ~/bxgithub
-    #fi
-    #cd ~/bxgithub
-    #if [ ! -d "$homeDir/bxgithub/emacs-c-ide-demo" ]; then
-        ## echo "export PATH=$PATH:/usr/lib/git-core" >> ~/.bashrc
-        ## source ~/.bashrc
-        ## git clone https://github.com/baoxianzhang/emacs-c-ide-demo.git
-        #wget -nc -O emacs-c-ide-demo.zip https://github.com/baoxianzhang/emacs-c-ide-demo/archive/master.zip
-        #unzip -o emacs-c-ide-demo.zip
-        #mv emacs-c-ide-demo-master emacs-c-ide-demo
-    #fi
-    #rm ~/.emacs.d -rf
-    #ln -s ~/bxgithub/emacs-c-ide-demo ~/.emacs.d
-#fi
-
-#if [ $FLAG_SILVERSEARCH_AG_INSTALL == 1 ];then
-#    cecho "<<<<<< Install silversearch-ag. >>>>>>" $yellow
-#    sudo apt-get install silversearch-ag -y
-#fi
-
-if [ $FLAG_GOOGLEPINYIN_INSTALL == 1 ];then
-    cecho "<<<<<< Install googlepinyin Input method. >>>>>>" $yellow
-    #Ref: http://blog.sina.com.cn/s/blog_8ec233c80101huyz.html
-    cd $SOFTWARE_PATH
-    sudo apt-get install ibus-googlepinyin -y
-    sudo apt-get install ibus ibus-clutter ibus-gtk ibus-gtk3 ibus-qt4 -y
-    cecho "<<<<<< Finished to install googlePinyin, Please configure it! >>>>>>" $green
-    cecho "Install Chinese language: System Settings > Language Support > Install/Remove Languages > install the Chinese language" $green
-    #cecho "Try: "im-switch -s ibus" to start ibus frame" $green
-    cecho "Try: "ibus-setup" to set the input method" $green
-    cecho "Try: "ibus-daemon -drx" to find the input method icon" $green
-    cecho "Logout the system to use input method after finish all the installation!" $green
 fi
 
 if [ $FLAG_VIRTUALBOX_INSTALL == 1 ];then
@@ -673,7 +549,7 @@ if [ $FLAG_VIRTUALBOX_WIN7_INSTALL == 1 ];then
             # Add Drag function on the host and the virtualbox
             # Settings->General->Advanced: choose shared Clipboard Bidirectional; Drag'n Drop: Bidrectional.
         fi
-   fi
+    fi
 fi
 
 if [ $FLAG_VAGRANT_INSTALL == 1 ];then
@@ -871,7 +747,7 @@ if [ $FLAG_FLAT_THEMES_ICONS_INSTALL == 1 ]; then
     #sudo apt-get install ultra-flat-icons-gree
     echo ""
 
-cat <<EOF
+    cat <<EOF
 Now press your super key,
 search for Ubuntu Tweak and fire it.
 Under the tweaks tab, there is an option for theme.
@@ -882,18 +758,18 @@ EOF
 fi;
 
 if [ $FLAG_SHADOWSOCKS_INSTALL == 1 ]; then
-   cecho "<<<<<< Install shadowsocks. " $yellow
-   echo "sudo pip install shadowsocks";
-   sudo -H pip install shadowsocks
-   echo -e "\033[40;32m deploy the proxy server on your remote vps: server[1,2,3] \033[0m"
+    cecho "<<<<<< Install shadowsocks. " $yellow
+    echo "sudo pip install shadowsocks";
+    sudo -H pip install shadowsocks
+    echo -e "\033[40;32m deploy the proxy server on your remote vps: server[1,2,3] \033[0m"
 
-   SS_CFG="/etc/shadowsocks.json"
-   if [ ! -f "$SS_CFG" ]; then
-     echo "no found shadowsocks config file: /etc/shadowsocks.json";
-     sudo touch "$SS_CFG"
-   fi
-   sudo chmod a+w "$SS_CFG"
-   cat > "$SS_CFG" <<EOF
+    SS_CFG="/etc/shadowsocks.json"
+    if [ ! -f "$SS_CFG" ]; then
+        echo "no found shadowsocks config file: /etc/shadowsocks.json";
+        sudo touch "$SS_CFG"
+    fi
+    sudo chmod a+w "$SS_CFG"
+    cat > "$SS_CFG" <<EOF
    {
     "server":["server1","server2"],
     "server_port":8080,
@@ -906,14 +782,24 @@ if [ $FLAG_SHADOWSOCKS_INSTALL == 1 ]; then
    }
 EOF
 
-  echo -e "\033[40;32m you can start the shadowsocks server on remote vps: sudo ssserver -c /etc/shadowsocks.json -d start \033[0m"
-  #sudo ssserver -c $SS_CFG -d stop
-  #sudo ssserver -c $SS_CFG -d start
-  echo -e "\033[40;32m you can start the shadowsocks client on your local laptop: sslocal -c /etc/shadowsocks.json \033[0m"
+    echo -e "\033[40;32m you can start the shadowsocks server on remote vps: sudo ssserver -c /etc/shadowsocks.json -d start \033[0m"
+    #sudo ssserver -c $SS_CFG -d stop
+    #sudo ssserver -c $SS_CFG -d start
+    echo -e "\033[40;32m you can start the shadowsocks client on your local laptop: sslocal -c /etc/shadowsocks.json \033[0m"
 fi;
 
-# other softwares packagesender, 
+# other softwares packagesender,
 echo ""
 cecho "Done， Happy Hacking!" $red
 echo ""
 
+if [ $FLAG_RUST_INSTALL == 1 ]; then
+    cecho "<<<<<< Install Rust. >>>>>>" $yellow
+    cd $SOFTWARE_PATH
+    wget -nc https://static.rust-lang.org/dist/rust-1.13.0-x86_64-unknown-linux-gnu.tar.gz
+    tar -xzvf rust-1.13.0-x86_64-unknown-linux-gnu.tar.gz
+    cd rust-1.13.0-x86_64-unknown-linux-gnu
+    sudo ./install.sh
+    cargo install racer
+    cargo install rustfmt
+fi
