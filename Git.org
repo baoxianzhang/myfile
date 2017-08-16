@@ -44,7 +44,6 @@
     Git working directory requires only one small index file.
     4. git branch is simpler.
 
-
 ** Git 的机理
 
    不同于某些版本管理软件，Git 在决定代码修改历史以及保存形式的时候不会被文件名的变化所愚弄，Git 关注的是文件的内容本身。在实际操作中，代码文件经历频繁的再命名，分解和合并。
@@ -62,14 +61,18 @@
    1. 暂存操作
    #+BEGIN_QUOTE
    $ git add README test.rb LICENSE
+
    $ git commit -m 'initial commit of my project'
    #+END_QUOTE
    当使用 git commit 新建一个提交对象前，Git 会先计算每一个子目录的校验和，然后在 Git 仓库中将这些目录保存为(tree)对象。之后 Git 创建的提交对象，处理包含相关的提交信息之外，还包含着指向这个树对象的指针。
    现在，Git 参数中有 5 个对象:
 
    三个表示文件快照内容的 blob 对象
+
    一个记录着目录树内容及其中哥哥文件对应 blob 对象索引的 tree 对象
+
    一个包含指向 tree 对象的索引和其他提交信息元数据的 commit 对象
+
    [[file:img/gitcommittreeblob.png]]
 
    做些修改后再次提交，那么这次的提交对象包含上次提交对象的指针。两次提交后，仓库历史会变成如下
@@ -83,29 +86,25 @@
 
    git cat-file -p <contain> or <SHA>
 
-
    Git 支持许多数据传输协议：
+   #+BEGIN_QUOTE
    git://
    http(s)://
    user@server:/path.git 表示的 SSH 传输协议
-
-
+   #+END_QUOTE
    .gitignore 对某些文件或者某些文件夹不进行版本控制
    [[https://github.com/github/gitignore][A collection of useful .gitignore templates]]
-
-
-
 ** Git 安装
 *** Windows
     https://git-scm.com
-
 *** Ubuntu
     sudo apt-get install git
-
+    https://git-scm.com (recommended)
 ** Git 命令
 *** 四个工作阶段：
     [[file:img/git4stage.png]]
     [[file:img/git4basic.png]]
+
     workspace: 工作目录的内容是你当前看到的，也是最新的
 
     index: 又称为暂存区，标记了当前工作目录中，哪些内容是被 git 管理的, git status 可以查看
@@ -113,7 +112,6 @@
     local repository: 本地仓库保存了提交的各个版本
 
     remote repository: 远程仓库是本地仓库的异地备份
-
 *** git init
     对仓库进行初始化
     如果是远程服务器的话使用：git init --bare
@@ -140,15 +138,18 @@
     #+END_QUOTE
 *** git add
     把修改的文件和文件夹增加到暂存区
+    #+BEGIN_QUOTE
     git add <file>
     git add <folder>
-    git add . : add all in current directory
+    git add . //add all in current directory
+    #+END_QUOTE
 *** git commit
     把暂存区的内容存入到本地仓库
+    #+BEGIN_QUOTE
     git commit -m "message"
     git commit --amend "message" :撤销本地仓库的提交信息，提交新的修改信息
-
-    file:img/gitcommit.png
+    #+END_QUOTE
+    [[img/gitcommit.png]]
 
     Git 最佳实践：commit msg
     http://blog.jobbole.com/109197/?utm_source=blog.jobbole.com&utm_medium=relatedPosts
@@ -162,15 +163,15 @@
     +code review 中，阅读代码就比较痛苦。
     1. thoughtbot 规范
     #+BEGIN_QUOTE
-    # 50-character subject line
-    #
-    # 72-character wrapped longer description. This should answer:
-    #
-    # * Why was this change necessary?
-    # * How does it address the problem?
-    # * Are there any side effects?
-    #
-    # Include a link to the ticket, if any.
+    50-character subject line
+    
+    72-character wrapped longer description. This should answer:
+    
+    * Why was this change necessary?
+    * How does it address the problem?
+    * Are there any side effects?
+    
+    Include a link to the ticket, if any.
     #+END_QUOTE
 
     #+BEGIN_QUOTE
@@ -352,6 +353,7 @@
     #+END_QUOTE
 *** git revert
     撤销一个提交的同事会创建一个新的提交。
+
     [[file:img/gitrevertbefore.png]]
     [[file:img/gitrevertafter.png]]
 *** git merge
@@ -467,8 +469,10 @@
      git checkout hotfix
      git reset HEAD~2
      hotfix 分支末端的两个提交变成了悬挂提交。下次 Git 执行垃圾回收的时候，这两个提交会被删除。
+
      [[file:img/gitresetbefore.png]]
      [[file:img/gitresetafter.png]]
+
      当你传入 HEAD 以外的的其他提交的时候要格外小心，因为 reset 会重写当前分支的历史，因此，和 rebase 一样不要在公共分支上操作。
 
      文件层面:
@@ -684,3 +688,4 @@
 **** [[blog.jobbole.com/108828][Git 王者超神之路]]
 *** 《Git 权威指南》
 *** [[https://github.com/nvie/gitflow][gitflow in github]]
+*** [[http://www.jianshu.com/p/e196b90b5b15][Git:Reset,Checkout 和 Revert]]
