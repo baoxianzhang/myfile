@@ -1,8 +1,8 @@
 * Git
   Git 是免费的开源的分布式版本控制系统，是目前世界上被最广泛使用的现代软件版本管理系统。  
-  https://git-scm.com    
-  https://git-scm.com/docs  
-  https://github.com
+  https://git-scm.com  
+https://git-scm.com/docs  
+https://github.com
 ** Git 的由来
    Linus Torvalds->Linux kernal(1991)->BitKeeper(2002)->Git(2005)
 
