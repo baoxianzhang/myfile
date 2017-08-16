@@ -1,10 +1,7 @@
 * Git
-  Git 是免费的开源的分布式版本控制系统，是目前世界上被最广泛使用的现代软件版本管理系统。
-
-  https://git-scm.com
-
-  https://git-scm.com/docs
-
+  Git 是免费的开源的分布式版本控制系统，是目前世界上被最广泛使用的现代软件版本管理系统。  
+  https://git-scm.com    
+  https://git-scm.com/docs  
   https://github.com
 ** Git 的由来
    Linus Torvalds->Linux kernal(1991)->BitKeeper(2002)->Git(2005)
@@ -60,24 +57,18 @@
    首次提交产生的提交对象没有父对象，普通提交操作产生的提交对象有一个父对象，而由多个分支合并产生的提交对象有多个父对象。
    1. 暂存操作
    #+BEGIN_QUOTE
-   $ git add README test.rb LICENSE
-
+   $ git add README test.rb LICENSE  
    $ git commit -m 'initial commit of my project'
    #+END_QUOTE
    当使用 git commit 新建一个提交对象前，Git 会先计算每一个子目录的校验和，然后在 Git 仓库中将这些目录保存为(tree)对象。之后 Git 创建的提交对象，处理包含相关的提交信息之外，还包含着指向这个树对象的指针。
    现在，Git 参数中有 5 个对象:
 
-   三个表示文件快照内容的 blob 对象
-
-   一个记录着目录树内容及其中哥哥文件对应 blob 对象索引的 tree 对象
-
-   一个包含指向 tree 对象的索引和其他提交信息元数据的 commit 对象
-
-   [[file:img/gitcommittreeblob.png]]
-
-   做些修改后再次提交，那么这次的提交对象包含上次提交对象的指针。两次提交后，仓库历史会变成如下
+   三个表示文件快照内容的 blob 对象  
+   一个记录着目录树内容及其中哥哥文件对应 blob 对象索引的 tree 对象  
+   一个包含指向 tree 对象的索引和其他提交信息元数据的 commit 对象  
+   [[file:img/gitcommittreeblob.png]]  
+   做些修改后再次提交，那么这次的提交对象包含上次提交对象的指针。两次提交后，仓库历史会变成如下  
    [[file:img/gitcommittreeblob1.png]]
-
 
    Git 对象
    [[www.tuicool.com/articles/eui213m][Git 由浅入深之存储原理]]
@@ -88,8 +79,8 @@
 
    Git 支持许多数据传输协议：
    #+BEGIN_QUOTE
-   git://
-   http(s)://
+   git://  
+   http(s)://  
    user@server:/path.git 表示的 SSH 传输协议
    #+END_QUOTE
    .gitignore 对某些文件或者某些文件夹不进行版本控制
@@ -366,7 +357,6 @@
 
     [[file:img/gitmergenoff.png]]
 
-    git merge
     [[file:img/gitmergeff.png]]
 *** git reflog
     引用日志是 Git 的安全网。它记录了你在仓库中做的所有更改，不管你有没有提交。你也可以认为这是你本地更改的完整历史记录。
