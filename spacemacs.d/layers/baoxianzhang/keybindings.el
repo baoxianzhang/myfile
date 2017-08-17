@@ -14,6 +14,7 @@
 
 (spacemacs/set-leader-keys "o y" 'youdao-dictionary-search-at-point+)
 (spacemacs/set-leader-keys "o d" 'find-by-pinyin-dired)
+(spacemacs/set-leader-keys "o i" 'org-insert-src-block)
 
 (spacemacs/set-leader-keys "ar" 'my-ranger)
 ;; (setq smerge-command-prefix "\C-cv")
