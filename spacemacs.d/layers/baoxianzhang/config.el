@@ -100,7 +100,6 @@
   ;;    ))
 
   ;; (add-hook 'org-babel-after-execute-hook 'bh/display-inline-images 'append)
-
 (defun ROS-c-mode-hook()
   (setq c-basic-offset 2)
   (setq indent-tabs-mode nil)
@@ -114,3 +113,19 @@
 (add-to-list 'auto-mode-alist '("\\.h$" . c++-mode))
 ;;; roslaunch highlighting
 (add-to-list 'auto-mode-alist '("\\.launch$" . xml-mode))
+;;; Auto LF in org-mode
+(add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
+
+;;; Auto indent 2 in shell-mode
+;; (add-hook 'shell-mode-hook (lambda () (setq sh-basic-offset 2)))
+;; (add-hook 'shell-mode-hook (lambda () (setq sh-indentation 2)))
+;; '(sh-basic-offset 2)
+;; '(sh-indentation 2)
+;; '(smie-indent-basic 2)
+(setq sh-basic-offset 2)
+(setq sh-indentation 2)
+
+
+
+
+

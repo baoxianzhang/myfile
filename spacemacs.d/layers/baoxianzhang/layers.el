@@ -25,6 +25,7 @@
                                       git
                                       markdown
                                       python
+                                      shell-scripts
                                       (org :variables
                                            org-enable-github-support t)
                                       (shell :variables
