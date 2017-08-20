@@ -19,7 +19,6 @@ configuration files keep me using software consistent and efficient.
     + softwareInstallFlag.sh
     The software install switch for the script
 
-<<<<<<< HEAD
 ** My configuration files
 *** zsh
     + oh-my-zsh

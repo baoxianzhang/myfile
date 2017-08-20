@@ -49,7 +49,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-flow z extract vi-mode tmux zsh-autosuggestions colored-man-pages web-search)
+plugins=(git git-flow autojump z extract tmux zsh-autosuggestions colored-man-pages web-search)
 
 # User configuration
 
@@ -133,53 +133,27 @@ alias dl='cd ~/Downloads/'
 alias dt='cd ~/Desktop/'
 alias tl='cd ~/Templates/'
 alias mf='cd ~/bxgithub/myfile'
-alias sw='cd ~/softwares/'
-alias halneutron='cd ~/molmc_code/firmware/hal/src/neutron/'
+alias sw='cd ~/Softwares/'
 alias vi='vim'
 alias em='emacs'
 alias o='nautilus ./'
-alias arduino='. ~/softwares/arduino-1.6.12/arduino'
 alias encodeI='iconv -f GBK -t UTF-8 '
 alias encodeE='enca -L zh_CN -x utf-8 '
 #alias encodeAll="encodeE $(find ./ *)"
-alias rmkeygen='ssh-keygen -f "/home/${USERNAME}/.ssh/known_hosts" -R 192.168.8.1'
-alias sshAtom='ssh root@192.168.8.1'
-alias telAtom='telnet 192.168.8.1'
 alias s='source ~/.zshrc'
 alias S='source ~/.zshrc'
 alias vz='vim ~/.zshrc'
-alias bxis='vim ~/bxgithub/myfile/bxsoftware.sh'
-alias scpIntoyunAtom='scp ~/molmc_code/intorobot_atom/out/intorobot_stm32_server.tar.gz root@112.124.117.64:/tmp/'
-alias scpIntoyunNeutron='scp ~/molmc_code/intorobot_neutron/out/intorobot_stm32_server.tar.gz root@112.124.117.64:/tmp/'
 alias shutdown='sudo shutdown -h now'
 alias sd='sudo shutdown -h now'
 alias reboot='sudo reboot'
-alias atom='cd ~/molmc_code/intorobot_atom/'
-alias neutron='cd ~/molmc_code/intorobot_neutron/'
-alias openwrt='cd ~/molmc_code/openwrtgithub/'
-alias firmware='cd ~/molmc_code/firmware/'
-alias halFirmware='cd ~/molmc_code/intorobot-firmware-hal/hal/src/neutron/'
-alias down_neutron='cd ~/molmc_code/firmware/build/release/intorobot-bin/1.3.1.160704/neutron/'
-alias spark='cd ~/code/sparkfirmware/'
-alias ota='cd ~/molmc_code/ota/'
-alias fac_test='cd ~/molmc_code/encry_intorobot/factest_neutron/'
-alias pub='cd ~/molmc_code/pub/'
-alias myfile='cd ~/bxgithub/myfile/'
-alias scpdefaultparam="scp ~/molmc_code/pub/default-param/* root@192.168.8.1:~/"
 alias lstty="ls /dev/tty*"
 alias tmux='tmux -2'
-alias crt='sudo SecureCRT'
 alias sl='ls'
 alias LS='ls'
 alias SL='ls'
-alias lnmyemacs='touch ~/.emacs.d && rm ~/.emacs.d -f && ln -s ~/bxgithub/mygithubspacemacs ~/.emacs.d'
-alias lnoriginemacs='touch ~/.emacs.d && rm ~/.emacs.d -f && ln -s ~/bxgithub/originspacemacs ~/.emacs.d'
-alias lnmyspacemacs='touch ~/.spacemacs.d && rm ~/.spacemacs.d -f && ln -s ~/bxgithub/myfile/spacemacs.d ~/.spacemacs.d'
-alias lnzlspacemacs='touch ~/.spacemacs.d && rm ~/.spacemacs.d -f && ln -s ~/bxgithub/spacemacs-private ~/.spacemacs.d'
 alias springemacs='pkill -SIGUSR2 emacs'
-alias espApp="sudo ~/molmc_code/intorobot-firmware-hal/tools/esptool/esptool -v -cb 921600 -cd nodemcu -cp /dev/ttyUSB0 -ca 0x8000 -cf $1"
-alias espbootloader="sudo ~/molmc/intorobot-firmware-hal/tools/esptool/esptool -v -cb 921600 -cd nodemcu -cp /dev/ttyUSB0 -ca 0x00000 -cf $1"
-alias aptinstall="sudo apt-get install"
+alias clion='~/Software/clion-2017.1.3/bin/clion.sh'
+alias matlab='/usr/local/MATLAB/R2014a/bin/matlab'
 
 scpIntoyunTmp() {
     scp $1 root@112.124.117.64:/tmp/
@@ -210,7 +184,6 @@ distUsage(){
 
 
 #/usr/bin/setxkbmap -option "ctrl:swapcaps"
-export PATH=$PATH:/usr/lib/git-core/
 export PATH=$PATH:~/softwares/xtensa-esp32-elf/bin
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 #eval $(thefuck --alias)
@@ -218,9 +191,6 @@ export PATH=$PATH:/usr/src/xtensa-lx106-elf/bin
 export PATH=$PATH:/usr/lib/git-core
 export PATH=$PATH:~/.cargo/bin
 export PATH=$PATH:~/softwares/Zotero_linux-x86_64
-export INTOROBOT_DEVELOP=1
-export PARTICLE_DEVELOP=1
-export IDF_PATH=~/code/esp-idf
 export TERM=xterm-256color
 
 # source /opt/ros/indigo/setup.zsh
