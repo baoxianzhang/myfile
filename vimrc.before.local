@@ -5,6 +5,14 @@ let g:mapleader = ','
 "You can configure ag.nvim to always start searching from your project root instead of the cwd
 let g:ag_working_path_mode="r"
 
+" ros style
+set shiftwidth=2  " Two space indents
+set tabstop=2     " Tab key indents two spaces at a time
+set expandtab     " Use spaces when the <Tab> key is pressed
+set cindent       " Turn on automatic C-code indentation
+" Actual formatting rules go here
+" once I figure out what they should be...
+
 "================ Key Mapping ==================
 map <leader><space>        :FixWhitespace<cr>
 " normal no recursive mapping

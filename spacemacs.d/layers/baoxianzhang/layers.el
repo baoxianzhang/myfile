@@ -23,7 +23,7 @@
                                       better-defaults
                                       emacs-lisp
                                       git
-                                      markdown
+                                      (markdown :variables markdown-live-preview-engine 'vmd)
                                       python
                                       shell-scripts
                                       (org :variables
@@ -55,14 +55,14 @@
                                       ;; cscope
                                       ;; semantic
                                       yaml
-                                      (rust :variables rust-format-on-save t)
-                                      ;; (latex :variables
-                                      ;;       latex-build-command "LaTeX"
-                                      ;;       latex-enable-auto-fill t
-                                      ;;       latex-enable-folding t)
+                                      ;; (rust :variables rust-format-on-save t)
                                       imenu-list
                                       csv
-
+                                      latex
+                                      pandoc
+                                      ;; ycmd
+                                      extra-langs
+                                      html
 
                                       baoxianzhang-org-page
                                       ;; baoxianzhang-better-defaults

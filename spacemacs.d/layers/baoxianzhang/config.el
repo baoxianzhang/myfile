@@ -125,6 +125,11 @@
 (setq sh-basic-offset 2)
 (setq sh-indentation 2)
 
+(add-hook 'doc-view-mode-hook 'auto-revert-mode)
+
+(setq ycmd-server-command (list "python" (file-truename "~/code/ycmd/ycmd")))
+;; (add-hook 'c++-mode-hook 'ycmd-mode)
+
 
 
 
