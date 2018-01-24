@@ -111,6 +111,7 @@
 
 ;;; In order to get namespace indentation correct, .h files must be opened in C++ mode
 (add-to-list 'auto-mode-alist '("\\.h$" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.cu$" . c++-mode))
 ;;; roslaunch highlighting
 (add-to-list 'auto-mode-alist '("\\.launch$" . xml-mode))
 ;;; Auto LF in org-mode
@@ -127,10 +128,17 @@
 
 (add-hook 'doc-view-mode-hook 'auto-revert-mode)
 
-(setq ycmd-server-command (list "python" (file-truename "~/code/ycmd/ycmd")))
+;; (setq ycmd-server-command (list "python" (file-truename "~/code/ycmd/ycmd")))
 ;; (add-hook 'c++-mode-hook 'ycmd-mode)
 
+;; (defun my-flymd-browser-function (url)
+;;   (let ((browse-url-browser-function 'browse-url-firefox))
+;;     (browse-url url)))
+;; (setq flymd-browser-open-function 'my-flymd-browser-function)
 
 
+;; (add-to-list 'auto-mode-alist '("\\.prototxt$" . protobuf-mode))
 
-
+(with-eval-after-load 'anaconda-mode
+  (remove-hook 'anaconda-mode-response-read-fail-hook
+               'anaconda-mode-show-unreadable-response))
