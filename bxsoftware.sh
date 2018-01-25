@@ -71,7 +71,6 @@ if [ $FLAG_APT_GET_SOFTWARE_INSTALL == 1 ];then
         build-essential
         python
         python3
-        openssh-server
         trash-cli
         luajit
         exuberant-ctags
@@ -717,9 +716,15 @@ fi
 #if [ $FLAG_SHADOWSOCKS_INSTALL == 1 ];then
 #    cecho "<<<<<< Install Shadwsocks. >>>>>>" $yellow
 #    sudo apt-get install python-pip
-#    sudo pip install shadowsocks
+#    sudo pip install --upgrade git+https://github.com/shadowsocks/shadowsocks.git@master
+#    wget -c https://github.com/jedisct1/libsodium/releases/download/1.0.16/libsodium-1.0.16.tar.gz
+#    tar -xf libsodium-1.0.16.tar.gz
+#    cd libsodium-1.0.16
+#    ./configure
+#    make
+#    sudo make install
 #    cecho "add SwitchyOmega.crx plugin to google chrome" $green
-#    cecho "in input/output restore from file add *.bak and choose auto switch" $green
+#    cecho "in Import/Export restore from file add *.bak and choose auto switch" $green
 #    cecho "chmod +x shadowsock.sh and ./shadowsocks" $green
 #fi
 
