@@ -152,28 +152,13 @@ alias sl='ls'
 alias LS='ls'
 alias SL='ls'
 alias springemacs='pkill -SIGUSR2 emacs'
-alias clion='~/Software/clion-2017.1.3/bin/clion.sh'
-alias matlab='/usr/local/MATLAB/R2017a/bin/matlab'
 alias cb='catkin build'
 alias cc='catkin clean --y'
-
-scpIntoyunTmp() {
-    scp $1 root@112.124.117.64:/tmp/
-    #command scp $1 root@112.124.117.64:/tmp/
-}
-
-scpIntoRobotTmp() {
-    scp $1 root@115.29.193.81:/tmp/
-    #command scp $1 root@115.29.193.81:/tmp/
-}
-
-flash20000() {
-    st-flash --reset write $1 0x8020000
-}
-
-flash00000() {
-    st-flash --reset write $1 0x8000000
-}
+alias ccb='catkin clean --y && catkin build'
+alias cm='catkin_make'
+alias gimp='LANGUAGE=zh_CN gimp'
+alias cdcaffe='cd ~/code/SegNet/caffe-segnet-cudnn5/'
+alias xmind='~/Software/xmind-8-linux/XMind_amd64/XMind'
 
 distUsage(){
     sudo du -d 1 -k $1/* | sort -n -r
@@ -191,16 +176,32 @@ distUsage(){
 export PATH=$PATH:/usr/lib/git-core
 export PATH=$PATH:~/.cargo/bin
 export PATH=$PATH:~/softwares/Zotero_linux-x86_64
-export PATH=$PATH:~/Software/ParaView-5.4.0-Qt5-OpenGL2-MPI-Linux-64bit/bin
+export PATH=$PATH:~/Software/ParaView-5.4.0-Qt5-OpenGL2-MPI-Linux-64bit/bin:~/Software/xmind-8-linux/XMind_amd64/
+#export PATH=$PATH:/usr/bin/
 export TERM=xterm-256color
 
 
-# For ROS
-source /opt/ros/indigo/setup.zsh
-source /home/zhangbaoxian/Project/loc_pro/devel/setup.zsh
-source /home/zhangbaoxian/Project/catkin_ws/devel/setup.zsh
 #export EDITOR='emacs -nw'
+#
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export CAFFE_ROOT="/home/zhangbaoxian/code/SegNet/caffe-segnet-cudnn5"
+export PYTHONPATH=/home/zhangbaoxian/code/SegNet/caffe-segnet-cudnn5/python:$PYTHONPATH
+# added by Anaconda2 installer
+# export PATH="/home/zhangbaoxian/anaconda2/bin:$PATH"
+#. /home/zhangbaoxian/code/torch/install/bin/torch-activate
+#
+export CUDNN_PATH="/usr/local/cuda/lib64/libcudnn.so.5"
+
+# For Tex
+export TeXLiveMANPATH=/usr/local/texlive/2017/texmf-dist/doc/man
+export TeXLiveINFOPATH=/usr/local/texlive/2017/texmf-dist/doc/info
+export TeXLivePATH=/usr/local/texlive/2017/bin/x86_64-linux
+export PATH=$PATH:$TeXLivePATH
+
+# For ROS
+source /opt/ros/kinetic/setup.zsh
+source /home/zhangbaoxian/Projects/catkin_ws/devel/setup.zsh
