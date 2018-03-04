@@ -152,8 +152,6 @@ alias sl='ls'
 alias LS='ls'
 alias SL='ls'
 alias springemacs='pkill -SIGUSR2 emacs'
-alias clion='~/Software/clion-2017.1.3/bin/clion.sh'
-alias matlab='/usr/local/MATLAB/R2017a/bin/matlab'
 alias cb='catkin build'
 alias cc='catkin clean --y'
 alias ccb='catkin clean --y && catkin build'
@@ -179,7 +177,6 @@ flash20000() {
 flash00000() {
     st-flash --reset write $1 0x8000000
 }
-
 distUsage(){
     sudo du -d 1 -k $1/* | sort -n -r
 }
@@ -204,3 +201,4 @@ source /opt/ros/kinetic/setup.zsh
 source ~/catkin_ws/devel/setup.zsh
 
 #export EDITOR='emacs -nw'
+
