@@ -156,6 +156,11 @@ alias clion='~/Software/clion-2017.1.3/bin/clion.sh'
 alias matlab='/usr/local/MATLAB/R2017a/bin/matlab'
 alias cb='catkin build'
 alias cc='catkin clean --y'
+alias ccb='catkin clean --y && catkin build'
+alias cm='catkin_make'
+alias baidu_upload='bypy upload'
+alias baidu_downdir='bypy downdir'
+alias baidu_compare='bypy compare'
 
 scpIntoyunTmp() {
     scp $1 root@112.124.117.64:/tmp/
@@ -185,22 +190,17 @@ distUsage(){
 #}
 
 
-#/usr/bin/setxkbmap -option "ctrl:swapcaps"
+/usr/bin/setxkbmap -option "ctrl:swapcaps"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 #eval $(thefuck --alias)
 export PATH=$PATH:/usr/lib/git-core
 export PATH=$PATH:~/.cargo/bin
 export PATH=$PATH:~/softwares/Zotero_linux-x86_64
-export PATH=$PATH:~/Software/ParaView-5.4.0-Qt5-OpenGL2-MPI-Linux-64bit/bin
 export TERM=xterm-256color
 
 
 # For ROS
-source /opt/ros/indigo/setup.zsh
-source /home/zhangbaoxian/Project/loc_pro/devel/setup.zsh
-source /home/zhangbaoxian/Project/catkin_ws/devel/setup.zsh
-#export EDITOR='emacs -nw'
+source /opt/ros/kinetic/setup.zsh
+source ~/catkin_ws/devel/setup.zsh
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+#export EDITOR='emacs -nw'
