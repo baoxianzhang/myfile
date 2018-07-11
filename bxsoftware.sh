@@ -16,6 +16,7 @@ function askForContinue()
     esac
 }
 
+THISDIR=$( cd "$( dirname "$0")" && pwd )
 # Reset text attributes to normal + without clearing screen.
 # alias Reset="tput sgr0"
 
