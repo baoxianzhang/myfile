@@ -232,3 +232,9 @@ nmap <C-s> :Gtrans<CR>
 imap <C-s> <ESC>:Gtrans<CR>i
 vmap <C-s> :call Gtrans()<CR>
 
+
+" for the window to ubuntu
+set fileencodings=ucs-bom,utf-8,utf-16,gbk,big5,gb18030,latin1
+" set fileencodings=utf-8, ucs-bom, gb18030, gbk, gb2312, cp936
+set termencoding=utf-8
+set encoding=utf-8

@@ -23,7 +23,9 @@
                                       better-defaults
                                       emacs-lisp
                                       git
+                                      github
                                       (markdown :variables markdown-live-preview-engine 'vmd)
+                                      chrome
                                       python
                                       shell-scripts
                                       (org :variables
@@ -40,29 +42,31 @@
                                                chinese-enable-youdao-dict t)
                                       (c-c++ :variables
                                              c-c++-default-mode-for-headers 'c++-mode
+                                             c-c++-enable-clang-support t
                                              ;; :mode "\\.ino\\'" )
                                              )
                                       (colors :variables
                                               colors-enable-nyan-cat-progress-bar t)
                                       ;; games
                                       ranger
-                                      pdf-tools
+                                      ;; pdf-tools
                                       (dash :variables helm-dash-docset-newpath "~/bxgithub/myconfigresources/zeal/docsets"
                                             ;; )
                                             helm-dash-browser-func 'eww)
                                       (gtags :variables gtags-enable-by-default t)
                                       ;; gtags
                                       ;; cscope
-                                      ;; semantic
+                                      semantic
                                       yaml
                                       ;; (rust :variables rust-format-on-save t)
                                       imenu-list
                                       csv
-                                      latex
-                                      pandoc
+                                      ;; latex
+                                      ;; pandoc
                                       ;; ycmd
                                       extra-langs
                                       html
+                                      protobuf
 
                                       baoxianzhang-org-page
                                       ;; baoxianzhang-better-defaults

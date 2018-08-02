@@ -1,7 +1,7 @@
 *  My personal software install script and configuration files on Ubuntu
 
 ** Why should I make a script to install software on ubuntu?
-    Since I have use ubuntu for several years, it is annoying to 
+    Since I have use ubuntu for several years, it is annoying to
 reinstall the software when the system broken down for reasons.
 There is a lot of software used in my daily work and life. When
 the system is broken down, it will almost take me one or two days
@@ -20,6 +20,7 @@ configuration files keep me using software consistent and efficient.
     The software install switch for the script
 
 ** My configuration files
+The dotfiles: http://dotfiles.github.io/
 *** zsh
     + oh-my-zsh
     + zshrc

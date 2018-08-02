@@ -158,7 +158,12 @@ alias ccb='catkin clean --y && catkin build'
 alias cm='catkin_make'
 alias gimp='LANGUAGE=zh_CN gimp'
 alias cdcaffe='cd ~/code/SegNet/caffe-segnet-cudnn5/'
-alias xmind='~/Software/xmind-8-linux/XMind_amd64/XMind'
+alias xmind="cd ~/Software/xmind-8-update8-linux/XMind_amd64/"
+alias data='cd ~/Projects/data/'
+alias filter='cd ~/Projects/filter_ws/'
+alias matlab='sudo /usr/local/MATLAB/R2018a/bin/matlab'
+alias rsview='/home/zhangbaoxian/Projects/catkin_ws/src/VeloView/build/install/bin/RSView'
+alias ss='source devel/setup.zsh'
 
 distUsage(){
     sudo du -d 1 -k $1/* | sort -n -r
@@ -179,6 +184,8 @@ export PATH=$PATH:~/softwares/Zotero_linux-x86_64
 export PATH=$PATH:~/Software/ParaView-5.4.0-Qt5-OpenGL2-MPI-Linux-64bit/bin:~/Software/xmind-8-linux/XMind_amd64/
 #export PATH=$PATH:/usr/bin/
 export TERM=xterm-256color
+
+# export GTAGSLIBPATH=/home/zhangbaoxian/code/pcl:/home/zhangbaoxian/code/opencv
 
 
 #export EDITOR='emacs -nw'
@@ -202,6 +209,27 @@ export TeXLiveINFOPATH=/usr/local/texlive/2017/texmf-dist/doc/info
 export TeXLivePATH=/usr/local/texlive/2017/bin/x86_64-linux
 export PATH=$PATH:$TeXLivePATH
 
+export PATH=$PATH:/home/zhangbaoxian/Projects/catkin_ws/VeloView/build/install/bin
+
 # For ROS
 source /opt/ros/kinetic/setup.zsh
+# source /home/zhangbaoxian/p3_ws/devel/setup.zsh
 source /home/zhangbaoxian/Projects/catkin_ws/devel/setup.zsh
+# source /home/zhangbaoxian/Projects/localization_Projects/devel/setup.zsh
+source /home/zhangbaoxian/Projects/none_ws/devel/setup.zsh
+#
+# export CUDA_HOME=/usr/local/cuda
+# export LD_LIBRARY_PATH=${CUDA_HOME}/lib64:${LD_LIBRARY_PATH}
+# export PATH=${CUDA_HOME}/bin:${PATH}
+
+export  PATH=/usr/local/cuda-9.0/bin:$PATH
+export  LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64$LD_LIBRARY_PATH
+
+# source /home/zhangbaoxian/Projects/filter_ws/devel/setup.zsh
+# source /home/zhangbaoxian/Projects/calibration/devel/setup.zsh
+# source /home/zhangbaoxian/Projects/others/catkin_ws/devel/setup.zsh
+# source /home/zhangbaoxian/Projects/p3_ws/devel/setup.zsh
+#
+#  export PYTHONPATH=$PYTHONPATH:/home/zhangbaoxian/Projects/catkin_ws/src/VeloView/build/install/lib/paraview-4.3
+#  export PYTHONPATH=$PYTHONPATH:/home/zhangbaoxian/Projects/catkin_ws/src/VeloView/build/install/lib/paraview-4.3/site-packages
+#  export PYTHONPATH=$PYTHONPATH:/home/zhangbaoxian/Projects/catkin_ws/src/VeloView/build/install/lib/paraview-4.3/site-packages/vtk

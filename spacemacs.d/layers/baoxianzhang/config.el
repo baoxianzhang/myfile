@@ -142,3 +142,30 @@
 (with-eval-after-load 'anaconda-mode
   (remove-hook 'anaconda-mode-response-read-fail-hook
                'anaconda-mode-show-unreadable-response))
+
+;; gtags
+
+;; Please note `file-truename' must be used!
+(setenv "GTAGSLIBPATH" (concat "/usr/include"
+                               ":"
+                               "pcl"
+                               ":"
+                               "opencv"
+                               ;; (file-truename "~/proj2")
+                               ;; ":"
+                               ;; (file-truename "~/proj1")
+                               ))
+(setenv "MAKEOBJDIRPREFIX" (file-truename "~/code/gtags_obj/"))
+(setq company-backends '((company-dabbrev-code company-gtags)))
+
+
+
+(require 'cc-mode)
+(require 'semantic)
+
+(global-semanticdb-minor-mode 1)
+(global-semantic-idle-scheduler-mode 1)
+
+(semantic-mode 1)
+
+
