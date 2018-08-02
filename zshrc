@@ -164,7 +164,27 @@ alias filter='cd ~/Projects/filter_ws/'
 alias matlab='sudo /usr/local/MATLAB/R2018a/bin/matlab'
 alias rsview='/home/zhangbaoxian/Projects/catkin_ws/src/VeloView/build/install/bin/RSView'
 alias ss='source devel/setup.zsh'
+alias baidu_upload='bypy upload'
+alias baidu_downdir='bypy downdir'
+alias baidu_compare='bypy compare'
 
+scpIntoyunTmp() {
+    scp $1 root@112.124.117.64:/tmp/
+    #command scp $1 root@112.124.117.64:/tmp/
+}
+
+scpIntoRobotTmp() {
+    scp $1 root@115.29.193.81:/tmp/
+    #command scp $1 root@115.29.193.81:/tmp/
+}
+
+flash20000() {
+    st-flash --reset write $1 0x8020000
+}
+
+flash00000() {
+    st-flash --reset write $1 0x8000000
+}
 distUsage(){
     sudo du -d 1 -k $1/* | sort -n -r
 }
@@ -175,14 +195,12 @@ distUsage(){
 #}
 
 
-#/usr/bin/setxkbmap -option "ctrl:swapcaps"
+/usr/bin/setxkbmap -option "ctrl:swapcaps"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 #eval $(thefuck --alias)
 export PATH=$PATH:/usr/lib/git-core
 export PATH=$PATH:~/.cargo/bin
 export PATH=$PATH:~/softwares/Zotero_linux-x86_64
-export PATH=$PATH:~/Software/ParaView-5.4.0-Qt5-OpenGL2-MPI-Linux-64bit/bin:~/Software/xmind-8-linux/XMind_amd64/
-#export PATH=$PATH:/usr/bin/
 export TERM=xterm-256color
 
 # export GTAGSLIBPATH=/home/zhangbaoxian/code/pcl:/home/zhangbaoxian/code/opencv
