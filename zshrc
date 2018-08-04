@@ -204,7 +204,8 @@ export PATH=$PATH:~/softwares/Zotero_linux-x86_64
 export TERM=xterm-256color
 export GTAGSFORCECPP=true
 
-export GTAGSLIBPATH=/home/zhangbaoxian/code/pcl:/home/zhangbaoxian/code/opencv:/home/zhangbaoxian/code/eigen:/home/zhangbaoxian/code/ros
+
+export GTAGSLIBPATH=${HOME}/code/pcl:${HOME}/code/opencv:${HOME}/code/eigen:${HOME}/code/ros:${HOME}/code/libpointmatcher:${HOME}/code/ethzasl_icp_mapping/libpointmatcher_ros
 
 
 #export EDITOR='emacs -nw'
@@ -214,11 +215,11 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-export CAFFE_ROOT="/home/zhangbaoxian/code/SegNet/caffe-segnet-cudnn5"
-export PYTHONPATH=/home/zhangbaoxian/code/SegNet/caffe-segnet-cudnn5/python:$PYTHONPATH
+export CAFFE_ROOT="${HOME}/code/SegNet/caffe-segnet-cudnn5"
+export PYTHONPATH=${HOME}/code/SegNet/caffe-segnet-cudnn5/python:$PYTHONPATH
 # added by Anaconda2 installer
-# export PATH="/home/zhangbaoxian/anaconda2/bin:$PATH"
-#. /home/zhangbaoxian/code/torch/install/bin/torch-activate
+# export PATH="${HOME}/anaconda2/bin:$PATH"
+#. ${HOME}/code/torch/install/bin/torch-activate
 #
 export CUDNN_PATH="/usr/local/cuda/lib64/libcudnn.so.5"
 
@@ -228,14 +229,14 @@ export TeXLiveINFOPATH=/usr/local/texlive/2017/texmf-dist/doc/info
 export TeXLivePATH=/usr/local/texlive/2017/bin/x86_64-linux
 export PATH=$PATH:$TeXLivePATH
 
-export PATH=$PATH:/home/zhangbaoxian/Projects/catkin_ws/VeloView/build/install/bin
+export PATH=$PATH:${HOME}/Projects/catkin_ws/VeloView/build/install/bin
 
 # For ROS
 source /opt/ros/kinetic/setup.zsh
-# source /home/zhangbaoxian/p3_ws/devel/setup.zsh
-source /home/zhangbaoxian/Projects/catkin_ws/devel/setup.zsh
-# source /home/zhangbaoxian/Projects/localization_Projects/devel/setup.zsh
-source /home/zhangbaoxian/Projects/none_ws/devel/setup.zsh
+# source ${HOME}/p3_ws/devel/setup.zsh
+# source ${HOME}/Projects/catkin_ws/devel/setup.zsh
+# source ${HOME}/Projects/localization_Projects/devel/setup.zsh
+# source ${HOME}/Projects/none_ws/devel/setup.zsh
 #
 # export CUDA_HOME=/usr/local/cuda
 # export LD_LIBRARY_PATH=${CUDA_HOME}/lib64:${LD_LIBRARY_PATH}
@@ -244,11 +245,11 @@ source /home/zhangbaoxian/Projects/none_ws/devel/setup.zsh
 export  PATH=/usr/local/cuda-9.0/bin:$PATH
 export  LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64$LD_LIBRARY_PATH
 
-# source /home/zhangbaoxian/Projects/filter_ws/devel/setup.zsh
-# source /home/zhangbaoxian/Projects/calibration/devel/setup.zsh
-# source /home/zhangbaoxian/Projects/others/catkin_ws/devel/setup.zsh
-# source /home/zhangbaoxian/Projects/p3_ws/devel/setup.zsh
+# source ${HOME}/Projects/filter_ws/devel/setup.zsh
+# source ${HOME}/Projects/calibration/devel/setup.zsh
+# source ${HOME}/Projects/others/catkin_ws/devel/setup.zsh
+# source ${HOME}/Projects/p3_ws/devel/setup.zsh
 #
-#  export PYTHONPATH=$PYTHONPATH:/home/zhangbaoxian/Projects/catkin_ws/src/VeloView/build/install/lib/paraview-4.3
-#  export PYTHONPATH=$PYTHONPATH:/home/zhangbaoxian/Projects/catkin_ws/src/VeloView/build/install/lib/paraview-4.3/site-packages
-#  export PYTHONPATH=$PYTHONPATH:/home/zhangbaoxian/Projects/catkin_ws/src/VeloView/build/install/lib/paraview-4.3/site-packages/vtk
+#  export PYTHONPATH=$PYTHONPATH:${HOME}/Projects/catkin_ws/src/VeloView/build/install/lib/paraview-4.3
+#  export PYTHONPATH=$PYTHONPATH:${HOME}/Projects/catkin_ws/src/VeloView/build/install/lib/paraview-4.3/site-packages
+#  export PYTHONPATH=$PYTHONPATH:${HOME}/Projects/catkin_ws/src/VeloView/build/install/lib/paraview-4.3/site-packages/vtk
