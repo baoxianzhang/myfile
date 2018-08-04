@@ -146,19 +146,19 @@
 ;; gtags
 
 ;; Please note `file-truename' must be used!
-(setenv "GTAGSLIBPATH" (concat "ros"
-                               ":"
-                               "eigen"
-                               ":"
-                               "pcl"
-                               ":"
-                               "opencv"
-                               ;; (file-truename "~/proj2")
-                               ;; ":"
-                               ;; (file-truename "~/proj1")
-                               ))
-(setenv "MAKEOBJDIRPREFIX" (file-truename "~/code/gtags_obj/"))
-(setq company-backends '((company-dabbrev-code company-gtags)))
+;; (setenv "GTAGSLIBPATH" (concat "ros"
+;;                                ":"
+;;                                "eigen"
+;;                                ":"
+;;                                "pcl"
+;;                                ":"
+;;                                "opencv"
+;;                                ;; (file-truename "~/proj2")
+;;                                ;; ":"
+;;                                ;; (file-truename "~/proj1")
+;;                                ))
+;; (setenv "MAKEOBJDIRPREFIX" (file-truename "~/code/gtags_obj/"))
+;; (setq company-backends '((company-dabbrev-code company-gtags)))
 
 
 
