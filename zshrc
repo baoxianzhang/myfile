@@ -202,6 +202,7 @@ export PATH=$PATH:/usr/lib/git-core
 export PATH=$PATH:~/.cargo/bin
 export PATH=$PATH:~/softwares/Zotero_linux-x86_64
 export TERM=xterm-256color
+export GTAGSFORCECPP=true
 
 # export GTAGSLIBPATH=/home/zhangbaoxian/code/pcl:/home/zhangbaoxian/code/opencv
 
