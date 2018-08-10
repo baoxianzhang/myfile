@@ -161,7 +161,8 @@ alias cdcaffe='cd ~/code/SegNet/caffe-segnet-cudnn5/'
 alias xmind="cd ~/Software/xmind-8-update8-linux/XMind_amd64/"
 alias data='cd ~/Projects/data/'
 alias filter='cd ~/Projects/filter_ws/'
-alias matlab='sudo /usr/local/MATLAB/R2018a/bin/matlab'
+#alias matlab='sudo /usr/local/MATLAB/R2018a/bin/matlab'
+#alias matlab='sudo ln -s /usr/local/MATLAB/R2018a/bin/matlab /usr/local/bin/matlab'
 alias rsview='/home/zhangbaoxian/Projects/catkin_ws/src/VeloView/build/install/bin/RSView'
 alias ss='source devel/setup.zsh'
 alias baidu_upload='bypy upload'
@@ -234,9 +235,9 @@ export PATH=$PATH:${HOME}/Projects/catkin_ws/VeloView/build/install/bin
 # For ROS
 source /opt/ros/kinetic/setup.zsh
 # source ${HOME}/p3_ws/devel/setup.zsh
-# source ${HOME}/Projects/catkin_ws/devel/setup.zsh
+source ${HOME}/Projects/catkin_ws/devel/setup.zsh
 # source ${HOME}/Projects/localization_Projects/devel/setup.zsh
-# source ${HOME}/Projects/none_ws/devel/setup.zsh
+source ${HOME}/Projects/none_ws/devel/setup.zsh
 #
 # export CUDA_HOME=/usr/local/cuda
 # export LD_LIBRARY_PATH=${CUDA_HOME}/lib64:${LD_LIBRARY_PATH}

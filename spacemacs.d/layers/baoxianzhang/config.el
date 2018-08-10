@@ -169,5 +169,14 @@
 (global-semantic-idle-scheduler-mode 1)
 
 (semantic-mode 1)
+;; Bind clang-format-buffer to tab on the c++-mode only:
+;; (add-hook 'c++-mode-hook 'clang-format-bindings)
+;; (defun clang-format-bindings ()
+;;   (define-key c++-mode-map [tab] 'clang-format-buffer))
+
+;; Bind clang-format-region to C-M-tab in all modes:
+;; (spacemacs/set-leader-keys "cr" 'clang-format-region)
+;; Bind clang-format-buffer to tab on the c++-mode only:
+(spacemacs/set-leader-keys "cf" 'clang-format-buffer)
 
 
