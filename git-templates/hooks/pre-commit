@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-files_to_format=$(git diff --cached --name-only --diff-filter=ACM | grep -E "*.cpp$|*.h$|*.cc$|*.hpp$|*.c$")
+files_to_format=$(git diff --cached --name-only --diff-filter=ACM | grep -E "(*\.cpp$)|(*\.h$)|(*\.cc$)|(*\.hpp$)|(*\.c$)")
 
-echo -e $files_to_format
+# echo -e $files_to_format
 
 if [ -n "$files_to_format" ]; then
   echo -e "  Warning: some file not format, auto format them using clang-format tool."
