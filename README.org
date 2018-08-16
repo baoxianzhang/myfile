@@ -33,3 +33,9 @@ The dotfiles: http://dotfiles.github.io/
     + vimrc.bundles.local
 *** tmux
     + tmux.conf
+      
+*** git
+    + projectinit
+    + git init
+    
+

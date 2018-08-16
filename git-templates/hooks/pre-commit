@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+#cp -n  ~/.git/CHANGELOG ./
+#cp -n ~/.git/LICENCE ./
+#cp -n ~/.git/README.md ./
+#cp -n ~/.git/.clang-format ./
+#cp -n ~/.git/.gitignore ./
+files_to_format=$(git diff --cached --name-only --diff-filter=ACM | grep -E "*.cpp$|*.h$|*.cc$|*.hpp$|*.c$")
+
+if [ -n "$files_to_format" ]; then
+  echo -e "  Warning: some file not format, auto format them using clang-format tool."
+  clang-format -i $files_to_format
+  git add $files_to_format
+fi

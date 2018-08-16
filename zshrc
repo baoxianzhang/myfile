@@ -1,51 +1,52 @@
-# Path to your oh-my-zsh installation.
-export ZSH=/home/${USERNAME}/.oh-my-zsh
+#Path to your oh - my - zsh installation.
+export ZSH = / home / ${USERNAME} /.oh - my - zsh
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-ZSH_THEME="robbyrussell"
+#Set name of the theme to load.
+#Look in ~ /.oh - my - zsh / themes /
+#Optionally, if you set this to "random", it'll load a random theme each
+#time that oh - my - zsh is loaded.
+                                                  ZSH_THEME = "robbyrussell"
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+#Uncomment the following line to use case -sensitive completion.
+#CASE_SENSITIVE = "true"
 
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
+#Uncomment the following line to use hyphen - insensitive completion.Case
+#sensitive completion must be off._ and -will be interchangeable.
+#HYPHEN_INSENSITIVE = "true"
 
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+#Uncomment the following line to disable bi - weekly auto - update checks.
+#DISABLE_AUTO_UPDATE = "true"
 
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
+#Uncomment the following line to change how often to auto - update(in days).
+#export UPDATE_ZSH_DAYS = 13
 
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
+#Uncomment the following line to disable colors in ls.
+#DISABLE_LS_COLORS = "true"
 
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+#Uncomment the following line to disable auto - setting terminal title.
+#DISABLE_AUTO_TITLE = "true"
 
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+#Uncomment the following line to enable command auto - correction.
+#ENABLE_CORRECTION = "true"
 
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
+#Uncomment the following line to display red dots whilst waiting for completion.
+#COMPLETION_WAITING_DOTS = "true"
 
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
+#Uncomment the following line if you want to disable marking untracked files
+#under VCS as dirty.This makes repository status check for large repositories
+#much, much faster.
+#DISABLE_UNTRACKED_FILES_DIRTY = "true"
 
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
+#Uncomment the following line if you want to change the command execution time
+#stamp shown in the history command output.
+#The optional three formats : "mm/dd/yyyy" | "dd.mm.yyyy" | "yyyy-mm-dd"
+#HIST_STAMPS = "mm/dd/yyyy"
 
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
+#Would you like to use another custom folder than $ZSH / custom ?
+#ZSH_CUSTOM = / path / to / new - custom - folder
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+#Which plugins would you like to load                                          \
+    ? (plugins can be found in ~ /.oh - my - zsh / plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
@@ -169,6 +170,20 @@ alias baidu_upload='bypy upload'
 alias baidu_downdir='bypy downdir'
 alias baidu_compare='bypy compare'
 
+########## terminator socks ##############
+# sudo apt-get install polipo
+# sudo vim /etc/polipo/config
+# add following three lines
+#    socksParentProxy = "localhost:1080"
+#    socksProxyTpye = socks5
+#    logLevel = 4
+# sudo service polipo stop
+# sudo service polipo start
+# curl ip.gs
+alias hp="export http_proxy=http://localhost:8123"
+alias unsethp="unset http_proxy"
+alias projectinit="cp -n ~/.git-templates/CHANGELOG ./ ||  cp -n ~/.git-templates/LICENCE ./  || cp -n ~/.git-templates/README ./  || cp -n ~/.git-templates/.clang-format ./ || cp -n ~/.git-templates/.gitignore ./"
+
 scpIntoyunTmp() {
     scp $1 root@112.124.117.64:/tmp/
     #command scp $1 root@112.124.117.64:/tmp/
@@ -190,11 +205,6 @@ distUsage(){
     sudo du -d 1 -k $1/* | sort -n -r
 }
 
-#mcd() {
-#    mkdir -p "$1";
-#    cd "$1";
-#}
-
 
 /usr/bin/setxkbmap -option "ctrl:swapcaps"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -202,55 +212,45 @@ distUsage(){
 export PATH=$PATH:/usr/lib/git-core
 export PATH=$PATH:~/.cargo/bin
 export PATH=$PATH:~/softwares/Zotero_linux-x86_64
+export PATH=~/.npm-global/bin:$PATH
 export TERM=xterm-256color
+
+###################### For GTAGS ######################
 export GTAGSFORCECPP=true
-
-
 export GTAGSLIBPATH=${HOME}/code/pcl:${HOME}/code/opencv:${HOME}/code/eigen:${HOME}/code/ros:${HOME}/code/libpointmatcher:${HOME}/code/ethzasl_icp_mapping/libpointmatcher_ros
 
 
-#export EDITOR='emacs -nw'
-#
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-export CAFFE_ROOT="${HOME}/code/SegNet/caffe-segnet-cudnn5"
-export PYTHONPATH=${HOME}/code/SegNet/caffe-segnet-cudnn5/python:$PYTHONPATH
 # added by Anaconda2 installer
 # export PATH="${HOME}/anaconda2/bin:$PATH"
 #. ${HOME}/code/torch/install/bin/torch-activate
-#
-export CUDNN_PATH="/usr/local/cuda/lib64/libcudnn.so.5"
 
-# For Tex
+##################### For CUDA #########################
+export  PATH=/usr/local/cuda-9.0/bin:$PATH
+export  LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64$LD_LIBRARY_PATH
+export CAFFE_ROOT="${HOME}/code/SegNet/caffe-segnet-cudnn5"
+export PYTHONPATH=${HOME}/code/SegNet/caffe-segnet-cudnn5/python:$PYTHONPATH
+export CUDNN_PATH="/usr/local/cuda/lib64/libcudnn.so.5"
+# export CUDA_HOME=/usr/local/cuda
+# export LD_LIBRARY_PATH=${CUDA_HOME}/lib64:${LD_LIBRARY_PATH}
+# export PATH=${CUDA_HOME}/bin:${PATH}
+
+##################### For RSVIEW #########################
+#  export PATH=$PATH:${HOME}/Projects/catkin_ws/VeloView/build/install/bin
+#  export PYTHONPATH=$PYTHONPATH:${HOME}/Projects/catkin_ws/src/VeloView/build/install/lib/paraview-4.3
+#  export PYTHONPATH=$PYTHONPATH:${HOME}/Projects/catkin_ws/src/VeloView/build/install/lib/paraview-4.3/site-packages
+#  export PYTHONPATH=$PYTHONPATH:${HOME}/Projects/catkin_ws/src/VeloView/build/install/lib/paraview-4.3/site-packages/vtk
+
+##################### For TEX #########################
 export TeXLiveMANPATH=/usr/local/texlive/2017/texmf-dist/doc/man
 export TeXLiveINFOPATH=/usr/local/texlive/2017/texmf-dist/doc/info
 export TeXLivePATH=/usr/local/texlive/2017/bin/x86_64-linux
 export PATH=$PATH:$TeXLivePATH
 
-export PATH=$PATH:${HOME}/Projects/catkin_ws/VeloView/build/install/bin
 
-# For ROS
+##################### For ROS #########################
 source /opt/ros/kinetic/setup.zsh
 # source ${HOME}/p3_ws/devel/setup.zsh
-source ${HOME}/Projects/catkin_ws/devel/setup.zsh
+# source ${HOME}/Projects/catkin_ws/devel/setup.zsh
 # source ${HOME}/Projects/localization_Projects/devel/setup.zsh
-source ${HOME}/Projects/none_ws/devel/setup.zsh
+# source ${HOME}/Projects/none_ws/devel/setup.zsh
 #
-# export CUDA_HOME=/usr/local/cuda
-# export LD_LIBRARY_PATH=${CUDA_HOME}/lib64:${LD_LIBRARY_PATH}
-# export PATH=${CUDA_HOME}/bin:${PATH}
-
-export  PATH=/usr/local/cuda-9.0/bin:$PATH
-export  LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64$LD_LIBRARY_PATH
-
-# source ${HOME}/Projects/filter_ws/devel/setup.zsh
-# source ${HOME}/Projects/calibration/devel/setup.zsh
-# source ${HOME}/Projects/others/catkin_ws/devel/setup.zsh
-# source ${HOME}/Projects/p3_ws/devel/setup.zsh
-#
-#  export PYTHONPATH=$PYTHONPATH:${HOME}/Projects/catkin_ws/src/VeloView/build/install/lib/paraview-4.3
-#  export PYTHONPATH=$PYTHONPATH:${HOME}/Projects/catkin_ws/src/VeloView/build/install/lib/paraview-4.3/site-packages
-#  export PYTHONPATH=$PYTHONPATH:${HOME}/Projects/catkin_ws/src/VeloView/build/install/lib/paraview-4.3/site-packages/vtk

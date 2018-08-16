@@ -20,6 +20,10 @@
 ;; (setq smerge-command-prefix "\C-cv")
 (spacemacs/set-leader-keys "o f" 'run-ros-clang-format)
 
+;; (spacemacs/set-leader-keys "j =" 'clang-format-buffer)
+
+(spacemacs/set-leader-keys "c f" 'clang-format-buffer)
+
 
 
 
