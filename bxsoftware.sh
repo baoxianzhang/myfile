@@ -810,21 +810,20 @@ if [ $FLAG_RUST_INSTALL == 1 ]; then
   cargo install rustfmt
 fi
 
-if[$FLAG_SOFTLINK_GIT_TEMPLATES_INSTALL == 1]; then
+if [$FLAG_SOFTLINK_GIT_TEMPLATES_INSTALL == 1]; then
   cecho "<<<<<< Softlink git templates. >>>>>>" $yellow
   #usage : git init
   #rm.gitignore ang projectinit
-  rm -
-  rf ~ /.git - templates rm - rf ~ /.git - clone - init rm -
-  rf ~ /.gitconfig ln - s ~ / bxgithub / myfile / git -
-  templates ~ /.git - templates ln - s ~ / bxgithub / myfile / git -
-  templates /.git - clone - init ~ /.git - clone - init ln -
-  s ~ / bxgithub / myfile / git -
-  templates /.gitconfig ~ /
-  .gitconfig
+  rm -rf ~/.git-templates
+  rm -rf ~/.git-clone-init
+  rm -rf ~/.gitconfig
+  ln -s ~/bxgithub/myfile/git-templates ~/.git-templates
+  ln -s ~/bxgithub/myfile/git-templates/.git-clone-init ~/.git-clone-init
 
-  #git config-- global core.excludesfile ~ /.git - templates /.gitignore - global
-  #git config-- global init.templatedir ~ /.git - templates
-  #git config-- global commit.template ~ /.git - templates /.gitmessage.txt
+  git config --global core.excludesfile ~/.git-templates/.gitignore-global
+  git config --global init.templatedir ~/.git-templates
+  git config --global commit.template ~/.git-templates/.gitmessage.txt
+  git config --global user.email "baoxianzhit@gmail.com"
+  git config --global user.name "baoxianzhang"
 
 fi

@@ -66,7 +66,7 @@
                                       ;; ycmd
                                       extra-langs
                                       html
-                                      protobuf
+                                      ;; protobuf
 
                                       baoxianzhang-org-page
                                       ;; baoxianzhang-better-defaults
