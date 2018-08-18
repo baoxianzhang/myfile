@@ -819,11 +819,12 @@ if [$FLAG_SOFTLINK_GIT_TEMPLATES_INSTALL == 1]; then
   rm -rf ~/.gitconfig
   ln -s ~/bxgithub/myfile/git-templates ~/.git-templates
   ln -s ~/bxgithub/myfile/git-templates/.git-clone-init ~/.git-clone-init
+  ln -s ~/bxgithub/myfile/git-templates/.gitconfig ~/.gitconfig
 
-  git config --global core.excludesfile ~/.git-templates/.gitignore-global
-  git config --global init.templatedir ~/.git-templates
-  git config --global commit.template ~/.git-templates/.gitmessage.txt
-  git config --global user.email "baoxianzhit@gmail.com"
-  git config --global user.name "baoxianzhang"
+  # git config --global core.excludesfile ~/.git-templates/.gitignore-global
+  # git config --global init.templatedir ~/.git-templates
+  # git config --global commit.template ~/.git-templates/.gitmessage.txt
+  # git config --global user.email "baoxianzhit@gmail.com"
+  # git config --global user.name "baoxianzhang"
 
 fi

@@ -1,0 +1,9 @@
+[core]
+	excludesfile = ~/.git-templates/.gitignore-global
+[init]
+	templatedir = ~/.git-templates
+[commit]
+	template = ~/.git-templates/.gitmessage.txt
+[user]
+	email = baoxianzhit@gmail.com
+	name = baoxianzhang
