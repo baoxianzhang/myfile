@@ -139,10 +139,11 @@ alias em='emacs'
 alias o='nautilus ./'
 alias encodeI='iconv -f GBK -t UTF-8 '
 alias encodeE='enca -L zh_CN -x utf-8 '
+alias vz='vim ~/.zshrc'
 #alias encodeAll="encodeE $(find ./ *)"
 alias s='source ~/.zshrc'
 alias S='source ~/.zshrc'
-alias vz='vim ~/.zshrc'
+alias ss='source devel/setup.zsh'
 alias shutdown='sudo shutdown -h now'
 alias sd='sudo shutdown -h now'
 alias reboot='sudo reboot'
@@ -156,6 +157,7 @@ alias cb='catkin build'
 alias cc='catkin clean --y'
 alias ccb='catkin clean --y && catkin build'
 alias cm='catkin_make'
+# alias catkin_clean_pkg='catkin_make --pkg xxx --make-args clean'
 alias gimp='LANGUAGE=zh_CN gimp'
 alias cdcaffe='cd ~/code/SegNet/caffe-segnet-cudnn5/'
 alias xmind="cd ~/Software/xmind-8-update8-linux/XMind_amd64/"
@@ -164,7 +166,6 @@ alias filter='cd ~/Projects/filter_ws/'
 #alias matlab='sudo /usr/local/MATLAB/R2018a/bin/matlab'
 #alias matlab='sudo ln -s /usr/local/MATLAB/R2018a/bin/matlab /usr/local/bin/matlab'
 alias rsview='/home/zhangbaoxian/Projects/catkin_ws/src/VeloView/build/install/bin/RSView'
-alias ss='source devel/setup.zsh'
 alias baidu_upload='bypy upload'
 alias baidu_downdir='bypy downdir'
 alias baidu_compare='bypy compare'
@@ -181,7 +182,7 @@ alias baidu_compare='bypy compare'
 # curl ip.gs
 alias hp="export http_proxy=http://localhost:8123"
 alias unsethp="unset http_proxy"
-alias projectinit="cp -n ~/.git-templates/CHANGELOG ./ ||  cp -n ~/.git-templates/LICENCE ./  || cp -n ~/.git-templates/README ./  || cp -n ~/.git-templates/.clang-format ./ || cp -n ~/.git-templates/.gitignore ./"
+alias projectinit="cp -n ~/.git-templates/CHANGELOG ./; cp -n ~/.git-templates/LICENCE ./; cp -n ~/.git-templates/README.md ./; cp -n ~/.git-templates/.clang-format ./; cp -n ~/.git-templates/.gitignore ./"
 
 scpIntoyunTmp() {
     scp $1 root@112.124.117.64:/tmp/
@@ -224,8 +225,8 @@ export GTAGSLIBPATH=${HOME}/code/pcl:${HOME}/code/opencv:${HOME}/code/eigen:${HO
 #. ${HOME}/code/torch/install/bin/torch-activate
 
 ##################### For CUDA #########################
-export  PATH=/usr/local/cuda-9.0/bin:$PATH
-export  LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64$LD_LIBRARY_PATH
+export PATH=/usr/local/cuda-9.0/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64$LD_LIBRARY_PATH
 export CAFFE_ROOT="${HOME}/code/SegNet/caffe-segnet-cudnn5"
 export PYTHONPATH=${HOME}/code/SegNet/caffe-segnet-cudnn5/python:$PYTHONPATH
 export CUDNN_PATH="/usr/local/cuda/lib64/libcudnn.so.5"
@@ -249,7 +250,7 @@ export PATH=$PATH:$TeXLivePATH
 ##################### For ROS #########################
 source /opt/ros/kinetic/setup.zsh
 # source ${HOME}/p3_ws/devel/setup.zsh
-# source ${HOME}/Projects/catkin_ws/devel/setup.zsh
+source ${HOME}/Projects/catkin_ws/devel/setup.zsh
 # source ${HOME}/Projects/localization_Projects/devel/setup.zsh
 # source ${HOME}/Projects/none_ws/devel/setup.zsh
 #
