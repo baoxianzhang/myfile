@@ -169,13 +169,14 @@ alias rsview='/home/zhangbaoxian/Projects/catkin_ws/src/VeloView/build/install/b
 alias baidu_upload='bypy upload'
 alias baidu_downdir='bypy downdir'
 alias baidu_compare='bypy compare'
+# alias grep='grep -nr'
 
 ########## terminator socks ##############
 # sudo apt-get install polipo
 # sudo vim /etc/polipo/config
 # add following three lines
 #    socksParentProxy = "localhost:1080"
-#    socksProxyTpye = socks5
+#    socksProxyType = socks5
 #    logLevel = 4
 # sudo service polipo stop
 # sudo service polipo start
