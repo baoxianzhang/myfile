@@ -2,6 +2,8 @@
 #Author: baoxian zhang[baoxianzhang] <baoxianzhit@gmail.com>
 #Date: Tuesday, 14-03-2016
 
+# THISDIR=$( cd "$( dirname "$0")" && pwd )
+
 ## Function
 function askForContinue()
 {
