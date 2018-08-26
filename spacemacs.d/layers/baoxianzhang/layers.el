@@ -64,11 +64,12 @@
                                       ;; latex
                                       ;; pandoc
                                       ;; ycmd
-                                      extra-langs
+                                      ;; extra-langs
                                       html
+                                      cmake
                                       ;; protobuf
 
-                                      baoxianzhang-org-page
+                                      ;; baoxianzhang-org-page
                                       ;; baoxianzhang-better-defaults
                                       ;; baoxianzhang-misc
                                       ;; baoxianzhang-org
