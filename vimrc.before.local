@@ -5,14 +5,6 @@ let g:mapleader = ','
 "You can configure ag.nvim to always start searching from your project root instead of the cwd
 let g:ag_working_path_mode="r"
 
-" ros style
-set shiftwidth=2  " Two space indents
-set tabstop=2     " Tab key indents two spaces at a time
-set expandtab     " Use spaces when the <Tab> key is pressed
-set cindent       " Turn on automatic C-code indentation
-" Actual formatting rules go here
-" once I figure out what they should be...
-
 "================ Key Mapping ==================
 map <leader><space>        :FixWhitespace<cr>
 " normal no recursive mapping
@@ -238,3 +230,109 @@ set fileencodings=ucs-bom,utf-8,utf-16,gbk,big5,gb18030,latin1
 " set fileencodings=utf-8, ucs-bom, gb18030, gbk, gb2312, cp936
 set termencoding=utf-8
 set encoding=utf-8
+
+" ros style
+set shiftwidth=2  " Two space indents
+set tabstop=2     " Tab key indents two spaces at a time
+set expandtab     " Use spaces when the <Tab> key is pressed
+set cindent       " Turn on automatic C-code indentation
+" Actual formatting rules go here
+" once I figure out what they should be...
+"
+""--------------------------ROS C++ code style----------------
+
+set ts            =2
+set shiftwidth    =2
+set tabstop       =2
+set softtabstop   =2
+set expandtab
+set textwidth     =150
+set cindent
+set cinoptions    =2
+let b:undo_indent = "setl sw< ts< sts< et< tw< wrap< cin< cino< inde<"
+
+
+
+setlocal nowrap        "自动折行
+
+
+
+"-------------YouCompleteMe-----------------------------------"
+"
+"" YCM 补全菜单配色
+" 菜单
+highlight Pmenu ctermfg=2 ctermbg=3 guifg=#005f87 guibg=#EEE8D5
+" 选中项
+highlight PmenuSel ctermfg=2 ctermbg=3 guifg=#AFD700 guibg=#106900
+let g:spf13_bundle_groups=['general', 'youcompleteme']
+let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py'
+let g:ycm_confirm_extra_conf=0      " 允许 vim 加载 .ycm_extra_conf.py 文件，不再提示  
+let g:ycm_collect_identifiers_from_tags_files = 1           " 开启 YCM 基于标签引擎
+let g:ycm_collect_identifiers_from_comments_and_strings = 1 " 注释与字符串中的内容也用于补全
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
+let g:ycm_complete_in_comments = 1                          " 在注释输入中也能补全
+let g:ycm_complete_in_strings = 1                           " 在字符串输入中也能补全
+let g:ycm_show_diagnostics_ui = 1                           " 使用语法检查
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>" |            " 回车即选中当前项
+nnoremap <c-j> :YcmCompleter GoToDefinitionElseDeclaration<CR>|     " 跳转到定义处
+nmap <F4> :YcmDiags<CR>
+let g:ycm_semantic_triggers = {}
+let g:ycm_semantic_triggers.c = ['->', '.', '(', '[', '&']
+
+" YCM 集成 OmniCppComplete 补全引擎，设置其快捷键  
+inoremap <leader>; <C-x><C-o>  
+" 补全内容不以分割子窗口形式出现，只显示补全列表  
+set completeopt-=preview  
+let g:ycm_min_num_of_chars_for_completion=2
+let g:ycm_cache_omnifunc=0  " 禁止缓存匹配项，每次都重新生成匹配项  
+let g:ycm_seed_identifiers_with_syntax=1   " 语法关键字补全
+let g:ycm_key_invoke_completion = '<M-;>'  " 修改对C函数的补全快捷键，默认是CTRL + space，修改为ALT + ;  
+let g:ycm_error_symbol = '✗'    " 设置转到定义处的快捷键为ALT + G，这个功能非常赞 
+let g:ycm_warning_symbol = '>*'
+nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
+nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
+nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
+"======= for ros ======================="
+
+let g:ycm_semantic_triggers = {
+ \ 'roslaunch' : ['="', '$(', '/'],
+ \ 'rosmsg,rossrv,rosaction' : ['re!^', '/'],
+ \ }
+
+"-------------syntastic-------------"
+" 设置错误符号
+let g:syntastic_error_symbol='✗'
+" 设置警告符号
+let g:syntastic_warning_symbol='⚠'
+" 是否在打开文件时检查
+let g:syntastic_check_on_open=1
+" 是否在保存文件后检查
+let g:syntastic_check_on_wq=0
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_cpp_compiler = 'clang++'
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+"高亮错误
+let g:syntastic_enable_highlighting=0
+"让syntastic支持C++11
+let g:syntastic_cpp_compiler_options = '-std=c++11 -stdlib=libc++'
+
+
+"----------------NERDTREE -------------------------
+" 在 vim 启动的时候默认开启 NERDTree（autocmd 可以缩写为 au）
+"autocmd VimEnter * NERDTree     "当文件夹下文件很多时，载入费事
+" 当打开 NERDTree 窗口时，自动显示 Bookmarks
+let NERDTreeShowBookmarks=1
+
+

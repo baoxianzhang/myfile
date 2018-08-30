@@ -34,7 +34,8 @@
                                              shell-default-height 30
                                              shell-default-position 'bottom)
                                       ;; spell-checking
-                                      ;; syntax-checking
+                                      syntax-checking
+                                      ;; flycheck
                                       version-control
                                       (chinese :variables
                                                ;; chinese-default-input-method 'chinese-pyim
@@ -63,7 +64,7 @@
                                       csv
                                       ;; latex
                                       ;; pandoc
-                                      ;; ycmd
+                                      ycmd
                                       ;; extra-langs
                                       html
                                       cmake

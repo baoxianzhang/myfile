@@ -178,4 +178,17 @@
 ;; (spacemacs/set-leader-keys "cr" 'clang-format-region)
 ;; Bind clang-format-buffer to tab on the c++-mode only:
 
+(add-hook 'c++-mode-hook (lambda () (setq flycheck-clang-language-standard "c++11")))
+
+;; ycmd
+;; (require 'ycmd)
+;; (add-hook 'c++-mode-hook 'ycmd-mode)
+;; 
+;; (require 'company-ycmd)
+;; (company-ycmd-setup)
+
+(setq ycmd-server-command (list "python" "-u" (file-truename "~/code/ycmd/ycmd/")))
+(setq ycmd-force-semantic-completion t)
+(add-hook 'c-mode-hook 'ycmd-mode)
+(add-hook 'python-mode-hook 'ycmd-mode)
 
