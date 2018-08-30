@@ -186,7 +186,7 @@ alias g++="g++ -std=c++11"
 alias hp="export http_proxy=http://localhost:8123"
 alias unsethp="unset http_proxy"
 #alias projectinit="cp -n ~/.git-templates/CHANGELOG ./; cp -n ~/.git-templates/LICENCE ./; cp -n ~/.git-templates/README.md ./; cp -n ~/.git-templates/.clang-format ./; cp -n ~/.git-templates/.gitignore ./"
-alias projectinit="cp -n ~/.git-templates/.clang-format ./; cp -n ~/.git-templates/.gitignore ./"
+alias projectinit="cp -n ~/.git-templates/.clang-format ./; cp -n ~/.git-templates/.gitignore ./; cp -n ~/bxgithub/myfile/ycm_extra_conf.py ./ "
 
 scpIntoyunTmp() {
     scp $1 root@112.124.117.64:/tmp/
