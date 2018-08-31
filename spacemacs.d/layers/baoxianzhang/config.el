@@ -199,8 +199,28 @@
                            (list (expand-file-name "/usr/local/include/pcl-1.8/") ;; this for the ~ dir
                            "/usr/include/eigen3"
                            "/opt/ros/kinetic/include"
+                           "./include"
+                           "../include"
+                           "./"
                                  ))))
+
+;; (add-hook 'c++-mode-hook (lambda ()
+;;                            (setq flycheck-gcc-include-path
+;;                                  (mapcar (lambda (p) (expand-file-name p (projectile-project-root)) you-include-file)
 ;; (add-to-list 'company-backends 'company-c-headers)
+
+;; https://emacs.stackexchange.com/questions/13065/automatically-add-project-directory-to-flycheck-clang-gcc-include-path
+;; (defun setup-flycheck-gcc-project-path ()
+;;   (let ((root (ignore-errors (projectile-project-root))))
+;;     (when root
+;;       (add-to-list
+;;        (make-variable-buffer-local 'flycheck-gcc-include-path)
+;;        root)))
+;; 
+;; (add-hook 'c++-mode-hook 'setup-flycheck-gcc-project-path)
+
+;; https://github.com/flycheck/flycheck/issues/659
+;; (add-hook 'c++-mode-hook (lambda () (set flycheck-gcc-include-path (mapcar (lambda (p) (expand-file-name p (projectile-project-root)) my-relative-include-paths)
 
 ;; ycmd
 ;; (require 'ycmd)
