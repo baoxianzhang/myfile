@@ -194,6 +194,8 @@
                            ;; (setq flycheck-checker 'c/c++-clang)
                            (setq flycheck-gcc-language-standard "c++11")
                            ))
+
+;; https://github.com/swarm-robotics/fordyca/blob/f8a26813f4e05a4ed96a1f174c1a59bf8ab785da/.dir-locals.el
 (add-hook 'c++-mode-hook
           (lambda () (setq flycheck-gcc-include-path
                            (list (expand-file-name "/usr/local/include/pcl-1.8/") ;; this for the ~ dir
@@ -202,7 +204,11 @@
                            "./include"
                            "../include"
                            "./"
-                                 ))))
+                           (concat
+                            (projectile-project-root)
+                            "include")
+                           )
+                           )))
 
 ;; (add-hook 'c++-mode-hook (lambda ()
 ;;                            (setq flycheck-gcc-include-path
@@ -221,6 +227,7 @@
 
 ;; https://github.com/flycheck/flycheck/issues/659
 ;; (add-hook 'c++-mode-hook (lambda () (set flycheck-gcc-include-path (mapcar (lambda (p) (expand-file-name p (projectile-project-root)) my-relative-include-paths)
+;; (add-hook 'c++-mode-hook (lambda () (setq flycheck-gcc-include-path (mapcar (lambda (p) (expand-file-name p (projectile-project-root)) "./include" ))) ))
 
 ;; ycmd
 ;; (require 'ycmd)
