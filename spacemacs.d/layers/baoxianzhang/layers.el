@@ -21,6 +21,7 @@
                                                        auto-completion-enable-sort-by-usage t
                                                        )
                                       better-defaults
+                                      ;; ycmd
                                       emacs-lisp
                                       git
                                       github
@@ -35,6 +36,7 @@
                                              shell-default-position 'bottom)
                                       ;; spell-checking
                                       syntax-checking
+                                      ;; (syntax-checking :variables syntax-checking-enable-by-default nil)
                                       ;; flycheck
                                       version-control
                                       (chinese :variables
@@ -64,7 +66,6 @@
                                       csv
                                       ;; latex
                                       ;; pandoc
-                                      ycmd
                                       ;; extra-langs
                                       html
                                       cmake

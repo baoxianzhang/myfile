@@ -56,50 +56,50 @@
 (add-hook 'org-mode-hook (lambda () (setq truncate-lines t)))
 
 
- ;; C and C++ style
+;; C and C++ style
 (setq c-default-style "linux"
       c-basic-offset 4)
 ;; (setq c-default-style '("linux") )
 ;; (setq c-basic-offset 4)
 ;; (setq tab-width 4)
 
-  ;; (setq org-capture-templates
-  ;;       '(("t" "Todo" entry (file+headline "~/bxgithub/myfile/spacemacs.d/org/gtd.org" "工作安排")
-  ;;          "* TODO [#B] %?\n  %i\n"
-  ;;          :empty-lines 1)
-  ;;         ))
+;; (setq org-capture-templates
+;;       '(("t" "Todo" entry (file+headline "~/bxgithub/myfile/spacemacs.d/org/gtd.org" "工作安排")
+;;          "* TODO [#B] %?\n  %i\n"
+;;          :empty-lines 1)
+;;         ))
 
 
 
-  ;; (require 'org-octopress)
-  ;; (setq org-octopress-directory-top       "~/bxgithub/myHexoBlog/source")
-  ;; (setq org-octopress-directory-posts     "~/bxgithub/myHexoBlog/source/_posts")
-  ;; (setq org-octopress-directory-org-top   "~/bxgithub/myHexoBlog/source")
-  ;; (setq org-octopress-directory-org-posts "~/bxgithub/myHexoBlog/source/blog")
-  ;; (setq org-octopress-setup-file          "~/bxgithub/myHexoBlog/setupfile.org")
+;; (require 'org-octopress)
+;; (setq org-octopress-directory-top       "~/bxgithub/myHexoBlog/source")
+;; (setq org-octopress-directory-posts     "~/bxgithub/myHexoBlog/source/_posts")
+;; (setq org-octopress-directory-org-top   "~/bxgithub/myHexoBlog/source")
+;; (setq org-octopress-directory-org-posts "~/bxgithub/myHexoBlog/source/blog")
+;; (setq org-octopress-setup-file          "~/bxgithub/myHexoBlog/setupfile.org")
 
 
 
-  ;; ;; for ditaa
-  ;; (setq org-ditaa-jar-path "~/bxgithub/myfile/spacemacs.d/ditaa.jar")
+;; ;; for ditaa
+;; (setq org-ditaa-jar-path "~/bxgithub/myfile/spacemacs.d/ditaa.jar")
 
-  ;; (org-babel-do-load-languages
-  ;;  'org-babel-load-languages
-  ;;  '(;; other Babel languages
-  ;;    (ditaa . t)
-  ;;    ;; (plantuml . t)
-  ;;    ;; (dot . t)
-  ;;    (sh . t)
-  ;;    (python . t)
-  ;;    ;; (R . t)
-  ;;    ;; (plantuml . t)
-  ;;    ;; (dot . t)
-  ;;    (C . t)
-  ;;    (org . t)
-  ;;    (latex . t)
-  ;;    ))
+;; (org-babel-do-load-languages
+;;  'org-babel-load-languages
+;;  '(;; other Babel languages
+;;    (ditaa . t)
+;;    ;; (plantuml . t)
+;;    ;; (dot . t)
+;;    (sh . t)
+;;    (python . t)
+;;    ;; (R . t)
+;;    ;; (plantuml . t)
+;;    ;; (dot . t)
+;;    (C . t)
+;;    (org . t)
+;;    (latex . t)
+;;    ))
 
-  ;; (add-hook 'org-babel-after-execute-hook 'bh/display-inline-images 'append)
+;; (add-hook 'org-babel-after-execute-hook 'bh/display-inline-images 'append)
 (defun ROS-c-mode-hook()
   (setq c-basic-offset 2)
   (setq indent-tabs-mode nil)
@@ -178,17 +178,43 @@
 ;; (spacemacs/set-leader-keys "cr" 'clang-format-region)
 ;; Bind clang-format-buffer to tab on the c++-mode only:
 
-(add-hook 'c++-mode-hook (lambda () (setq flycheck-clang-language-standard "c++11")))
+;; (add-hook 'c++-mode-hook (lambda () (setq flycheck-clang-language-standard "c++11")))
+;; (add-hook 'c++-mode-hook (lambda () (setq flycheck-checker 'c/c++-clang)
+;;                            (setq flycheck-gcc-language-standard "c++11")
+;;                            (setq flycheck-clang-language-standard "c++11")
+;;                            ;; (setq flycheck-gcc-includes "")
+;;                            ;; (setq flycheck-clang-includes "")
+;;                            (setq flycheck-clang-includes "")
+
+;;                            (add-to-list 'company-c-headers-path-system "/usr/include/c++/5/" )))
+
+;; http://www.flycheck.org/en/27/_downloads/flycheck.html
+(add-hook 'c++-mode-hook (lambda ()
+                           (setq flycheck-checker 'c/c++-gcc)
+                           ;; (setq flycheck-checker 'c/c++-clang)
+                           (setq flycheck-gcc-language-standard "c++11")
+                           ))
+(add-hook 'c++-mode-hook
+          (lambda () (setq flycheck-gcc-include-path
+                           (list (expand-file-name "/usr/local/include/pcl-1.8/") ;; this for the ~ dir
+                           "/usr/include/eigen3"
+                           "/opt/ros/kinetic/include"
+                                 ))))
+;; (add-to-list 'company-backends 'company-c-headers)
 
 ;; ycmd
 ;; (require 'ycmd)
 ;; (add-hook 'c++-mode-hook 'ycmd-mode)
-;; 
+;;
 ;; (require 'company-ycmd)
 ;; (company-ycmd-setup)
 
-(setq ycmd-server-command (list "python" "-u" (file-truename "~/code/ycmd/ycmd/")))
-(setq ycmd-force-semantic-completion t)
-(add-hook 'c-mode-hook 'ycmd-mode)
-(add-hook 'python-mode-hook 'ycmd-mode)
+;; (setq ycmd-server-command (list "python" "-u" (file-truename "~/code/ycmd/ycmd/")))
+;; (setq ycmd-global-config '("~/bxgithub/myfile/ycm_extra_conf.py"))
+;; (setq ycmd-extra-conf-whitelist '("~/code/*"))
+;; (setq ycmd-force-semantic-completion t)
 
+
+;; (add-hook 'c-mode-hook 'ycmd-mode)
+;; (add-hook 'c++-mode-hook 'ycmd-mode)
+;; (add-hook 'python-mode-hook 'ycmd-mode)
