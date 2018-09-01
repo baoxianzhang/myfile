@@ -198,7 +198,8 @@
 ;; https://github.com/swarm-robotics/fordyca/blob/f8a26813f4e05a4ed96a1f174c1a59bf8ab785da/.dir-locals.el
 (add-hook 'c++-mode-hook
           (lambda () (setq flycheck-gcc-include-path
-                           (list (expand-file-name "/usr/local/include/pcl-1.8/") ;; this for the ~ dir
+                           (list (expand-file-name "~/Projects/catkin_ws/devel/include") ;; this for the ~ dir
+                           "/usr/local/include/pcl-1.8/"
                            "/usr/include/eigen3"
                            "/opt/ros/kinetic/include"
                            "./include"
