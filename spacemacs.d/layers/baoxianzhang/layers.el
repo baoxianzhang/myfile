@@ -35,8 +35,8 @@
                                              shell-default-height 30
                                              shell-default-position 'bottom)
                                       ;; spell-checking
-                                      syntax-checking
-                                      ;; (syntax-checking :variables syntax-checking-enable-by-default nil)
+                                      ;; syntax-checking
+                                      (syntax-checking :variables syntax-checking-enable-by-default nil)
                                       ;; flycheck
                                       version-control
                                       (chinese :variables
