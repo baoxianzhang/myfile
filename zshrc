@@ -160,7 +160,7 @@ alias cm='catkin_make'
 # alias catkin_clean_pkg='catkin_make --pkg xxx --make-args clean'
 alias gimp='LANGUAGE=zh_CN gimp'
 alias cdcaffe='cd ~/code/SegNet/caffe-segnet-cudnn5/'
-alias xmind="cd ~/Software/xmind-8-update8-linux/XMind_amd64/"
+alias xmind="$( cd "$( dirname "$0")" && pwd ); cd ~/Software/xmind-8-update8-linux/XMind_amd64/; ./XMind; cd $THISDIR "
 alias data='cd ~/Projects/data/'
 alias filter='cd ~/Projects/filter_ws/'
 #alias matlab='sudo /usr/local/MATLAB/R2018a/bin/matlab'
@@ -169,6 +169,9 @@ alias rsview='THISDIR=$( cd "$( dirname "$0")" && pwd ); cd /home/zhangbaoxian/S
 alias baidu_upload='bypy upload'
 alias baidu_downdir='bypy downdir'
 alias baidu_compare='bypy compare'
+# cppcheck --enable=error all style unusedFuntion path
+alias cppcheck='cppcheck --enable=all ./'
+alias chmod_default='find . -type d -exec chmod 755 {} \; find . -type f -exec chmod 644 {} \;'
 
 alias g++="g++ -std=c++11"
 # alias grep='grep -nr'
@@ -186,7 +189,7 @@ alias g++="g++ -std=c++11"
 alias hp="export http_proxy=http://localhost:8123"
 alias unsethp="unset http_proxy"
 #alias projectinit="cp -n ~/.git-templates/CHANGELOG ./; cp -n ~/.git-templates/LICENCE ./; cp -n ~/.git-templates/README.md ./; cp -n ~/.git-templates/.clang-format ./; cp -n ~/.git-templates/.gitignore ./"
-alias projectinit="cp -n ~/.git-templates/.clang-format ./; cp -n ~/.git-templates/.gitignore ./; cp -n ~/bxgithub/myfile/ycm_extra_conf.py ./ "
+alias projectinit="cp -n ~/.git-templates/.clang-format ./; cp -n ~/.git-templates/.gitignore ./"
 
 scpIntoyunTmp() {
     scp $1 root@112.124.117.64:/tmp/
@@ -210,7 +213,7 @@ distUsage(){
 }
 
 
-/usr/bin/setxkbmap -option "ctrl:swapcaps"
+# /usr/bin/setxkbmap -option "ctrl:swapcaps"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 #eval $(thefuck --alias)
 export PATH=$PATH:/usr/lib/git-core
@@ -255,6 +258,6 @@ export PATH=$PATH:$TeXLivePATH
 source /opt/ros/kinetic/setup.zsh
 # source ${HOME}/p3_ws/devel/setup.zsh
 source ${HOME}/Projects/catkin_ws/devel/setup.zsh
-# source ${HOME}/Projects/localization_Projects/devel/setup.zsh
+source ${HOME}/Projects/rs_ws/devel/setup.zsh
 # source ${HOME}/Projects/none_ws/devel/setup.zsh
 #

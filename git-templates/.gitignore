@@ -5,6 +5,9 @@ GSYMS
 GPATH
 tags
 
+debian
+obj-x86_64-linux-gnu
+
 # Python byte-compile file
 __pycache__/
 *.py[co]
