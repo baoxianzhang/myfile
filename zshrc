@@ -191,14 +191,17 @@ alias unsethp="unset http_proxy"
 #alias projectinit="cp -n ~/.git-templates/CHANGELOG ./; cp -n ~/.git-templates/LICENCE ./; cp -n ~/.git-templates/README.md ./; cp -n ~/.git-templates/.clang-format ./; cp -n ~/.git-templates/.gitignore ./"
 alias projectinit="cp -n ~/.git-templates/.clang-format ./; cp -n ~/.git-templates/.gitignore ./"
 
-scpIntoyunTmp() {
-    scp $1 root@112.124.117.64:/tmp/
-    #command scp $1 root@112.124.117.64:/tmp/
-}
 
-scpIntoRobotTmp() {
-    scp $1 root@115.29.193.81:/tmp/
-    #command scp $1 root@115.29.193.81:/tmp/
+# replacestring() {
+  # sed "s#$2#$3#g" $1 > $4
+# }
+
+replaceFileString() {
+  echo "The target file is  $1"
+  echo "The new file is  $4"
+  echo "The old string is $2"
+  echo "The new string is $3"
+  sed "s#$2#$3#g" $1 > $4
 }
 
 flash20000() {

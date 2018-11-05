@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/usr/bin/env sh
 #Author: baoxian zhang[baoxianzhang] <baoxianzhit@gmail.com>
 #Date: Tuesday, 14-03-2016
 
