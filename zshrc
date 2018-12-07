@@ -264,3 +264,5 @@ source ${HOME}/Projects/catkin_ws/devel/setup.zsh
 source ${HOME}/Projects/rs_ws/devel/setup.zsh
 # source ${HOME}/Projects/none_ws/devel/setup.zsh
 #
+#################### For some useful shell ############
+export PATH=$PATH:${HOME}/bxgithub/myfile
