@@ -4,7 +4,7 @@ echo "USAGE:"
 echo "$0 input_markdown_file output_markdown_file"
 echo ""
 echo ""
-if [ $# -ne 2 ];
+if [ $# -ne 2 ]
 then
   echo "Error: the input param is not equal to 2!"
   exit
