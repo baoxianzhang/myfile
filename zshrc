@@ -216,8 +216,12 @@ distUsage(){
 }
 
 
-# /usr/bin/setxkbmap -option "ctrl:swapcaps"
+/usr/bin/setxkbmap -option "ctrl:swapcaps"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# autojump
+[[ -s ${HOME}/.autojump/etc/profile.d/autojump.sh ]] && source ${HOME}/.autojump/etc/profile.d/autojump.sh
+
 #eval $(thefuck --alias)
 export PATH=$PATH:/usr/lib/git-core
 export PATH=$PATH:~/.cargo/bin
@@ -236,10 +240,10 @@ export GTAGSLIBPATH=${HOME}/code/pcl:${HOME}/code/opencv:${HOME}/code/eigen:${HO
 
 ##################### For CUDA #########################
 export PATH=/usr/local/cuda-9.0/bin:$PATH
-export LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64$LD_LIBRARY_PATH
-export CAFFE_ROOT="${HOME}/code/SegNet/caffe-segnet-cudnn5"
-export PYTHONPATH=${HOME}/code/SegNet/caffe-segnet-cudnn5/python:$PYTHONPATH
-export CUDNN_PATH="/usr/local/cuda/lib64/libcudnn.so.5"
+# export LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64$LD_LIBRARY_PATH
+# export CAFFE_ROOT="${HOME}/code/SegNet/caffe-segnet-cudnn5"
+# export PYTHONPATH=${HOME}/code/SegNet/caffe-segnet-cudnn5/python:$PYTHONPATH
+# export CUDNN_PATH="/usr/local/cuda/lib64/libcudnn.so.5"
 # export CUDA_HOME=/usr/local/cuda
 # export LD_LIBRARY_PATH=${CUDA_HOME}/lib64:${LD_LIBRARY_PATH}
 # export PATH=${CUDA_HOME}/bin:${PATH}
@@ -258,10 +262,10 @@ export PATH=$PATH:$TeXLivePATH
 
 
 ##################### For ROS #########################
-source /opt/ros/kinetic/setup.zsh
+source /opt/ros/melodic/setup.zsh
 # source ${HOME}/p3_ws/devel/setup.zsh
-source ${HOME}/Projects/catkin_ws/devel/setup.zsh
-source ${HOME}/Projects/rs_ws/devel/setup.zsh
+#source ${HOME}/Projects/catkin_ws/devel/setup.zsh
+#source ${HOME}/Projects/rs_ws/devel/setup.zsh
 # source ${HOME}/Projects/none_ws/devel/setup.zsh
 #
 #################### For some useful shell ############
