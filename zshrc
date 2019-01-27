@@ -221,6 +221,7 @@ distUsage(){
 
 # autojump
 [[ -s ${HOME}/.autojump/etc/profile.d/autojump.sh ]] && source ${HOME}/.autojump/etc/profile.d/autojump.sh
+autoload -U compinit && compinit -u
 
 #eval $(thefuck --alias)
 export PATH=$PATH:/usr/lib/git-core
