@@ -264,10 +264,9 @@ export PATH=$PATH:$TeXLivePATH
 
 ##################### For ROS #########################
 source /opt/ros/melodic/setup.zsh
-# source ${HOME}/p3_ws/devel/setup.zsh
-#source ${HOME}/Projects/catkin_ws/devel/setup.zsh
-#source ${HOME}/Projects/rs_ws/devel/setup.zsh
-# source ${HOME}/Projects/none_ws/devel/setup.zsh
+source ${HOME}/Projects/driver_ws/devel/setup.zsh
+source ${HOME}/Projects/rs_ws/devel/setup.zsh
+source ${HOME}/Projects/plugin_ws/devel/setup.zsh
 #
 #################### For some useful shell ############
 export PATH=$PATH:${HOME}/bxgithub/myfile
