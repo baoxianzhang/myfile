@@ -216,7 +216,6 @@ distUsage(){
 }
 
 
-/usr/bin/setxkbmap -option "ctrl:swapcaps"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # autojump
@@ -267,6 +266,20 @@ source /opt/ros/melodic/setup.zsh
 source ${HOME}/Projects/driver_ws/devel/setup.zsh
 source ${HOME}/Projects/rs_ws/devel/setup.zsh
 source ${HOME}/Projects/plugin_ws/devel/setup.zsh
-#
+
 #################### For some useful shell ############
 export PATH=$PATH:${HOME}/bxgithub/myfile
+
+
+
+###################### For ROS in Thinkpad #########################
+# /usr/bin/setxkbmap -option "ctrl:swapcaps"
+# source /opt/ros/melodic/setup.zsh
+
+###################### For ROS in Company #########################
+# source /opt/ros/kinetic/setup.zsh
+# source ${HOME}/p3_ws/devel/setup.zsh
+# source ${HOME}/Projects/catkin_ws/devel/setup.zsh
+# source ${HOME}/Projects/rs_ws/devel/setup.zsh
+# source ${HOME}/Projects/none_ws/devel/setup.zsh
+#
