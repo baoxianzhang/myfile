@@ -231,6 +231,8 @@ noremap <leader>yd :<C-u>Yde<CR>
 xnoremap p pgvy   " 多次粘贴
 
 
+" for fzf
+set rtp+=~/.fzf
 
 
 

@@ -105,9 +105,9 @@ alias ranger=ranger
 alias sl=sl
 #alias rm='trash-put'
 alias homedistusage='sudo du -d 1 -k /home/* | sort -n -r'
-alias screenshota='gnome-screenshot -a'
-alias screenshotw='gnome-screenshot -w'
-alias screenshotc='gnome-screenshot -c'
+alias screenshota='gnome-screenshot -a --interactive'
+alias screenshotw='gnome-screenshot -w --interactive'
+alias screenshotc='gnome-screenshot -c --interactive'
 # 给USB设备增加读写权限, logout to effect
 # sudo usermod -a -G dialout $USER
 #
@@ -160,12 +160,12 @@ alias cm='catkin_make'
 # alias catkin_clean_pkg='catkin_make --pkg xxx --make-args clean'
 alias gimp='LANGUAGE=zh_CN gimp'
 alias cdcaffe='cd ~/code/SegNet/caffe-segnet-cudnn5/'
-alias xmind="$( cd "$( dirname "$0")" && pwd ); cd ~/Software/xmind-8-update8-linux/XMind_amd64/; ./XMind; cd $THISDIR "
+# alias xmind="$( cd $( dirname "$0") && pwd ); cd ~/Software/xmind-8-update8-linux/XMind_amd64/; ./XMind; cd $THISDIR "
 alias data='cd ~/Projects/data/'
 alias filter='cd ~/Projects/filter_ws/'
 #alias matlab='sudo /usr/local/MATLAB/R2018a/bin/matlab'
 #alias matlab='sudo ln -s /usr/local/MATLAB/R2018a/bin/matlab /usr/local/bin/matlab'
-alias rsview='THISDIR=$( cd "$( dirname "$0")" && pwd ); cd /home/zhangbaoxian/Software/rsview/; ./run_rsview.sh; cd $THISDIR'
+# alias rsview='THISDIR=$( cd "$( dirname "$0")" && pwd ); cd /home/zhangbaoxian/Software/rsview/; ./run_rsview.sh; cd $THISDIR'
 alias baidu_upload='bypy upload'
 alias baidu_downdir='bypy downdir'
 alias baidu_compare='bypy compare'
@@ -273,7 +273,7 @@ export PATH=$PATH:${HOME}/bxgithub/myfile
 
 
 ###################### For ROS in Thinkpad #########################
-# /usr/bin/setxkbmap -option "ctrl:swapcaps"
+/usr/bin/setxkbmap -option "ctrl:swapcaps"
 # source /opt/ros/melodic/setup.zsh
 
 ###################### For ROS in Company #########################
