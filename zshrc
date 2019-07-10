@@ -49,7 +49,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-flow autojump z extract tzsh-autosuggestions colored-man-pages web-search)
+plugins=(git git-flow z extract tzsh-autosuggestions colored-man-pages web-search)
 
 # User configuration
 
@@ -231,8 +231,7 @@ export TERM=xterm-256color
 
 ###################### For GTAGS ######################
 export GTAGSFORCECPP=true
-export GTAGSLIBPATH=${HOME}/code/pcl:${HOME}/code/opencv:${HOME}/code/eigen:${HOME}/code/ros:${HOME}/code/libpointmatcher:${HOME}/code/ethzasl_icp_mapping/libpointmatcher_ros
-
+export GTAGSLIBPATH=${HOME}/code/pcl:${HOME}/code/opencv:${HOME}/code/eigen:${HOME}/code/ros:${HOME}/code/libpointmatcher:${HOME}/code/ethzasl_icp_mapping/libpointmatcher_ros:${HOME}/Projects/temp_ws/src/rs_map_v_2
 
 # added by Anaconda2 installer
 # export PATH="${HOME}/anaconda2/bin:$PATH"
@@ -240,13 +239,13 @@ export GTAGSLIBPATH=${HOME}/code/pcl:${HOME}/code/opencv:${HOME}/code/eigen:${HO
 
 ##################### For CUDA #########################
 export PATH=/usr/local/cuda-9.0/bin:$PATH
-# export LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
 # export CAFFE_ROOT="${HOME}/code/SegNet/caffe-segnet-cudnn5"
 # export PYTHONPATH=${HOME}/code/SegNet/caffe-segnet-cudnn5/python:$PYTHONPATH
-# export CUDNN_PATH="/usr/local/cuda/lib64/libcudnn.so.5"
-# export CUDA_HOME=/usr/local/cuda
-# export LD_LIBRARY_PATH=${CUDA_HOME}/lib64:${LD_LIBRARY_PATH}
-# export PATH=${CUDA_HOME}/bin:${PATH}
+export CUDNN_PATH="/usr/local/cuda/lib64/libcudnn.so.5"
+export CUDA_HOME=/usr/local/cuda
+export LD_LIBRARY_PATH=${CUDA_HOME}/lib64:${LD_LIBRARY_PATH}
+export PATH=${CUDA_HOME}/bin:${PATH}
 
 ##################### For RSVIEW #########################
 #  export PATH=$PATH:${HOME}/Projects/catkin_ws/VeloView/build/install/bin
@@ -272,9 +271,13 @@ export PATH=$PATH:${HOME}/bxgithub/myfile
 # source /opt/ros/melodic/setup.zsh
 
 ###################### For ROS in Company #########################
-# source /opt/ros/kinetic/setup.zsh
-# source ${HOME}/p3_ws/devel/setup.zsh
+source /opt/ros/kinetic/setup.zsh
 # source ${HOME}/Projects/catkin_ws/devel/setup.zsh
+# source ${HOME}/p3_ws/devel/setup.zsh
 # source ${HOME}/Projects/rs_ws/devel/setup.zsh
-# source ${HOME}/Projects/none_ws/devel/setup.zsh
-#
+# source ${HOME}/Projects/temp_ws/devel/setup.zsh
+source ${HOME}/Projects/simulator/devel/setup.zsh
+source ${HOME}/Projects/calib_ws/devel/setup.zsh
+source ${HOME}/Projects/system_ws/devel/setup.zsh
+source ${HOME}/Projects/rsdriver_ws/devel/setup.zsh
+
