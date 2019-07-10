@@ -261,10 +261,10 @@ export PATH=$PATH:$TeXLivePATH
 
 
 ##################### For ROS #########################
-source /opt/ros/melodic/setup.zsh
-source ${HOME}/Projects/driver_ws/devel/setup.zsh
-source ${HOME}/Projects/rs_ws/devel/setup.zsh
-source ${HOME}/Projects/plugin_ws/devel/setup.zsh
+# source /opt/ros/melodic/setup.zsh
+# source ${HOME}/Projects/driver_ws/devel/setup.zsh
+# source ${HOME}/Projects/rs_ws/devel/setup.zsh
+# source ${HOME}/Projects/plugin_ws/devel/setup.zsh
 
 #################### For some useful shell ############
 export PATH=$PATH:${HOME}/bxgithub/myfile
@@ -272,7 +272,7 @@ export PATH=$PATH:${HOME}/bxgithub/myfile
 
 
 ###################### For ROS in Thinkpad #########################
-/usr/bin/setxkbmap -option "ctrl:swapcaps"
+# /usr/bin/setxkbmap -option "ctrl:swapcaps"
 # source /opt/ros/melodic/setup.zsh
 
 ###################### For ROS in Company #########################
