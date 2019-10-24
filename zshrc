@@ -155,6 +155,8 @@ alias SL='ls'
 alias springemacs='pkill -SIGUSR2 emacs'
 alias cb='catkin build'
 alias cc='catkin clean --y'
+alias cco='catkin clean --orphans'
+alias ccp='catkin clean PACKAGE'
 alias ccb='catkin clean --y && catkin build'
 alias cm='catkin_make'
 # alias catkin_clean_pkg='catkin_make --pkg xxx --make-args clean'
@@ -171,7 +173,7 @@ alias baidu_downdir='bypy downdir'
 alias baidu_compare='bypy compare'
 # cppcheck --enable=error all style unusedFuntion path
 alias cppcheck='cppcheck --enable=all ./'
-alias chmod_default='find . -type d -exec chmod 755 {} \; find . -type f -exec chmod 644 {} \;'
+alias chmod_default="find . -type d -exec chmod 775 {} \; ; find . -type f -exec chmod 664 {} \;"
 
 alias g++="g++ -std=c++11"
 # alias grep='grep -nr'
@@ -276,13 +278,13 @@ export PATH=$PATH:${HOME}/bxgithub/myfile
 # source /opt/ros/melodic/setup.zsh
 
 ###################### For ROS in Company #########################
-source /opt/ros/kinetic/setup.zsh
 # source ${HOME}/Projects/catkin_ws/devel/setup.zsh
 # source ${HOME}/p3_ws/devel/setup.zsh
 # source ${HOME}/Projects/rs_ws/devel/setup.zsh
 # source ${HOME}/Projects/temp_ws/devel/setup.zsh
-source ${HOME}/Projects/simulator/devel/setup.zsh
-source ${HOME}/Projects/calib_ws/devel/setup.zsh
-source ${HOME}/Projects/system_ws/devel/setup.zsh
+# source ${HOME}/Projects/simulator/devel/setup.zsh
+# source ${HOME}/Projects/calib_ws/devel/setup.zsh
+source /opt/ros/kinetic/setup.zsh
+#source ${HOME}/Projects/system_ws/devel/setup.zsh
 source ${HOME}/Projects/rsdriver_ws/devel/setup.zsh
-
+#
