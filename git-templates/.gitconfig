@@ -7,7 +7,7 @@
 	template = ~/.git-templates/.gitmessage.txt
 [user]
 	email = baoxianzhit@gmail.com
-	name = baoxianzhang
+	name = zhangbaoxian
 [magithub]
 	online = false
 [magithub "status"]
@@ -19,3 +19,8 @@
 [alias]
 	unstage = reset HEAD --
 	last = log -1 HEAD
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f

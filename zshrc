@@ -162,12 +162,12 @@ alias cm='catkin_make'
 # alias catkin_clean_pkg='catkin_make --pkg xxx --make-args clean'
 alias gimp='LANGUAGE=zh_CN gimp'
 alias cdcaffe='cd ~/code/SegNet/caffe-segnet-cudnn5/'
-# alias xmind="$( cd $( dirname "$0") && pwd ); cd ~/Software/xmind-8-update8-linux/XMind_amd64/; ./XMind; cd $THISDIR "
+alias xmind="$( cd $( dirname "$0") && pwd ); cd ~/Software/xmind-8-update8-linux/XMind_amd64/; ./XMind; cd $THISDIR "
 alias data='cd ~/Projects/data/'
 alias filter='cd ~/Projects/filter_ws/'
 #alias matlab='sudo /usr/local/MATLAB/R2018a/bin/matlab'
 #alias matlab='sudo ln -s /usr/local/MATLAB/R2018a/bin/matlab /usr/local/bin/matlab'
-# alias rsview='THISDIR=$( cd "$( dirname "$0")" && pwd ); cd /home/zhangbaoxian/Software/rsview/; ./run_rsview.sh; cd $THISDIR'
+# alias rsview='THISDIR=$( cd "$( dirname "$0")" && pwd ); cd ~/Software/rsview/; ./run_rsview.sh; cd $THISDIR'
 alias baidu_upload='bypy upload'
 alias baidu_downdir='bypy downdir'
 alias baidu_compare='bypy compare'
@@ -176,6 +176,7 @@ alias cppcheck='cppcheck --enable=all ./'
 alias chmod_default="find . -type d -exec chmod 775 {} \; ; find . -type f -exec chmod 664 {} \;"
 
 alias g++="g++ -std=c++11"
+alias cppcheck="cppcheck --enable=all --std=c++11"
 # alias grep='grep -nr'
 
 ########## terminator socks ##############
@@ -217,6 +218,22 @@ distUsage(){
     sudo du -d 1 -k $1/* | sort -n -r
 }
 
+function upsearch()
+{
+  test "/" = "$PWD" && echo "upsearch fail: " "$1" && return || test -e "$1" && UPSEARCH_RET="$PWD" && return || builtin cd .. && upsearch $1
+}
+
+
+function sros()
+{
+  local dir="$PWD"
+  upsearch devel
+  echo "You're in ROS WS: " "$UPSEARCH_RET"
+  echo "Source in this WS"
+  source $UPSEARCH_RET/devel/setup.zsh && echo "Done!" || echo "Failed!"
+  builtin cd "$dir"
+}
+
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -232,8 +249,8 @@ export PATH=~/.npm-global/bin:$PATH
 export TERM=xterm-256color
 
 ###################### For GTAGS ######################
-export GTAGSFORCECPP=true
-export GTAGSLIBPATH=${HOME}/code/pcl:${HOME}/code/opencv:${HOME}/code/eigen:${HOME}/code/ros:${HOME}/code/libpointmatcher:${HOME}/code/ethzasl_icp_mapping/libpointmatcher_ros:${HOME}/Projects/temp_ws/src/rs_map_v_2
+# export GTAGSFORCECPP=true
+export GTAGSLIBPATH=${HOME}/code/pcl:${HOME}/code/opencv:${HOME}/code/eigen:${HOME}/code/ros:${HOME}/code/libpointmatcher:${HOME}/code/ethzasl_icp_mapping/libpointmatcher_ros:${HOME}/code/qt_include
 
 # added by Anaconda2 installer
 # export PATH="${HOME}/anaconda2/bin:$PATH"
@@ -242,8 +259,7 @@ export GTAGSLIBPATH=${HOME}/code/pcl:${HOME}/code/opencv:${HOME}/code/eigen:${HO
 ##################### For CUDA #########################
 export PATH=/usr/local/cuda-9.0/bin:$PATH
 export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
-# export CAFFE_ROOT="${HOME}/code/SegNet/caffe-segnet-cudnn5"
-# export PYTHONPATH=${HOME}/code/SegNet/caffe-segnet-cudnn5/python:$PYTHONPATH
+
 export CUDNN_PATH="/usr/local/cuda/lib64/libcudnn.so.5"
 export CUDA_HOME=/usr/local/cuda
 export LD_LIBRARY_PATH=${CUDA_HOME}/lib64:${LD_LIBRARY_PATH}
@@ -256,35 +272,21 @@ export PATH=${CUDA_HOME}/bin:${PATH}
 #  export PYTHONPATH=$PYTHONPATH:${HOME}/Projects/catkin_ws/src/VeloView/build/install/lib/paraview-4.3/site-packages/vtk
 
 ##################### For TEX #########################
-export TeXLiveMANPATH=/usr/local/texlive/2017/texmf-dist/doc/man
-export TeXLiveINFOPATH=/usr/local/texlive/2017/texmf-dist/doc/info
-export TeXLivePATH=/usr/local/texlive/2017/bin/x86_64-linux
-export PATH=$PATH:$TeXLivePATH
-
-
-##################### For ROS #########################
-# source /opt/ros/melodic/setup.zsh
-# source ${HOME}/Projects/driver_ws/devel/setup.zsh
-# source ${HOME}/Projects/rs_ws/devel/setup.zsh
-# source ${HOME}/Projects/plugin_ws/devel/setup.zsh
+# export TeXLiveMANPATH=/usr/local/texlive/2017/texmf-dist/doc/man
+# export TeXLiveINFOPATH=/usr/local/texlive/2017/texmf-dist/doc/info
+# export TeXLivePATH=/usr/local/texlive/2017/bin/x86_64-linux
+# export PATH=$PATH:$TeXLivePATH
 
 #################### For some useful shell ############
 export PATH=$PATH:${HOME}/bxgithub/myfile
-
-
 
 ###################### For ROS in Thinkpad #########################
 # /usr/bin/setxkbmap -option "ctrl:swapcaps"
 # source /opt/ros/melodic/setup.zsh
 
 ###################### For ROS in Company #########################
-# source ${HOME}/Projects/catkin_ws/devel/setup.zsh
-# source ${HOME}/p3_ws/devel/setup.zsh
-# source ${HOME}/Projects/rs_ws/devel/setup.zsh
-# source ${HOME}/Projects/temp_ws/devel/setup.zsh
-# source ${HOME}/Projects/simulator/devel/setup.zsh
-# source ${HOME}/Projects/calib_ws/devel/setup.zsh
 source /opt/ros/kinetic/setup.zsh
+#source ${HOME}/Projects/catkin_ws/devel/setup.zsh
+#source ${HOME}/Projects/rsdriver_ws/devel/setup.zsh
 #source ${HOME}/Projects/system_ws/devel/setup.zsh
-source ${HOME}/Projects/rsdriver_ws/devel/setup.zsh
 #
