@@ -30,7 +30,8 @@ values."
    dotspacemacs-configuration-layer-path '("~/.spacemacs.d/layers/")
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(vimscript
+   '(
+     octavevimscript
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -77,7 +78,7 @@ values."
    ;; (default t)
    dotspacemacs-elpa-https t
    ;; Maximum allowed time in seconds to contact an ELPA repository.
-   dotspacemacs-elpa-timeout 5
+   dotspacemacs-elpa-timeout 30
    ;; If non nil then spacemacs will check for updates at startup
    ;; when the current branch is not `develop'. Note that checking for
    ;; new versions works via git commands, thus it calls GitHub services
@@ -290,20 +291,29 @@ executes.
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
 
-
-
+  (setq configuration-layer--elpa-archives
+     '(("melpa-cn" . "http://elpa.emacs-china.org/melpa/")
+       ("org-cn"   . "http://elpa.emacs-china.org/org/")
+        ("gnu-cn"   . "http://elpa.emacs-china.org/gnu/")
+        ))
+ 
+;; (setq configuration-layer-elpa-archives
+;;       '(("melpa-cn" . "https://mirrors.ustc.edu.cn/elpa/melpa/")
+;;         ("org-cn"   . "https://mirrors.ustc.edu.cn/elpa/org/")
+;;         ("gnu-cn"   . "https://mirrors.ustc.edu.cn/elpa/gnu/")))
+ 
 ;; zilongshanren
-;;   (setq configuration-layer--elpa-archives
-;;         '(("melpa-cn" . "https://elpa.zilongshanren.com/melpa/")
-;;           ("org-cn"   . "https://elpa.zilongshanren.com/org/")
-;;           ("gnu-cn"   . "https://elpa.zilongshanren.com/gnu/")))
+   (setq configuration-layer-elpa-archives
+          '(("melpa-cn" . "https://elpa.zilongshanren.com/melpa/")
+            ("org-cn"   . "https://elpa.zilongshanren.com/org/")
+            ("gnu-cn"   . "https://elpa.zilongshanren.com/gnu/")))
 
 
-  (setq-default
-   configuration-layer--elpa-archives
-   '(("melpa-cn" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
-     ("gnu-cn" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
-     ("org-cn" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/org/")))
+ ;;  (setq-default
+;;    configuration-layer--elpa-archives
+ ;;   '(("melpa-cn" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
+ ;;     ("gnu-cn" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
+  ;;    ("org-cn" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/org/")))
  )
 
 (defun dotspacemacs/user-config ()
@@ -327,7 +337,7 @@ you should place your code here."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (stickyfunc-enhance srefactor pyim pyim-basedict org-category-capture org-mime magit-gh-pulls dash-functional gmail-message-mode ham-mode html-to-markdown github-search github-clone github-browse-file gist gh marshal logito pcache flymd ghub edit-server vmd-mode flycheck-ycmd flycheck-rust seq flycheck-pos-tip flycheck company-ycmd ycmd request-deferred let-alist deferred pandoc-mode ox-pandoc company-auctex auctex insert-shebang fish-mode company-shell web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data wolfram-mode thrift stan-mode scad-mode qml-mode matlab-mode julia-mode arduino-mode evil-unimpaired ox-gfm zeal-at-point youdao-dictionary chinese-word-at-point yapfify yaml-mode xterm-color ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package unfill toml-mode toc-org spaceline powerline smeargle shell-pop restart-emacs ranger rainbow-mode rainbow-identifiers rainbow-delimiters racer pyvenv pytest pyenv-mode py-isort popwin pip-requirements persp-mode pdf-tools tablist pcre2el paradox spinner pangu-spacing orgit org-projectile org-present org-pomodoro alert log4e gntp org-page git org-plus-contrib mustache simple-httpd ht org-download org-bullets open-junk-file neotree mwim multi-term move-text mmm-mode markdown-toc markdown-mode magit-gitflow macrostep lorem-ipsum live-py-mode linum-relative link-hint info+ indent-guide imenu-list hydra hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-gtags helm-gitignore request helm-flx helm-descbinds helm-dash helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md ggtags fuzzy flx-ido flx find-by-pinyin-dired fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit with-editor evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight eshell-z eshell-prompt-extras esh-help elisp-slime-nav dumb-jump disaster diminish diff-hl define-word cython-mode csv-mode company-statistics company-quickhelp company-c-headers company-anaconda company column-enforce-mode color-identifiers-mode cmake-mode clean-aindent-mode clang-format chinese-pyim chinese-pyim-basedict pos-tip cargo rust-mode blog-admin names ctable bind-map bind-key auto-yasnippet yasnippet auto-highlight-symbol auto-compile packed anaconda-mode pythonic f dash s aggressive-indent adaptive-wrap ace-window ace-pinyin pinyinlib ace-link ace-jump-helm-line helm avy helm-core async ac-ispell auto-complete popup monokai-theme))))
+    (xr nadvice vimrc-mode lv dash-docs transient dactyl-mode stickyfunc-enhance srefactor pyim pyim-basedict org-category-capture org-mime magit-gh-pulls dash-functional gmail-message-mode ham-mode html-to-markdown github-search github-clone github-browse-file gist gh marshal logito pcache flymd ghub edit-server vmd-mode flycheck-ycmd flycheck-rust seq flycheck-pos-tip flycheck company-ycmd ycmd request-deferred let-alist deferred pandoc-mode ox-pandoc company-auctex auctex insert-shebang fish-mode company-shell web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data wolfram-mode thrift stan-mode scad-mode qml-mode matlab-mode julia-mode arduino-mode evil-unimpaired ox-gfm zeal-at-point youdao-dictionary chinese-word-at-point yapfify yaml-mode xterm-color ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package unfill toml-mode toc-org spaceline powerline smeargle shell-pop restart-emacs ranger rainbow-mode rainbow-identifiers rainbow-delimiters racer pyvenv pytest pyenv-mode py-isort popwin pip-requirements persp-mode pdf-tools tablist pcre2el paradox spinner pangu-spacing orgit org-projectile org-present org-pomodoro alert log4e gntp org-page git org-plus-contrib mustache simple-httpd ht org-download org-bullets open-junk-file neotree mwim multi-term move-text mmm-mode markdown-toc markdown-mode magit-gitflow macrostep lorem-ipsum live-py-mode linum-relative link-hint info+ indent-guide imenu-list hydra hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-gtags helm-gitignore request helm-flx helm-descbinds helm-dash helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md ggtags fuzzy flx-ido flx find-by-pinyin-dired fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit with-editor evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight eshell-z eshell-prompt-extras esh-help elisp-slime-nav dumb-jump disaster diminish diff-hl define-word cython-mode csv-mode company-statistics company-quickhelp company-c-headers company-anaconda company column-enforce-mode color-identifiers-mode cmake-mode clean-aindent-mode clang-format chinese-pyim chinese-pyim-basedict pos-tip cargo rust-mode blog-admin names ctable bind-map bind-key auto-yasnippet yasnippet auto-highlight-symbol auto-compile packed anaconda-mode pythonic f dash s aggressive-indent adaptive-wrap ace-window ace-pinyin pinyinlib ace-link ace-jump-helm-line helm avy helm-core async ac-ispell auto-complete popup monokai-theme))))
 (defun dotspacemacs/emacs-custom-settings ()
   "Emacs custom settings.
 This is an auto-generated function, do not modify its content directly, use

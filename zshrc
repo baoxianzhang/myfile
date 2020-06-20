@@ -49,7 +49,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-flow z extract tzsh-autosuggestions colored-man-pages web-search)
+plugins=(git git-flow z extract colored-man-pages web-search)
 
 # User configuration
 
@@ -282,10 +282,10 @@ export PATH=$PATH:${HOME}/bxgithub/myfile
 
 ###################### For ROS in Thinkpad #########################
 # /usr/bin/setxkbmap -option "ctrl:swapcaps"
+source /opt/ros/noetic/setup.zsh
 # source /opt/ros/melodic/setup.zsh
 
 ###################### For ROS in Company #########################
-source /opt/ros/kinetic/setup.zsh
 #source ${HOME}/Projects/catkin_ws/devel/setup.zsh
 #source ${HOME}/Projects/rsdriver_ws/devel/setup.zsh
 #source ${HOME}/Projects/system_ws/devel/setup.zsh
