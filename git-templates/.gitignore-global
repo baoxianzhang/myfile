@@ -13,7 +13,7 @@ __pycache__/
 *~
 \#*\#
 build/
-data/
+# data/
 script/
 utest/data/
 installer/

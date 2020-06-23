@@ -30,7 +30,8 @@ values."
    dotspacemacs-configuration-layer-path '("~/.spacemacs.d/layers/")
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(vimscript
+   '(
+     octavevimscript
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -77,7 +78,7 @@ values."
    ;; (default t)
    dotspacemacs-elpa-https t
    ;; Maximum allowed time in seconds to contact an ELPA repository.
-   dotspacemacs-elpa-timeout 5
+   dotspacemacs-elpa-timeout 30
    ;; If non nil then spacemacs will check for updates at startup
    ;; when the current branch is not `develop'. Note that checking for
    ;; new versions works via git commands, thus it calls GitHub services
@@ -290,20 +291,29 @@ executes.
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
 
-
-
+  (setq configuration-layer--elpa-archives
+     '(("melpa-cn" . "http://elpa.emacs-china.org/melpa/")
+       ("org-cn"   . "http://elpa.emacs-china.org/org/")
+        ("gnu-cn"   . "http://elpa.emacs-china.org/gnu/")
+        ))
+ 
+;; (setq configuration-layer-elpa-archives
+;;       '(("melpa-cn" . "https://mirrors.ustc.edu.cn/elpa/melpa/")
+;;         ("org-cn"   . "https://mirrors.ustc.edu.cn/elpa/org/")
+;;         ("gnu-cn"   . "https://mirrors.ustc.edu.cn/elpa/gnu/")))
+ 
 ;; zilongshanren
-;;   (setq configuration-layer--elpa-archives
-;;         '(("melpa-cn" . "https://elpa.zilongshanren.com/melpa/")
-;;           ("org-cn"   . "https://elpa.zilongshanren.com/org/")
-;;           ("gnu-cn"   . "https://elpa.zilongshanren.com/gnu/")))
+   (setq configuration-layer-elpa-archives
+          '(("melpa-cn" . "https://elpa.zilongshanren.com/melpa/")
+            ("org-cn"   . "https://elpa.zilongshanren.com/org/")
+            ("gnu-cn"   . "https://elpa.zilongshanren.com/gnu/")))
 
 
-  (setq-default
-   configuration-layer--elpa-archives
-   '(("melpa-cn" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
-     ("gnu-cn" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
-     ("org-cn" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/org/")))
+ ;;  (setq-default
+;;    configuration-layer--elpa-archives
+ ;;   '(("melpa-cn" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
+ ;;     ("gnu-cn" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
+  ;;    ("org-cn" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/org/")))
  )
 
 (defun dotspacemacs/user-config ()
@@ -328,6 +338,7 @@ you should place your code here."
  '(package-selected-packages
    (quote
     (zeal-at-point youdao-dictionary names chinese-word-at-point yapfify yaml-mode xterm-color ws-butler winum which-key web-mode volatile-highlights vmd-mode vimrc-mode vi-tilde-fringe uuidgen use-package unfill toc-org tagedit stickyfunc-enhance srefactor spaceline powerline smeargle slim-mode shell-pop scss-mode sass-mode restart-emacs ranger rainbow-mode rainbow-identifiers rainbow-delimiters pyvenv pytest pyim pyim-basedict xr pyenv-mode py-isort pug-mode popwin pip-requirements persp-mode pcre2el paradox spinner pangu-spacing ox-gfm orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-plus-contrib org-mime org-download org-bullets open-junk-file neotree mwim multi-term move-text mmm-mode markdown-toc magit-gitflow magit-popup magit-gh-pulls macrostep lorem-ipsum live-py-mode linum-relative link-hint insert-shebang indent-guide imenu-list hydra lv hy-mode dash-functional hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-pydoc helm-projectile projectile helm-mode-manager helm-make helm-gtags helm-gitignore request helm-flx helm-descbinds helm-dash dash-docs helm-css-scss helm-company helm-c-yasnippet helm-ag haml-mode google-translate golden-ratio gnuplot gmail-message-mode ham-mode markdown-mode html-to-markdown gitignore-mode github-search github-clone github-browse-file gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gist gh marshal logito pcache ht gh-md ggtags fuzzy flymd flycheck-pos-tip flycheck pkg-info epl flx-ido flx fish-mode find-by-pinyin-dired fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit git-commit with-editor transient evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav edit-server dumb-jump disaster diminish diff-hl define-word dactyl-mode cython-mode csv-mode company-web web-completion-data company-statistics company-shell company-quickhelp pos-tip company-c-headers company-anaconda company column-enforce-mode color-identifiers-mode cmake-mode clean-aindent-mode clang-format bind-map bind-key auto-yasnippet yasnippet auto-highlight-symbol auto-compile packed anaconda-mode pythonic f dash s aggressive-indent adaptive-wrap ace-window ace-pinyin pinyinlib ace-link ace-jump-helm-line helm avy helm-core async ac-ispell auto-complete popup monokai-theme))))
+
 (defun dotspacemacs/emacs-custom-settings ()
   "Emacs custom settings.
 This is an auto-generated function, do not modify its content directly, use
