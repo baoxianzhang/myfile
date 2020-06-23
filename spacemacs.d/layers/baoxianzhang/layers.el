@@ -68,7 +68,7 @@
                                       ;; pandoc
                                       ;; extra-langs
                                       html
-                                      cmake
+                                      ;; cmake
                                       ;; protobuf
 
                                       ;; baoxianzhang-org-page

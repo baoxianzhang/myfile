@@ -1,6 +1,7 @@
 [core]
 	excludesfile = ~/.git-templates/.gitignore-global
 	editor = vim
+	quotepath = false
 [init]
 	templatedir = ~/.git-templates
 [commit]

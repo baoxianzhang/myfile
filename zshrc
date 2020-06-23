@@ -182,17 +182,37 @@ alias cppcheck="cppcheck --enable=all --std=c++11"
 ########## terminator socks ##############
 # sudo apt-get install polipo
 # sudo vim /etc/polipo/config
-# add following three lines
-#    socksParentProxy = "localhost:1080"
-#    socksProxyType = socks5
-#    logLevel = 4
+# add following lines
+# https://www.meirenji.info/2017/12/09/Ubuntu%E9%85%8D%E7%BD%AEShadowsocks%E5%AE%9E%E7%8E%B0%E7%BB%88%E7%AB%AF%E4%BB%A3%E7%90%86/
+
+# logSyslog = false
+# logFile = "/var/log/polipo/polipo.log"
+#  
+# socksParentProxy = "127.0.0.1:1080"
+# socksProxyType = socks5
+#  
+# chunkHighMark = 50331648
+# objectHighMark = 16384
+#  
+# serverMaxSlots = 64
+# serverSlots = 16
+# serverSlots1 = 32
+#  
+# proxyAddress = "0.0.0.0"
+# proxyPort = 8123
+
+# /etc/init.d/polipo restart  or below two line
 # sudo service polipo stop
 # sudo service polipo start
-# curl ip.gs
+# curl ip.gs and test http_proxy=http://localhost:8123
 alias hp="export http_proxy=http://localhost:8123"
+alias hps="export https_proxy=http://localhost:8123"
 alias unsethp="unset http_proxy"
+alias unsethps="unset http_proxys"
+alias ganttlab="sudo docker run -p 8282:80 ganttlab/ganttlab"
+alias gitlab_time_report="cd ~/code/gitlab-time-report &&  GITLAB_URL="http://192.168.1.20" GITLAB_TOKEN="GAdXD8yPmRvfWyXX-6b7" npm start"
+
 #alias projectinit="cp -n ~/.git-templates/CHANGELOG ./; cp -n ~/.git-templates/LICENCE ./; cp -n ~/.git-templates/README.md ./; cp -n ~/.git-templates/.clang-format ./; cp -n ~/.git-templates/.gitignore ./"
-alias projectinit="cp -n ~/.git-templates/.clang-format ./; cp -n ~/.git-templates/.gitignore ./"
 
 
 # replacestring() {
@@ -287,6 +307,6 @@ export PATH=$PATH:${HOME}/bxgithub/myfile
 ###################### For ROS in Company #########################
 source /opt/ros/kinetic/setup.zsh
 #source ${HOME}/Projects/catkin_ws/devel/setup.zsh
-#source ${HOME}/Projects/rsdriver_ws/devel/setup.zsh
-#source ${HOME}/Projects/system_ws/devel/setup.zsh
+source ${HOME}/Projects/rsdriver_ws/devel/setup.zsh
+source ${HOME}/Projects/system_ws/devel/setup.zsh
 #
