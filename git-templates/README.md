@@ -8,17 +8,17 @@ git config --global commit.template ~/.git-templates/.gitmessage.txt
 ```
 
 ## brief
-+ pre-commit
++ pre-commit   
   use clang-format to format the c, c++ code.
-+ commit-msg
-  Add commit type check.
-+ .clang-format
++ commit-msg   
+  Add commit type check.  
++ .clang-format   
   The clang-format setting.
-+ .git-clone-init
++ .git-clone-init    
   Clone use different name and email setting according to the code repo address.
-+ .gitignore
++ .gitignore   
   The globale ignore git setting.
-+ .gitmessage.txt
++ .gitmessage.txt   
   Git commit message setting.
 
 
