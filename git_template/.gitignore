@@ -5,6 +5,9 @@ GSYMS
 GPATH
 tags
 
+debian
+obj-x86_64-linux-gnu
+
 # Python byte-compile file
 __pycache__/
 *.py[co]
@@ -13,8 +16,6 @@ __pycache__/
 *~
 \#*\#
 build/
-# data/
-script/
 utest/data/
 installer/
 # backup files
@@ -36,7 +37,7 @@ cmake-build-*/
 .vscode
 
 # clang-format
-.clang-format
+# .clang-format
 
 # ROSBag files
 *.bag
