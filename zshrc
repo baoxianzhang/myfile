@@ -162,7 +162,7 @@ alias cm='catkin_make'
 # alias catkin_clean_pkg='catkin_make --pkg xxx --make-args clean'
 alias gimp='LANGUAGE=zh_CN gimp'
 alias cdcaffe='cd ~/code/SegNet/caffe-segnet-cudnn5/'
-alias xmind="$( cd $( dirname "$0") && pwd ); cd ~/Software/xmind-8-update8-linux/XMind_amd64/; ./XMind; cd $THISDIR "
+alias xmind="$( cd $( dirname "$0") && pwd ); cd ~/Software/xmind-8-update9-linux/XMind_amd64/; ./XMind; cd $THISDIR "
 alias data='cd ~/Projects/data/'
 alias filter='cd ~/Projects/filter_ws/'
 #alias matlab='sudo /usr/local/MATLAB/R2018a/bin/matlab'
@@ -212,7 +212,14 @@ alias unsethps="unset http_proxys"
 alias ganttlab="sudo docker run -p 8282:80 ganttlab/ganttlab"
 alias gitlab_time_report="cd ~/code/gitlab-time-report &&  GITLAB_URL="http://192.168.1.20" GITLAB_TOKEN="GAdXD8yPmRvfWyXX-6b7" npm start"
 
-#alias projectinit="cp -n ~/.git-templates/CHANGELOG ./; cp -n ~/.git-templates/LICENCE ./; cp -n ~/.git-templates/README.md ./; cp -n ~/.git-templates/.clang-format ./; cp -n ~/.git-templates/.gitignore ./"
+alias gitlab_docker="docker run --detach --publish 443:443 --publish 80:80 --publish 2222:22 --name gitlab --restart unless-stopped -v /mnt/gitlab/etc:/etc/gitlab -v /mnt/gitlab/log:/var/log/gitlab -v /mnt/gitlab/data:/var/opt/gitlab gitlab/gitlab-ce"
+
+
+
+
+
+
+#alias projectinit="cp -n ~/.git_template/CHANGELOG ./; cp -n ~/.git_template/LICENCE ./; cp -n ~/.git_template/README.md ./; cp -n ~/.git_template/.clang-format ./; cp -n ~/.git_template/.gitignore ./"
 
 
 # replacestring() {
@@ -305,8 +312,8 @@ export PATH=$PATH:${HOME}/bxgithub/myfile
 # source /opt/ros/noetic/setup.zsh
 
 ###################### For ROS in Company #########################
-source /opt/ros/kinetic/setup.zsh
+#source /opt/ros/kinetic/setup.zsh
 #source ${HOME}/Projects/catkin_ws/devel/setup.zsh
-source ${HOME}/Projects/rsdriver_ws/devel/setup.zsh
-source ${HOME}/Projects/system_ws/devel/setup.zsh
+#source ${HOME}/Projects/rsdriver_ws/devel/setup.zsh
+#source ${HOME}/Projects/system_ws/devel/setup.zsh
 #
