@@ -171,8 +171,9 @@ alias filter='cd ~/Projects/filter_ws/'
 alias baidu_upload='bypy upload'
 alias baidu_downdir='bypy downdir'
 alias baidu_compare='bypy compare'
-# cppcheck --enable=error all style unusedFuntion path
-alias cppcheck='cppcheck --enable=all ./'
+# cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON .
+# cppcheck --project=compile_commands.json
+alias cppcheck='cppcheck --template=gcc --enable=all ./'
 alias chmod_default="find . -type d -exec chmod 775 {} \; ; find . -type f -exec chmod 664 {} \;"
 
 alias g++="g++ -std=c++11"
