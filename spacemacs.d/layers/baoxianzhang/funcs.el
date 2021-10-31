@@ -14,26 +14,6 @@
       (org-display-inline-images)
     (error nil)))
 
-;; https://emacs-china.org/t/ranger-golden-ratio/964/2
-(defun my-ranger ()
-  (interactive)
-  (if golden-ratio-mode
-      (progn
-        (golden-ratio-mode -1)
-        (ranger)
-        (setq golden-ratio-previous-enable t))
-    (progn
-      (ranger)
-      (setq golden-ratio-previous-enable nil))))
-
-(defun my-quit-ranger ()
-  (interactive)
-  (if golden-ratio-previous-enable
-      (progn
-        (ranger-close)
-        (golden-ratio-mode 1))
-    (ranger-close)))
-
 (defun hidden-dos-eol ()
   "Do not show ^M in files containing mixed UNIX and DOS line endings."
   (interactive)
@@ -47,18 +27,6 @@
   (interactive)
   (goto-char (point-min))
   (while (search-forward "\r" nil t) (replace-match "")))
-
-(defun run-ros-clang-format ()
-  "Runs clang-format on cpp, h files in Projects/ and reverts buffers"
-  (interactive)
-  (and
-   (string-match "/Projects/.*\\.\\(h\\|cpp\\)$" buffer-file-name)
-   (save-some-buffers 'no-confirm)
-   (shell-command (concat "clang-format-3.8 -style=file -i " buffer-file-name))
-   (message (concat "Saved and ran clang-format on " buffer-file-name))
-   (revert-buffer t t t)
-   )
-  )
 
 (defun org-insert-src-block (src-code-type)
   "Insert a `SRC-CODE-TYPE' type source code block in org-mode."
@@ -77,16 +45,6 @@
     (insert "#+END_SRC\n")
     (previous-line 2)
     (org-edit-src-code)))
-
-
-
-
-
-
-
-
-
-
 
 ;; It contains all the defined functions used in the layer.
 

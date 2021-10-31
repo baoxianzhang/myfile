@@ -16,23 +16,6 @@
 (spacemacs/set-leader-keys "o d" 'find-by-pinyin-dired)
 (spacemacs/set-leader-keys "o i" 'org-insert-src-block)
 
-(spacemacs/set-leader-keys "ar" 'my-ranger)
-;; (setq smerge-command-prefix "\C-cv")
-(spacemacs/set-leader-keys "o f" 'run-ros-clang-format)
-
-;; (spacemacs/set-leader-keys "j =" 'clang-format-buffer)
-
-(spacemacs/set-leader-keys "c f" 'clang-format-buffer)
-
-
-
-
-
-
-
-
-
-
 
 ;; It contains general key bindings.
 

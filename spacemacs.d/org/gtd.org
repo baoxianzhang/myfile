@@ -1,2 +1,0 @@
-* TODO C++ Primer
-SCHEDULED: <2016-12-09 Fri +1d>

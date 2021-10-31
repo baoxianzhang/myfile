@@ -9,76 +9,66 @@
 ;;
 ;;; License: GPLv3
 
-(configuration-layer/declare-layers '(
-                                      (auto-completion :variables
-                                                       auto-completion-return-key-behavior 'complete
-                                                       auto-completion-tab-key-behavior 'cycle
-                                                       auto-completion-complete-with-key-sequence nil
-                                                       auto-completion-complete-with-key-sequence-delay 0.1
-                                                       auto-completion-private-snippets-directory "~/.spacemacs.d/snippets/"
-                                                       auto-completion-enable-snippets-in-popup t
-                                                       auto-completion-enable-help-tooltip t
-                                                       auto-completion-enable-sort-by-usage t
-                                                       )
-                                      better-defaults
-                                      ;; ycmd
-                                      emacs-lisp
-                                      git
-                                      github
-                                      (markdown :variables markdown-live-preview-engine 'vmd)
-                                      chrome
-                                      python
-                                      shell-scripts
-                                      (org :variables
-                                           org-enable-github-support t)
-                                      (shell :variables
-                                             shell-default-height 30
-                                             shell-default-position 'bottom)
-                                      ;; spell-checking
-                                      ;; syntax-checking
-                                      (syntax-checking :variables syntax-checking-enable-by-default nil)
-                                      ;; flycheck
-                                      version-control
-                                      (chinese :variables
-                                               ;; chinese-default-input-method 'chinese-pyim
-                                               ;; chinese-enable-fcitx t
-                                               chinese-enable-youdao-dict t)
-                                      (c-c++ :variables
-                                             c-c++-default-mode-for-headers 'c++-mode
-                                             c-c++-enable-clang-support t
-                                             ;; :mode "\\.ino\\'" )
-                                             )
-                                      (colors :variables
-                                              colors-enable-nyan-cat-progress-bar t)
-                                      ;; games
-                                      ranger
-                                      ;; pdf-tools
-                                      (dash :variables helm-dash-docset-newpath "~/bxgithub/myconfigresources/zeal/docsets"
-                                            ;; )
-                                            helm-dash-browser-func 'eww)
-                                      (gtags :variables gtags-enable-by-default t)
-                                      ;; gtags
-                                      ;; cscope
-                                      semantic
-                                      yaml
-                                      ;; (rust :variables rust-format-on-save t)
-                                      imenu-list
-                                      csv
-                                      ;; latex
-                                      ;; pandoc
-                                      ;; extra-langs
-                                      html
-                                      ;; cmake
-                                      ;; protobuf
+(configuration-layer/declare-layers
+ '(
+   ;; ----------------------------------------------------------------
+   ;; Example of useful layers you may want to use right away.
+   ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
+   ;; `M-m f e R' (Emacs style) to install them.
+   ;; ----------------------------------------------------------------
+   auto-completion
+   better-defaults
+   emacs-lisp
+   git
+   helm
+   markdown
+   multiple-cursors
+   (chinese :variables
+            chinese-enable-youdao-dict t
+            chinese-enable-avy-pinyin t
+            )
+   org
+   ;; (lsp :variables
+   ;; lsp-lens-enable t)
+   (c-c++ :variables
+          c-c++-backend 'lsp-ccls
+          c-c++-adopt-subprojects t
+          c-c++-lsp-enable-semantic-highlight 'rainbow
+          c-c++-dap-adapters '(dap-lldb dap-cpptools)
+          c-c++-default-mode-for-headers 'c++-mode
+          c-c++-enable-organize-includes-on-save t
+          c-c++-enable-clang-format-on-save t
+          c-c++-enable-auto-newline t
+          c-c++-default-mode-for-headers 'c++-mode
+          c-c++-enable-organize-includes-on-save t
+          c-c++-enable-clang-format-on-save t
+          ccls-initialization-options `(:compilationDatabaseDirectory "build")
+          projectile-require-project-root t
+          )
+   spell-checking
+   syntax-checking
+   version-control
+   games
+   treemacs
+   (shell
+    :variables
+    shell-default-shell 'vterm
+    )
 
-                                      ;; baoxianzhang-org-page
-                                      ;; baoxianzhang-better-defaults
-                                      ;; baoxianzhang-misc
-                                      ;; baoxianzhang-org
-                                      ;; baoxianzhang-programming
-                                      ;; baoxianzhang-ui
+   github
+   python
+   version-control
+   yaml
+   csv
+   ;; latex
+   cmake
 
-                                      ))
+   ;; baoxianzhang-better-defaults
+   ;; baoxianzhang-misc
+   ;; baoxianzhang-org
+   ;; baoxianzhang-programming
+   ;; baoxianzhang-ui
+   ))
 
 
 ;; This file is the first file to be loaded and this is the place where addtional layers can be declared.

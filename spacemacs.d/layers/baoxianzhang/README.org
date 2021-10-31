@@ -1,13 +1,16 @@
 #+TITLE: baoxianzhang layer
 
-# The maximum height of the logo should be 200 pixels.
-# [[img/baoxianzhang.png]]
-
 # TOC links should be GitHub style anchors.
 * Table of Contents                                        :TOC_4_gh:noexport:
- - [[#description][Description]]
- - [[#install][Install]]
- - [[#key-bindings][Key bindings]]
+- [[#description][Description]]
+- [[#install][Install]]
+- [[#key-bindings][Key bindings]]
+- [[#configuration][Configuration]]
+  - [[#c-c][c-c++]]
+    - [[#build-ccls][Build ccls]]
+    - [[#project-setup][Project Setup]]
+  - [[#shell][shell]]
+  - [[#chinese][chinese]]
 
 * Description
 This layer does my personal additional layer. This layer is the main layer, which 
@@ -23,8 +26,63 @@ file.
 | Key Binding | Description    |
 |-------------+----------------|
 | ~SPC x x x~ | Does thing01   |
-# Use GitHub URLs if you wish to link a Spacemacs documentation file or its heading.
-# Examples:
-# [[https://github.com/syl20bnr/spacemacs/blob/master/doc/VIMUSERS.org#sessions]]
-# [[https://github.com/syl20bnr/spacemacs/blob/master/layers/%2Bfun/emoji/README.org][Link to Emoji layer README.org]]
-# If space-doc-mode is enabled, Spacemacs will open a local copy of the linked file.
+
+* Configuration
+** c-c++
+Use lsp-ccls backend. This is currently the most fully featured implementation, including semantic highlighting and some navigation/ introspection features that are not provided by clangd.
+
+#+BEGIN_SRC emacs-lisp
+     (c-c++ :variables
+          c-c++-backend 'lsp-ccls
+          c-c++-adopt-subprojects t
+          c-c++-lsp-enable-semantic-highlight 'rainbow
+          c-c++-dap-adapters '(dap-lldb dap-cpptools)
+          c-c++-default-mode-for-headers 'c++-mode
+          c-c++-enable-organize-includes-on-save t
+          c-c++-enable-clang-format-on-save t
+          c-c++-enable-auto-newline t
+          c-c++-default-mode-for-headers 'c++-mode
+          c-c++-enable-organize-includes-on-save t
+          c-c++-enable-clang-format-on-save t
+          ccls-initialization-options `(:compilationDatabaseDirectory "build")
+          projectile-require-project-root t
+          )
+#+END_SRC
+
+*** [[ ][Build ccls]]
+#+BEGIN_SRC sh
+  sudo apt-get install ccls
+#+END_SRC
+*** Project Setup
+The first thing should compile the project use the cmake to let the ccls find the header and symbols.
+#+BEGIN_SRC sh
+  cd build
+  cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=YES
+  cd ..
+  ln -s build/compile_commands.json .
+#+END_SRC
+
+In the configuration line, it will automatically find the compile_command.json in the build folder.
+
+#+BEGIN_SRC emacs-lisp
+  ccls-initialization-options `(:compilationDatabaseDirectory "build")
+#+END_SRC
+
+If the emacs doesn't launch the ccls, just enter the `SPC-SPC lsp` command.
+
+Ref:
+https://emacs-china.org/t/ccls-0-20190823-3-released/10342/20
+
+https://clangd.llvm.org/installation.html#project-setup
+
+
+** shell
+Here use the `vterm` for the power of the emacs vterm. 
+ 
+** chinese
+
+Add the line in your shell config, e.g. ~/.zshrc.
+#+BEGIN_SRC sh
+  export LC_CTYPE=zh_CN.UTF-8
+#+END_SRC
+
