@@ -215,6 +215,7 @@ alias gitlab_time_report="cd ~/code/gitlab-time-report &&  GITLAB_URL="http://19
 
 alias gitlab_docker="docker run --detach --publish 443:443 --publish 80:80 --publish 2222:22 --name gitlab --restart unless-stopped -v /mnt/gitlab/etc:/etc/gitlab -v /mnt/gitlab/log:/var/log/gitlab -v /mnt/gitlab/data:/var/opt/gitlab gitlab/gitlab-ce"
 
+alias gitlab_run="docker run gitlab/gitlab-ce:latest"
 
 
 
@@ -276,6 +277,10 @@ export PATH=$PATH:~/softwares/Zotero_linux-x86_64
 export PATH=~/.npm-global/bin:$PATH
 export TERM=xterm-256color
 
+
+###################### For EMACS Chinese Input ######################
+export LC_CTYPE=zh_CN.UTF-8
+
 ###################### For GTAGS ######################
 # export GTAGSFORCECPP=true
 export GTAGSLIBPATH=${HOME}/code/pcl:${HOME}/code/opencv:${HOME}/code/eigen:${HOME}/code/ros:${HOME}/code/libpointmatcher:${HOME}/code/ethzasl_icp_mapping/libpointmatcher_ros:${HOME}/code/qt_include
@@ -309,8 +314,8 @@ export PATH=${CUDA_HOME}/bin:${PATH}
 export PATH=$PATH:${HOME}/bxgithub/myfile
 
 ###################### For ROS in Thinkpad #########################
-# /usr/bin/setxkbmap -option "ctrl:swapcaps"
-# source /opt/ros/noetic/setup.zsh
+#/usr/bin/setxkbmap -option "ctrl:swapcaps"
+source /opt/ros/noetic/setup.zsh
 
 ###################### For ROS in Company #########################
 #source /opt/ros/kinetic/setup.zsh
