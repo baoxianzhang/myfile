@@ -56,3 +56,7 @@ ENV/
 
 # rslidar hardware config file
 *.csv
+
+# lsp-ccls
+.ccls-cache
+
