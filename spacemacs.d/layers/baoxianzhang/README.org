@@ -50,6 +50,19 @@ Use lsp-ccls backend. This is currently the most fully featured implementation, 
 #+END_SRC
 
 *** [[ ][Build ccls]]
+   In ubuntu 16.04:
+ #+BEGIN_SRC sh
+   https://snapcraft.io/install/ccls/ubuntu     
+   https://www.cnblogs.com/zi-wang/p/12666557.html
+#+END_SRC
+
+ #+BEGIN_SRC sh
+   sudo apt install snapd
+   sudo snap install ccls --classic 
+   # add the /snap/bin dir to $PATH 
+#+END_SRC
+  
+  In ubuntu 18.04 or above: 
 #+BEGIN_SRC sh
   sudo apt-get install ccls
 #+END_SRC

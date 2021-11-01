@@ -311,7 +311,7 @@ export PATH=${CUDA_HOME}/bin:${PATH}
 # export PATH=$PATH:$TeXLivePATH
 
 #################### For some useful shell ############
-export PATH=$PATH:${HOME}/bxgithub/myfile
+export PATH=$PATH:${HOME}/bxgithub/myfile:/snap/bin/
 
 ###################### For ROS #########################
 #/usr/bin/setxkbmap -option "ctrl:swapcaps"

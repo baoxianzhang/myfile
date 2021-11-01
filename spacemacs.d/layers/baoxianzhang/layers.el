@@ -50,8 +50,7 @@
    version-control
    games
    treemacs
-   (shell
-    :variables
+   (shell :variables
     shell-default-shell 'vterm
     )
 
