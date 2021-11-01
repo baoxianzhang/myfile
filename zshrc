@@ -315,5 +315,5 @@ export PATH=$PATH:${HOME}/bxgithub/myfile
 
 ###################### For ROS #########################
 #/usr/bin/setxkbmap -option "ctrl:swapcaps"
-# source /opt/ros/kinetic/setup.zsh
-source /opt/ros/$(printenv ROS_DISTRO)/setup.zsh
+source /opt/ros/kinetic/setup.zsh
+#source /opt/ros/$(printenv ROS_DISTRO)/setup.zsh
