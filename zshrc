@@ -219,7 +219,7 @@ alias gitlab_run="docker run gitlab/gitlab-ce:latest"
 
 
 
-
+alias qt511_lib_source="export LD_LIBRARY_PATH=${CUDA_HOME}/lib64:${LD_LIBRARY_PATH}:/opt/qt511/lib"
 
 #alias projectinit="cp -n ~/.git_template/CHANGELOG ./; cp -n ~/.git_template/LICENCE ./; cp -n ~/.git_template/README.md ./; cp -n ~/.git_template/.clang-format ./; cp -n ~/.git_template/.gitignore ./"
 
@@ -313,13 +313,7 @@ export PATH=${CUDA_HOME}/bin:${PATH}
 #################### For some useful shell ############
 export PATH=$PATH:${HOME}/bxgithub/myfile
 
-###################### For ROS in Thinkpad #########################
+###################### For ROS #########################
 #/usr/bin/setxkbmap -option "ctrl:swapcaps"
-source /opt/ros/noetic/setup.zsh
-
-###################### For ROS in Company #########################
-#source /opt/ros/kinetic/setup.zsh
-#source ${HOME}/Projects/catkin_ws/devel/setup.zsh
-#source ${HOME}/Projects/rsdriver_ws/devel/setup.zsh
-#source ${HOME}/Projects/system_ws/devel/setup.zsh
-#
+# source /opt/ros/kinetic/setup.zsh
+source /opt/ros/$(printenv ROS_DISTRO)/setup.zsh
