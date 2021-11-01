@@ -46,6 +46,10 @@
     (previous-line 2)
     (org-edit-src-code)))
 
+(defun custom/disable-lsp-diagnostics ()
+  (setq-local lsp-diagnostic-package :none)
+  (setq-local lsp-ui-doc-enable nil))
+
 ;; It contains all the defined functions used in the layer.
 
 ;; This file is loaded after packages.el and before config.el.

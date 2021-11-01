@@ -28,32 +28,37 @@
             chinese-enable-avy-pinyin t
             )
    org
+   javascript
    ;; (lsp :variables
    ;; lsp-lens-enable t)
+   (spell-checking :variable
+                   spell-checking-enable-by-default nil
+                   )
+   (syntax-checking :variables
+                    syntax-checking-enable-by-default nil
+                    )
    (c-c++ :variables
           c-c++-backend 'lsp-ccls
           c-c++-adopt-subprojects t
           c-c++-lsp-enable-semantic-highlight 'rainbow
+          ;; c-c++-lsp-enable-semantic-highlight nil
           c-c++-dap-adapters '(dap-lldb dap-cpptools)
           c-c++-default-mode-for-headers 'c++-mode
-          c-c++-enable-organize-includes-on-save t
           c-c++-enable-clang-format-on-save t
           c-c++-enable-auto-newline t
           c-c++-default-mode-for-headers 'c++-mode
-          c-c++-enable-organize-includes-on-save t
-          c-c++-enable-clang-format-on-save t
+          c-c++-enable-organize-includes-on-save nil
           ccls-initialization-options `(:compilationDatabaseDirectory "build")
           projectile-require-project-root t
+          lsp-lens-enable nil
           )
-   spell-checking
-   syntax-checking
    version-control
    games
    treemacs
-   (shell :variables
-    shell-default-shell 'vterm
-    )
-
+   shell
+   ;; (shell :variables
+   ;;  shell-default-shell 'vterm
+   ;;  )
    github
    python
    version-control

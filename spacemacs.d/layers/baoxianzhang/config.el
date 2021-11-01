@@ -26,3 +26,8 @@
 ;;; Auto indent 2 in shell-mode
 (setq sh-basic-offset 2)
 (setq sh-indentation 2)
+
+;; Disable the syntax-checking in lsp
+;; Ref: https://github.com/syl20bnr/spacemacs/issues/13414
+(when (configuration-layer/layer-used-p 'lsp)
+  (add-hook 'c++-mode-hook 'custom/disable-lsp-diagnostics))
