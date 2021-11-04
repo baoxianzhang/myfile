@@ -27,7 +27,47 @@
             chinese-enable-youdao-dict t
             chinese-enable-avy-pinyin t
             )
-   org
+   (org :variable
+        org-todo-dependencies-strategy 'naive-auto
+        org-enable-notifications t
+        org-start-notification-daemon-on-startup t
+        org-enable-github-support t ;; for github flavored markdown
+        org-enable-bootstrap-support t
+        org-enable-reveal-js-support t
+        org-enable-org-contacts-support t
+        org-contacts-files '("~/bxgithub/org/contacts.org" "~/bxgithu/org/file2.org")
+        org-capture-templates '(("c" "Contacts" entry (file "~/bxgithub/org/contacts.org")
+                                 "* %(org-contacts-template-name)
+:PROPERTIES:
+:EMAIL: %(org-contacts-template-email)
+:END:"))
+        org-enable-org-journal-support t
+        org-journal-dir "~/bxgithub/org/journal/"
+        org-journal-file-format "%Y-%m-%d"
+        org-journal-date-prefix "#+TITLE: "
+        org-journal-date-format "%A, %B %d %Y"
+        org-journal-time-prefix "* "
+        org-journal-time-format ""
+
+        org-enable-hugo-support t
+        org-enable-trello-support t
+        org-projectile-file "TODOs.org"
+
+        org-enable-org-brain-support t
+        org-enable-roam-support t
+        org-enable-roam-server t
+        org-enable-roam-protocal t
+        spaceline-org-clock-p t
+        org-enable-sticky-header t
+        org-enable-valign t
+        org-enable-appear-support t
+        org-enable-verb-support t
+        org-enable-asciidoc-support t
+
+        org-persp-startup-with-agenda "a"
+        org-agenda-files (list "~/bxgithub/org/work.org"
+                               )
+        )
    javascript
    ;; (lsp :variables
    ;; lsp-lens-enable t)

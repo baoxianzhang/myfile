@@ -31,3 +31,10 @@
 ;; Ref: https://github.com/syl20bnr/spacemacs/issues/13414
 (when (configuration-layer/layer-used-p 'lsp)
   (add-hook 'c++-mode-hook 'custom/disable-lsp-diagnostics))
+
+(with-eval-after-load 'org-agenda
+  (require 'org-projectile)
+  (mapcar '(lambda (file)
+             (when (file-exists-p file)
+               (push file org-agenda-files)))
+          (org-projectile-todo-files)))
