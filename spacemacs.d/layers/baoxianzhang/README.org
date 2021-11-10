@@ -11,9 +11,10 @@
     - [[#project-setup][Project Setup]]
   - [[#shell][shell]]
   - [[#chinese][chinese]]
+- [[#good-doc][Good doc]]
 
 * Description
-This layer does my personal additional layer. This layer is the main layer, which 
+This layer does my personal additional layer. This layer is the main layer, which
 include other layers. Please see the layers.el for details.
 
 * Install
@@ -32,37 +33,37 @@ file.
 Use lsp-ccls backend. This is currently the most fully featured implementation, including semantic highlighting and some navigation/ introspection features that are not provided by clangd.
 
 #+BEGIN_SRC emacs-lisp
-     (c-c++ :variables
-          c-c++-backend 'lsp-ccls
-          c-c++-adopt-subprojects t
-          c-c++-lsp-enable-semantic-highlight 'rainbow
-          c-c++-dap-adapters '(dap-lldb dap-cpptools)
-          c-c++-default-mode-for-headers 'c++-mode
-          c-c++-enable-organize-includes-on-save t
-          c-c++-enable-clang-format-on-save t
-          c-c++-enable-auto-newline t
-          c-c++-default-mode-for-headers 'c++-mode
-          c-c++-enable-organize-includes-on-save t
-          c-c++-enable-clang-format-on-save t
-          ccls-initialization-options `(:compilationDatabaseDirectory "build")
-          projectile-require-project-root t
-          )
+  (c-c++ :variables
+         c-c++-backend 'lsp-ccls
+         c-c++-adopt-subprojects t
+         c-c++-lsp-enable-semantic-highlight 'rainbow
+         c-c++-dap-adapters '(dap-lldb dap-cpptools)
+         c-c++-default-mode-for-headers 'c++-mode
+         c-c++-enable-organize-includes-on-save t
+         c-c++-enable-clang-format-on-save t
+         c-c++-enable-auto-newline t
+         c-c++-default-mode-for-headers 'c++-mode
+         c-c++-enable-organize-includes-on-save t
+         c-c++-enable-clang-format-on-save t
+         ccls-initialization-options `(:compilationDatabaseDirectory "build")
+         projectile-require-project-root t
+         )
 #+END_SRC
 
 *** [[ ][Build ccls]]
-   In ubuntu 16.04:
- #+BEGIN_SRC sh
-   https://snapcraft.io/install/ccls/ubuntu     
-   https://www.cnblogs.com/zi-wang/p/12666557.html
+In ubuntu 16.04:
+#+BEGIN_SRC sh
+  https://snapcraft.io/install/ccls/ubuntu
+  https://www.cnblogs.com/zi-wang/p/12666557.html
 #+END_SRC
 
- #+BEGIN_SRC sh
-   sudo apt install snapd
-   sudo snap install ccls --classic 
-   # add the /snap/bin dir to $PATH 
+#+BEGIN_SRC sh
+  sudo apt install snapd
+  sudo snap install ccls --classic
+  # add the /snap/bin dir to $PATH
 #+END_SRC
-  
-  In ubuntu 18.04 or above: 
+
+In ubuntu 18.04 or above:
 #+BEGIN_SRC sh
   sudo apt-get install ccls
 #+END_SRC
@@ -90,8 +91,8 @@ https://clangd.llvm.org/installation.html#project-setup
 
 
 ** shell
-Here use the `vterm` for the power of the emacs vterm. 
- 
+Here use the `vterm` for the power of the emacs vterm.
+
 ** chinese
 
 Add the line in your shell config, e.g. ~/.zshrc.
@@ -99,3 +100,18 @@ Add the line in your shell config, e.g. ~/.zshrc.
   export LC_CTYPE=zh_CN.UTF-8
 #+END_SRC
 
+
+* Good doc
+
++ org-mode TODO
+  https://orgmode.org/worg/org-tutorials/orgtutorial_dto.html
+
+
++ org-agenda calendar
+  https://errickson.net/code/org_agenda_calendar.html
+  *agenda calendar* key binding:
+  f and b: Go forward or backwards in time.
+  v followed by m, y or w: View a month, a year, or a week at a time respectively.
+  .: Return to today.
+  Enter: While your cursor is on an event, open that event in its original file.
+  r: Rebuild the agenda (if you’ve been editing files).

@@ -35,7 +35,7 @@
         org-enable-bootstrap-support t
         org-enable-reveal-js-support t
         org-enable-org-contacts-support t
-        org-contacts-files '("~/bxgithub/org/contacts.org" "~/bxgithu/org/file2.org")
+        org-contacts-files '("~/bxgithub/org/contacts.org")
         org-capture-templates '(("c" "Contacts" entry (file "~/bxgithub/org/contacts.org")
                                  "* %(org-contacts-template-name)
 :PROPERTIES:
@@ -64,11 +64,15 @@
         org-enable-verb-support t
         org-enable-asciidoc-support t
 
-        org-persp-startup-with-agenda "a"
-        org-agenda-files (list "~/bxgithub/org/work.org"
-                               )
+        ;; org-persp-startup-with-agenda "a"
+        ;; org-agenda-files (list "~/bxgithub/org/work.org"
+        ;;                        "~/bxgithub/org/life.org"
+        ;;                        )
+        org-agenda-files '("~/bxgithub/org")
+        org-agenda-start-on-weekday 0
         )
    javascript
+   html
    ;; (lsp :variables
    ;; lsp-lens-enable t)
    (spell-checking :variable
