@@ -12,6 +12,7 @@
   - [[#shell][shell]]
   - [[#chinese][chinese]]
 - [[#good-doc][Good doc]]
+  - [[#org-mode][org-mode]]
 
 * Description
 This layer does my personal additional layer. This layer is the main layer, which
@@ -102,7 +103,7 @@ Add the line in your shell config, e.g. ~/.zshrc.
 
 
 * Good doc
-
+** org-mode
 + org-mode TODO
   https://orgmode.org/worg/org-tutorials/orgtutorial_dto.html
 
@@ -115,3 +116,28 @@ Add the line in your shell config, e.g. ~/.zshrc.
   .: Return to today.
   Enter: While your cursor is on an event, open that event in its original file.
   r: Rebuild the agenda (if you’ve been editing files).
+
+
++ https://out-of-cheese-error.netlify.app/spacemacs-config#orgf1ff4d8
+
++ Good Spacemacs org
+  SPC i s: helm-yas
+  SHIFT ->: circle the TODO->DONE state
+  SHIFT up/down : circle the priority A B C state
+  SHIFT >/<: the calendar move month
+  SHIFT up/down: the calendar move day
+  on SCHEDULED TIME: use SHIFT up/down/left/right to change the date and time
+  , s S: sort the time
+  , s s: org-spars-tree, search the tag
+  org-columns: e to change TODO or A
+  CTRL+C CTRL+C: add tag
+  https://www.bilibili.com/video/BV1tt411j7A5/
+  
++ CTRL+h i: The Info.  SHIFT+Enter: enter link, and q to exit
+  + CTRL+h i-> Org Guide, Org Mode, Emacs, Elisp, Emacs Lisp Intro
++ CTRL+h r: The info-emacs-manual
++ SPC+SPC org-info to read the org-mode manual
++ org-kanban: Ctrl+c Ctrl+c update the kanban
+https://asciinema.org/a/201532
+shift, :mirrored, :match, :layout, :scope
+configure-block

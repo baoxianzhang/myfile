@@ -62,7 +62,6 @@ Each entry is either:
 
 
 
-
 ;; It contains this list of packages of the layer and the actual configuration for the packages included in the layer.
 
 ;; This file is loaded after layers.el.
@@ -106,4 +105,4 @@ Each entry is either:
     :config (progn
               )
     )
-)
+  )

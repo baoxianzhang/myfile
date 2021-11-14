@@ -34,42 +34,50 @@
         org-enable-github-support t ;; for github flavored markdown
         org-enable-bootstrap-support t
         org-enable-reveal-js-support t
-        org-enable-org-contacts-support t
-        org-contacts-files '("~/bxgithub/org/contacts.org")
-        org-capture-templates '(("c" "Contacts" entry (file "~/bxgithub/org/contacts.org")
-                                 "* %(org-contacts-template-name)
-:PROPERTIES:
-:EMAIL: %(org-contacts-template-email)
-:END:"))
-        org-enable-org-journal-support t
-        org-journal-dir "~/bxgithub/org/journal/"
-        org-journal-file-format "%Y-%m-%d"
-        org-journal-date-prefix "#+TITLE: "
-        org-journal-date-format "%A, %B %d %Y"
-        org-journal-time-prefix "* "
-        org-journal-time-format ""
+;;         org-enable-org-contacts-support t
+;;         org-contacts-files '("~/bxgithub/org/contacts.org")
+;;         org-capture-templates '(("c" "Contacts" entry (file "~/bxgithub/org/contacts.org")
+;;                                  "* %(org-contacts-template-name)
+;; :PROPERTIES:
+;; :EMAIL: %(org-contacts-template-email)
+;; :END:"))
+;;         org-enable-org-journal-support t
+;;         org-journal-dir "~/bxgithub/org/journal/"
+;;         org-journal-file-format "%Y-%m-%d"
+;;         org-journal-date-prefix "#+TITLE: "
+;;         org-journal-date-format "%A, %B %d %Y"
+;;         org-journal-time-prefix "* "
+;;         org-journal-time-format ""
 
-        org-enable-hugo-support t
-        org-enable-trello-support t
-        org-projectile-file "TODOs.org"
+;;         org-enable-hugo-support t
+;;         org-enable-trello-support t
+;;         org-projectile-file "TODOs.org"
 
-        org-enable-org-brain-support t
-        org-enable-roam-support t
-        org-enable-roam-server t
-        org-enable-roam-protocal t
-        spaceline-org-clock-p t
-        org-enable-sticky-header t
-        org-enable-valign t
-        org-enable-appear-support t
-        org-enable-verb-support t
-        org-enable-asciidoc-support t
+;;         org-enable-org-brain-support t
+;;         org-enable-roam-support t
+;;         org-enable-roam-server t
+;;         org-enable-roam-protocal t
+;;         spaceline-org-clock-p t
+;;         org-enable-sticky-header t
+;;         org-enable-valign t
+;;         org-enable-appear-support t
+;;         org-enable-verb-support t
+;;         org-enable-asciidoc-support t
 
         ;; org-persp-startup-with-agenda "a"
         ;; org-agenda-files (list "~/bxgithub/org/work.org"
         ;;                        "~/bxgithub/org/life.org"
         ;;                        )
-        org-agenda-files '("~/bxgithub/org")
-        org-agenda-start-on-weekday 0
+
+        ;; org-agenda-files '("~/bxgithub/org")
+        ;; org-agenda-start-on-weekday 0
+        ;; org-todo-keywords '((sequence "TODO(t!)" "NEXT(n!)" "DOINGNOW(d!)" "BLOCKED(b!)" "TODELEGATE(g!)" "DELEGATED(D!)" "FOLLOWUP(f!)" "TICKLE(T!)" "|" "CANCELLED(c!)" "DONE(F!)"))
+
+        ;; org-todo-keyword-faces '(("TODO" . org-warning)
+        ;;   ("DOINGNOW" . "#E35DBF")
+        ;;   ("CANCELED" . (:foreground "white" :background "#4d4d4d" :weight bold))
+        ;;   ("DELEGATED" . "pink")
+        ;;   ("NEXT" . "#008080"))
         )
    javascript
    html
@@ -108,7 +116,7 @@
    version-control
    yaml
    csv
-   ;; latex
+   latex
    cmake
 
    ;; baoxianzhang-better-defaults
