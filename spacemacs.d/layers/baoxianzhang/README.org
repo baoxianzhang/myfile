@@ -141,3 +141,4 @@ Add the line in your shell config, e.g. ~/.zshrc.
 https://asciinema.org/a/201532
 shift, :mirrored, :match, :layout, :scope
 configure-block
++ present: https://geeksocket.in/posts/presentations-org-emacs/
