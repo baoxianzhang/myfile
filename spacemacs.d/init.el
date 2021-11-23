@@ -79,7 +79,7 @@ This function should only modify configuration layer settings."
                                     ;; gitattributes-mode
                                     ;; gitconfig-mode
                                     ;; gitignore-mode
-                                    helm-gitignore
+                                    ;; helm-gitignore
                                     )
 
    ;; Defines the behaviour of Spacemacs when installing packages.
@@ -675,6 +675,14 @@ before packages are loaded."
         org-fontify-whole-heading-line t
         org-fontify-done-headline t
         org-fontify-quote-and-verse-blocks t)
+
+  ;; evil-redirect-digit-argument removed from evil
+  ;; https://github.com/Somelauw/evil-org-mode/issues/93
+  (fset 'evil-redirect-digit-argument 'ignore) ;; before evil-org loaded
+
+  (add-to-list 'evil-digit-bound-motions 'evil-org-beginning-of-line)
+  (evil-define-key 'motion 'evil-org-mode
+    (kbd "0") 'evil-org-beginning-of-line)
 
   )
 
