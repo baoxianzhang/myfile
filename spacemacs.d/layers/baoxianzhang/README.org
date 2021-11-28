@@ -107,7 +107,6 @@ Add the line in your shell config, e.g. ~/.zshrc.
 + org-mode TODO
   https://orgmode.org/worg/org-tutorials/orgtutorial_dto.html
 
-
 + org-agenda calendar
   https://errickson.net/code/org_agenda_calendar.html
   *agenda calendar* key binding:
@@ -138,7 +137,26 @@ Add the line in your shell config, e.g. ~/.zshrc.
 + CTRL+h r: The info-emacs-manual
 + SPC+SPC org-info to read the org-mode manual
 + org-kanban: Ctrl+c Ctrl+c update the kanban
-https://asciinema.org/a/201532
+  https://asciinema.org/a/201532
 shift, :mirrored, :match, :layout, :scope
 configure-block
-+ present: https://geeksocket.in/posts/presentations-org-emacs/
++ present
+  https://geeksocket.in/posts/presentations-org-emacs/
++ column view
+  https://brantou.github.io/2017/04/14/org-column-view-tutorial/
+  S-left/right: cycle through possible value
+             e: edit the value
+             a: edit the list of possible values
+             v: show the value in the minibuffer
+  M-left/right: move the column to the left/right
+           < >: narrow/widen the column width
++ gantt
+https://orgmode.org/worg/org-tutorials/org-taskjuggler.html
+org-taskjuggler-export
+sudo apt install ruby
+sudo gem install taskjuggler
+sudo apt install tj3
+tj3 xxx.tjp
+
+
+
