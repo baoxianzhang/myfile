@@ -52,7 +52,7 @@ ENV/
 .ycm_extra_conf.py
 
 # rslidar hardware config file
-*.csv
+# *.csv
 
 # lsp-ccls
 .ccls-cache
