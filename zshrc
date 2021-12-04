@@ -178,7 +178,11 @@ alias chmod_default="find . -type d -exec chmod 775 {} \; ; find . -type f -exec
 
 alias g++="g++ -std=c++11"
 alias cppcheck="cppcheck --enable=all --std=c++11"
+## cmake for compile_commands.json for lsp in emacs
+alias cmake="cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=YES"
 # alias grep='grep -nr'
+
+alias labview="/usr/local/natinst/LabVIEW-2021-64/labviewprofull"
 
 ########## terminator socks ##############
 # sudo apt-get install polipo

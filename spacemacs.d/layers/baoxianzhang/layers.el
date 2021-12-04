@@ -34,6 +34,9 @@
         org-enable-github-support t ;; for github flavored markdown
         org-enable-bootstrap-support t
         org-enable-reveal-js-support t
+
+        ;; setting here not work
+        ;; org-plantuml-jar-path "~/bxgithub/plantuml.jar"
 ;;         org-enable-org-contacts-support t
 ;;         org-contacts-files '("~/bxgithub/org/contacts.org")
 ;;         org-capture-templates '(("c" "Contacts" entry (file "~/bxgithub/org/contacts.org")
@@ -118,6 +121,12 @@
    csv
    latex
    cmake
+   ;; xkcd
+   (plantuml ;; :variable
+             ;; plantuml-jar-path "~/bxgithub/plantuml.jar"
+             ;; org-plantuml-jar-path "~/bxgithub/org"
+                   )
+
 
    ;; baoxianzhang-better-defaults
    ;; baoxianzhang-misc
