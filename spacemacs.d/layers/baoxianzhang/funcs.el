@@ -60,3 +60,11 @@
 ;;   (defun spacemacs/my-package-enable () ...)
 ;;   (defun spacemacs/my-package-disable () ...))
 ;; By guarding these functions we avoid to define them in case the package `my-package` is not used.
+
+(defun delete-carrage-returns ()
+  (interactive)
+  (save-excursion
+    (goto-char 0)
+    (while (search-forward"\
+" nil :noerror)
+      (replace-match""))))

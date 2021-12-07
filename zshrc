@@ -320,3 +320,4 @@ export PATH=$PATH:${HOME}/bxgithub/myfile:/snap/bin/
 ###################### For ROS #########################
 #/usr/bin/setxkbmap -option "ctrl:swapcaps"
 source /opt/ros/noetic/setup.zsh
+# source /opt/ros/galactic/setup.zsh

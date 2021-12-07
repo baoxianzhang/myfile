@@ -9,8 +9,11 @@
 ;;
 ;;; License: GPLv3
 
-(define-key evil-normal-state-map (kbd "C-]")   'helm-gtags-find-tag)
-(define-key evil-normal-state-map (kbd "C-t")   'evil-jump-backward)
+;; (define-key evil-normal-state-map (kbd "C-]")   'helm-gtags-find-tag)
+;; (define-key evil-normal-state-map (kbd "C-t")   'evil-jump-backward)
+(define-key evil-normal-state-map (kbd "C-]")   'xref-find-definitions)
+(define-key evil-normal-state-map (kbd "C-t")   'xref-find-references)
+
 
 (spacemacs/set-leader-keys "o y" 'youdao-dictionary-search-at-point+)
 (spacemacs/set-leader-keys "o d" 'find-by-pinyin-dired)
