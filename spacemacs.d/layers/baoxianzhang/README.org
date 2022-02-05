@@ -15,6 +15,7 @@
   - [[#org-mode][org-mode]]
 - [[#good-command][Good Command]]
   - [[#remove-ctrl-m-characters-from-a-file-in-unix][Remove CTRL-M characters from a file in UNIX]]
+  - [[#org-num-mode][org-num-mode]]
 
 * Description
 This layer does my personal additional layer. This layer is the main layer, which
@@ -168,3 +169,4 @@ tj3 xxx.tjp
 2. Type: M-x replace-string RET C-q C-m RET RET
 where "RET" means <press the return key> and C-q and C-m mean <hold the CTRL key and press the m (or q) key>.
 
+** org-num-mode

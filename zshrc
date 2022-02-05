@@ -217,7 +217,12 @@ alias unsethps="unset http_proxys"
 alias ganttlab="sudo docker run -p 8282:80 ganttlab/ganttlab"
 alias gitlab_time_report="cd ~/code/gitlab-time-report &&  GITLAB_URL="http://192.168.1.20" GITLAB_TOKEN="GAdXD8yPmRvfWyXX-6b7" npm start"
 
-alias gitlab_docker="docker run --detach --publish 443:443 --publish 80:80 --publish 2222:22 --name gitlab --restart unless-stopped -v /mnt/gitlab/etc:/etc/gitlab -v /mnt/gitlab/log:/var/log/gitlab -v /mnt/gitlab/data:/var/opt/gitlab gitlab/gitlab-ce"
+
+export GITLAB_HOME=$HOME/gitlab_mnt
+
+alias gitlab_docker="docker run --detach --publish 443:443 --publish 80:80 --publish 2222:22 --name gitlab --restart unless-stopped -v $GITLAB_HOME/config:/etc/gitlab -v $GITLAB_HOME/logs:/var/log/gitlab -v $GITLAB_HOME/data:/var/opt/gitlab --shm-size 256m gitlab/gitlab-ce"
+
+# alias gitlab_docker="docker run --detach --publish 443:443 --publish 80:80 --publish 2222:22 --name gitlab --restart unless-stopped -v /mnt/gitlab/etc:/etc/gitlab -v /mnt/gitlab/log:/var/log/gitlab -v /mnt/gitlab/data:/var/opt/gitlab gitlab/gitlab-ce"
 
 alias gitlab_run="docker run gitlab/gitlab-ce:latest"
 
@@ -320,4 +325,4 @@ export PATH=$PATH:${HOME}/bxgithub/myfile:/snap/bin/
 ###################### For ROS #########################
 #/usr/bin/setxkbmap -option "ctrl:swapcaps"
 source /opt/ros/noetic/setup.zsh
-# source /opt/ros/galactic/setup.zsh
+#source /opt/ros/galactic/setup.zsh

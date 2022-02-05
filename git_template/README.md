@@ -7,6 +7,7 @@ ln -s dir_to_git_template/.git-clone-init ~/.git-clone-init
 ln -s dir_to_git_template/.gitconfig ~/.gitconfig
 git config --global init.templatedir ~/.git_template
 git config --global commit.template ~/.git_templates/.gitmessage.txt
+git config --global core.excludefile ~/.git_template/.gitignore-global
 ```
 
 ## 2 brief
