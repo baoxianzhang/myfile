@@ -584,6 +584,10 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+  (require 'loadhist)
+  (file-dependents (feature-file 'cl))
+
+  (setq byte-compile-warnings '(cl-functions))
 
   (setq org-link-frame-setup (quote (file . find-file)))
   (setq org-link-frame-setup

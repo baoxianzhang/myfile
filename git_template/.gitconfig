@@ -9,7 +9,7 @@
 	template = ~/.git_template/.gitmessage.txt
 [user]
 	email = baoxianzhit@gmail.com
-	name = zhangbaoxian
+	name = bxzhang
 [magithub]
 	online = false
 [magithub "status"]

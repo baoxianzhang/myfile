@@ -320,7 +320,7 @@ export PATH=${CUDA_HOME}/bin:${PATH}
 # export PATH=$PATH:$TeXLivePATH
 
 #################### For some useful shell ############
-export PATH=$PATH:${HOME}/bxgithub/myfile:/snap/bin/
+export PATH=$PATH:${HOME}/bxgithub/myfile:/snap/bin/:/home/leo/Downloads/ExcelCompare-0.6.1
 
 ###################### For ROS #########################
 #/usr/bin/setxkbmap -option "ctrl:swapcaps"

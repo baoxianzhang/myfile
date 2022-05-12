@@ -38,3 +38,9 @@
              (when (file-exists-p file)
                (push file org-agenda-files)))
           (org-projectile-todo-files)))
+
+
+
+;; https://emacs.stackexchange.com/questions/58489/how-do-i-debug-package-cl-is-deprecated
+
+(setq byte-compile-warnings '(not cl-functions))
