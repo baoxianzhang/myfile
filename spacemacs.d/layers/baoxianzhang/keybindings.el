@@ -14,6 +14,9 @@
 (define-key evil-normal-state-map (kbd "C-]")   'xref-find-definitions)
 (define-key evil-normal-state-map (kbd "C-t")   'xref-find-references)
 
+;; NOTE
+;; good command evil-jump-backward, use default keybindings "C-o"
+
 
 (spacemacs/set-leader-keys "o y" 'youdao-dictionary-search-at-point+)
 (spacemacs/set-leader-keys "o d" 'find-by-pinyin-dired)

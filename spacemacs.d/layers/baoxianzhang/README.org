@@ -93,6 +93,11 @@ https://emacs-china.org/t/ccls-0-20190823-3-released/10342/20
 
 https://clangd.llvm.org/installation.html#project-setup
 
+| Key Binding | Description    |
+|-------------+----------------|
+| ~C-o~     | evil-jump-backward |
+| ~C-]~   | xref-find-definitions|
+
 
 ** shell
 Here use the `vterm` for the power of the emacs vterm.

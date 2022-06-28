@@ -53,22 +53,20 @@ This function should only modify configuration layer settings."
    dotspacemacs-additional-packages '(
                                       ;; Aesthetics
                                       doom-themes
-                                      org-bullets
                                       olivetti
                                       ;; For writing
                                       writegood-mode
                                       langtool
-                                      ;; For org-drill
-                                      ;; org-plus-contrib
                                       ;; For defining nice org-capture templates
                                       org-starter
                                       dash
                                       dash-functional
-                                      org-reverse-datetree
+
                                       ;; For annotating PDFs
                                       org-noter
                                       ;; For making a kanban from TODO entries
                                       org-kanban
+                                      org-bullets
                                       )
 
    ;; A list of packages that cannot be updated.
@@ -584,80 +582,18 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+
+  ;; suppress the cl package warning
   (require 'loadhist)
   (file-dependents (feature-file 'cl))
-
   (setq byte-compile-warnings '(cl-functions))
 
-  (setq org-link-frame-setup (quote (file . find-file)))
-  (setq org-link-frame-setup
-        (quote
-         ((file . find-file)
-          (vm . vm-visit-folder-other-frame)
-          (vm-imap . vm-visit-imap-folder-other-frame)
-          (gnus . org-gnus-no-new-news)
-          (wl . wl-other-frame))))
-
-
-  (setq org-agenda-window-setup (quote current-window))
-  ;; To add all org files in a repository to the agenda
-  (setq org-agenda-files (directory-files-recursively "~/bxgithub/org/" "\.org$"))
-  ;; Set task-related keywords
-  (setq org-todo-keywords
-        '((sequence "IDEA(i)" "TODO(t)" "PROGRESS(p)" "REVIEW(r)" "|" "DONE(d)" )
-          ;; (sequence "MEETING(m)" "|" "MET(M)")
-          ))
-  ;; Start agenda on current day instead of Monday
-  (setq org-agenda-start-on-weekday nil)
-  ;; Ignore scheduled tasks and tasks with a deadline in task list view (SPC m a t)
-  (setq org-agenda-todo-ignore-with-date t)
-  ;; Skip finished items
-  (setq org-agenda-skip-deadline-if-done t)
-  (setq org-agenda-skip-scheduled-if-done t)
-  (setq org-agenda-skip-timestamp-if-done t)
-  ;; Skip deleted files
-  (setq org-agenda-skip-unavailable-files t)
-
-  ;; ;; Deft-related
-  ;; (setq deft-directory "~/bxgithub/org")
-  ;; (setq deft-extensions '("org"))
-  ;; (setq deft-recursive t)
-
-
-  ;; Org-Capture templates
-  (setq org-capture-templates
-        (quote (
-                ("n" "Notes" entry
-                 (file+function "~/bxgithub/org/note.org" org-reverse-datetree-goto-date-in-file)
-                 "* %^{Description} %^g
-  Added: %t
-  %?
-
- ")
-
-                ("t" "Task" entry
-                 (file+function "~/bxgithub/org/task.org" org-reverse-datetree-goto-date-in-file)
-                 "* TODO %^{Description} %^gkanban:
-  Added: %t
-  SCHEDULED: %^{Date}T
-  %?
-
- ")
-
-                ("m" "Meeting" entry
-                 (file+headline "~/bxgithub/org/meeting.org" "Meetings/People-related")
-                 "** MEETING %^{Description} %^g
-  SCHEDULED: %^{Date}T
-  %?
-
-")
-
-                ("l" "Log Time" entry
-                 (file+function "~/bxgithub/org/log.org" org-reverse-datetree-goto-date-in-file)
-                 "** %U - %^{Activity}  %^g"
-                 :immediate-finish t)
-                )))
-
+  (with-eval-after-load 'org-agenda
+    (require 'org-projectile)
+    (mapcar '(lambda (file)
+               (when (file-exists-p file)
+                 (push file org-agenda-files)))
+            (org-projectile-todo-files)))
 
   (add-hook 'org-mode-hook (lambda ()
                              "Beautify Org Checkbox Symbol"
@@ -665,31 +601,9 @@ before packages are loaded."
                              (push '("[X]" . "☑" ) prettify-symbols-alist)
                              (push '("[-]" . "❍" ) prettify-symbols-alist)
                              (prettify-symbols-mode)))
-  (defface org-checkbox-done-text
-    '((t (:foreground "#71696A")))
-    "Face for the text part of a checked org-mode checkbox.")
-
-
-  ;; Makes some things look nicer
-  (setq org-startup-indented t
-        org-pretty-entities t
-        ;; show actually italicized text instead of /italicized text/
-        org-hide-emphasis-markers t
-        org-agenda-block-separator ""
-        org-fontify-whole-heading-line t
-        org-fontify-done-headline t
-        org-fontify-quote-and-verse-blocks t)
-
-
-  (setq org-plantuml-jar-path "~/bxgithub/plantuml.jar")
-
   ;; evil-redirect-digit-argument removed from evil
   ;; https://github.com/Somelauw/evil-org-mode/issues/93
   ;; (fset 'evil-redirect-digit-argument 'ignore) ;; before evil-org loaded
-
-  ;; (add-to-list 'evil-digit-bound-motions 'evil-org-beginning-of-line)
-  ;; (evil-define-key 'motion 'evil-org-mode
-  ;;   (kbd "0") 'evil-org-beginning-of-line)
 
   )
 
@@ -701,19 +615,19 @@ before packages are loaded."
 This is an auto-generated function, do not modify its content directly, use
 Emacs customize menu instead.
 This function is called at the very end of Spacemacs initialization."
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(evil-want-Y-yank-to-eol nil)
- '(package-selected-packages
-   '(plantuml-mode web-beautify tern prettier-js npm-mode nodejs-repl livid-mode skewer-mode js2-refactor multiple-cursors js2-mode js-doc import-js grizzl impatient-mode simple-httpd helm-gtags ggtags counsel-gtags counsel swiper ivy add-node-modules-path typit mmt sudoku selectric-mode pacmacs 2048-game yasnippet-snippets unfill treemacs-magit smeargle orgit-forge orgit org-rich-yank org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-contrib org org-cliplink mwim mmm-mode markdown-toc htmlize helm-org-rifle helm-gitignore helm-git-grep helm-company helm-c-yasnippet gnuplot gitignore-templates gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe fringe-helper git-gutter gh-md fuzzy forge yaml markdown-mode magit ghub closql emacsql-sqlite emacsql treepy magit-section git-commit with-editor transient flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip evil-org company browse-at-remote auto-yasnippet yasnippet auto-dictionary ac-ispell auto-complete lv ws-butler writeroom-mode winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org symon symbol-overlay string-inflection string-edit spaceline-all-the-icons restart-emacs request rainbow-delimiters quickrun popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless multi-line macrostep lorem-ipsum link-hint inspector info+ indent-guide hybrid-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-ls-git helm-flx helm-descbinds helm-ag google-translate golden-ratio font-lock+ flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav editorconfig dumb-jump drag-stuff dotenv-mode dired-quick-sort diminish define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile aggressive-indent ace-link ace-jump-helm-line))
- '(paradox-github-token t))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-)
+  (custom-set-variables
+   ;; custom-set-variables was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   '(evil-want-Y-yank-to-eol nil)
+   '(package-selected-packages
+     '(plantuml-mode web-beautify tern prettier-js npm-mode nodejs-repl livid-mode skewer-mode js2-refactor multiple-cursors js2-mode js-doc import-js grizzl impatient-mode simple-httpd helm-gtags ggtags counsel-gtags counsel swiper ivy add-node-modules-path typit mmt sudoku selectric-mode pacmacs 2048-game yasnippet-snippets unfill treemacs-magit smeargle orgit-forge orgit org-rich-yank org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-contrib org org-cliplink mwim mmm-mode markdown-toc htmlize helm-org-rifle helm-gitignore helm-git-grep helm-company helm-c-yasnippet gnuplot gitignore-templates gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe fringe-helper git-gutter gh-md fuzzy forge yaml markdown-mode magit ghub closql emacsql-sqlite emacsql treepy magit-section git-commit with-editor transient flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip evil-org company browse-at-remote auto-yasnippet yasnippet auto-dictionary ac-ispell auto-complete lv ws-butler writeroom-mode winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org symon symbol-overlay string-inflection string-edit spaceline-all-the-icons restart-emacs request rainbow-delimiters quickrun popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless multi-line macrostep lorem-ipsum link-hint inspector info+ indent-guide hybrid-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-ls-git helm-flx helm-descbinds helm-ag google-translate golden-ratio font-lock+ flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav editorconfig dumb-jump drag-stuff dotenv-mode dired-quick-sort diminish define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile aggressive-indent ace-link ace-jump-helm-line))
+   '(paradox-github-token t))
+  (custom-set-faces
+   ;; custom-set-faces was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   )
+  )
