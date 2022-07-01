@@ -165,6 +165,7 @@ alias cdcaffe='cd ~/code/SegNet/caffe-segnet-cudnn5/'
 alias xmind="$( cd $( dirname "$0") && pwd ); cd ~/Software/xmind-8-update9-linux/XMind_amd64/; ./XMind; cd $THISDIR "
 alias data='cd ~/Projects/data/'
 alias filter='cd ~/Projects/filter_ws/'
+alias cmake="cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=YES"
 #alias matlab='sudo /usr/local/MATLAB/R2018a/bin/matlab'
 #alias matlab='sudo ln -s /usr/local/MATLAB/R2018a/bin/matlab /usr/local/bin/matlab'
 # alias rsview='THISDIR=$( cd "$( dirname "$0")" && pwd ); cd ~/Software/rsview/; ./run_rsview.sh; cd $THISDIR'

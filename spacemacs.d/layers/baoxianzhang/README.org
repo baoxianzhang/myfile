@@ -175,3 +175,14 @@ tj3 xxx.tjp
 where "RET" means <press the return key> and C-q and C-m mean <hold the CTRL key and press the m (or q) key>.
 
 ** org-num-mode
+
+
+#+BEGIN_SRC register
+  // a-z：都可以用作寄存器名。"ayy把当前行的内容放入a寄存器。
+  // A-Z：用大写字母索引寄存器，可以在寄存器中追加内容。 如"Ayy把当前行的内容追加到a寄存器中。
+  // :reg 显示所有寄存器的内容。
+  // ""：不加寄存器索引时，默认使用的寄存器。
+  // "*：当前选择缓冲区，"*yy把当前行的内容放入当前选择缓冲区。
+  /// / "+：系统剪贴板。"+yy把当前行的内容放入系统剪贴板
+#+END_SRC
+

@@ -21,7 +21,10 @@
    emacs-lisp
    git
    helm
-   markdown
+   (markdown :variables
+             markdown-live-preview-engine 'vmd ;; sudo npm install -g vmd
+             )
+   eww
    multiple-cursors
    (chinese :variables
             chinese-enable-youdao-dict t
@@ -143,6 +146,10 @@
         org-plantuml-jar-path "~/bxgithub/plantuml.jar"
         )
 
+   (deft :variable
+     deft-zetteldeft t
+     )
+
 
    javascript
    html
@@ -172,16 +179,18 @@
    version-control
    games
    treemacs
-   shell
-   ;; (shell :variables
-   ;;  shell-default-shell 'vterm
-   ;;  )
+   (shell :variables
+    ;; shell-default-shell 'ansi-term
+    shell-default-term-shell "/bin/zsh"
+    ;; shell-enable-smart-eshell t
+    )
    python
    version-control
    yaml
    csv
    latex
    cmake
+   pdf
    ;; xkcd
    ;; (plantuml :variables
    ;;           plantuml-jar-path "~/bxgithub/plantuml.jar"
