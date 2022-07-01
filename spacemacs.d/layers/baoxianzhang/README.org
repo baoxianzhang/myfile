@@ -16,6 +16,8 @@
 - [[#good-command][Good Command]]
   - [[#remove-ctrl-m-characters-from-a-file-in-unix][Remove CTRL-M characters from a file in UNIX]]
   - [[#org-num-mode][org-num-mode]]
+  - [[#vim-register][vim register]]
+  - [[#export-from-org-to-markdown-in-spacemacs][Export from Org to Markdown in Spacemacs]]
 
 * Description
 This layer does my personal additional layer. This layer is the main layer, which
@@ -166,8 +168,9 @@ sudo gem install taskjuggler
 sudo apt install tj3
 tj3 xxx.tjp
 
-
-
+installinstall
+install
+installinstall
 * Good Command
 ** Remove CTRL-M characters from a file in UNIX
 1. Go to the beginning of the document.
@@ -176,13 +179,27 @@ where "RET" means <press the return key> and C-q and C-m mean <hold the CTRL key
 
 ** org-num-mode
 
+** vim register
+https://blog.csdn.net/prike/article/details/79088791
+https://www.jianshu.com/p/80bc31f096ba
 
 #+BEGIN_SRC register
-  // a-z：都可以用作寄存器名。"ayy把当前行的内容放入a寄存器。
-  // A-Z：用大写字母索引寄存器，可以在寄存器中追加内容。 如"Ayy把当前行的内容追加到a寄存器中。
-  // :reg 显示所有寄存器的内容。
-  // ""：不加寄存器索引时，默认使用的寄存器。
-  // "*：当前选择缓冲区，"*yy把当前行的内容放入当前选择缓冲区。
-  /// / "+：系统剪贴板。"+yy把当前行的内容放入系统剪贴板
+1. The unnamed register ""                                         缓存最后一次操作内容；
+2. 10 numbered registers "0 to "9                                  缓存最近操作内容，复制与删除有别, "0寄存器缓存最近一次复制的内容，"1-"9缓存最近9次删除内容;
+3. The small delete register "-                                    缓存行内删除内容;
+4. 26 named registers "a to "z or "A to "Z                         指定时可用; 用小写字母引用有名寄存器，会覆盖该寄存器的原有内容。 用大写字母引用有名寄存器, 会将新内容添加到原有内容之后;
+5. four read-only registers ":, "., "% and "#                      分别缓存最近命令、最近插入文本、当前文件名、当前交替文件名;
+6. the expression register "=                                      用于执行表达式命令
+7. The selection and drop registers "*, "+ and "~                  存取GUI选择文本，可用于与外部应用交互，使用前提为系统剪切板（clipboard）可用；
+8. The black hole register "_                                      存取GUI选择文本，可用于与外部应用交互，使用前提为系统剪切板（clipboard）可用；
+9. Last search pattern register "/                                 缓存最近的搜索模式;
+
+:help registers                                                    官方文档
+:reg                                                               查询一下目前寄存器的情况
+
+如果想把当前单词复制到寄存器 a 中， 可以执行 "ayiw 。
+把当前整行文本剪切到寄存器 b 中， 可以执行 "bdd 
 #+END_SRC
 
+** Export from Org to Markdown in Spacemacs
+https://dev.to/roeeyn/export-from-org-to-markdown-in-spacemacs-1dab
