@@ -74,64 +74,6 @@
         org-ref-default-bibliography '("~/bxgithub/org/org_roam/papers/references.bib")
         org-ref-pdf-directory "~/bxgithub/org/org_roam/papers/pdfs/"
 
-        org-agenda-window-setup (quote current-window)
-        ;; To add all org files in a repository to the agenda
-        org-agenda-files (directory-files-recursively "~/bxgithub/org/" "\.org$")
-        org-persp-startup-with-agenda "a"
-
-        ;; Start agenda on current day instead of Monday
-        org-agenda-start-on-weekday nil
-        org-todo-keywords
-        '((sequence "IDEA(i)" "TODO(t)" "PROGRESS(p)" "REVIEW(r)" "|" "DONE(d)" )
-          )
-        org-todo-keyword-faces '(("TODO" . org-warning)
-                                 ("PROGRESS" . "#E35DBF")
-                                 ("CANCELED" . (:foreground "white" :background "#4d4d4d" :weight bold))
-                                 ("REVIEW" . "pink")
-                                 ("DONE" . "#008080")
-                                 )
-
-        ;; Skip finished items
-        ;; (setq org-agenda-skip-deadline-if-done t)
-        ;; (setq org-agenda-skip-scheduled-if-done t)
-        ;; (setq org-agenda-skip-timestamp-if-done t)
-
-        ;; Skip deleted files
-        org-agenda-skip-unavailable-files t
-
-        ;; Org-Capture templates
-        org-capture-templates
-        (quote (
-                ("n" "Notes" entry
-                 (file+function "~/bxgithub/org/note.org" org-reverse-datetree-goto-date-in-file)
-                 "* %^{Description} %^g
-  Added: %t
-  %?
-
- ")
-
-                ("t" "Task" entry
-                 (file+function "~/bxgithub/org/task.org" org-reverse-datetree-goto-date-in-file)
-                 "* TODO %^{Description} %^gkanban:
-  Added: %t
-  SCHEDULED: %^{Date}T
-  %?
-
- ")
-
-                ("m" "Meeting" entry
-                 (file+headline "~/bxgithub/org/meeting.org" "Meetings/People-related")
-                 "** MEETING %^{Description} %^g
-  SCHEDULED: %^{Date}T
-  %?
-
-")
-
-                ("l" "Log Time" entry
-                 (file+function "~/bxgithub/org/log.org" org-reverse-datetree-goto-date-in-file)
-                 "** %U - %^{Activity}  %^g"
-                 :immediate-finish t)
-                ))
 
         ;; Makes some things look nicer
         org-startup-indented t
@@ -180,10 +122,10 @@
    games
    treemacs
    (shell :variables
-    ;; shell-default-shell 'ansi-term
-    shell-default-term-shell "/bin/zsh"
-    ;; shell-enable-smart-eshell t
-    )
+          ;; shell-default-shell 'ansi-term
+          shell-default-term-shell "/bin/zsh"
+          ;; shell-enable-smart-eshell t
+          )
    python
    version-control
    yaml

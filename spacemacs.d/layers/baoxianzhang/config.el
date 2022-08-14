@@ -44,3 +44,84 @@
 ;; https://emacs.stackexchange.com/questions/58489/how-do-i-debug-package-cl-is-deprecated
 
 (setq byte-compile-warnings '(not cl-functions))
+
+;; self org config
+(setq org-agenda-window-setup (quote current-window) )
+(setq org-columns-default-format "%40ITEM(Task) %Effort(EE){:} %CLOCKSUM(Time Spent) %SCHEDULED(Scheduled) %DEADLINE(Deadline)")
+
+
+;; Files
+(setq org-directory "~/bxgithub/org")
+(setq org-agenda-files (directory-files-recursively "~/bxgithub/org/" "\.org$") )
+(setq org-persp-startup-with-agenda "a")
+(setq org-agenda-start-on-weekday 1)
+(setq org-agenda-skip-unavailable-files t)
+
+;; TODO
+(setq org-todo-keywords
+      '((sequence "TODO(t)" "NEXT(n)" "HOLD(h)" "|" "DONE(d)")))
+(add-hook 'org-after-todo-state-change-hook #'log-todo-next-creation-date)
+
+(setq org-todo-keyword-faces '(("TODO" . org-warning)
+                         ("NEXT" . "#E35DBF")
+                         ("HOLD" . (:foreground "white" :background "#4d4d4d" :weight bold))
+                         ("DONE" . "#008080")
+                         )
+      )
+
+
+;; Capture
+(setq org-capture-templates
+      `(("i" "Inbox" entry  (file "~/bxgithub/org/inbox.org")
+        ,(concat "* TODO %?\n"
+                 "/Entered on/ %U"))
+        ("m" "Meeting" entry  (file+headline "~/bxgithub/org/agenda.org" "Future")
+        ,(concat "* %? :meeting:\n"
+                 "<%<%Y-%m-%d %a %H:00>>"))
+        ("n" "Note" entry  (file "~/bxgithub/org/notes.org")
+        ,(concat "* Note (%a)\n"
+                 "/Entered on/ %U\n" "\n" "%?"))
+        )
+      )
+
+;; Use full window for org-capture
+(add-hook 'org-capture-mode-hook 'delete-other-windows)
+
+;; Refile
+(setq org-refile-use-outline-path 'file)
+(setq org-outline-path-complete-in-steps nil)
+(setq org-refile-targets
+      '(("projects.org" :regexp . "\\(?:\\(?:Note\\|Task\\)s\\)")))
+
+;; Agenda
+(setq org-agenda-custom-commands
+      '(("g" "Get Things Done (GTD)"
+         ((agenda ""
+                  ((org-agenda-skip-function
+                    '(org-agenda-skip-entry-if 'deadline))
+                   (org-deadline-warning-days 0)))
+          (todo "NEXT"
+                ((org-agenda-skip-function
+                  '(org-agenda-skip-entry-if 'deadline))
+                 (org-agenda-prefix-format "  %i %-12:c [%e] ")
+                 (org-agenda-overriding-header "\nTasks\n")))
+          (agenda nil
+                  ((org-agenda-entry-types '(:deadline))
+                   (org-agenda-format-date "")
+                   (org-deadline-warning-days 7)
+                   (org-agenda-skip-function
+                    '(org-agenda-skip-entry-if 'notregexp "\\* NEXT"))
+                   (org-agenda-overriding-header "\nDeadlines")))
+          (tags-todo "inbox"
+                     ((org-agenda-prefix-format "  %?-12t% s")
+                      (org-agenda-overriding-header "\nInbox\n")))
+          (tags "CLOSED>=\"<today>\""
+                ((org-agenda-overriding-header "\nCompleted today\n")))))))
+
+
+(setq org-log-done 'time)
+
+;; Add it after refile
+(advice-add 'org-refile :after
+	          (lambda (&rest _)
+	            (gtd-save-org-buffers)))
