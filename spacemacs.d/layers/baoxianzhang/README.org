@@ -153,6 +153,9 @@ configure-block
 + present
   https://geeksocket.in/posts/presentations-org-emacs/
 + column view
+   C-c C-x C-c (org-columns)
+   r or g on a columns view line (org-columns-redo)
+   C-c C-x x org-dynamic-block-insert-dblock selected columnview
   https://brantou.github.io/2017/04/14/org-column-view-tutorial/
   S-left/right: cycle through possible value
              e: edit the value
