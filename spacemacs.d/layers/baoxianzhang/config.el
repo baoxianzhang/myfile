@@ -51,72 +51,62 @@
 
 
 ;; Files
-(setq org-directory "~/bxgithub/org")
-(setq org-agenda-files (directory-files-recursively "~/bxgithub/org/" "\.org$") )
+(setq org-directory "~/bxgithub/gtd")
+(setq org-agenda-files (directory-files-recursively "~/bxgithub/gtd/" "\.org$") )
 (setq org-persp-startup-with-agenda "a")
 (setq org-agenda-start-on-weekday 1)
 (setq org-agenda-skip-unavailable-files t)
 
 ;; TODO
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "NEXT(n)" "HOLD(h)" "|" "DONE(d)")))
-(add-hook 'org-after-todo-state-change-hook #'log-todo-next-creation-date)
+      '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")))
 
 (setq org-todo-keyword-faces '(("TODO" . org-warning)
                          ("NEXT" . "#E35DBF")
-                         ("HOLD" . (:foreground "white" :background "#4d4d4d" :weight bold))
                          ("DONE" . "#008080")
-                         )
-      )
-
+                         ))
 
 ;; Capture
 (setq org-capture-templates
-      `(("i" "Inbox" entry  (file "~/bxgithub/org/inbox.org")
+      `(("i" "Inbox" entry  (file "~/bxgithub/gtd/inbox.org")
         ,(concat "* TODO %?\n"
-                 "/Entered on/ %U"))
-        ("m" "Meeting" entry  (file+headline "~/bxgithub/org/agenda.org" "Future")
+                 "Entered on %U"))
+        ("m" "Meeting" entry  (file+headline "~/bxgithub/gtd/agenda.org" "Future")
         ,(concat "* %? :meeting:\n"
                  "<%<%Y-%m-%d %a %H:00>>"))
-        ("n" "Note" entry  (file "~/bxgithub/org/notes.org")
+        ("n" "Note" entry  (file "~/bxgithub/gtd/notes.org")
         ,(concat "* Note (%a)\n"
-                 "/Entered on/ %U\n" "\n" "%?"))
+                 "Entered on %U\n" "\n" "%?"))
         )
       )
 
 ;; Use full window for org-capture
-(add-hook 'org-capture-mode-hook 'delete-other-windows)
+;; (add-hook 'org-capture-mode-hook 'delete-other-windows)
+(add-hook 'org-after-todo-state-change-hook #'log-todo-next-creation-date)
 
 ;; Refile
 (setq org-refile-use-outline-path 'file)
 (setq org-outline-path-complete-in-steps nil)
 (setq org-refile-targets
-      '(("projects.org" :regexp . "\\(?:\\(?:Note\\|Task\\)s\\)")))
+      '(("project.org" :regexp . "\\(?:\\(?:Note\\|Task\\)\\)")))
 
 ;; Agenda
 (setq org-agenda-custom-commands
       '(("g" "Get Things Done (GTD)"
          ((agenda ""
-                  ((org-agenda-skip-function
-                    '(org-agenda-skip-entry-if 'deadline))
-                   (org-deadline-warning-days 0)))
+                  ;; (org-agenda-skip-function '(org-agenda-skip-entry-if 'deadline))
+                  ((org-deadline-warning-days 7)
+                   ))
           (todo "NEXT"
-                ((org-agenda-skip-function
-                  '(org-agenda-skip-entry-if 'deadline))
+                (
+                 ;; (org-agenda-skip-function '(org-agenda-skip-entry-if 'deadline))
                  (org-agenda-prefix-format "  %i %-12:c [%e] ")
-                 (org-agenda-overriding-header "\nTasks\n")))
-          (agenda nil
-                  ((org-agenda-entry-types '(:deadline))
-                   (org-agenda-format-date "")
-                   (org-deadline-warning-days 7)
-                   (org-agenda-skip-function
-                    '(org-agenda-skip-entry-if 'notregexp "\\* NEXT"))
-                   (org-agenda-overriding-header "\nDeadlines")))
+                 (org-agenda-overriding-header "Tasks")))
           (tags-todo "inbox"
                      ((org-agenda-prefix-format "  %?-12t% s")
-                      (org-agenda-overriding-header "\nInbox\n")))
+                      (org-agenda-overriding-header "Inbox")))
           (tags "CLOSED>=\"<today>\""
-                ((org-agenda-overriding-header "\nCompleted today\n")))))))
+                ((org-agenda-overriding-header "Completed today")))))))
 
 
 (setq org-log-done 'time)
@@ -125,3 +115,52 @@
 (advice-add 'org-refile :after
 	          (lambda (&rest _)
 	            (gtd-save-org-buffers)))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;org-roam;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(setq org-enable-org-brain-support t)
+;; (setq org-brain-path "~/bxgithub/org/org_brain/")
+(setq org-enable-roam-support t)
+(setq org-enable-roam-server t)
+(setq org-enable-roam-protocal t)
+(setq org-roam-directory "~/bxgithub/braindump/org")
+(setq org-fc-directories '("~/bxgithub/braindump/") )
+(setq org-ref-default-bibliography '("~/bxgithub/braindump/org/biblio.bib") )
+(setq org-ref-pdf-directory "~/bxgithub/braindump/org/pdf/" )
+(setq org-roam-directory (file-truename "~/bxgithub/braindump/org/")
+      ;; org-roam-database-connector 'sqlite-builtin
+      ;; org-roam-db-gc-threshold most-positive-fixnum
+      ;; org-id-link-to-org-use-id t
+      )
+
+(setq org-roam-capture-templates
+      '(("m" "main" plain
+         "%?"
+         :if-new (file+head "main/${slug}.org"
+                            "#+title: ${title}\n")
+         :immediate-finish t
+         :unnarrowed t)
+        ("r" "reference" plain "%?"
+         :if-new
+         (file+head "reference/${slug}.org" "#+title: ${title}\n")
+         :immediate-finish t
+         :unnarrowed t)
+        ("a" "article" plain "%?"
+         :if-new
+         (file+head "articles/${slug}.org" "#+title: ${title}\n#+filetags: :article:\n")
+         :immediate-finish t
+         :unnarrowed t)))
+
+
+;; (setq org-roam-node-display-template
+;;         (concat "${type:15} ${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; chinese calendar ;;;;;;;;;;;;
+;; (setq mark-holidays-in-calendar t)
+;; (setq cal-china-x-important-holidays cal-china-x-chinese-holidays)
+;; (setq cal-china-x-general-holidays '((holiday-lunar 1 15 "元宵节")))
+;; (setq calendar-holidays
+;;       (append cal-china-x-important-holidays
+;;               cal-china-x-general-holidays
+;;               other-holidays))

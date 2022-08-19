@@ -93,10 +93,33 @@
 See also `org-save-all-org-buffers'"
   (interactive)
   (message "Saving org-agenda-files buffers...")
-  (save-some-buffers t (lambda () 
-			                   (when (member (buffer-file-name) org-agenda-files) 
+  (save-some-buffers t (lambda ()
+			                   (when (member (buffer-file-name) org-agenda-files)
 			                     t)))
   (message "Saving org-agenda-files buffers... done"))
 
 
+;; Save the corresponding buffers
+(defun open-self-layers-file()
+  "Open the layers.el file"
+  (interactive)
+  (message "open self layer file ...")
+  (find-file "~/bxgithub/myfile/spacemacs.d/layers/baoxianzhang/layers.el")
+  (message "Done"))
 
+;; diary for chinese birthday
+;; https://emacs-china.org/t/topic/2119/14
+;; %%(diary-chinese-anniversary 7 29 1988) LEO is %d years old
+;; (defun my-diary-chinese-anniversary (lunar-month lunar-day &optional year mark)
+;;   (let* ((ddate (diary-make-date lunar-month lunar-day year))
+;;          (dd (calendar-extract-day ddate))
+;;          (mm (calendar-extract-month ddate))
+;;          (yy (calendar-extract-year ddate))
+;;          (a-date (calendar-absolute-from-gregorian date))
+;;          (c-date (calendar-chinese-from-absolute a-date))
+;;          (mm2 (nth 2 c-date))
+;;          (dd2 (nth 3 c-date))
+;;          (y (calendar-extract-year date))
+;;          (diff (if year (- y year) 100)))
+;;     (and (> diff 0) (= mm mm2) (= dd dd2)
+;;          (cons mark (format entry diff (diary-ordinal-suffix diff))))))

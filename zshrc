@@ -289,6 +289,7 @@ export TERM=xterm-256color
 
 
 ###################### For EMACS Chinese Input ######################
+# https://emacs-china.org/t/topic/974/9
 export LC_CTYPE=zh_CN.UTF-8
 
 ###################### For GTAGS ######################

@@ -47,33 +47,8 @@
         org-enable-verb-support t
         org-enable-asciidoc-support t
 
-        ;; contacts
-        org-enable-org-contacts-support t
-        org-contacts-files '("~/bxgithub/org/contacts.org")
-
-        ;; journal
-        org-enable-org-journal-support t
-        org-journal-dir "~/bxgithub/org/journal/"
-        org-journal-file-format "%Y-%m-%d"
-        org-journal-date-prefix "#+TITLE: "
-        org-journal-date-format "%A, %B %d %Y"
-        org-journal-time-prefix "* "
-        org-journal-time-format ""
-        org-journal-enable-agenda-integration t
-
         ;; TODO add absolute path
         org-projectile-file "TODOs.org"
-
-        org-enable-org-brain-support t
-        org-brain-path "~/bxgithub/org/org_brain/"
-        org-enable-roam-support t
-        org-enable-roam-server t
-        org-enable-roam-protocal t
-        org-roam-directory "~/bxgithub/org/org_roam/"
-        org-fc-directories '("~/bxgithub/org/org_roam/")
-        org-ref-default-bibliography '("~/bxgithub/org/org_roam/papers/references.bib")
-        org-ref-pdf-directory "~/bxgithub/org/org_roam/papers/pdfs/"
-
 
         ;; Makes some things look nicer
         org-startup-indented t

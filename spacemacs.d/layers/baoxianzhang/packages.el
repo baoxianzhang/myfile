@@ -30,7 +30,13 @@
 ;;; Code:
 
 (defconst baoxianzhang-packages
-  '(hideif)
+  '(hideif
+    ;; (cal-china-x :location (recipe
+    ;;                        :fetcher melpa
+    ;;                        :repo "xwl/cal-china-x"))
+  )
+
+
   "The list of Lisp packages required by the baoxianzhang layer.
 
 Each entry is either:
@@ -56,7 +62,8 @@ Each entry is either:
         `./local/PACKAGE/PACKAGE.el'
 
       - A list beginning with the symbol `recipe' is a melpa
-        recipe.  See: https://github.com/milkypostman/melpa#recipe-format")
+        recipe.  See: https://github.com/milkypostman/melpa#recipe-format"
+  )
 
 
 
@@ -106,3 +113,11 @@ Each entry is either:
               )
     )
   )
+
+;; (defun baoxianzhang/init-cal-china-x ()
+;;   (use-package
+;;     cal-china-x
+;;     :config (progn
+;;               )
+;;     )
+;;   )

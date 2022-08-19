@@ -30,9 +30,9 @@ file.
 
 * Key bindings
 
-| Key Binding | Description    |
-|-------------+----------------|
-| ~SPC x x x~ | Does thing01   |
+| Key Binding | Description  |
+|-------------+--------------|
+| C-o         | evil-jump-backward |
 
 * Configuration
 ** c-c++
@@ -110,6 +110,10 @@ Add the line in your shell config, e.g. ~/.zshrc.
 #+BEGIN_SRC sh
   export LC_CTYPE=zh_CN.UTF-8
 #+END_SRC
+
+如果一个非 UTF-8 编码, 比如 GBK 编码的文件打开, 可能 Emacs 会乱码, 这时候 M-x revert-buffer-with-coding-system 选择 gbk 即可.
+
+一般在 windows 下的文件，直接在 ubuntu 下的 emacs 打开也是没有问题。
 
 
 * Good doc
