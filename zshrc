@@ -328,3 +328,7 @@ export PATH=$PATH:${HOME}/bxgithub/myfile:/snap/bin/:/home/leo/Downloads/ExcelCo
 #/usr/bin/setxkbmap -option "ctrl:swapcaps"
 source /opt/ros/noetic/setup.zsh
 #source /opt/ros/galactic/setup.zsh
+#
+## fast github
+## git config --global url."https://hub.fastgit.xyz/".insteadOf "https://github.com/"
+## git config protocol.https.allow always

@@ -108,18 +108,50 @@ See also `org-save-all-org-buffers'"
   (message "Done"))
 
 ;; diary for chinese birthday
+;; https://emacs-china.org/t/topic/2119/22?page=2
 ;; https://emacs-china.org/t/topic/2119/14
 ;; %%(diary-chinese-anniversary 7 29 1988) LEO is %d years old
-;; (defun my-diary-chinese-anniversary (lunar-month lunar-day &optional year mark)
-;;   (let* ((ddate (diary-make-date lunar-month lunar-day year))
-;;          (dd (calendar-extract-day ddate))
-;;          (mm (calendar-extract-month ddate))
-;;          (yy (calendar-extract-year ddate))
-;;          (a-date (calendar-absolute-from-gregorian date))
-;;          (c-date (calendar-chinese-from-absolute a-date))
-;;          (mm2 (nth 2 c-date))
-;;          (dd2 (nth 3 c-date))
-;;          (y (calendar-extract-year date))
-;;          (diff (if year (- y year) 100)))
-;;     (and (> diff 0) (= mm mm2) (= dd dd2)
-;;          (cons mark (format entry diff (diary-ordinal-suffix diff))))))
+;; need cal-china, otherwise occur bad sexp problem
+;; below my-diary-chinese-anniversary1 and 2 is not work, show bad sexp problem
+(defun my-diary-chinese-anniversary (lunar-month lunar-day &optional year mark)
+  (let* ((ddate (diary-make-date lunar-month lunar-day year))
+         (dd (calendar-extract-day ddate))
+         (mm (calendar-extract-month ddate))
+         (yy (calendar-extract-year ddate))
+         (a-date (calendar-absolute-from-gregorian date))
+         (c-date (calendar-chinese-from-absolute a-date))
+         (mm2 (nth 2 c-date))
+         (dd2 (nth 3 c-date))
+         (y (calendar-extract-year date))
+         (diff (if year (- y year) 100)))
+    (and (> diff 0) (= mm mm2) (= dd dd2)
+         (cons mark (format entry diff (diary-ordinal-suffix diff))))))
+
+;; ;; diary for chinese birthday
+;; (defun my-diary-chinese-anniversary1 (lunar-month lunar-day &optional year mark)
+;;   (if year
+;;       (let* ((d-date (diary-make-date lunar-month lunar-day year))
+;;              (a-date (calendar-absolute-from-gregorian d-date))
+;;              (c-date (calendar-chinese-from-absolute a-date))
+;;              (date a-date)
+;;              (cycle (car c-date))
+;;              (yy (cadr c-date))
+;;              (y (+ (* 100 cycle) yy)))
+;;         (diary-chinese-anniversary lunar-month lunar-day y mark))
+;;     (diary-chinese-anniversary lunar-month lunar-day year mark)))
+
+
+;; ;; diary for chinese birthday
+;; ;; 我这里calendar-date-style默认是’iso，会出现 Bad sexp at line 2错误，在let里将calendar-date-style改成american后正常。
+;; (defun my-diary-chinese-anniversary2 (lunar-month lunar-day &optional year mark)
+;;   (if year
+;;       (let* ((calendar-date-style 'american)
+;;              (d-date (diary-make-date lunar-month lunar-day year))
+;;              (a-date (calendar-absolute-from-gregorian d-date))
+;;              (c-date (calendar-chinese-from-absolute a-date))
+;;              (date a-date)
+;;              (cycle (car c-date))
+;;              (yy (cadr c-date))
+;;              (y (+ (* 100 cycle) yy)))
+;;         (diary-chinese-anniversary lunar-month lunar-day y mark))
+;;     (diary-chinese-anniversary lunar-month lunar-day year mark)))

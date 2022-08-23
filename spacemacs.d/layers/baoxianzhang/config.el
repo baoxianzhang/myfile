@@ -155,12 +155,19 @@
 ;; (setq org-roam-node-display-template
 ;;         (concat "${type:15} ${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
 
+(setq chinese-calendar-celestial-stem
+      ["甲" "乙" "丙" "丁" "戊" "己" "庚" "辛" "壬" "癸"]
+      chinese-calendar-terrestrial-branch
+      ["子" "丑" "寅" "卯" "辰" "巳" "午" "未" "申" "酉" "戌" "亥"])
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; chinese calendar ;;;;;;;;;;;;
+;; https://github.com/xwl/cal-china-x
+;; add below in the package config
 ;; (setq mark-holidays-in-calendar t)
 ;; (setq cal-china-x-important-holidays cal-china-x-chinese-holidays)
 ;; (setq cal-china-x-general-holidays '((holiday-lunar 1 15 "元宵节")))
 ;; (setq calendar-holidays
-;;       (append cal-china-x-important-holidays
+;;       (append ;;cal-china-x-important-holidays
 ;;               cal-china-x-general-holidays
-;;               other-holidays))
+;;               ;; other-holidays
+;;               ))
