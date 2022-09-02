@@ -155,3 +155,53 @@ See also `org-save-all-org-buffers'"
 ;;              (y (+ (* 100 cycle) yy)))
 ;;         (diary-chinese-anniversary lunar-month lunar-day y mark))
 ;;     (diary-chinese-anniversary lunar-month lunar-day year mark)))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; use valgrind in the emacs shell
+(defun valgrind()
+  (interactive)
+  (compilation-minor-mode)
+  (define-key compilation-minor-mode-map (kbd "") 'comint-send-input)
+  (define-key compilation-minor-mode-map (kbd "S-") 'comint-goto-error)
+  (add-hook 'shell-mode-hook 'valgrind)
+)
+
+
+
+;;;;;;;;;;;;;;;;;;;org-roam ;;;;;;;;;;;;;;;;;;;;;;;
+(defun org-capture-slipbox ()
+  (interactive)
+  (org-roam-capture nil "s"))
+
+
+(cl-defmethod org-roam-node-type ((node org-roam-node))
+  "Return the TYPE of NODE."
+  (condition-case nil
+      (file-name-nondirectory
+       (directory-file-name
+        (file-name-directory
+         (file-relative-name (org-roam-node-file node) org-roam-directory))))
+    (error "")))
+
+
+(defun org-roam-node-from-cite (keys-entries)
+  (interactive (list (citar-select-ref :multiple nil :rebuild-cache t)))
+  (let ((title (citar--format-entry-no-widths (cdr keys-entries)
+                                              "${author editor} :: ${title}")))
+    (org-roam-capture-templates
+                       '(("r" "reference" plain "%?" :if-new
+                          (file+head "reference/${citekey}.org"
+                                     ":PROPERTIES:
+:ROAM_REFS: [cite:@${citekey}]
+:END:
+,#+title: ${title}\n")
+                          :immediate-finish t
+                          :unnarrowed t))
+                       :info (list :citekey (car keys-entries))
+                       :node (org-roam-node-create :title title)
+                       :props '(:finalize find-file))))
+
+(defun tag-new-node-as-draft ()
+  (org-roam-tag-add '("draft")))
+
