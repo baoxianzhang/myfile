@@ -34,6 +34,7 @@
     (cal-china-x :location (recipe
                            :fetcher melpa
                            :repo "xwl/cal-china-x"))
+    (org-roam-bibtex)
   )
 
 
@@ -131,3 +132,21 @@ Each entry is either:
               )
     )
   )
+
+(defun baoxianzhang/init-org-roam-bibtex ()
+  (use-package
+    org-roam-bibtex
+    :after (org-roam)
+    :config
+    (setq orb-note-actions-interface 'hydra)
+    (setq orb-preformat-keywords
+          '("citekey" "title" "url" "author-or-editor" "keywords" "file" "date")
+          orb-process-file-keyword t
+          orb-insert-interface 'helm-bibtex
+          orb-file-field-extensions '("pdf")
+          orb-insert-follow-link t
+          )
+    )
+  )
+
+

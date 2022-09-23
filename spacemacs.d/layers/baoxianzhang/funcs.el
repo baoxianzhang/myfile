@@ -174,17 +174,17 @@ See also `org-save-all-org-buffers'"
   (interactive)
   (org-roam-capture nil "s"))
 
-
-;; (cl-defmethod org-roam-node-type ((node org-roam-node))
-;;   "Return the TYPE of NODE."
-;;   (condition-case nil
-;;       (file-name-nondirectory
-;;        (directory-file-name
-;;         (file-name-directory
-;;          (file-relative-name (org-roam-node-file node) org-roam-directory))))
-;;     (error "")))
-
-
+;; add with-eval-after-load https://github.com/jethrokuan/org-roam-guide/issues/2#issuecomment-1240626498
+(with-eval-after-load 'org-roam
+  (cl-defmethod org-roam-node-type ((node org-roam-node))
+    "Return the TYPE of NODE."
+    (condition-case nil
+        (file-name-nondirectory
+         (directory-file-name
+          (file-name-directory
+           (file-relative-name (org-roam-node-file node) org-roam-directory))))
+      (error "")))
+  )
 (defun org-roam-node-from-cite (keys-entries)
   (interactive (list (citar-select-ref :multiple nil :rebuild-cache t)))
   (let ((title (citar--format-entry-no-widths (cdr keys-entries)

@@ -123,7 +123,8 @@
 ;; (setq org-brain-path "~/bxgithub/org/org_brain/")
 (setq org-enable-roam-support t)
 (setq org-enable-roam-server t)
-(setq org-enable-roam-protocal t)
+(setq org-enable-roam-ui t)
+(setq org-enable-roam-protocol t)
 (make-directory "~/bxgithub/braindump/" t)
 (setq org-roam-directory "~/bxgithub/braindump/org")
 (setq org-fc-directories '("~/bxgithub/braindump/") )
@@ -159,6 +160,21 @@
          :unnarrowed t)
         )
       )
+
+(setq org-capture-templates
+      `(("i" "Inbox" entry  (file "~/bxgithub/gtd/inbox.org")
+         ,(concat "* TODO %?\n"
+                  "Entered on %U"))
+        ("m" "Meeting" entry  (file+headline "~/bxgithub/gtd/agenda.org" "Future")
+         ,(concat "* %? :meeting:\n"
+                  "<%<%Y-%m-%d %a %H:00>>"))
+        ("n" "Note" entry  (file "~/bxgithub/gtd/notes.org")
+         ,(concat "* Note (%a)\n"
+                  "Entered on %U\n" "\n" "%?"))
+        )
+      )
+
+
 
 
 
