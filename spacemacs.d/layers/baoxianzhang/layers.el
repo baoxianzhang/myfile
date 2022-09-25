@@ -112,7 +112,8 @@
    ;; (plantuml :variables
    ;;           plantuml-jar-path "~/bxgithub/plantuml.jar"
    ;;           )
-
+   epub
+   bibtex
    )
  )
 

@@ -138,6 +138,7 @@ Each entry is either:
     org-roam-bibtex
     :after (org-roam)
     :config
+    (require 'org-ref)
     (setq orb-note-actions-interface 'hydra)
     (setq orb-preformat-keywords
           '("citekey" "title" "url" "author-or-editor" "keywords" "file" "date")

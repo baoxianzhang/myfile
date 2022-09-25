@@ -117,6 +117,12 @@
 	          (lambda (&rest _)
 	            (gtd-save-org-buffers)))
 
+(setq bibtex-completion-bibliography '("~/bxgithub/braindump/org/biblio.bib")
+      bibtex-completion-library-path "~/bxgithub/braindump/org/pdf/"
+      bibtex-completion-notes-path "~/bxgithub/braindump/org/pdf/notes.org")
+(setq org-ref-open-pdf-function
+      (lambda (fpath)
+        (start-process "zathura" "*helm-bibtex-zathura*" "/usr/bin/zathura" fpath)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;org-roam;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (setq org-enable-org-brain-support t)

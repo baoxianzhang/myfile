@@ -546,16 +546,16 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
   ;;        ))
   ;;
 
-  ;; (setq configuration-layer-elpa-archives
-  ;;       '(("melpa-cn" . "https://mirrors.ustc.edu.cn/elpa/melpa/")
-  ;;         ("org-cn"   . "https://mirrors.ustc.edu.cn/elpa/org/")
-  ;;         ("gnu-cn"   . "https://mirrors.ustc.edu.cn/elpa/gnu/")))
+     (setq configuration-layer-elpa-archives
+           '(("melpa-cn" . "https://mirrors.ustc.edu.cn/elpa/melpa/")
+             ("org-cn"   . "https://mirrors.ustc.edu.cn/elpa/org/")
+             ("gnu-cn"   . "https://mirrors.ustc.edu.cn/elpa/gnu/")))
 
   ;; zilongshanren
-  ;; (setq configuration-layer-elpa-archives
-  ;;        '(("melpa-cn" . "https://elpa.zilongshanren.com/melpa/")
-  ;;          ("org-cn"   . "https://elpa.zilongshanren.com/org/")
-  ;;          ("gnu-cn"   . "https://elpa.zilongshanren.com/gnu/")))
+  ;;  (setq configuration-layer-elpa-archives
+  ;;         '(("melpa-cn" . "https://elpa.zilongshanren.com/melpa/")
+  ;;           ("org-cn"   . "https://elpa.zilongshanren.com/org/")
+  ;;           ("gnu-cn"   . "https://elpa.zilongshanren.com/gnu/")))
 
 
   ;;  (setq-default
