@@ -114,6 +114,8 @@
    ;;           )
    epub
    bibtex
+   (octave :variables
+           octave-comment-char ?%)
    )
  )
 
