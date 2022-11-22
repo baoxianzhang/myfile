@@ -35,6 +35,8 @@
                            :fetcher melpa
                            :repo "xwl/cal-china-x"))
     (org-roam-bibtex)
+    (flycheck-clang-tidy
+      )
   )
 
 
@@ -150,4 +152,10 @@ Each entry is either:
     )
   )
 
-
+(defun baoxianzhang/init-flycheck-clang-tidy()
+  (use-package flycheck-clang-tidy
+  :after flycheck
+  :hook
+  (flycheck-mode . flycheck-clang-tidy-setup)
+  )
+)

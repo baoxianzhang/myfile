@@ -73,10 +73,10 @@
    ;; (lsp :variables
    ;; lsp-lens-enable t)
    (spell-checking :variable
-                   spell-checking-enable-by-default nil
+                   spell-checking-enable-by-default t
                    )
    (syntax-checking :variables
-                    syntax-checking-enable-by-default nil
+                    syntax-checking-enable-by-default t
                     )
    (c-c++ :variables
           c-c++-backend 'lsp-ccls

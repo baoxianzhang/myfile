@@ -215,6 +215,7 @@ alias hp="export http_proxy=http://localhost:8123"
 alias hps="export https_proxy=http://localhost:8123"
 alias unsethp="unset http_proxy"
 alias unsethps="unset http_proxys"
+# http://localhost:8282 to get the local ganntlab web
 alias ganttlab="sudo docker run -p 8282:80 ganttlab/ganttlab"
 alias gitlab_time_report="cd ~/code/gitlab-time-report &&  GITLAB_URL="http://192.168.1.20" GITLAB_TOKEN="GAdXD8yPmRvfWyXX-6b7" npm start"
 
