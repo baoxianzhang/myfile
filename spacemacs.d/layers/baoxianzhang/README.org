@@ -18,6 +18,7 @@
   - [[#org-num-mode][org-num-mode]]
   - [[#vim-register][vim register]]
   - [[#export-from-org-to-markdown-in-spacemacs][Export from Org to Markdown in Spacemacs]]
+  - [[#set-file-coding-system][Set file coding system]]
 
 * Description
 This layer does my personal additional layer. This layer is the main layer, which
@@ -210,3 +211,7 @@ https://www.jianshu.com/p/80bc31f096ba
 
 ** Export from Org to Markdown in Spacemacs
 https://dev.to/roeeyn/export-from-org-to-markdown-in-spacemacs-1dab
+
+** Set file coding system
+M-x set-buffer-file-coding-system   
+选择，utf-8-with-signture (utf-8 with BOM)

@@ -196,3 +196,13 @@
       chinese-calendar-terrestrial-branch
       ["子" "丑" "寅" "卯" "辰" "巳" "午" "未" "申" "酉" "戌" "亥"])
 
+
+;;;;;;;; coding-systems ;;;;;;;;;;;;;;;;;;;;;
+;; (set-language-environment "UTF-8")
+;; (set-default-coding-systems 'utf-8-with-signature)
+;; (set-default-coding-systems 'utf-8)
+
+;; (set-keyboard-coding-system 'utf-8-unix)
+
+;; do this especially on Windows, else python output problem
+;; (set-terminal-coding-system 'utf-8-unix)
