@@ -2,6 +2,7 @@
 	excludesfile = ~/.git_template/.gitignore-global
 	editor = vim
 	quotepath = false
+	excludefile = /home/leo/.git_template/.gitignore-global
 [init]
 	templatedir = ~/.git_template
 	defaultBranch = master
@@ -30,5 +31,3 @@
 	required = true
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
-[url "https://hub.fastgit.xyz/"]
-	insteadOf = https://github.com/

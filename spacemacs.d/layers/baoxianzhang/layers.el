@@ -85,6 +85,9 @@
           ;; c-c++-lsp-enable-semantic-highlight nil
           c-c++-dap-adapters '(dap-lldb dap-cpptools)
           c-c++-default-mode-for-headers 'c++-mode
+          c-c++-enable-clang-support t
+          c-c++-enable-google-style t
+          c-c++-enable-google-newline t
           c-c++-enable-clang-format-on-save t
           c-c++-enable-auto-newline t
           c-c++-default-mode-for-headers 'c++-mode
@@ -101,7 +104,16 @@
           shell-default-term-shell "/bin/zsh"
           ;; shell-enable-smart-eshell t
           )
-   python
+   (python :variables
+           python-lsp-backend 'lsp
+           python-lsp-server 'pyright
+           python-fill-column 99
+           python-formatter 'black
+           python-format-on-save t
+           python-test-runner 'pytest
+           python-sort-imports-on-save t
+           python-pipenv-activate t)
+
    version-control
    yaml
    csv

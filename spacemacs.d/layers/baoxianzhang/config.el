@@ -188,6 +188,8 @@
 
 
 ;;;;;;;; coding-systems ;;;;;;;;;;;;;;;;;;;;;
+;; https://stackoverflow.com/questions/14031724/how-to-make-emacs-accept-utf-8-uppercase-encoding
+(define-coding-system-alias 'UTF-8 'utf-8)
 ;; (set-language-environment "UTF-8")
 ;; (set-default-coding-systems 'utf-8-with-signature)
 ;; (set-default-coding-systems 'utf-8)

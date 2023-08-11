@@ -308,7 +308,9 @@ export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
 export CUDNN_PATH="/usr/local/cuda/lib64/libcudnn.so.5"
 export CUDA_HOME=/usr/local/cuda
 export LD_LIBRARY_PATH=${CUDA_HOME}/lib64:${LD_LIBRARY_PATH}
+export LD_LIBRARY_PATH=/usr/local/lib:${LD_LIBRARY_PATH}
 export PATH=${CUDA_HOME}/bin:${PATH}
+export PATH=$PATH:~/.local/bin/
 
 ##################### For RSVIEW #########################
 #  export PATH=$PATH:${HOME}/Projects/catkin_ws/VeloView/build/install/bin
@@ -326,14 +328,9 @@ export PATH=${CUDA_HOME}/bin:${PATH}
 export PATH=$PATH:${HOME}/bxgithub/myfile:/snap/bin/:/home/leo/Downloads/ExcelCompare-0.6.1
 
 ###################### For ROS #########################
-/usr/bin/setxkbmap -option "ctrl:swapcaps"
+# /usr/bin/setxkbmap -option "ctrl:swapcaps"
 source /opt/ros/noetic/setup.zsh
-#source /opt/ros/galactic/setup.zsh
-#
-## fast github
-## git config --global url."https://hub.fastgit.xyz/".insteadOf "https://github.com/"
-## git config protocol.https.allow always
-#
+
 
 export PATH=$PATH:${HOME}/bxgithub/myfile:/snap/bin/:~/.local/bin
 
@@ -344,6 +341,3 @@ export PATH=$PATH:/home/leo/Zotero/Zotero_linux-x86_64/
 export http_proxy="http://127.0.0.1:1080"
 export https_proxy="http://127.0.0.1:1080"
 export ALL_PROXY="socks5://127.0.0.1:1080"
-
-
-

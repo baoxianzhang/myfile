@@ -34,7 +34,7 @@ cmake-build-*/
 .vscode
 
 # clang-format
-.clang-format
+# .clang-format
 
 # ROSBag files
 *.bag
