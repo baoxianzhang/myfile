@@ -81,6 +81,7 @@
         )
       )
 
+
 ;; Use full window for org-capture
 ;; (add-hook 'org-capture-mode-hook 'delete-other-windows)
 (add-hook 'org-after-todo-state-change-hook #'log-todo-next-creation-date)
@@ -109,6 +110,7 @@
           (tags "CLOSED>=\"<today>\""
                 ((org-agenda-overriding-header "Completed today")))))))
 
+`
 
 (setq org-log-done 'time)
 
@@ -117,9 +119,9 @@
 	          (lambda (&rest _)
 	            (gtd-save-org-buffers)))
 
-(setq bibtex-completion-bibliography '("~/bxgithub/braindump/org/biblio.bib")
-      bibtex-completion-library-path "~/bxgithub/braindump/org/pdf/"
-      bibtex-completion-notes-path "~/bxgithub/braindump/org/pdf/notes.org")
+(setq bibtex-completion-bibliography '("~/bxgithub/roam/org/biblio.bib")
+      bibtex-completion-library-path "~/bxgithub/roam/org/pdf/"
+      bibtex-completion-notes-path "~/bxgithub/roam/org/pdf/notes.org")
 (setq org-ref-open-pdf-function
       (lambda (fpath)
         (start-process "zathura" "*helm-bibtex-zathura*" "/usr/bin/zathura" fpath)))
@@ -131,12 +133,12 @@
 (setq org-enable-roam-server t)
 (setq org-enable-roam-ui t)
 (setq org-enable-roam-protocol t)
-(make-directory "~/bxgithub/braindump/" t)
-(setq org-roam-directory "~/bxgithub/braindump/org")
-(setq org-fc-directories '("~/bxgithub/braindump/") )
-(setq org-ref-default-bibliography '("~/bxgithub/braindump/org/biblio.bib") )
-(setq org-ref-pdf-directory "~/bxgithub/braindump/org/pdf/" )
-(setq org-roam-directory (file-truename "~/bxgithub/braindump/org/")
+(make-directory "~/bxgithub/roam/" t)
+(setq org-roam-directory "~/bxgithub/roam/org")
+(setq org-fc-directories '("~/bxgithub/roam/") )
+(setq org-ref-default-bibliography '("~/bxgithub/roam/org/biblio.bib") )
+(setq org-ref-pdf-directory "~/bxgithub/roam/org/pdf/" )
+(setq org-roam-directory (file-truename "~/bxgithub/roam/org/")
       ;; org-roam-database-connector 'sqlite-builtin
       ;; org-roam-db-gc-threshold most-positive-fixnum
       ;; org-id-link-to-org-use-id t
@@ -167,18 +169,6 @@
         )
       )
 
-(setq org-capture-templates
-      `(("i" "Inbox" entry  (file "~/bxgithub/gtd/inbox.org")
-         ,(concat "* TODO %?\n"
-                  "Entered on %U"))
-        ("m" "Meeting" entry  (file+headline "~/bxgithub/gtd/agenda.org" "Future")
-         ,(concat "* %? :meeting:\n"
-                  "<%<%Y-%m-%d %a %H:00>>"))
-        ("n" "Note" entry  (file "~/bxgithub/gtd/notes.org")
-         ,(concat "* Note (%a)\n"
-                  "Entered on %U\n" "\n" "%?"))
-        )
-      )
 
 
 
