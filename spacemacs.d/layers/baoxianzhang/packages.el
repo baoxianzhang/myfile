@@ -35,8 +35,10 @@
                            :fetcher melpa
                            :repo "xwl/cal-china-x"))
     (org-roam-bibtex)
-    (flycheck-clang-tidy
-      )
+    (flycheck-clang-tidy)
+    (bazel :location (recipe
+                      :fetcher github
+                      :repo "bazelbuild/emacs-bazel-mode" ))
   )
 
 
@@ -161,3 +163,10 @@ Each entry is either:
   (flycheck-mode . flycheck-clang-tidy-setup)
   )
 )
+
+(defun baoxianzhang/init-bazel()
+  (use-package bazel
+    :config (progn )
+    )
+  )
+
