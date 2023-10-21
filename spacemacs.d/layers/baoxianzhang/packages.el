@@ -122,6 +122,7 @@ Each entry is either:
     cal-china-x
     :init (progn )
     :ensure t
+    :defer t
     :config (progn
               (setq mark-holidays-in-calendar t)
               (setq cal-china-x-important-holidays cal-china-x-chinese-holidays)
@@ -139,6 +140,7 @@ Each entry is either:
   (use-package
     org-roam-bibtex
     :after (org-roam)
+    :defer t
     :config
     (require 'org-ref)
     (setq orb-note-actions-interface 'hydra)

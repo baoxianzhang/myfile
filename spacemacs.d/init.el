@@ -67,6 +67,7 @@ This function should only modify configuration layer settings."
                                       org-bullets
                                       ;; org-roam-bibtex
                                       cal-china-x
+                                      gptel
                                       )
 
    ;; A list of packages that cannot be updated.
@@ -74,10 +75,6 @@ This function should only modify configuration layer settings."
 
    ;; A list of packages that will not be installed and loaded.
    dotspacemacs-excluded-packages '(
-                                    ;; gitattributes-mode
-                                    ;; gitconfig-mode
-                                    ;; gitignore-mode
-                                    ;; helm-gitignore
                                     )
 
    ;; Defines the behaviour of Spacemacs when installing packages.
@@ -604,8 +601,8 @@ before packages are loaded."
   ;; evil-redirect-digit-argument removed from evil
   ;; https://github.com/Somelauw/evil-org-mode/issues/93
   (fset 'evil-redirect-digit-argument 'ignore) ;; before evil-org loaded
-
-  )
+  (require 'gptel)
+)
 
 
 ;; Do not write anything past this comment. This is where Emacs will
