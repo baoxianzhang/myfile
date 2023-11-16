@@ -20,7 +20,10 @@
 ;; good command evil-jump-backward, use default keybindings "C-o"
 
 
-(spacemacs/set-leader-keys "o y" 'youdao-dictionary-search-at-point+)
+;; (spacemacs/set-leader-keys "o y" 'youdao-dictionary-search-at-point+)
+;; (spacemacs/set-leader-keys "o y" 'google-translate-at-point)
+(spacemacs/set-leader-keys "o g" 'google-translate-at-point)
+(spacemacs/set-leader-keys "o t" 'translate/translate-word-at-point)
 (spacemacs/set-leader-keys "o d" 'find-by-pinyin-dired)
 (spacemacs/set-leader-keys "o i" 'org-insert-src-block)
 (spacemacs/set-leader-keys "o b" 'open-self-layers-file)

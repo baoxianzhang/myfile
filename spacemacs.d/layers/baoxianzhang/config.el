@@ -198,3 +198,9 @@
 
 ;; do this especially on Windows, else python output problem
 ;; (set-terminal-coding-system 'utf-8-unix)
+
+
+(setq-default google-translate-default-target-language "zh-CN")
+
+
+

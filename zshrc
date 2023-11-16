@@ -338,6 +338,6 @@ export PATH=$PATH:${HOME}/bxgithub/myfile:/snap/bin/:~/.local/bin
 # zotero
 export PATH=$PATH:/home/leo/Zotero/Zotero_linux-x86_64/
 
-export http_proxy="http://127.0.0.1:1080"
-export https_proxy="http://127.0.0.1:1080"
-export ALL_PROXY="socks5://127.0.0.1:1080"
+#export http_proxy="http://127.0.0.1:1080"
+#export https_proxy="http://127.0.0.1:1080"
+#export ALL_PROXY="socks5://127.0.0.1:1080"

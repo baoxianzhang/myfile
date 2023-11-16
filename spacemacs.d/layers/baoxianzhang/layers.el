@@ -128,6 +128,10 @@
    bibtex
    (octave :variables
            octave-comment-char ?%)
+   (translate :variables
+              gts-translate-list '(("en" "zh") ("en" "fr"))
+              )
+
    )
  )
 

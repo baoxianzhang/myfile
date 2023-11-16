@@ -19,6 +19,7 @@
   - [[#vim-register][vim register]]
   - [[#export-from-org-to-markdown-in-spacemacs][Export from Org to Markdown in Spacemacs]]
   - [[#set-file-coding-system][Set file coding system]]
+- [[#translate-layer][translate layer]]
 
 * Description
 This layer does my personal additional layer. This layer is the main layer, which
@@ -215,3 +216,16 @@ https://dev.to/roeeyn/export-from-org-to-markdown-in-spacemacs-1dab
 ** Set file coding system
 M-x set-buffer-file-coding-system   
 选择，utf-8-with-signture (utf-8 with BOM)
+
+* translate layer
+出现 symbol's function definition is void: gts-translate
+
+包括 gts-text 问题，这个暂时未解
+可能出现了冲突，解决方法： 找到 go-translate package, 在 go-translate-autoloads.el 中的 加入 gts-translate 那一行
+#+BEGIN_SRC emacs-lisp
+(autoload 'gts-do-translate "go-translate" "\
+Do the translate" t nil)
+
+(autoload 'gts-translate "go-translate" "\
+Do the translate" t nil)
+#+END_SRC
