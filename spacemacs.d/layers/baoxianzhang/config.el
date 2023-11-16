@@ -20,6 +20,10 @@
 (add-to-list 'auto-mode-alist '("\\.cu$" . c++-mode))
 ;;; roslaunch highlighting
 (add-to-list 'auto-mode-alist '("\\.launch$" . xml-mode))
+
+(add-to-list 'auto-mode-alist '("/BUILD\\(\\..*\\)?\\'" . bazel-mode))
+(add-to-list 'auto-mode-alist '("/WORKSPACE\\'" . bazel-mode))
+(add-to-list 'auto-mode-alist '("\\.\\(BUILD\\|WORKSPACE\\|bzl\\)\\'" . bazel-mode))
 ;;; Auto LF in org-mode
 (add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
 
